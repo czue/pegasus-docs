@@ -10,6 +10,16 @@ the desired values for your project.
 These will be used in the UI (e.g. page titles and social `<meta>` tags), and in 
 generated absolute urls.
 
+## Personalize your landing page
+
+Pegasus ships with a stub landing page, however most projects will want to highly customize their landing page.
+Unless you are planning on building a marketing site on a different platform, this is likely one of the first 
+things you'll do.
+
+To modify the default landing page, simply edit the `./apps/web/templates/web/landing_page.html` file.
+
+You can make any customizations you like.
+
 ## Styles
 
 **Customizing styles requires setting up the [front-end build](/front-end).**
