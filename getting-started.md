@@ -50,7 +50,7 @@ mkdir {{ project_name }}
 After setting environment variables, to start a project with the template run:
 
 ```bash
-django-admin startproject {{ project_name }} ./{{ project_name }}/ --template=pegasus/ --extension=py --name=assets/index.js,package.json,README.md
+django-admin startproject {{ project_name }} ./{{ project_name }}/ --template=pegasus/ --name=assets/index.js,package.json,README.md
 ```
 
 ## Enter the project directory
