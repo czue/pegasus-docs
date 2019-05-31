@@ -1,10 +1,14 @@
 .. Pegasus documentation master file, created by
    sphinx-quickstart on Mon Mar 18 15:47:15 2019.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
 
 Welcome to Pegasus's documentation!
 ===================================
+
+Here you'll find everything you need to know about setting up and configuring Pegasus for your project.
+
+You'll need a Pegasus license to proceed.
+For more information, and to purchase a license, visit `saaspegasus.com`_.
+
 
 .. toctree::
    :maxdepth: 2
@@ -23,3 +27,4 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
+.. _saaspegasus.com: https://www.saaspegasus.com/
