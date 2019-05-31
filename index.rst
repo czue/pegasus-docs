@@ -7,15 +7,19 @@ Welcome to Pegasus's documentation!
 Here you'll find everything you need to know about setting up and configuring Pegasus for your project.
 
 You'll need a Pegasus license to proceed.
-For more information, and to purchase a license, visit `saaspegasus.com`_.
+If you don't have one, head on over to `saaspegasus.com`_ to get yours.
 
+If you're just getting started, head on over to the :doc:`getting-started` guide.
+
+The complete set of documentation is below.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: All Documentation:
 
    getting-started
    customizations
+   configuration
    front-end
 
 

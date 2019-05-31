@@ -1,14 +1,6 @@
 # Customizations
 
-*This documentation is a work in progress*
-
-## Update project metadata
-
-In the generated `settings.py` file, update all variables in `PROJECT_METADATA` to 
-the desired values for your project.
-
-These will be used in the UI (e.g. page titles and social `<meta>` tags), and in 
-generated absolute urls.
+This page outlines the basics of customizing Pegasus to meet your application's needs.
 
 ## Personalize your landing page
 
@@ -20,15 +12,28 @@ To modify the default landing page, simply edit the `./apps/web/templates/web/la
 
 You can make any customizations you like.
 
+If you want to start from Pegasus's example landing page, then just copy the contents of
+`./pegasus/apps/examples/templates/pegasus/examples/example_landing_page.html` into the landing page file.
+
+## Update the logged-in experience
+
+After you've tweaked your landing page, you'll likely want to dive into the nuts and bolts that make up your app.
+
+To modify the logged-in default page, edit the `./apps/web/templates/web/app_home.html` file.
+
+### Changing the navigation
+
+There are two levels of navigation that ship with Pegasus, the top nav and the sidebar nav. You'll likely want to modify both.
+
+To change the sidebar nav edit the `./pegasus/templates/pegasus/app/components/app_nav.html` file.
+
 ## Styles
 
-**Customizing styles requires setting up the [front-end build](/front-end).**
+**Customizing styles requires setting up the [front-end build pipeline](/front-end).**
 
 This project uses Bulma's styles by default.
 Bulma is very easy to customize to your needs, 
 though you can always drop Bulma for your preferred CSS framework.
-
-To edit styles first make sure you have configured your [front-end build pipeline](/front-end).
 
 Then to change styles, edit the generated `{{project_name}}.scss` file in `assets/styles` with any custom styles you want
 and run this command to rebuild them:
@@ -36,7 +41,6 @@ and run this command to rebuild them:
 ```bash
 npm run build  # or "dev" or "dev-watch"
 ```
-
 
 ## Javascript
 
