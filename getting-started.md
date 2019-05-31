@@ -1,33 +1,30 @@
 Getting Started
 ===============
 
-Instructions for starting your first Pegasus project.
+Here's everything you should need to create your first Pegasus project.
 
-## Prerequisites
+## Download Pegasus
 
-It's assumed that you've installed the following already.
+If you haven't already, you'll need to purchase a Pegasus License at [http://www.saaspegasus.com/](http://www.saaspegasus.com/).
 
-- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+From the "Downloads" page, download the latest version of the Pegasus template file and save this somewhere on your local file system.
+
+## Install Prerequisites
+
+If you haven't already, you'll need to install the following:
+
 - [Python 3](https://www.python.org/downloads/)
 - [Virtualenv](https://virtualenv.pypa.io/en/stable/)
 - [Virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/)
 
-## Setup virtualenv and install Django
+*Note: It is possible to use the template without the virtualenv tools, but these instructions assume you have them.*
+
+## Setup a virtualenv and install Django
 
 ```
 mkvirtualenv --no-site-packages -p python3 {{ project_name }}
 pip install django
 ```
-
-## Download or clone pegasus
-
-Make sure you have been given access, then run the following:
-
-```
-git clone https://gitlab.com/czue/pegasus.git
-```
-
-You can download/install this anywhere.
 
 ## Configure environment
 
