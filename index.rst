@@ -20,11 +20,6 @@ For more information, and to purchase a license, visit `saaspegasus.com`_.
 
 
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
 
 .. _saaspegasus.com: https://www.saaspegasus.com/
