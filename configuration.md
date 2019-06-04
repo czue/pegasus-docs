@@ -16,6 +16,7 @@ PROJECT_METADATA = {
     'DESCRIPTION': 'My Amazing SaaS Application',
     'IMAGE': 'https://upload.wikimedia.org/wikipedia/commons/2/20/PEO-pegasus_black.svg',
     'KEYWORDS': 'SaaS, django',
+    'CONTACT_EMAIL': 'you@example.com',
 }
 ```
 
@@ -57,7 +58,8 @@ See [Sending email](https://docs.djangoproject.com/en/2.2/topics/email/) in the 
 
 ## User Sign Up
 
-The sign up workflow is managed by [django-allauth](https://www.intenct.nl/projects/django-allauth/).
+The sign up workflow is managed by [django-allauth](https://www.intenct.nl/projects/django-allauth/)
+with a sensible set of defaults and templates.
 
 ### Requiring email confirmation
 
@@ -68,6 +70,21 @@ However, this can be easily changed by changing the following value in `settings
 ACCOUNT_EMAIL_VERIFICATION = 'optional'  # change to "mandatory" to require users to confirm email before signing in.
 ```
 
+### Social login
+
+It's easy to add social login (e.g. login with Google, Facebook, Twitter) to your site using allauth.
+
+For details on how to set this up for a particular provider [see this page](https://django-allauth.readthedocs.io/en/latest/providers.html).
+
+If you need help setting this up feel free to get in touch!
+
+### Further configuration
+
+Allauth is highly configurable.
+It's recommended that you look into the various [configuration settings availabile within allauth](https://django-allauth.readthedocs.io/en/latest/configuration.html)
+for any advanced customization.
+
+
 ## Google Analytics
 
 To enable Google Analytics, just add your analytics tracking ID to `settings.py`:
@@ -75,3 +92,23 @@ To enable Google Analytics, just add your analytics tracking ID to `settings.py`
 ```python
 GOOGLE_ANALYTICS_ID = 'UA-XXXXXXX-1' 
 ```
+
+## Sentry
+
+[Sentry](https://sentry.io/) is the gold standard for tracking errors in Django applications and
+Pegasus can connect to it with just a few lines of configuration.
+
+To get setup, simply add the following code snippet to your `settings.py` file:
+
+```python
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+sentry_sdk.init(
+    dsn='https://****@sentry.io/12345',
+    integrations=[DjangoIntegration()]
+)
+```
+
+If you are starting from `settings_production.example.py` then you just need to populate `SENTRY_DSN` from your
+Sentry project settings.
