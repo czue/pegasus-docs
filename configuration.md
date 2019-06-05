@@ -112,3 +112,17 @@ sentry_sdk.init(
 
 If you are starting from `settings_production.example.py` then you just need to populate `SENTRY_DSN` from your
 Sentry project settings.
+
+
+## Stripe
+
+If you're using [Stripe](https://www.stripe.com/) to collect payments you'll need to fill in the following in `settings.py`
+(or populate them in the appropriate environment variables):
+
+```python
+STRIPE_LIVE_PUBLIC_KEY = os.environ.get("STRIPE_LIVE_PUBLIC_KEY", "<your publishable key>")
+STRIPE_LIVE_SECRET_KEY = os.environ.get("STRIPE_LIVE_SECRET_KEY", "<your secret key>")
+STRIPE_TEST_PUBLIC_KEY = os.environ.get("STRIPE_TEST_PUBLIC_KEY", "<your publishable key>")
+STRIPE_TEST_SECRET_KEY = os.environ.get("STRIPE_TEST_SECRET_KEY", "<your secret key>")
+STRIPE_LIVE_MODE = False  # Change to True in production
+```
