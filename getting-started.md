@@ -11,7 +11,8 @@ If you haven't already, you'll need to install the following.
 - [Virtualenv](https://virtualenv.pypa.io/en/stable/)
 - [Virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/)
 
-*Note: It is possible to use the template without the virtualenv tools, but these instructions assume you have them.*
+*Note: It is possible to use the template without the virtualenv tools, 
+but they are highly recommended and these instructions assume you have them.*
 
 ## Download Pegasus
 
@@ -36,7 +37,7 @@ If you are using teams you should set the `PEGASUS_USING_TEAMS` variable to `1`:
 export PEGASUS_USING_TEAMS=1
 ```
 
-If your project doesn't use teams you should skip this step.
+If your project doesn't plan to use teams you should skip this step.
 
 ## Make a directory and start project
 
