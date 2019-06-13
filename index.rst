@@ -23,7 +23,4 @@ The complete set of documentation is below.
    front-end
 
 
-
-* :ref:`search`
-
 .. _saaspegasus.com: https://www.saaspegasus.com/
