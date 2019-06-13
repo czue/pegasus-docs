@@ -106,7 +106,7 @@ Refreshing the page should bring up the example gallery tab.
 ## Building Your Application
 
 At this point, Pegasus has installed scaffolding for all of the user management, authentication, and (optionally) team views,
-and given you a beautiful base UI template to work from. 
+and given you a beautiful base UI template and clear code structure to work from. 
  
 Now that you're up and running it's time for the fun part: building your new application!
 
