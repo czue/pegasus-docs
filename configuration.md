@@ -4,10 +4,10 @@ This section describes some of the settings and configuration detials you can ch
 
 ## Project Metadata
 
-Pegasus uses the `PROJECT_METADATA` setting in `settings.py` to generate various things
-like page titles and social sharing information.
+When you first setup Pegasus it populated the `PROJECT_METADATA` setting in `settings.py` with various 
+things like page titles and social sharing information.
 
-These should be changed to match the desired values for your own project.
+These settings can later be changed as you like by editing the setting directly:
 
 ```python
 PROJECT_METADATA = {

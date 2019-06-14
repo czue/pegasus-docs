@@ -20,37 +20,39 @@ If you haven't already, you'll need to purchase a Pegasus License at [saaspegasu
 
 From the "Downloads" page, download the latest version of the Pegasus template file and save it somewhere on your local file system.
 
-## Setup a virtualenv and install Django
+## Setup a Python3 virtualenv
+
+It's recommended that you setup your project in a virtualenv. 
+After installing prerequisites, run the following command:
 
 ```
 mkvirtualenv --no-site-packages -p python3 {{ project_name }}
-pip install django
 ```
 
-## Configure environment
+## Install cookiecutter
 
-Pegasus uses environment variables to help with its configuration.
+This project uses [Cookiecutter](https://cookiecutter.readthedocs.io/en/latest/) to configure your template,
+which must be installed before proceeding.
 
-If you are using teams you should set the `PEGASUS_USING_TEAMS` variable to `1`:
-
-```
-export PEGASUS_USING_TEAMS=1
-```
-
-If your project doesn't plan to use teams you should skip this step.
-
-## Make a directory and start project
+To do this, from inside your virtualenv just run:
 
 ```
-mkdir {{ project_name }}
+pip install cookiecutter>=1.6.0
 ```
 
-After setting environment variables, to start a project with the template run the following command.
-You will need to replace `/path/to/pegasus.tar` with the path to the downloaded file above.
+## Create your project
 
-```bash
-django-admin startproject {{ project_name }} ./{{ project_name }}/ --template=/path/to/pegasus.tar --name=assets/index.js,package.json,README.md
+Go into the directory where you wish to create your project and run the following command.
+You will need to replace `/path/to/pegasus.zip` with the path to the downloaded file above.
+
 ```
+cookiecutter /path/to/pegasus.zip
+```
+
+The command will run you through a series of configuration prompts. 
+Just fill in your project information for all the sections and let it complete.
+
+Once the command runs a new folder with your project's name will be created.
 
 ## Enter the project directory
 
@@ -60,7 +62,7 @@ cd {{ project_name }}
 
 You should see a lot of newly created files for your project including a `manage.py` file.
 
-## Install requirements
+## Install package requirements
 
 ```
 pip install -r requirements.txt
@@ -69,13 +71,13 @@ pip install -r requirements.txt
 ## Setup database
 
 ```
-./manage.py migrate
+python ./manage.py migrate
 ```
 
 ## Runserver
 
 ```
-./manage.py runserver
+python ./manage.py runserver
 ```
 
 Go to [http://localhost:8000](http://localhost:8000) and you should see the default Pegasus landing page!
@@ -92,7 +94,7 @@ By default, accessing the examples is restricted to superusers only.
 To convert your newly-created user into admin go through the following steps:
 
 ```
-./manage.py shell
+python ./manage.py shell
 >>> from apps.users.models import CustomUser
 >>> user = CustomUser.objects.all()[0]
 >>> user.is_superuser = True
@@ -117,4 +119,7 @@ Some examples of things you might want to do next include:
 - Start modifying the list of navigation tabs and logged-in user experience
 - Create a new django app and begin building out your data models in `models.py`
 
-For some initial pointers on where to go from here, head on over to the [Customizations Page](/customizations).
+For some initial pointers on where to to make Pegasus your own, head on over to the [Customizations Page](/customizations).
+
+For the nitty-gritty details on setting up things like email, error logging, sign up flow, analytics, and more 
+go to [Settings and Configuration](/configuration).
