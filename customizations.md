@@ -8,9 +8,8 @@ Pegasus ships with a stub landing page, however most projects will want to highl
 Unless you are planning on building a marketing site on a different platform, this is likely one of the first 
 things you'll do.
 
-To modify the default landing page, simply edit the `./apps/web/templates/web/landing_page.html` file.
-
-You can make any customizations you like.
+To modify the default landing page, simply edit the `./apps/web/templates/web/landing_page.html` file
+and make any customizations you like.
 
 If you want to start from Pegasus's example landing page, then just copy the contents of
 `./pegasus/apps/examples/templates/pegasus/examples/example_landing_page.html` into the landing page file.
@@ -19,7 +18,7 @@ If you want to start from Pegasus's example landing page, then just copy the con
 
 After you've tweaked your landing page, you'll likely want to dive into the nuts and bolts that make up your app.
 
-To modify the logged-in default page, edit the `./apps/web/templates/web/app_home.html` file.
+To modify the logged-in default page, edit the `./apps/web/templates/web/app_home.html` file to your liking.
 
 ### Changing the navigation
 
@@ -48,5 +47,3 @@ The project uses a webpack build pipeline to compile the javascript files.
 
 The main javascript architecture is a series of page-specific React applications
 that access data from Django Rest Framework using [CoreAPI](https://www.coreapi.org/).
-
- 
