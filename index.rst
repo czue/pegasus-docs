@@ -9,7 +9,7 @@ Here you'll find everything you need to know about setting up and configuring Pe
 You'll need a Pegasus license to proceed.
 If you don't have one, head on over to `saaspegasus.com`_ to get yours.
 
-If you're just getting started, head on over to the :doc:`getting-started` guide.
+If you're just getting started, you'll want to start with the :doc:`getting-started` guide.
 
 The complete set of documentation is below.
 
