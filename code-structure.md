@@ -26,12 +26,12 @@ This is the overall structure of a new Pegasus project:
 
 The first three directories are Python modules while the last three are not.
 
-### Your `{{project_name}}` module
+## Your `{{project_name}}` module
 
 This is your Django project root directory. 
 It's where your settings, root urlconf and `wsgi.py` file will live.
 
-### Your `apps` module
+## Your `apps` module
 
 This is where your project's apps will live.
 It is pre-populated with a few skeleton apps for you to further customize to your needs.
@@ -44,21 +44,21 @@ The module starts with three apps (two if you aren't using teams).
 - `teams` is where team models are defined.
 - `web` contains utilities and components related to the generic views, layouts and templates
 
-### The `pegasus` module
+## The `pegasus` module
 
 This is where most of Pegasus's functionality resides, including templates,
 many base models, and the example gallery.
 
 In general it is not expected that you'll need to modify much in this module, though feel free to do so!
 
-### The `requirements` folder
+## The `requirements` folder
 
 This is where you define your project's Python requrements.
 
 Requirements are managed using `pip-tools`. 
 For more information on using it see [their documentation](https://github.com/jazzband/pip-tools).
 
-### The `assets` folder
+## The `assets` folder
 
 This is where the source files for your site's JavaScript and CSS live.
 These files are what you should edit to change your JS and CSS.
@@ -66,7 +66,7 @@ These files are what you should edit to change your JS and CSS.
 See [front-end](/front-end) for more information on how to compile these files.
 
 
-### The `static` folder
+## The `static` folder
 
 This folder contains your project's static files, including the compiled output files
 from the `assets` folder as well as images.
