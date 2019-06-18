@@ -21,6 +21,7 @@ The complete set of documentation is below.
    customizations
    configuration
    front-end
+   code-structure
 
 
 .. _saaspegasus.com: https://www.saaspegasus.com/
