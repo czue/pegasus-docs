@@ -24,7 +24,9 @@ To modify the logged-in default page, edit the `./apps/web/templates/web/app_hom
 
 There are two levels of navigation that ship with Pegasus, the top nav and the sidebar nav. You'll likely want to modify both.
 
-To change the sidebar nav edit the `./pegasus/templates/pegasus/app/components/app_nav.html` file.
+To change the top nav edit the `./apps/web/templates/web/components/top_nav.html` file.
+
+To change the sidebar nav edit the `./apps/web/templates/web/components/app_nav.html` file.
 
 ## Styles
 
