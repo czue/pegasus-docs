@@ -23,6 +23,8 @@ From the "Downloads" page, download the latest version of the Pegasus template f
 
 It's recommended that you setup your project in a `virtualenv`.
 [Here are some reasons why](https://help.pythonanywhere.com/pages/VirtualenvsExplained/).
+
+Follow one of the sections below depending on how you want to manage your virtualenvs.
  
 ### Using `virtualenv`
 
@@ -39,7 +41,7 @@ To activate the environment then run:
 source {{ project_name_env }}/bin/activate
 ```
 
-**You will need to activate this environment every time you work on your project.**
+***You will need to activate this environment every time you work on your project.***
 
 ### Alternative instructions using `virtualenvwrapper`
 
