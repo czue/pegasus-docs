@@ -9,10 +9,9 @@ If you haven't already, you'll need to install the following.
 
 - [Python 3](https://www.python.org/downloads/)
 - [Virtualenv](https://virtualenv.pypa.io/en/stable/)
-- [Virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/)
 
-*Note: It is possible to use the template without the virtualenv tools, 
-but they are highly recommended and these instructions assume you have them.*
+*Note: It is possible to use the template without `virtualenv`, 
+but it is highly recommended, and these instructions assume you are using it.*
 
 ## Download Pegasus
 
@@ -22,11 +21,42 @@ From the "Downloads" page, download the latest version of the Pegasus template f
 
 ## Setup a Python3 virtualenv
 
-It's recommended that you setup your project in a virtualenv. 
-After installing prerequisites, run the following command:
+It's recommended that you setup your project in a `virtualenv`.
+[Here are some reasons why](https://help.pythonanywhere.com/pages/VirtualenvsExplained/).
+ 
+### Using `virtualenv`
+
+After installing prerequisites, run the following command wherever you want to create
+the `virtualenv`. This will create the environment in the `{{ project_name_env }}` directory.
 
 ```
-mkvirtualenv --no-site-packages -p python3 {{ project_name }}
+virtualenv -p python3 {{ project_name_env }}
+```
+
+To activate the environment then run:
+
+```
+source {{ project_name_env }}/bin/activate
+```
+
+**You will need to activate this environment every time you work on your project.**
+
+### Alternative instructions using `virtualenvwrapper`
+
+[Virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) is an optional convenience 
+tool that helps manage virturalenvs. 
+ 
+If you choose to use `virtualenvwrapper` you can use the following command to create your environment.
+This can be run from anywhere since `virtualenvwrapper` manages the location of your envs for you.
+
+```
+mkvirtualenv -p python3 {{ project_name }}
+```
+
+Then to activate the environment you simply use:
+
+```
+workon {{ project_name }}
 ```
 
 ## Install cookiecutter
