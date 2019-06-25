@@ -69,7 +69,7 @@ which must be installed before proceeding.
 To do this, from inside your virtualenv just run:
 
 ```
-pip install cookiecutter>=1.6.0
+pip install "cookiecutter>=1.6.0"
 ```
 
 ## Create your project
@@ -123,16 +123,11 @@ To create your first user account, just go through the sign up flow in your web 
 ### Promote your user to an admin
 
 By default, accessing the examples is restricted to superusers only.
-To convert your newly-created user into admin go through the following steps:
+To convert your newly-created user into an admin, run the following command,
+being sure to replace the email address with the one you used to sign up.
 
 ```
-python ./manage.py shell
->>> from apps.users.models import CustomUser
->>> user = CustomUser.objects.all()[0]
->>> user.is_superuser = True
->>> user.is_staff = True
->>> user.save()
->>> exit()
+python ./manage.py promote_user_to_superuser yourname@example.com
 ``` 
 
 Refreshing the page should bring up the example gallery tab.
