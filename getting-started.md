@@ -26,7 +26,7 @@ It's recommended that you setup your project in a `virtualenv`.
 
 Follow one of the sections below depending on how you want to manage your virtualenvs.
  
-### Using `virtualenv`
+### Using virtualenv
 
 After installing prerequisites, run the following command wherever you want to create
 the `virtualenv`. This will create the environment in the `{{ project_name_env }}` directory.
@@ -43,7 +43,7 @@ source {{ project_name_env }}/bin/activate
 
 ***You will need to activate this environment every time you work on your project.***
 
-### Alternative instructions using `virtualenvwrapper`
+### Alternative instructions using virtualenvwrapper
 
 [Virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) is an optional convenience 
 tool that helps manage virturalenvs. 
@@ -61,15 +61,14 @@ Then to activate the environment you simply use:
 workon {{ project_name }}
 ```
 
-## Install cookiecutter
+## Setup Pegasus
 
-This project uses [Cookiecutter](https://cookiecutter.readthedocs.io/en/latest/) to configure your template,
-which must be installed before proceeding.
+To run pegasus you'll first need to install the installer and its dependencies.
 
 To do this, from inside your virtualenv just run:
 
 ```
-pip install "cookiecutter>=1.6.0"
+pip install pegasus-installer
 ```
 
 ## Create your project
@@ -78,7 +77,7 @@ Go into the directory where you wish to create your project and run the followin
 You will need to replace `/path/to/pegasus.zip` with the path to the downloaded file above.
 
 ```
-cookiecutter /path/to/pegasus.zip
+pegasus /path/to/pegasus.zip
 ```
 
 The command will run you through a series of configuration prompts. 
