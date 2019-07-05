@@ -22,6 +22,6 @@ The complete set of documentation is below.
    configuration
    front-end
    code-structure
-
+   cookbooks
 
 .. _saaspegasus.com: https://www.saaspegasus.com/
