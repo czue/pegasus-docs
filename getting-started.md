@@ -119,17 +119,7 @@ Go to [http://localhost:8000](http://localhost:8000) and you should see the defa
 
 To create your first user account, just go through the sign up flow in your web browser.
 
-### Promote your user to an admin
-
-By default, accessing the examples is restricted to superusers only.
-To convert your newly-created user into an admin, run the following command,
-being sure to replace the email address with the one you used to sign up.
-
-```
-python ./manage.py promote_user_to_superuser yourname@example.com
-``` 
-
-Refreshing the page should bring up the example gallery tab.
+From there you should be able to access all bulit-in functionality and examples.
 
 ## Building Your Application
 
