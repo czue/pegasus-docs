@@ -43,6 +43,13 @@ and run this command to rebuild them:
 npm run build  # or "dev" or "dev-watch"
 ```
 
+As a simple, impactful change to get started, you can set the following variable to change
+the primary color/theme across the site:
+
+```scss
+$link: #2e7636;  // change primary color to green
+```
+
 ## Javascript
 
 The project uses a webpack build pipeline to compile the javascript files.
