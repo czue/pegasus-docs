@@ -47,7 +47,7 @@ As a simple, impactful change to get started, you can set the following variable
 the primary color/theme across the site:
 
 ```scss
-$link: #2e7636;  // change primary color to green
+$primary: #2e7636;  // change primary color to green
 ```
 
 ## Javascript
