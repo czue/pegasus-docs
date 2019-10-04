@@ -120,11 +120,12 @@ To add a navigation element to your new page, just paste the following snippet i
   </a>
 </li>
 ```
-# Success!
+
+## Success!
 
 If you've successfully completed these steps you should be able to go to click on the navigation 
 element (or visit [http://localhost:8000/payments/](http://localhost:8000/payments/)) to see your 
 new payment module working.
  
 **Note: if payments are giving a Stripe error you likely need to fix your 
-[Stripe configuration](configuration.md#stripe).**
+[Stripe configuration](configuration.md).**
