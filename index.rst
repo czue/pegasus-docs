@@ -23,5 +23,6 @@ The complete set of documentation is below.
    front-end
    code-structure
    cookbooks
+   payments
 
 .. _saaspegasus.com: https://www.saaspegasus.com/

@@ -127,4 +127,4 @@ element (or visit [http://localhost:8000/payments/](http://localhost:8000/paymen
 new payment module working.
  
 **Note: if payments are giving a Stripe error you likely need to fix your 
-[Stripe configuration][configuration.md#stripe].**
+[Stripe configuration](configuration.md#stripe).**

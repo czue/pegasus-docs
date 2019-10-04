@@ -58,3 +58,6 @@ If you aren't using teams, you can delete the following additional code around i
 1. Delete `static/js/teams-bundle.js`
 
 
+## Using the Payments example
+
+To make the Payments example a part of your own application, see [this page](payments.md).
