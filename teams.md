@@ -72,3 +72,22 @@ in addition to checking team membership the role is also checked and if the user
 The above decorators offer special exemptions for Django superusers, who are allowed to access
 all teams and all pages by default.
 
+### Template tags
+
+In addition to the decorators, you can also use template tags to check user / team access from a template.
+
+This can be useful for hiding/showing certain content based on a user's team role.
+The `is_member_of` filter can be used to check team membership, and the `is_admin_of` filter can be used
+to check if a user is a team admin. For example, the following will show only if the logged in user
+is an admin of the associated team:
+
+```html
+{% load team_tags %}
+{% if team and request.user|is_admin_of:team %}
+  <p>You're an admin of {{team.name}}.</p>
+{% elif team and request.user|is_member_of:team %}
+  <p>You're a member of {{team.name}}.</p>
+{% else %}
+  <p>Sorry you don't have access to {{team.name}}.</p>
+{% endif %}
+```
