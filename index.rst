@@ -23,6 +23,7 @@ The complete set of documentation is below.
    front-end
    code-structure
    cookbooks
+   teams
    payments
 
 .. _saaspegasus.com: https://www.saaspegasus.com/
