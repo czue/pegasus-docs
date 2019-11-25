@@ -70,9 +70,15 @@ However, this can be easily changed by changing the following value in `settings
 ACCOUNT_EMAIL_VERIFICATION = 'optional'  # change to "mandatory" to require users to confirm email before signing in.
 ```
 
-### Social login
+### Google / Social login
 
-It's easy to add social login (e.g. login with Google, Facebook, Twitter) to your site using allauth.
+Pegasus (as of version 0.3.1) optionally ships with a "Login with Google" option. 
+Just enter "y" to the option during installation to start with a default configuration.
+
+You'll separately need to follow the steps [listed here](https://django-allauth.readthedocs.io/en/latest/providers.html#google)
+to configure things on the Google side and in the Django Admin.
+
+It's easy to add or change social login details (e.g. login with Facebook, Twitter, Github, etc.) using allauth.
 
 For details on how to set this up for a particular provider [see this page](https://django-allauth.readthedocs.io/en/latest/providers.html).
 
