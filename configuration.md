@@ -1,6 +1,6 @@
 # Settings and Configuration
 
-This section describes some of the settings and configuration detials you can change inside Pegasus.
+This section describes some of the settings and configuration details you can change inside Pegasus.
 
 ## Project Metadata
 
@@ -61,15 +61,6 @@ See [Sending email](https://docs.djangoproject.com/en/2.2/topics/email/) in the 
 The sign up workflow is managed by [django-allauth](https://www.intenct.nl/projects/django-allauth/)
 with a sensible set of defaults and templates.
 
-### Requiring email confirmation
-
-Pegasus does not require users to confirm their email addresses prior to logging in. 
-However, this can be easily changed by changing the following value in `settings.py`
-
-```python
-ACCOUNT_EMAIL_VERIFICATION = 'optional'  # change to "mandatory" to require users to confirm email before signing in.
-```
-
 ### Google / Social login
 
 Pegasus (as of version 0.3.1) optionally ships with a "Login with Google" option. 
@@ -83,6 +74,17 @@ It's easy to add or change social login details (e.g. login with Facebook, Twitt
 For details on how to set this up for a particular provider [see this page](https://django-allauth.readthedocs.io/en/latest/providers.html).
 
 If you need help setting this up feel free to get in touch!
+
+### Requiring email confirmation
+
+Pegasus does not require users to confirm their email addresses prior to logging in. 
+However, this can be easily changed by changing the following value in `settings.py`
+
+```python
+ACCOUNT_EMAIL_VERIFICATION = 'optional'  # change to "mandatory" to require users to confirm email before signing in.
+```
+
+*Note: The email verification step will be skipped if using a Google / social login.*
 
 ### Further configuration
 
