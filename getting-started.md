@@ -16,7 +16,7 @@ Else read on below for the play-by-play.
 
 If you haven't already, you'll need to install the following.
 
-- [Python 3](https://www.python.org/downloads/)
+- [Python 3.6 or higher](https://www.python.org/downloads/)
 - [Virtualenv](https://virtualenv.pypa.io/en/stable/)
 
 *Note: It is possible to use the template without `virtualenv`, 
