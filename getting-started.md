@@ -122,13 +122,13 @@ python ./manage.py runserver
 
 Go to [http://localhost:8000](http://localhost:8000) and you should see the default Pegasus landing page!
 
-![](images/pegasus-landing-page.png)
+![Landing Page](images/pegasus-landing-page.png)
 
 ## Create a User
 
 To create your first user account, just go through the sign up flow in your web browser.
 
-From there you should be able to access all bulit-in functionality and examples.
+From there you should be able to access all built-in functionality and examples.
 
 ## Building Your Application
 
