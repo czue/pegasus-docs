@@ -26,4 +26,5 @@
 
 - Remove redundant raw prefix on some `path` url declarations
 - Reduced some duplicate access to `team` object when already available via the `request` object.
+- Made team permission template tags more consistent with rest of site (also allow access to superusers)
 
