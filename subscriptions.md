@@ -4,6 +4,18 @@ Subscriptions
 **Note: Subscriptions are a pre-release feature and this documentation is still a work in progress.
 To request access to Subscriptions, please email me at cory@saaspegasus.com**
 
+## Overview
+
+Subscriptions in Pegasus have three components which must all be setup in order for them to work correctly.
+
+1. **Stripe Billing data**. This is configured in Stripe.
+2. **Local Stripe models**. These are synced automatically from Stripe to your local database, using
+   [`dj-stripe`](https://github.com/dj-stripe/dj-stripe).
+3. **Pegasus metadata**. This is configured in `apps/subsriptions/metadata.py` and used to augment
+   the data from Stripe.
+
+The easiest way to setup all three is to follow the guide below.
+
 ## Getting Started
 
 Complete the following steps in order to setup your first subscription workflow.
