@@ -30,3 +30,13 @@
 - Reduced some duplicate access to `team` object when already available via the `request` object.
 - Made team permission template tags more consistent with rest of site (also allow access to superusers)
 - Upgraded various `npm` packages
+- Removed `PEGASUS_USING_TEAMS` and `pegasus_settings` context processor. All config is now handled at installation
+  time instead of by settings variables.
+
+
+## Documentation
+
+- Added release notes page (this one)
+- Added [subscriptions overview page](/subscriptions)
+- Updated "delete teams code" cookbook to reflect latest team changes 
+  (all the backend work is now done for you on installation)
