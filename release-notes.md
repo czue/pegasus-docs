@@ -1,6 +1,8 @@
 
 
-# Version 0.4
+# Version 0.5 (beta)
+
+This release is not yet public. [Get in touch](https://www.saaspegasus.com/support/) if you want to try it out!
 
 ## Subscriptions!
 
