@@ -19,10 +19,14 @@ This release is not yet public. [Get in touch](https://www.saaspegasus.com/suppo
 - Added `tooltip` utilities.
 - Added a few margin helper classes (e.g. `my-1`, `my-2` )
 
-## New Library Dependencies
+## New Python Library Dependencies
 
-- [attrs][https://www.attrs.org/en/stable/]
-- [dj-stripe][https://dj-stripe.readthedocs.io/en/stable/]
+- (attrs)[https://www.attrs.org/en/stable/]
+- (dj-stripe)[https://dj-stripe.readthedocs.io/en/stable/]
+
+## New JavaScript Library Dependencies
+
+- (js-cookie)[https://github.com/js-cookie/js-cookie]
 
 ## Small fixes and changes:
 
