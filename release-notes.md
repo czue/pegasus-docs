@@ -42,3 +42,7 @@ This release is not yet public. [Get in touch](https://www.saaspegasus.com/suppo
 - Added [subscriptions overview page](/subscriptions)
 - Updated "delete teams code" cookbook to reflect latest team changes 
   (all the backend work is now done for you on installation)
+
+# Version 0.4 and earlier
+
+Release notes for earlier versions are tracked at [https://www.saaspegasus.com/releases/](https://www.saaspegasus.com/releases/).
