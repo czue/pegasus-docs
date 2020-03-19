@@ -41,6 +41,33 @@ If you've set things up correctly you should see a page that looks like this:
 If you want to change the contents of the page, just edit the details in `metadata.py`. Watch how the page 
 changes when you make changes.
 
-When you're ready, repeat the same process on your live Stripe account.
+## Webhooks
 
-Good luck collecting your first subscription payment!
+Webhooks are used to notify your app about events that happen in Stripe, e.g. failed payments.
+More information can be found in [Stripe's webhook documentation](https://stripe.com/docs/webhooks).
+
+Pegasus ships with webhook functionality ready to go, however you are strongly encouraged
+to test locally using [Stripe's excellent guide](https://stripe.com/docs/webhooks/test).
+
+A few pieces of setup that are required:
+
+- For the webhook URL, it should be https://yourserver.com/stripe/webhook/. **The trailing slash is required.**
+  If using the Stripe CLI you can use `stripe listen --forward-to localhost:8000/stripe/webhook/`
+- Make sure to set `DJSTRIPE_WEBHOOK_SECRET` in your `settings.py` or environment.
+  This value can be found when configuring your webhook endpoint in the Stripe dashboard, 
+  or read from the console output in the Stripe CLI.
+
+Once webhooks are properly setup, all the underlying Stripe data will be automatically synced from
+Stripe with no additional setup on your part.
+
+### Custom Webhook Handling
+
+You may want to do more than just update the underlying Stripe objects when processing webhooks, 
+for example, notifying a customer or admin of a failed payment.
+
+Pegasus ships with an example of executing custom logic from a webhook in `apps/subscriptions/webhooks.py`. 
+This basic example will mail your project admins when a Subscription is canceled.
+
+More details on custom webhooks can be found in the [dj-stripe documentation](https://dj-stripe.readthedocs.io/en/stable/usage/webhooks.html). 
+
+Good luck collecting and managing your first subscription payments!
