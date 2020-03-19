@@ -36,6 +36,7 @@ This release is not yet public. [Get in touch](https://www.saaspegasus.com/suppo
 - Reduced some duplicate access to `team` object when already available via the `request` object.
 - Made team permission template tags more consistent with rest of site (also allow access to superusers)
 - Upgraded various `npm` packages
+- Upgraded Bulma to 0.8.0
 - Removed `PEGASUS_USING_TEAMS` and `pegasus_settings` context processor. All config is now handled at installation
   time instead of by settings variables.
 
