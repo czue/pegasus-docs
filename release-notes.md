@@ -30,7 +30,7 @@ This release is not yet public. [Get in touch](https://www.saaspegasus.com/suppo
 
 ## Small fixes and changes:
 
-- Moved app-specific templates from inside the apps to global Pegasus templates directory as recommended by 
+- Moved app-specific templates from inside the apps to global templates directory as recommended by 
   Two Scoops of Django
 - Remove redundant raw prefix on some `path` url declarations
 - Reduced some duplicate access to `team` object when already available via the `request` object.
@@ -39,6 +39,7 @@ This release is not yet public. [Get in touch](https://www.saaspegasus.com/suppo
 - Upgraded Bulma to 0.8.0
 - Removed `PEGASUS_USING_TEAMS` and `pegasus_settings` context processor. All config is now handled at installation
   time instead of by settings variables.
+
 
 
 ## Documentation
