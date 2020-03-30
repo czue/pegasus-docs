@@ -20,10 +20,12 @@ The complete set of documentation is below.
    getting-started
    customizations
    configuration
+   subscriptions
    front-end
    code-structure
    cookbooks
    teams
    payments
+   release-notes
 
 .. _saaspegasus.com: https://www.saaspegasus.com/
