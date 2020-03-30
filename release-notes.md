@@ -2,35 +2,35 @@ Version History and Release Notes
 =================================
 
 
-# Version 0.5 (beta)
+## Version 0.5
 
 This release is not yet public. [Get in touch](https://www.saaspegasus.com/support/) if you want to try it out!
 
-## Subscriptions!
+### Subscriptions!
 
 - Added a `subscription` field to `Team` and `CustomUser` objects, and a `customer` field to `CustomUser`.
 - Added `SubscriptionModelMixin` helper class for accessing / checking subscription status on a model.
 
-## Javascript build changes
+### Javascript build changes
 
 - Added `Pegasus.js` and made different modules available in front end code 
   (see subscriptions upgrade page example usage).
 
-## Sass / CSS changes
+### Sass / CSS changes
 
 - Added `tooltip` utilities.
 - Added a few margin helper classes (e.g. `my-1`, `my-2` )
 
-## New Python Library Dependencies
+### New Python Library Dependencies
 
 - (attrs)[https://www.attrs.org/en/stable/]
 - (dj-stripe)[https://dj-stripe.readthedocs.io/en/stable/]
 
-## New JavaScript Library Dependencies
+### New JavaScript Library Dependencies
 
 - (js-cookie)[https://github.com/js-cookie/js-cookie]
 
-## Small fixes and changes:
+### Small fixes and changes:
 
 - Moved app-specific templates from inside the apps to global templates directory as recommended by 
   Two Scoops of Django
@@ -42,15 +42,13 @@ This release is not yet public. [Get in touch](https://www.saaspegasus.com/suppo
 - Removed `PEGASUS_USING_TEAMS` and `pegasus_settings` context processor. All config is now handled at installation
   time instead of by settings variables.
 
-
-
-## Documentation
+### Documentation
 
 - Added release notes page (this one)
 - Added [subscriptions overview page](/subscriptions)
 - Updated "delete teams code" cookbook to reflect latest team changes 
   (all the backend work is now done for you on installation)
 
-# Version 0.4 and earlier
+## Version 0.4 and earlier
 
 Release notes for earlier versions are tracked at [https://www.saaspegasus.com/releases/](https://www.saaspegasus.com/releases/).
