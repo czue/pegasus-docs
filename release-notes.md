@@ -10,7 +10,7 @@ Read below for all the details.
 
 Added the [Stripe Subscriptions feature](https://www.saaspegasus.com/content/subscriptions-overview).
 
-Documentation for suscriptions can be [found here](/subscriptions).
+Documentation for subscriptions can be [found here](/subscriptions).
 
 #### Model changes
 
