@@ -23,7 +23,8 @@ Complete the following steps in order to setup your first subscription workflow.
 0. If you haven't already, [setup Pegasus and create an account](/getting-started). 
 1. Setup your billing plans in your Stripe test account. See 
    [Stripe's documentation](https://stripe.com/docs/billing/subscriptions/set-up-subscription) for help on doing this.
-2. Update the `STRIPE_*` variables in `settings.py` or in your os environment variables.
+2. Update the `STRIPE_*` variables in `settings.py` or in your os environment variables to match
+   the keys from Stripe. See [this page](https://stripe.com/docs/keys) to find your API keys.
 3. Run `./manage.py bootstrap_subscriptions`. If things are setup correctly,
    you should see output that includes "Synchronized plan plan_[plan_id]" for each plan you created,
    and an output starting with `ACTIVE_PRODUCTS = ` containing the products you just created.
@@ -71,3 +72,13 @@ This basic example will mail your project admins when a Subscription is canceled
 More details on custom webhooks can be found in the [dj-stripe documentation](https://dj-stripe.readthedocs.io/en/stable/usage/webhooks.html). 
 
 Good luck collecting and managing your first subscription payments!
+
+## Feature-Gating
+
+Pegasus ships with a demo page with a few feature-gating examples, including:
+
+1. Changing content on a page based on the user/team's subscription.
+1. Restricting access to an entire page based on the user/team's subscription.
+1. Showing subscription details like plan, payment details, and renewal date.
+
+For additional questions on feature-gating don't hesitate to get in touch!
