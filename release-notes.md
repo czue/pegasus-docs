@@ -8,6 +8,12 @@ Read below for all the details.
 
 ### Subscriptions!
 
+Added the [Stripe Subscriptions feature](https://www.saaspegasus.com/content/subscriptions-overview).
+
+Documentation for suscriptions can be [found here](/subscriptions).
+
+#### Model changes
+
 - Added a `subscription` field to `Team` and `CustomUser` objects, and a `customer` field to `CustomUser`.
 - Added `SubscriptionModelMixin` helper class for accessing / checking subscription status on a model.
 
