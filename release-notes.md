@@ -1,10 +1,10 @@
 Version History and Release Notes
 =================================
 
-
 ## Version 0.5
 
-This release is not yet public. [Get in touch](https://www.saaspegasus.com/support/) if you want to try it out!
+This is the biggest release to Pegasus since it's launch.
+Read below for all the details.
 
 ### Subscriptions!
 
@@ -23,12 +23,12 @@ This release is not yet public. [Get in touch](https://www.saaspegasus.com/suppo
 
 ### New Python Library Dependencies
 
-- (attrs)[https://www.attrs.org/en/stable/]
-- (dj-stripe)[https://dj-stripe.readthedocs.io/en/stable/]
+- [attrs](https://www.attrs.org/en/stable/)
+- [dj-stripe](https://dj-stripe.readthedocs.io/en/stable/)
 
 ### New JavaScript Library Dependencies
 
-- (js-cookie)[https://github.com/js-cookie/js-cookie]
+- [js-cookie](https://github.com/js-cookie/js-cookie)
 
 ### Small fixes and changes:
 
@@ -37,10 +37,11 @@ This release is not yet public. [Get in touch](https://www.saaspegasus.com/suppo
 - Remove redundant raw prefix on some `path` url declarations
 - Reduced some duplicate access to `team` object when already available via the `request` object.
 - Made team permission template tags more consistent with rest of site (also allow access to superusers)
-- Upgraded various `npm` packages
-- Upgraded Bulma to 0.8.0
 - Removed `PEGASUS_USING_TEAMS` and `pegasus_settings` context processor. All config is now handled at installation
   time instead of by settings variables.
+- Catch Stripe card errors in the payments example
+- Upgraded various `npm` packages
+- Upgraded Bulma to 0.8.0
 
 ### Documentation
 
