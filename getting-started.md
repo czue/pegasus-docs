@@ -132,10 +132,17 @@ To create your first user account, just go through the sign up flow in your web 
 
 From there you should be able to access all built-in functionality and examples.
 
+## (Optional) Setup your Stripe Subscriptions
+
+If you've installed with subscriptions, you'll want to set things up next.
+
+Head to the [subscriptions documentation](/subscriptions) and follow the steps there!
+
 ## Building Your Application
 
-At this point, Pegasus has installed scaffolding for all of the user management, authentication, and (optionally) team views,
-and given you a beautiful base UI template and clear code structure to work from. 
+At this point, Pegasus has installed scaffolding for all of the user management, authentication, and (optionally) 
+team views and Stripe subscriptions, and given you a beautiful base UI template and clear code 
+structure to work from. 
  
 Now that you're up and running it's time for the fun part: building your new application!
 
@@ -146,7 +153,8 @@ Some examples of things you might want to do next include:
 - Start modifying the list of navigation tabs and logged-in user experience
 - Create a new django app and begin building out your data models in `models.py`
 
-For some initial pointers on where to to make Pegasus your own, head on over to the [Customizations Page](/customizations).
+For some initial pointers on where to to make Pegasus your own, head on over to the 
+[Customizations Page](/customizations).
 
 For the nitty-gritty details on setting up things like email, error logging, sign up flow, analytics, and more 
 go to [Settings and Configuration](/configuration).
