@@ -41,16 +41,7 @@ take the following steps:
 
 ## Delete Teams Code
 
-If you aren't using teams, you can delete the following additional code around it.
-
-1. In `apps/web/templates/web/components/app_nav.html`, remove the section enclosed by `{% if PEGASUS_USING_TEAMS %}`.
-1. In `pegasus/context_processors`, remove `PEGASUS_USING_TEAMS` from the `pegasus_settings` function.
-1. In `settings.py`, remove the `PEGASUS_USING_TEAMS` variable declaration.
-1. In `settings.py`, remove `'pegasus.context_processors.pegasus_settings'` from `context_processors`
-1. Delete the *entire* `pegasus/apps/teams` directory.
-1. Delete the *entire* `pegasus/templates/teams` directory.
-
-### Cleaning the front-end code
+If you aren't using teams there are a few things you can cleanup on the front end code.
 
 1. In `assets/index.js` remove the `require('./javascript/pegasus/teams.js');` line.
 1. In `webpack.config.js`, delete the `teams` entry from `module.exports`.
