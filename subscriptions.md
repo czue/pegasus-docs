@@ -1,9 +1,6 @@
 Subscriptions
 =============
 
-**Note: Subscriptions are a pre-release feature and this documentation is still a work in progress.
-To request access to Subscriptions, please email me at cory@saaspegasus.com**
-
 ## Overview
 
 Subscriptions in Pegasus have three components which must all be setup in order for them to work correctly.
