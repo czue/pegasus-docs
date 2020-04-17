@@ -1,6 +1,16 @@
 Version History and Release Notes
 =================================
 
+## Version 0.5.1
+
+Version 0.5.1 is a minor maintenance release with a few minor bug fixes and bits of cleanup:
+
+- Upgraded Django to 3.0.5
+- Fixed bug where certain input types were getting overridden in Django Forms (thanks Yaniv for reporting!) 
+- Fixed bug with Object Lifecycle and Charts demos not working on Team installations (thanks Greg for reporting!)
+- Moved example chart JavaScript to the webpack pipeline and share Api access variables (thanks Greg for the suggestion!)
+- Switch `admin.py`  files to use the `@admin.register` decorator syntax
+
 ## Version 0.5
 
 This is the biggest release to Pegasus since it's launch.
