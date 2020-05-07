@@ -132,11 +132,17 @@ To create your first user account, just go through the sign up flow in your web 
 
 From there you should be able to access all built-in functionality and examples.
 
-## (Optional) Setup your Stripe Subscriptions
+## (Optional) Set up your Stripe Subscriptions
 
 If you've installed with subscriptions, you'll want to set things up next.
 
 Head to the [subscriptions documentation](/subscriptions) and follow the steps there!
+
+## (Optional) Set up Background Tasks
+
+For the progress bar example to work you'll need a Celery environment running.
+
+Head to [celery](/celery) and follow the steps there!
 
 ## Building Your Application
 

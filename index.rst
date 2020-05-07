@@ -22,6 +22,7 @@ The complete set of documentation is below.
    configuration
    subscriptions
    front-end
+   celery
    code-structure
    cookbooks
    teams

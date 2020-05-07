@@ -134,3 +134,7 @@ STRIPE_TEST_PUBLIC_KEY = os.environ.get("STRIPE_TEST_PUBLIC_KEY", "<your publish
 STRIPE_TEST_SECRET_KEY = os.environ.get("STRIPE_TEST_SECRET_KEY", "<your secret key>")
 STRIPE_LIVE_MODE = False  # Change to True in production
 ```
+
+## Celery
+
+See the [celery docs](/celery) for set up and configuration of Celery.
