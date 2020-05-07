@@ -1,6 +1,18 @@
 Version History and Release Notes
 =================================
 
+## Version 0.5.2
+
+- Fixed default Postgres DB settings (adding host and port)
+- Removed Stripe webhooks from project urls if not using subscriptions
+- Fixed but where subscription and teams templates were still being included even if not enabled for a project
+- upgrade `celery-progress` to 0.0.10
+- Cleaned up progress bar demo
+  - Used javascript cookie library for CSRF token
+  - Switched from `var` to `const` in a few places
+  - Removed debug logging statements
+
+
 ## Version 0.5.1
 
 Version 0.5.1 is a minor maintenance release with a few minor bug fixes and bits of cleanup:
