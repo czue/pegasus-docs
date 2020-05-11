@@ -12,6 +12,7 @@ Version History and Release Notes
   - Switched from `var` to `const` in a few places
   - Removed debug logging statements
 
+*May 7, 2020*
 
 ## Version 0.5.1
 
@@ -22,6 +23,8 @@ Version 0.5.1 is a minor maintenance release with a few minor bug fixes and bits
 - Fixed bug with Object Lifecycle and Charts demos not working on Team installations (thanks Greg for reporting!)
 - Moved example chart JavaScript to the webpack pipeline and share Api access variables (thanks Greg for the suggestion!)
 - Switch `admin.py`  files to use the `@admin.register` decorator syntax
+
+*April 17, 2020*
 
 ## Version 0.5
 
@@ -77,6 +80,8 @@ Documentation for subscriptions can be [found here](/subscriptions).
 - Added [subscriptions overview page](/subscriptions)
 - Updated "delete teams code" cookbook to reflect latest team changes 
   (all the backend work is now done for you on installation)
+
+*March 30, 2020*
 
 ## Version 0.4 and earlier
 
