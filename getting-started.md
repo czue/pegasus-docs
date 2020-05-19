@@ -39,11 +39,11 @@ Follow one of the sections below depending on how you want to manage your virtua
 
 After installing prerequisites, run the following command wherever you want to create
 the `virtualenv`. This will create the environment in the `{{ project_name_env }}` directory.
-You should replace the "python3.7" variable with whatever version you want to use, 
+You should replace the "python3.8" variable with whatever version you want to use, 
 but it *must be 3.6 or above*.
 
 ```
-virtualenv -p python3.7 {{ project_name_env }}
+virtualenv -p python3.8 {{ project_name_env }}
 ```
 
 To activate the environment then run:
@@ -63,7 +63,7 @@ If you choose to use `virtualenvwrapper` you can use the following command to cr
 This can be run from anywhere since `virtualenvwrapper` manages the location of your envs for you.
 
 ```
-mkvirtualenv -p python3 {{ project_name }}
+mkvirtualenv -p python3.8 {{ project_name }}
 ```
 
 Then to activate the environment you simply use:
@@ -109,16 +109,32 @@ You should see a lot of newly created files for your project including a `manage
 ```
 pip install -r requirements.txt
 ```
+## Set up database (Postgres only)
 
-## Setup database
+If you installed with Postgres, edit the `DATABASES` value in `{{ project_name }}/settings.py` with
+the appropriate details.
 
+You will also need to create a database for your project if you haven't already:
+
+```bash
+sudo -u postgres createdb {{ project_name }}
 ```
+
+## Create database migrations
+
+```bash
+python ./manage.py makemigrations
+```
+
+## Run database migrations
+
+```bash
 python ./manage.py migrate
 ```
 
-## Runserver
+## Run server
 
-```
+```bash
 python ./manage.py runserver
 ```
 
@@ -131,6 +147,10 @@ Go to [http://localhost:8000](http://localhost:8000) and you should see the defa
 To create your first user account, just go through the sign up flow in your web browser.
 
 From there you should be able to access all built-in functionality and examples.
+
+## (Optional) Enable admin access
+
+Follow [these instructions](cookbooks#use-the-django-admin-ui) to enable access to the Django Admin site.
 
 ## (Optional) Set up your Stripe Subscriptions
 
