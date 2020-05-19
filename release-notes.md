@@ -12,8 +12,8 @@ little new / changed in terms of functionality.
 The philosophy guiding this change is "your starting code base should be as understandable as possible".
 
 Historically, Pegasus has attempted to separate "Pegasus-owned" files from "user-owned" files.
-The thinking behind this structure was that Pegasus upgrades and code merges would be as easy as possible since
-- in theory - users would not need to modify anything in the "Pegasus-owned" space.
+The thinking behind this structure was that Pegasus upgrades and code merges would be as easy as possible since - 
+in theory - users would not need to modify anything in the "Pegasus-owned" space.
 
 In practice, the line between "Pegasus-owned" and "user-owned" was fuzzy, and customizing
 an application often required editing files in the "Pegasus-owned" space.
