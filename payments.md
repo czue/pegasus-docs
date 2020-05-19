@@ -74,7 +74,7 @@ Then edit the first line of `apps/payments/templates/payments/payments.html` to 
 instead of the example template:
 
 ```html
-{% extends "pegasus/app/app_base.html" %}
+{% extends "web/app/app_base.html" %}
 ```
 
 And find the line containing the `<form>` definition and change it as follows (changing the url
