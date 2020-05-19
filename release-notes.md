@@ -1,6 +1,81 @@
 Version History and Release Notes
 =================================
 
+## Version 0.6.0
+
+This release begins the move of Pegasus's core functionality out of the "pegasus" app and into
+the user-defined apps. It's a relatively big release from a code perspective, although there is very
+little new / changed in terms of functionality.
+
+### Philosophy
+
+The philosophy guiding this change is "your starting code base should be as understandable as possible".
+
+Historically, Pegasus has attempted to separate "Pegasus-owned" files from "user-owned" files.
+The thinking behind this structure was that Pegasus upgrades and code merges would be as easy as possible since
+- in theory - users would not need to modify anything in the "Pegasus-owned" space.
+
+In practice, the line between "Pegasus-owned" and "user-owned" was fuzzy, and customizing
+an application often required editing files in the "Pegasus-owned" space.
+So the benefit was not realized.
+
+Furthermore, this split caused the initial codebase to be more confusing, since core functionality was split
+across two places.
+
+### Changelog
+
+Changes related to the restructure above include:
+
+- Moved all base templates from `templates/pegasus/` to `templates/web/`
+- Moved team invitation templates from `templates/pegasus/email/` to `templates/teams/email/`
+- Merged `pegasus/apps/users` and all related code into `apps/users`
+- Merged `pegasus/apps/teams` and all related code into `apps/teams`
+- Removed `pegasus/apps/components` and moved code to more specific apps - further details below
+- Moved `promote_user_to_superuser` management command into `users` app
+- Moved `bootstrap_subscriptions` management command into `subscriptions` app
+- Moved `google_analytics_id` context processor to web app
+- Moved `meta.py` from pegasus app to web app
+- Moved `pegasus/utils/subscriptions.py` to `apps/subscriptions/helpers.py`
+- Added `apps.utils` and moved most of `pegasus.utils` there
+- Moved `PegasusBaseModel` to `apps.utils` and renamed to `BaseModel`
+- Removed unused `stripe.py` file (replacing functionality with equivalent functions in `djstripe`)
+- Removed "Pegasus" from API url names
+- Moved non-example JS imports out of `pegasus/Pegasus.js` and into `App.js`
+- Lowercased (and kebab-cased) all JS file names for consistency
+- Moved sass files from `assets/styles/pegasus`, to `assets/styles/app`
+- Renamed various layout classes, e.g. `pegasus-two-column`, `pegasus-message`, etc. to `app-[name]`
+- Moved `static/images/pegasus/undraw/` folder to `static/images/undraw`
+- Removed unused `pegasus/teams/serializers.py` file
+
+
+Other changes and fixes include:
+
+- Fix accepting an invitation if you're already signed in
+- Remove subscription-related fields from team and user models if not using subscriptions
+- Only ship base migration files for users and teams, and have applications manage their own migrations 
+- Improved checks and error-handling around accepting invitations multiple times
+- Upgraded `bulma` CSS framework to `0.8.2`
+- Upgraded `node-sass` to `4.14.1`
+- Ran `npm audit fix` to update other JS library dependencies
+- Upgraded `pip-tools` and other packages in `dev-requirements.txt`
+- Added backend check to the payments example, to show how to prevent client-side exploits
+- Improve password reset email copy
+- Use `$link` color in `$navbar-item-active-color` and `$menu-item-active-background-color`
+- Externalized styles on progress bar demo
+
+### A Note on Database Migrations
+
+Historically, Pegasus has shipped with complete database migrations.
+However, maintaining a set of migrations for each possible Pegasus configuration or forcing all configurations
+to use the same DB schema has proven unwieldy. Thus, migrations are now expected to be managed *outside of Pegasus*.
+
+For new users, the only change is that prior to running `./manage.py migrate` for the first time,
+you must first run `./manage.py makemigrations`.
+
+For existing users you can either keep your current migrations folder, or you can run 
+`./manage.py makemigrations` and then `./manage.py migrate --fake`. If you have changed the user or team
+models, then you should keep your current folder.
+
 ## Version 0.5.2
 
 - Fixed default Postgres DB settings (adding host and port)
