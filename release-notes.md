@@ -37,6 +37,7 @@ Changes related to the restructure above include:
 - Moved `meta.py` from pegasus app to web app
 - Moved `pegasus/utils/subscriptions.py` to `apps/subscriptions/helpers.py`
 - Added `apps.utils` and moved most of `pegasus.utils` there
+- Moved `pegasus/decorators.py` to `apps/utils/decorators.py`
 - Moved `PegasusBaseModel` to `apps.utils` and renamed to `BaseModel`
 - Removed unused `stripe.py` file (replacing functionality with equivalent functions in `djstripe`)
 - Removed "Pegasus" from API url names
