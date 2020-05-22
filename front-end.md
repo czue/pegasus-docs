@@ -41,3 +41,13 @@ You can also set it up to watch for changes by running:
 ```bash
 npm run dev-watch
 ```
+
+## Production build
+
+To build for production, run:
+
+```bash
+npm run build
+```
+
+This will compress your files, remove logging statements, etc.
