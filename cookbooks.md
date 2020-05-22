@@ -34,12 +34,10 @@ take the following steps:
 
 ### Cleaning the front-end code
 
-1. In `assets/index.js` remove the `require('./javascript/pegasus/examples/object-lifecycle.js');` line.
-1. In `assets/javascript/pegasus/Pegasus.js` remove the `export { Charts } from './examples/Charts';` line.
-1. In `webpack.config.js`, delete the `'object-lifecycle'` entry from `module.exports`.
-1. Delete the `assets/javascript/pegasus/examples` folder.
-1. Delete `static/js/object-lifecycle-bundle.js`
-
+1. In `assets/index.js` remove the `require('./javascript/pegasus/examples/object-lifecycle.js');` and `'./javascript/pegasus/pegasus.js'` lines.
+1. In `webpack.config.js`, delete the `'object-lifecycle'` and `'pegasus'` entries from `module.exports`.
+1. Delete the `assets/javascript/pegasus/` folder.
+1. Delete `static/js/object-lifecycle-bundle.js` and `static/js/pegasus-bundle.js`
 
 ## Delete Teams Code
 
