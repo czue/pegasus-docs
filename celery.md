@@ -5,7 +5,7 @@ Celery
 
 It is optional, but is required for the "background task" example to work.
 
-# Quick Start
+## Quick Start
 
 The easiest way to get going is to [download and install Redis](https://redis.io/download) 
 (if you don't already have it) and then run:
@@ -14,7 +14,7 @@ The easiest way to get going is to [download and install Redis](https://redis.io
 celery -A {{ project_name_env }} worker -l info
 ```
 
-# Setup and Configuration
+## Setup and Configuration
 
 The above setup uses [Redis](https://redis.io/) as a message broker and result backend.
 If you want to use a different message broker, for example [RabbitMQ](https://www.rabbitmq.com/),
