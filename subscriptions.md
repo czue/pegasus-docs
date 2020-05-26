@@ -72,7 +72,10 @@ Good luck collecting and managing your first subscription payments!
 
 ## Feature-Gating
 
-Pegasus ships with a demo page with a few feature-gating examples, including:
+Pegasus ships with a demo page with a few feature-gating examples, which
+are available from a new Pegasus installation under the "Subscription Demo" tab.
+
+These include:
 
 1. Changing content on a page based on the user/team's subscription.
 1. Restricting access to an entire page based on the user/team's subscription.
