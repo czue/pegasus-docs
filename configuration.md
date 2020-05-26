@@ -63,7 +63,7 @@ with a sensible set of defaults and templates.
 
 ### Google / Social login
 
-Pegasus (as of version 0.3.1) optionally ships with a "Login with Google" option. 
+Pegasus optionally ships with a "Login with Google" option. 
 Just enter "y" to the option during installation to start with a default configuration.
 
 You'll separately need to follow the steps [listed here](https://django-allauth.readthedocs.io/en/latest/providers.html#google)
