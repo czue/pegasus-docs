@@ -1,6 +1,12 @@
 Version History and Release Notes
 =================================
 
+## Version 0.6.1
+
+- Upgrade `requests` to version `0.23.0` to fix installation version conflict.
+
+*May 26, 2020*
+
 ## Version 0.6.0
 
 This release begins the move of Pegasus's core functionality out of the "pegasus" app and into
@@ -76,6 +82,8 @@ you must first run `./manage.py makemigrations`.
 For existing users you can either keep your current migrations folder, or you can run 
 `./manage.py makemigrations` and then `./manage.py migrate --fake`. If you have changed the user or team
 models, then you should keep your current folder.
+
+*May 19, 2020*
 
 ## Version 0.5.2
 
