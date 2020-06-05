@@ -1,6 +1,20 @@
 Version History and Release Notes
 =================================
 
+## Version 0.7.0
+
+Pegasus now supports [Vue.js](https://vuejs.org/)!
+
+Version 0.7 adds a Vue.js implementation of the Object Lifecycle demo so you can
+start with a foundation of either React or Vue.
+
+Minor changes:
+
+- Added `Membership` inline admin editing to `Teams` model (thanks Troels!)
+- Added a few more spacing utility css classes to `utilities.sass`
+
+*June 5, 2020*
+
 ## Version 0.6.1
 
 - Upgrade `requests` to version `0.23.0` to fix installation version conflict.
