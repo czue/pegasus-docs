@@ -39,6 +39,9 @@ If you've set things up correctly you should see a page that looks like this:
 If you want to change the contents of the page, just edit the details in `metadata.py`. Watch how the page 
 changes when you make changes.
 
+More background and details on this set up can be found in this 
+[Django Stripe Integration Guide](https://www.saaspegasus.com/guides/django-stripe-integrate/).
+
 ## Webhooks
 
 Webhooks are used to notify your app about events that happen in Stripe, e.g. failed payments.
@@ -66,9 +69,7 @@ for example, notifying a customer or admin of a failed payment.
 Pegasus ships with an example of executing custom logic from a webhook in `apps/subscriptions/webhooks.py`. 
 This basic example will mail your project admins when a Subscription is canceled.
 
-More details on custom webhooks can be found in the [dj-stripe documentation](https://dj-stripe.readthedocs.io/en/stable/usage/webhooks.html). 
-
-Good luck collecting and managing your first subscription payments!
+More details on custom webhooks can be found in the [dj-stripe documentation](https://dj-stripe.readthedocs.io/en/stable/usage/webhooks.html).
 
 ## Feature-Gating
 
