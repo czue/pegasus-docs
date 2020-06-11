@@ -1,6 +1,14 @@
 Version History and Release Notes
 =================================
 
+## Version 0.7.1
+
+- **Added ability to cancel a Subscription directly on the site.**
+  [Demo](https://www.saaspegasus.com/subscriptions/) (you have to create a Subscription first)
+- Don't show password change links if using social authentication (thanks Yaniv!)
+
+*June 11, 2020*
+
 ## Version 0.7.0
 
 Pegasus now supports [Vue.js](https://vuejs.org/)!
