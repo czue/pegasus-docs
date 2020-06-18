@@ -1,6 +1,15 @@
 Version History and Release Notes
 =================================
 
+## Version 0.7.2
+
+- Improved styling of Stripe credit card forms in subscriptions and payments examples
+- Fixed bug in subscriptions where not setting a default plan prevented the UI from working
+- Fixed bug where monthly subscriptions would not work if you also had a quarterly or 6-month price configured
+- Changed the order of some examples in examples home page and navigation
+
+*June 17 2020*
+
 ## Version 0.7.1
 
 - **Added ability to cancel a Subscription directly on the site.**
