@@ -1,6 +1,16 @@
 Version History and Release Notes
 =================================
 
+## Version 0.7.3
+
+- Upgraded to Django 3.0.7
+- Fixed display of renewal details in subscription view to work with the latest Stripe Prices API
+- Added ability to resend invitations from the team management page
+- Added sort order to team member list (by email address)
+- Cleaned up teams JavaSript (removed console logging statements, updated whitespace, removed commented code)
+
+*June 30 2020*
+
 ## Version 0.7.2
 
 - Improved styling of Stripe credit card forms in subscriptions and payments examples
