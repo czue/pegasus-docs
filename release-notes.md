@@ -1,6 +1,22 @@
 Version History and Release Notes
 =================================
 
+## Version 0.7.4
+
+This is another minor release with mostly small fixes and updates to the front end.
+
+- Added number formatting of Salary to object demo examples
+- Fixed styling of number form inputs
+- Removed unnecessary imports from `assets/index.js`
+- Fixed incorrect distinction between `dependencies` and `devDependencies` in `package.json`
+- Upgraded React to 16.13.1
+- Moved React object lifecycle example to a `react` subfolder
+- Started splitting up React object lifecycle demo into multiple files, and refactoring it to use hooks
+- Renamed React object lifecycle example bundle file from `object-lifecycle-bundle.js` to `react-object-lifecycle-bundle.js`
+- Removed unused "bower_components" exclusion in `webpack.config.js`
+
+*July 13 2020*
+
 ## Version 0.7.3
 
 - Upgraded to Django 3.0.7
