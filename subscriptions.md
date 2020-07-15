@@ -42,18 +42,36 @@ changes when you make changes.
 More background and details on this set up can be found in this 
 [Django Stripe Integration Guide](https://www.saaspegasus.com/guides/django-stripe-integrate/).
 
+## Customer Portal
+
+Pegasus uses the [Stripe Billing Customer Portal](https://stripe.com/docs/billing/subscriptions/customer-portal)
+for subscription management after subscription creation.
+
+To set up the portal, it's recommended you follow along with [Stripe's integration guide](https://stripe.com/docs/billing/subscriptions/integrating-customer-portal).
+
+To use the portal you will also need to set up webhooks as per below.
+
+Pegasus ships with webhooks to handle some common actions taken in the billing portal, including:
+
+- Subscription upgrades and downgrades
+- Subscription cancellation (immediately)
+- Subscription cancellations (end of billing period)
+
+Payment method updates are coming in a future release.
+
 ## Webhooks
 
 Webhooks are used to notify your app about events that happen in Stripe, e.g. failed payments.
 More information can be found in [Stripe's webhook documentation](https://stripe.com/docs/webhooks).
 
-Pegasus ships with webhook functionality ready to go, however you are strongly encouraged
+Pegasus ships with webhook functionality ready to go, including default handling of many events
+taken in Stripe's billing portal. That said, you are strongly encouraged
 to test locally using [Stripe's excellent guide](https://stripe.com/docs/webhooks/test).
 
 A few pieces of setup that are required:
 
 - For the webhook URL, it should be https://yourserver.com/stripe/webhook/. **The trailing slash is required.**
-  If using the Stripe CLI you can use `stripe listen --forward-to localhost:8000/stripe/webhook/`
+  If using the Stripe CLI in development you can use `stripe listen --forward-to localhost:8000/stripe/webhook/`
 - Make sure to set `DJSTRIPE_WEBHOOK_SECRET` in your `settings.py` or environment.
   This value can be found when configuring your webhook endpoint in the Stripe dashboard, 
   or read from the console output in the Stripe CLI.

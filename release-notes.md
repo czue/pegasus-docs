@@ -1,6 +1,35 @@
 Version History and Release Notes
 =================================
 
+## Version 0.8.0
+
+Stripe billing portal integration is here!
+
+You can now use Stripe's new [customer portal](https://stripe.com/docs/billing/subscriptions/customer-portal)
+to manage subscriptions in your app.
+
+Supported operations and configurations include upgrading and downgrading subscriptions,
+subscription cancellations (both immediately, and at period end), and subscription
+renewals.
+
+Additional documentation can be found in the [subscription docs](/subscriptions/).
+
+Details and other changes:
+
+- Added "manage billing" redirect to subscription pages if you have an active subscription,
+  which goes to the Stripe customer portal
+- Added webhook functionality to sync subscription changes and cancellations made via the Stripe portal
+- Removed built-in "Cancel" option and supporting code.
+- Upgraded `stripe` library to version `2.48.0`
+- Removed the `.customer` field from `CustomUser` object. Customers are now always accessed via their
+  associated subscriptions. 
+- Removed a lot of no-longer-needed code from `SubscriptionModelMixin` related to accessing subscriptions
+  from the `.customer` field. References to `.stripe_subscription` should be changed to simple `.subscription`
+  on the `CustomUser` and `Team` objects.
+- Added `avatar` to `CustomUser` admin.
+- Fixed bug where "http://" was incorrectly assigned to the `Site.domain` object (fixes issues using `absolute_url`)
+
+
 ## Version 0.7.4
 
 This is another minor release with mostly small fixes and updates to the front end.
