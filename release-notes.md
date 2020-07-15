@@ -1,6 +1,8 @@
 Version History and Release Notes
 =================================
 
+Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
+
 ## Version 0.8.0
 
 Stripe billing portal integration is here!
