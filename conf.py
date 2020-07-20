@@ -87,7 +87,7 @@ html_theme = 'sphinx_rtd_theme'
 #
 # html_theme_options = {}
 html_theme_options = {
-    'canonical_url': 'https://docs.saaspegasus.com',
+    # 'canonical_url': 'https://docs.saaspegasus.com/',
     'analytics_id': 'UA-94102737-10',
 }
 
