@@ -15,3 +15,8 @@ The maintainer uses the pip version.
 ## Building Docs
 
 To build docs run `make html`.
+
+
+## Deployment
+
+Deployment is handled by Netlify. The lastest master is automatically deployed.
