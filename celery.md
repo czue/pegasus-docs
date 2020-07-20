@@ -11,7 +11,7 @@ The easiest way to get going is to [download and install Redis](https://redis.io
 (if you don't already have it) and then run:
 
 ```python
-celery -A {{ project_name_env }} worker -l info
+celery -A {{ project_name }} worker -l info
 ```
 
 ## Setup and Configuration
