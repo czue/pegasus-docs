@@ -57,6 +57,9 @@ Pegasus ships with webhooks to handle some common actions taken in the billing p
 - Subscription cancellation (immediately)
 - Subscription cancellations (end of billing period)
 
+In the Stripe dashboard, you will need to subscribe to a minimum of `customer.subscription.updated`
+and `customer.subscription.deleted` to ensure subscription changes through the portal make it to your app successfully.
+
 Payment method updates are coming in a future release.
 
 ## Webhooks
