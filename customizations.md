@@ -36,7 +36,7 @@ This project uses Bulma's styles by default.
 Bulma is very easy to customize to your needs, 
 though you can always drop Bulma for your preferred CSS framework.
 
-Then to change styles, edit the generated `{{project_name}}.scss` file in `assets/styles` with any custom styles you want
+Then to change styles, edit the generated `site.scss` file in `assets/styles` with any custom styles you want
 and run this command to rebuild them:
 
 ```bash
