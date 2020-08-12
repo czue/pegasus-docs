@@ -44,6 +44,12 @@ ANYMAIL = {
 }
 ```
 
+If you are in the EU you may also need to add the following entry:
+
+```python
+    'MAILGUN_API_URL': 'https://api.eu.mailgun.net/v3',
+```
+
 The [anymail documentation](https://anymail.readthedocs.io/en/stable/) has much more information on these options.
 
 The following django settings should also be set:
