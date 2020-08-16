@@ -31,6 +31,7 @@ Details and other changes:
 - Added `avatar` to `CustomUser` admin.
 - Fixed bug where "http://" was incorrectly assigned to the `Site.domain` object (fixes issues using `absolute_url`)
 
+*July 16, 2020*
 
 ## Version 0.7.4
 
