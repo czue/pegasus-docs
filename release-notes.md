@@ -3,6 +3,17 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.8.1
+
+A minor maintenance/bugfix release:
+
+- Fixed a bug in the invitation workflow that prevented invitations from being accepted
+  when creating accounts with social logins. Note that this requires changing the `ACCOUNT_ADAPTER`
+  setting to  `'apps.teams.adapter.AcceptInvitationAdapter'`
+- Make site branding in the navigation stay visible on mobile devices
+- Make it more obvious that `settings.SECRET_KEY` should be overridden.
+- Upgrade Django to 3.0.9
+
 ## Version 0.8.0
 
 Stripe billing portal integration is here!
