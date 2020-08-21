@@ -14,6 +14,8 @@ A minor maintenance/bugfix release:
 - Make it more obvious that `settings.SECRET_KEY` should be overridden.
 - Upgrade Django to 3.0.9
 
+*Aug 21, 2020*
+
 ## Version 0.8.0
 
 Stripe billing portal integration is here!
