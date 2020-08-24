@@ -3,6 +3,13 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.8.2
+
+This release fixes an edge case in the invitation accepting logic that didn't work if
+a user left the page and came back later. 
+
+*Aug 24, 2020*
+
 ## Version 0.8.1
 
 A minor maintenance/bugfix release:
