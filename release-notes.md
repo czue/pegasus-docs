@@ -8,6 +8,8 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - Fix default styling of number inputs in forms.
 - Default `ACCOUNT_CONFIRM_EMAIL_ON_GET` to `True` if using email confirmation.
 - Fix issue building front end on certain newer versions of nodejs/npm
+- Upgrade `celery-progress` from `0.0.10` to `0.0.12`
+
 
 *Aug 31, 2020*
 
