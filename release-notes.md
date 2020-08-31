@@ -3,6 +3,14 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.8.3
+
+- Fix default styling of number inputs in forms.
+- Default `ACCOUNT_CONFIRM_EMAIL_ON_GET` to `True` if using email confirmation.
+- Fix issue building front end on certain newer versions of nodejs/npm
+
+*Aug 31, 2020*
+
 ## Version 0.8.2
 
 This release fixes an edge case in the invitation accepting logic that didn't work if
