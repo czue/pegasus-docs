@@ -3,6 +3,31 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.9.0
+
+This release is a large overhaul of the React example that ships with Pegasus, including:
+
+- Add url-routing support. Add/edit URLs now update and are linkable. 
+  This also enables back button support
+- Add validation feedback missing / bad data
+- Switch all components from using classes to [hooks](https://reactjs.org/docs/hooks-intro.html)
+- Split React components out into their own files
+
+Other minor updates:
+
+- Upgrade Django to 3.0.10 (3.1 support coming soon)
+- Upgrade various JavaScript dependencies
+- Generate random `SECRET_KEY` for each new installation
+
+Upgrading:
+
+**Existing Pegasus users will need to upgrade the installer to run this.**
+```
+pip install --upgrade pegasus-installer>=0.0.2
+```
+
+*Sep 4, 2020*
+
 ## Version 0.8.3
 
 - Fix default styling of number inputs in forms.
