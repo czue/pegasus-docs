@@ -12,12 +12,15 @@ This release is a large overhaul of the React example that ships with Pegasus, i
 - Add validation feedback missing / bad data
 - Switch all components from using classes to [hooks](https://reactjs.org/docs/hooks-intro.html)
 - Split React components out into their own files
+- Better loading UX
 
 Other minor updates:
 
 - Upgrade Django to 3.0.10 (3.1 support coming soon)
 - Upgrade various JavaScript dependencies
 - Generate random `SECRET_KEY` for each new installation
+- Upgrade to Bulma 0.9.0
+- Remove some spacing utility classes in favor of the ones that ship with bulma
 
 Upgrading:
 
