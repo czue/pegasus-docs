@@ -14,6 +14,16 @@ The easiest way to get going is to [download and install Redis](https://redis.io
 celery -A {{ project_name }} worker -l info
 ```
 
+### Running Celery on Windows
+
+Celery 4.x [no longer officially supports Windows](https://docs.celeryproject.org/en/4.0/whatsnew-4.0.html#removed-features). 
+To use Celery on Windows for development or test purposes, change the concurrency pool implementation to ``gevent`` instead.
+
+``` console
+pip install gevent
+celery -A {{ project_name }} worker -l info -P gevent
+```
+
 ## Setup and Configuration
 
 The above setup uses [Redis](https://redis.io/) as a message broker and result backend.
