@@ -1,8 +1,25 @@
-Building the Front-End 
+The Front End 
 ======================
 
-The front end code uses webpack to allow for ES6 and JSX javascript templates,
-as well as sass/scss style files.
+## Architecture
+
+Pegasus's front-end architecture is a hybrid model, with a standalone front-end codebase
+that is compiled and served inside Django templates.
+
+The front end uses [Babel](https://babeljs.io/) and [Webpack](https://webpack.js.org/) to
+compile the front-end code into bundle files that can be referenced using Django's 
+static file system, as represented in the diagram below.
+
+![Build Pipeline](images/js-pipeline-with-django.png)
+
+Pegasus's styles use the [Bulma CSS framework](https://bulma.io/), and building the 
+CSS files is included as part of the front-end build pipeline.
+
+For a much more detailed overview of the rationale behind this architecture,
+and the details of the set up see the [Modern JavaScript for Django Developers](https://www.saaspegasus.com/guides/modern-javascript-for-django-developers/)
+series.
+
+## Front-end files
 
 The source front-end files live in the `assets` directory, while the compiled files
 get created in the `static` directory.
@@ -10,7 +27,7 @@ get created in the `static` directory.
 Generally you should only ever edit the front-end files in `assets` directly, 
 and compile them using the instructions below.
 
-## Prerequisites
+## Prerequisites to building the front end
 
 To compile the front-end JavaScript and CSS files it's expected that you have installed:
 
@@ -26,8 +43,9 @@ npm install
 ```
 
 In your project's root directory.
+This will install all the dependencies necessary to build the front end.
 
-## Development
+## Building in Development
 
 Whenever you make modifications to the front-end files you will need to run
 the following command to rebuild the compiled JS bundles and CSS files:
@@ -42,7 +60,7 @@ You can also set it up to watch for changes by running:
 npm run dev-watch
 ```
 
-## Production build
+## Building for production
 
 To build for production, run:
 
@@ -51,3 +69,17 @@ npm run build
 ```
 
 This will compress your files, remove logging statements, etc.
+
+## Deployment best practices
+
+For ease of initial set up, the front-end bundle files are included with the Pegasus codebase.
+This allows you to get up and running with Pegasus without having to set up the front-end build pipeline.
+
+However, after you have set up the front-end toolchain it is recommended that you:
+
+1. Add the bundle files to your .gitignore so they are no longer managed by source control.
+2. Build the bundle files on your production server (using `npm install && npm run build`) as part of your CI/CD
+   deployment process.
+
+This will ensure that the latest, optimized version of the front-end code is always deployed
+as part of your production environment.
