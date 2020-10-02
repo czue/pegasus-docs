@@ -57,21 +57,27 @@ If you aren't using Stripe you can remove the code and dependencies by doing the
 
 1. In `settings.py` remove `djstripe` from `THIRD_PARTY_APPS`
 1. In `settings.py` remove `STRIPE_` and `DJSTRIPE_` settings
-1. Delete `pegasus/apps/components/stripe.py`
-1. Delete `pegasus/utils/subscriptions.py`
-1. Delete `pegasus/decorators.py`
-1. In `pegasus/apps/users/models.py`, remove code referencing `SubscriptionModelMixin` (import and class inheritance)
-1. In `pegasus/apps/users/models.py`, remove `customer` and `subscription` fields on the model
-1. In `pegasus/apps/teams/models.py`, remove code referencing `SubscriptionModelMixin` (teams build only)
-1. In `pegasus/apps/users/models.py`, remove `subscription` field on the model (teams build only)
+1. Delete `apps/utils/decorators.py`
 1. Delete `templates/stripe` directory
-1. In `assets/javascript/pegasus/Pegasus.js` remove `export { Payments } from './Payments';` line.
-1. Delete `assets/javascript/pegasus/Payments.js`.
-1. Delete your `apps/users/migrations` folder.
-1. Delete your `apps/teams/migrations` folder.
-1. Run `./manage.py makeimgrations users` (teams build only)
-1. Run `./manage.py makeimgrations teams` (teams build only)
-1. Run `./manage.py migrate`
+1. Delete the `@import "stripe.sass"` line from `assets/styles/app/_all.sass`
+1. Delete `assets/styles/app/stripe.sass`
+
+If you have not removed the examples using the method above, you also need
+to delete the payments example. This can be done with the following steps:
+
+1. Delete the paths starting with `/payments/` from `pegasus/apps/examples/urls.py`.
+1. Delete references to `Payment` from `pegasus/apps/examples/admin.py`.
+1. Delete `pegasus/apps/examples/views/payments.py`.
+1. Delete `pegasus/apps/examples/models/payments.py`.
+1. Delete the relevant sections of `templates/pegasus/examples/examples_home.html` and 
+  `templates/pegasus/examples/components/examples_nav.html` 
+1. Delete the `templates/pegasus/examples/payments/` folder.
+1. In `assets/javascript/app.js` remove `export { Payments } from './Payments';` line.
+1. Delete `assets/javascript/payments.js`.
+1. Run `./manage.py makemigrations` and `./manage.py migrate`
+
+Finally, remove the library dependencies:
+
 1. In `requirements/requirement.in` and `requirements/requirement.txt` remove `stripe` and `dj-stripe` lines.
 1. Run `pip-sync`
 
