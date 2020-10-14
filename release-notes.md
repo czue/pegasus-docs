@@ -3,6 +3,28 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.10.0
+
+This is largely a maintenance release with mostly minor updates and fixes, 
+but there are enough library upgrades that it warrants a version bump.
+
+- Upgrade all Python packages including upgrading to Django 3.1.2
+- Upgrade all npm packages
+- Add a new API for products and metadata at `/subscriptions/api/active-products/`.
+  Also includes adding some serialization classes and helper functions to subscriptions models.
+  *Subscriptions only.* 
+- Fix a bug where clicking on "Dashboard" didn't always take you to the right team.
+  Also set team ID in the request session so it can be accessed across requests, and
+  add `get_default_team` helper function to pull the last/current team from a request.
+  *Teams only.*
+- Fix default styling of textarea widgets in Django forms
+- Use `const` and `let` in subscriptions page JavaScript
+- Add `has-vcentered-cells` table formatting class to center table rows, and use
+  in teams UI and object lifecyle demos
+- Remove unnecessary `subscriptions.sass` file when Pegasus is built without subscriptions enabled
+
+*Oct 14, 2020*
+
 ## Version 0.9.0
 
 This release is a large overhaul of the React example that ships with Pegasus, including:
