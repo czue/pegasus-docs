@@ -6,7 +6,7 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 ## Version 0.10.1
 
 This release adds [Heroku](https://www.heroku.com/) deployment support.
-More details can be found in the new [deployment guide](/deployment/)
+More details can be found in the new [deployment guide](/deployment/).
 
 *Oct 26, 2020*
 
