@@ -25,6 +25,7 @@ contributions are most welcome!
    front-end
    celery
    code-structure
+   deployment
    cookbooks
    teams
    payments
