@@ -3,6 +3,13 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.10.2
+
+This release adds support for using [Docker](https://www.docker.com/) in development.
+More details can be found in the new [Docker documentation](/docker/).
+
+*Oct 28, 2020*
+
 ## Version 0.10.1
 
 This release adds [Heroku](https://www.heroku.com/) deployment support.
