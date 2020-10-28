@@ -96,6 +96,9 @@ Just fill in your project information for all the sections and let it complete.
 
 Once the command runs a new folder with your project's name will be created.
 
+**The remaining instructions are for non-Docker development.
+For instructions on getting set up with Docker see the [Docker docs](/docker/).**
+
 ## Enter the project directory
 
 ```
@@ -109,6 +112,7 @@ You should see a lot of newly created files for your project including a `manage
 ```
 pip install -r requirements.txt
 ```
+
 ## Set up database (Postgres only)
 
 If you installed with Postgres, edit the `DATABASES` value in `{{ project_name }}/settings.py` with
