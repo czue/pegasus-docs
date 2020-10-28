@@ -1,7 +1,7 @@
 # Using Docker in Development
 
-**Docker support is a new feature in Pegasus under active development (as of October 2020).
-Watch this page for more updates soon.**
+**Docker support is a new feature in Pegasus as of October 2020.
+Please report any issues and watch this page for updates.**
 
 Pegasus optionally includes support for [Docker](https://www.docker.com/) during development.
 The Docker development setup can also be used as a foundation for deploying to containerized platforms.
