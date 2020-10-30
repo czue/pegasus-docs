@@ -15,6 +15,24 @@ The following instructions are for specific platforms.
 If you would like to deploy to a platform that's not listed here, please get in touch by emailing 
 cory@saaspegasus.com!
 
+## Deploying to containers, with Docker
+
+As of version 0.10.2, Pegasus ships with [Docker support for development](/docker/).
+The Docker containers used for development can be modified to deploy to production environments
+that support containers - for example, Google Cloud Run/Kubernetes Engine, Amazon ECS,
+Heroku Container Registry, and Digital Ocean App Platform.
+
+Each environment has its own quirks in getting set up with containers - some of which are documented below.
+
+### Google Cloud Run
+
+The [Django on Cloud Run](https://codelabs.developers.google.com/codelabs/cloud-run-django) guide is a useful
+resource for deploying Pegasus apps on [Google Cloud Run](https://cloud.google.com/run).
+This [other guide](https://medium.com/@lhennessy/running-django-on-google-cloud-run-with-cloudsql-ac8141095b77) is
+also helpful to better understand the steps involved, though does not cover
+setting up a SQL database.
+
+
 ## Heroku
 
 To deploy to Heroku, first set up Pegasus using the "heroku" deploy platform option.
