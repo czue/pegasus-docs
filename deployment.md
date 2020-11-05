@@ -62,6 +62,34 @@ deploy with containers by running:
 heroku stack:set container
 ```
 
+
+### Configure Django Settings
+
+The Heroku deployment uses its own settings module (which extends the normal `settings.py`).
+To tell Heroku to use it, set the `DJANGO_SETTINGS_MODULE` config var to `{ project_slug }.settings_heroku`.
+This can be done in the "settings" tab of your Heroku application (you may need to click to reveal the Config vars)
+or in the CLI using the following command (replacing the `project_slug` with your app name):
+
+```
+heroku config:set DJANGO_SETTINGS_MODULE={ project_slug }.settings_heroku
+```
+
+### Set up Database
+
+To set up your database, first enable the addon in the UI or by running:
+
+```
+heroku addons:create heroku-postgresql
+```
+
+Then run your initial migrations using:
+
+```
+heroku run python manage.py migrate
+```
+
+Note: if you're using Heroku's Python module, migrations will run automatically.
+
 ### Deploying
 
 Both builds can be deployed using Heroku's standard git integration.
@@ -71,20 +99,7 @@ After you've connected your project's git repository to Heroku, just run:
 git push heroku master
 ```
 
-For things to run you will also need to configure your settings and environment per the next section.
-
-### Settings configuration
-
-The Heroku deployment uses its own settings module (which extends the normal `settings.py`).
-To tell Heroku to use it, set the `DJANGO_SETTINGS_MODULE` config var to `{ project_slug }.settings_heroku`.
-
-If you're using Docker, this will happen automatically, but in the Python build you can set it
-in the "settings" tab of your Heroku application (you may need to click to reveal the Config vars) or
-in the CLI using the following command (replacing the `project_slug` with your app name):
-
-```
-heroku config:set DJANGO_SETTINGS_MODULE={ project_slug }.settings_heroku
-```
+### Additional settings configuration
 
 If you need additional production settings, you can put them in the `settings_heroku.py` file,
 or include them as config vars like this:
@@ -94,16 +109,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 ```
 
 We recommend also setting `SECRET_KEY` in your Heroku config vars to avoid having it in version control.
-
-
-### Database migrations
-
-If you're using Heroku's Python module, database migrations should run automatically.
-However, in the Docker set up you will to manually run the following command to intialize your Database:
-
-```
-heroku run python manage.py migrate
-```
 
 ### Stripe support
 
@@ -122,7 +127,12 @@ to initialize your subscription data.
 
 The Heroku environment supports Celery out-of-the-box.
 
-However, you will need to install [the Heroku Redis addon](https://elements.heroku.com/addons/heroku-redis).
+However, you will need to install [the Heroku Redis addon](https://elements.heroku.com/addons/heroku-redis)
+from the UI or by running:
+
+```
+heroku addons:create heroku-redis
+```
 
 Additionally, you may need to run the following command to initialize a Celery worker:
 
