@@ -1,6 +1,6 @@
 # Deployment
 
-**Deployment support is a new feature in Pegasus under active development (as of October 2020)!
+**Deployment support is a new feature in Pegasus under active development (as of November 2020)!
 Watch this page for more updates and platforms, coming soon.**
 
 Pegasus can be deployed on any standard cloud infrastructure.
@@ -15,7 +15,7 @@ The following instructions are for specific platforms.
 If you would like to deploy to a platform that's not listed here, please get in touch by emailing 
 cory@saaspegasus.com!
 
-## Deploying to containers, with Docker
+## Deploying to containers with Docker
 
 As of version 0.10.2, Pegasus ships with [Docker support for development](/docker/).
 The Docker containers used for development can be modified to deploy to production environments
@@ -23,6 +23,11 @@ that support containers - for example, Google Cloud Run/Kubernetes Engine, Amazo
 Heroku Container Registry, and Digital Ocean App Platform.
 
 Each environment has its own quirks in getting set up with containers - some of which are documented below.
+
+### Heroku Containers
+
+Pegasus supports deploying to [Heroku with Docker](https://devcenter.heroku.com/categories/deploying-with-docker)
+out of the box. For more details see the [Heroku documentation](#heroku).
 
 ### Google Cloud Run
 
@@ -32,18 +37,54 @@ This [other guide](https://medium.com/@lhennessy/running-django-on-google-cloud-
 also helpful to better understand the steps involved, though does not cover
 setting up a SQL database.
 
-
 ## Heroku
 
-To deploy to Heroku, first set up Pegasus using the "heroku" deploy platform option.
+Pegasus supports deploying to Heroku as a standard Python application or using containers.
+
+### Building using Heroku's Python support
+
+To deploy with Heroku's Python module, first set up Pegasus using the "heroku" deploy platform option.
 This will create your Heroku `Procfile`, `runtime.txt`, and additional requirements/settings files
 needed for the Heroku platform.
+
+
+### Building using Heroku's Docker container support
+
+To deploy to Heroku using Docker, you should build Pegasus with the "heroku docker" deployment option.
+This will create your production `Dockerfile`, a `heroku.yml` file you can use [to build and deploy your 
+container](https://devcenter.heroku.com/articles/build-docker-images-heroku-yml), and 
+additional requirements/settings needed for the Heroku platform.
+
+After building and setting up Heroku you will also need to configure Heroku to
+deploy with containers by running:
+
+```
+heroku stack:set container
+```
+
+### Deploying
+
+Both builds can be deployed using Heroku's standard git integration.
+After you've connected your project's git repository to Heroku, just run:
+
+```
+git push heroku master
+```
+
+For things to run you will also need to configure your settings and environment per the next section.
 
 ### Settings configuration
 
 The Heroku deployment uses its own settings module (which extends the normal `settings.py`).
-To tell Heroku to use it, set the `DJANGO_SETTINGS_MODULE` config var to `{ project_slug }.settings_heroku`
-in the "settings" tab of your Heroku application (you may need to click to reveal the Config vars).
+To tell Heroku to use it, set the `DJANGO_SETTINGS_MODULE` config var to `{ project_slug }.settings_heroku`.
+
+If you're using Docker, this will happen automatically, but in the Python build you can set it
+in the "settings" tab of your Heroku application (you may need to click to reveal the Config vars) or
+in the CLI using the following command (replacing the `project_slug` with your app name):
+
+```
+heroku config:set DJANGO_SETTINGS_MODULE={ project_slug }.settings_heroku
+```
 
 If you need additional production settings, you can put them in the `settings_heroku.py` file,
 or include them as config vars like this:
@@ -53,6 +94,16 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 ```
 
 We recommend also setting `SECRET_KEY` in your Heroku config vars to avoid having it in version control.
+
+
+### Database migrations
+
+If you're using Heroku's Python module, database migrations should run automatically.
+However, in the Docker set up you will to manually run the following command to intialize your Database:
+
+```
+heroku run python manage.py migrate
+```
 
 ### Stripe support
 
@@ -78,3 +129,5 @@ Additionally, you may need to run the following command to initialize a Celery w
 ```
 heroku ps:scale worker=1
 ```
+
+This process should be the same for Python and containerized builds.
