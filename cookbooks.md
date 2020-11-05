@@ -67,7 +67,9 @@ to delete the payments example. This can be done with the following steps:
 
 1. Delete the paths starting with `/payments/` from `pegasus/apps/examples/urls.py`.
 1. Delete references to `Payment` from `pegasus/apps/examples/admin.py`.
+1. In `pegasus/apps/examples/views/__init__.py` delete line `from .payments import *`
 1. Delete `pegasus/apps/examples/views/payments.py`.
+1. In `pegasus/apps/examples/models/__init__.py` delete line `from .payments import Payment`
 1. Delete `pegasus/apps/examples/models/payments.py`.
 1. Delete the relevant sections of `templates/pegasus/examples/examples_home.html` and 
   `templates/pegasus/examples/components/examples_nav.html` 
