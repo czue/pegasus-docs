@@ -6,6 +6,7 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 ## Version 0.10.4
 
 This release adds experimental native support for deploying to Google Cloud Run.
+More details can be found in the [deployment guide](/deployment/#google-cloud).
 
 Additional updates:
 
