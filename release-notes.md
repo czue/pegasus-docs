@@ -3,6 +3,19 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.10.4
+
+This release adds experimental native support for deploying to Google Cloud Run.
+
+Additional updates:
+
+- Fix static file references to favicons.
+- Upgrade `certifi` to `2020.11.8`
+- Rename `heroku-requirements.txt` to `prod-requirements.txt` to be consistent across platforms (Heroku builds only)
+- Switch production Docker images from Python-alpine to Python-slim (Docker builds only)
+
+*Nov 10, 2020*
+
 ## Version 0.10.3
 
 This release adds native support for deploying to Heroku using Docker containers.
