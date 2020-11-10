@@ -20,7 +20,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Pegasus'
-copyright = '2019, Cory Zue'
+copyright = '2020, Cory Zue'
 author = 'Cory Zue'
 
 # The short X.Y version
