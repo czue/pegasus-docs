@@ -10,10 +10,12 @@ The most common ways of deploying Pegasus are:
 2. On a platform-as-a-service (PaaS) platform, such as Heroku, or PythonAnywhere
 3. In a containerized way, using Docker, Kubernetes, or Google Cloud Platform
 
-The following instructions are for specific platforms.
+Pegasus natively supports Heroku, Digital Ocean App Platform, and Google Cloud Run---though
+can be deployed on any infrastructure that supports Django apps.
+The following instructions are for specific supported platforms.
 
 If you would like to deploy to a platform that's not listed here, please get in touch by emailing 
-cory@saaspegasus.com!
+cory@saaspegasus.com and I'm happy to help!
 
 ## Deploying to containers with Docker
 
@@ -139,6 +141,53 @@ heroku ps:scale worker=1
 ```
 
 This process should be the same for Python and containerized builds.
+
+## Digital Ocean
+
+Pegasus provides native support for Digital Ocean App Platform.
+To build for Digital Ocean, choose the "digital_ocean_app_platform" option when installing Pegasus.
+Then follow the steps below to deploy your app.
+
+### Prerequisites
+
+If you haven't already, create your Digital Ocean account.
+**You can sign up with [this link](https://m.do.co/c/432e3abb37f3) to get $100 credit
+and help support Pegasus.**
+
+Next, install and configure the `doctl` command line tool by following [these instructions](https://www.digitalocean.com/docs/apis-clis/doctl/how-to/install/).
+
+Additionally, you must connect Digital Ocean to your project's Github repository.
+This can be done from inside App Platform, or by following [this link](https://cloud.digitalocean.com/apps/github/install).
+
+### Deploying
+
+Once you've configured the prerequisites, deploying is just a few steps.
+
+1. Edit the `/deploy/app-spec.yaml` file. In particular, make sure to set your Github repository and branch.
+2. Run `doctl apps create --spec deploy/app-spec.yaml`
+
+That's it!
+In a few minutes your app should be online.
+You can [find and view it here](https://cloud.digitalocean.com/apps).
+
+### Running Database Migrations
+
+You'll need to run database migrations to get your app working properly.
+The easiest way to do this is to click the "console" tab in app platform and just type in the command:
+
+```
+./manage.py migrate
+```
+
+See the screenshot below for what it looks like:
+
+![Console Migrations](/images/deployment/running-migrations-do.png)
+
+### Settings and Secrets
+
+App platform builds use the `settings_do.py` file.
+You can add settings here, and use environment variables to manage any secrets,
+following the `SECRET_KEY` example.
 
 ## Google Cloud
 
