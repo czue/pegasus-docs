@@ -12,6 +12,7 @@ Additional updates:
 
 - Remove duplicate `ACCOUNT_EMAIL_VERIFICATION` declaration in `settings.py`
 - Rename development `Dockerfile` to `Dockerfile.dev` for clarity and ease of deployment to other platforms
+- Fix SSL / mixed content errors when deploying on Google Cloud Run
 
 *Nov 17, 2020*
 
