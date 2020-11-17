@@ -3,6 +3,18 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.10.5
+
+This release adds native support for deploying to Digital Ocean app platform.
+See the [deployment guide](/deployment/#digital-ocean) for details.
+
+Additional updates:
+
+- Remove duplicate `ACCOUNT_EMAIL_VERIFICATION` declaration in `settings.py`
+- Rename development `Dockerfile` to `Dockerfile.dev` for clarity and ease of deployment to other platforms
+
+*Nov 17, 2020*
+
 ## Version 0.10.4
 
 This release adds experimental native support for deploying to Google Cloud Run.
