@@ -11,7 +11,7 @@ If you don't have one, head on over to `saaspegasus.com`_ to get yours.
 
 If you're just getting started, you'll want to start with the :doc:`getting-started` guide.
 
-This source for this documentation can be [found on Github](https://github.com/czue/pegasus-docs/) and
+This source for this documentation can be `found on Github <https://github.com/czue/pegasus-docs/>`_ and
 contributions are most welcome!
 
 .. toctree::
