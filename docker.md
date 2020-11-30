@@ -96,6 +96,23 @@ Or to promote a user to superuser, run:
 docker-compose exec web python manage.py promote_user_to_superuser me@example.com
 ```
 
+## Updating Python packages
+
+If you add or modify anything in your `requirements.txt` files, you will have to rebuild
+your containers. This can be done by running:
+
+```
+docker-compose build
+``` 
+
+After than you can run
+
+```
+docker-compose up
+``` 
+
+to run your project with the latest dependencies.
+
 ## Other Resources
 
 - [Dockerizing Django with Postgres, Gunicorn, and Nginx](https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/)
