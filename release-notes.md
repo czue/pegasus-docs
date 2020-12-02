@@ -11,6 +11,8 @@ This release is a grab-bag of fixes and upgrades based on recent feedback.
 - Switch from `extract-text-webpack-plugin` to `mini-css-extract-plugin` for CSS handling in Webpack
 - Rename `assets/index.js` to `assets/site.js` to support more styles in the future.
 - Use randomly generated identicons for users instead of a default empty profile picture
+- Move `.env.dev.example` to `.env.dev` and `.env.production.example` to `.env.production` so
+  they don't have to be copied to get running (Docker builds only)
 - Clean up payments UI a little
 - Remove accidentally included `team_admin.html` template when not building with teams
 - Remove accidentally included `Dockerfile.dev` template when not building with Docker
