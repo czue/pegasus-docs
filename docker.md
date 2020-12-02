@@ -23,16 +23,6 @@ following the [getting started guide](/getting-started/).
 cd {{ project_name }}
 ```
 
-### Create your environment file
-
-Create a local `.env.dev` file for your settings and secrets, by copying the `.env.dev.example` file:
-
-```
-cp .env.dev.example .env.dev
-```
-
-This file also tells your Docker environment to use your `settings_docker.py` as the `DJANGO_SETTINGS_MODULE`.
-
 ### Create and start your Docker containers
 
 ```python
@@ -69,8 +59,12 @@ a web container running your Django process, and a Celery container for backgrou
 
 ### Settings
 
-The Django and Celery settings use `settings_docker.py` which extends `settings.py`.
-Additional environment variables are passed via `.env.dev`.
+The docker environment sets environment variables using the included `.env.dev` file.
+This file also tells your Docker environment to use `settings_docker.py` (which extends `settings.py`)
+as the `DJANGO_SETTINGS_MODULE`.
+
+The `.env.dev` file is automatically ignored by git, so you can put any additional secrets there.
+It generally should not be checked into source control.
 
 ### Python environments
 

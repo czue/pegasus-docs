@@ -212,8 +212,8 @@ In particular you *must*:
 - Set the the `PROJECT_ID` and `REGION` environment variables
 
 Additionally, when completing [step 5](https://codelabs.developers.google.com/codelabs/cloud-run-django#4)
-be sure to save your SQL user credentials in  a file named `.env.production` (you can start with a template
-provided in `.env.production.example`).
+be sure to save your SQL user credentials in  a file named `.env.production` (Pegasus will provide 
+a template for you that you can edit).
 
 ### Building images for Google Cloud
 
