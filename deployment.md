@@ -183,6 +183,9 @@ See the screenshot below for what it looks like:
 
 ![Console Migrations](/images/deployment/running-migrations-do.png)
 
+You may also need to run additional commands to get up and running, e.g. `./manage.py bootstrap_subscriptions`
+for initializing your Stripe plan data.
+
 ### Settings and Secrets
 
 App platform builds use the `settings_do.py` file.
