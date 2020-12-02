@@ -3,6 +3,24 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.11.0
+
+This release is a grab-bag of fixes and upgrades based on recent feedback.
+
+- Force users to reconfirm their email when changing it and email verification is enabled
+- Switch from `extract-text-webpack-plugin` to `mini-css-extract-plugin` for CSS handling in Webpack
+- Rename `assets/index.js` to `assets/site.js` to support more styles in the future.
+- Use randomly generated identicons for users instead of a default empty profile picture
+- Clean up payments UI a little
+- Remove accidentally included `team_admin.html` template when not building with teams
+- Remove accidentally included `Dockerfile.dev` template when not building with Docker
+- Remove unused CSS classes from examples 
+- Upgrade various NPM packages to latest versions
+- Upgrade `django-allauth` to `0.44.0`
+- Upgrade `django` to `3.1.4`
+
+*December 2, 2020*
+
 ## Version 0.10.5
 
 This release adds native support for deploying to Digital Ocean app platform.
