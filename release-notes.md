@@ -3,6 +3,13 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+
+## Version 0.11.1
+
+- Fix bug in development Dockerfile from a new OS dependency introduced by the `django-allauth` upgrade.
+
+*December 7, 2020*
+
 ## Version 0.11.0
 
 This release is a grab-bag of fixes and upgrades based on recent feedback.
