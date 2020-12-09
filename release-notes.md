@@ -3,6 +3,12 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.11.2
+
+- Fixes to subscription workflow when using a trial period - automatically refresh page after
+  card is accepted and support 3D-Secure validation for credit cards when using a trial. 
+
+*December 9, 2020*
 
 ## Version 0.11.1
 
