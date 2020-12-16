@@ -3,6 +3,26 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.11.3
+
+This release overhauls the Payments example to use the Stripe `PaymentIntent` API 
+and [support 3DS / SCA cards](https://stripe.com/docs/strong-customer-authentication).
+
+Minor changes:
+
+- Upgrade `dj-stripe` to `2.4.1`
+- Pull `DJSTRIPE_WEBHOOK_SECRET` setting from environment variable if available 
+
+If you are upgrading from a previous installation, you may need to change
+the following two values in `settings.py`:
+
+```python
+DJSTRIPE_FOREIGN_KEY_TO_FIELD = 'id'  # change to 'djstripe_id' if not a new installation
+DJSTRIPE_USE_NATIVE_JSONFIELD = True  # change to False if not a new installation
+```
+
+*December 17, 2020*
+
 ## Version 0.11.2
 
 - Fixes to subscription workflow when using a trial period - automatically refresh page after
