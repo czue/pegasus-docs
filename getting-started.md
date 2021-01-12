@@ -16,7 +16,7 @@ Else read on below for the play-by-play.
 
 If you haven't already, you'll need to install the following.
 
-- [Python 3.6 or higher](https://www.python.org/downloads/)
+- [Python 3.7 or higher](https://www.python.org/downloads/)
 - [Virtualenv](https://virtualenv.pypa.io/en/stable/)
 
 *Note: It is possible to use the template without `virtualenv`, 
@@ -28,7 +28,7 @@ If you haven't already, you'll need to purchase a Pegasus License at [saaspegasu
 
 From the "Downloads" page, download the latest version of the Pegasus template file and save it somewhere on your local file system.
 
-## Setup a Python3.6+ virtualenv
+## Setup a Python 3.7+ virtualenv
 
 It's recommended that you setup your project in a `virtualenv`.
 [Here are some reasons why](https://help.pythonanywhere.com/pages/VirtualenvsExplained/).
@@ -40,7 +40,7 @@ Follow one of the sections below depending on how you want to manage your virtua
 After installing prerequisites, run the following command wherever you want to create
 the `virtualenv`. This will create the environment in the `{{ project_name_env }}` directory.
 You should replace the "python3.8" variable with whatever version you want to use, 
-but it *must be 3.6 or above*.
+but it *must be 3.7 or above*.
 
 ```
 virtualenv -p python3.8 {{ project_name_env }}
