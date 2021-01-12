@@ -30,6 +30,7 @@ contributions are most welcome!
    cookbooks
    teams
    payments
+   upgrading
    release-notes
 
 .. _saaspegasus.com: https://www.saaspegasus.com/
