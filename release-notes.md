@@ -3,6 +3,38 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.12.0
+
+This release is a set of changes laying the groundwork for future Pegasus improvements.
+
+*Existing Pegasus users will need to upgrade their installer to use the latest version
+(`pip install --upgrade pegasus-installer`)*
+
+**Experimental support for Tailwind CSS**
+
+More details can be found in the [Tailwind documentation](/experimental).
+
+*Note: this feature is not yet fully supported and is in an experimental pre-release.*
+
+**Simplified upgrade process**
+
+Pegasus now saves your configuration when you install it, to simplify the upgrade process.
+Instructions on upgrading can be found on the ["upgrading" page](/upgrading).
+
+**Additional related changes and fixes**
+
+- Remove `package-lock.json` from Pegasus for improved compatibility across NPM / OS versions. 
+  It is recommended to run `npm install` and then check in the resulting `package-lock.json` file to source control.
+  More details can be found in the [front end docs](/front-end). 
+- Switch some styling from Sass variables to CSS variables (e.g. colors) for compatibility with multiple CSS frameworks
+- Add a `site-base.sass` file for base Pegasus styles that aren't dependent on any CSS framework.
+- Fix issue with `PlanSerializer` and `dj-stripe` version 2.4.1
+- Remove no-longer-used `subscription_title.html` template.
+- Remove no-longer-used tooltip styles
+- Remove unused HTML from subscriptions upgrade page and split it out into partial templates
+- Change a few default settings, e.g. project and author name.
+- Upgrade django to 3.1.5.
+
 ## Version 0.11.3
 
 This release overhauls the Payments example to use the Stripe `PaymentIntent` API 
@@ -232,7 +264,7 @@ This is another minor release with mostly small fixes and updates to the front e
 - Moved React object lifecycle example to a `react` subfolder
 - Started splitting up React object lifecycle demo into multiple files, and refactoring it to use hooks
 - Renamed React object lifecycle example bundle file from `object-lifecycle-bundle.js` to `react-object-lifecycle-bundle.js`
-- Removed unused "bower_components" exclusion in `webpack.config.js`
+- Removed unused "bower_components" exclusion in `webpack.config`
 
 *July 13 2020*
 
