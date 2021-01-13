@@ -15,9 +15,9 @@ static file system, as represented in the diagram below.
 Pegasus's styles use the [Bulma CSS framework](https://bulma.io/), and building the 
 CSS files is included as part of the front-end build pipeline.
 
-For a much more detailed overview of the rationale behind this architecture,
+**For a much more detailed overview of the rationale behind this architecture,
 and the details of the set up see the [Modern JavaScript for Django Developers](https://www.saaspegasus.com/guides/modern-javascript-for-django-developers/)
-series.
+series.**
 
 ## Front-end files
 
@@ -44,6 +44,9 @@ npm install
 
 In your project's root directory.
 This will install all the dependencies necessary to build the front end.
+
+It will also generate a `package-lock.json` file.
+It is recommended that you add this file to source control for consistency across installations.
 
 ## Building in Development
 
