@@ -35,6 +35,8 @@ Instructions on upgrading can be found on the ["upgrading" page](/upgrading).
 - Change a few default settings, e.g. project and author name.
 - Upgrade django to 3.1.5.
 
+*January 13, 2021*
+
 ## Version 0.11.3
 
 This release overhauls the Payments example to use the Stripe `PaymentIntent` API 
