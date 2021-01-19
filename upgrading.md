@@ -12,3 +12,6 @@ The recommended workflow for upgrading an existing Pegasus project to the latest
 4. In your new project directory, manually merge any changes you want to bring in,
    and commit and push the result to Github/Gitlab.
 5. Pull the changes back into your original project directory from Github/Gitlab.
+
+After upgrading you may also need to reinstall requirements (`pip install -r requirements.txt`),
+npm packages (`npm install`), etc. depending on what has changed.
