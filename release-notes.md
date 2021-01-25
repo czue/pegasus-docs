@@ -3,6 +3,34 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.12.1
+
+This release continues the overhaul of the Pegasus CSS and templates to include experimental support for 
+the Bootstrap CSS framework. Details on using Bootstrap [can be found here](/experimental).
+
+Changes affecting everyone:
+
+- Fix "view subscription" page start date display, and accommodate when start date is not set in Stripe.
+- Default `ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True` to avoid double-login after email confirmation.
+- Move navbar avatar styling to standalone `navbar.sass` file to be shared across CSS frameworks.
+- Change navbar avatar class and CSS from `.avatar` to `.navbar-avatar`.
+- Split subscription details on the "view subscription" page into its own component templates.
+- Split hero section on the "upgrade subscription" page into its own component templates.
+- In `subscriptions.sass`, use css variables instead of sass variables for colors.
+- On subscription page, change "upgrade-features" selector from an ID to a class in HTML and CSS. 
+- Remove unused styles from `subscriptions.sass`
+- Clean up whitespace in a number of files
+
+
+Changes affecting experimental features:
+
+- Booststrap CSS build! [Details here](https://docs.saaspegasus.com/experimental#bootstrap-css-support).
+- Building for multiple CSS frameworks now includes Bootstrap (along with Bulma and Tailwind)
+- Building for Tailwind now overwrites Bulma templates instead of maintaining them in a separate
+  directory.
+
+*January 26, 2021*
+
 ## Version 0.12.0
 
 This release is a set of changes laying the groundwork for future Pegasus improvements.
