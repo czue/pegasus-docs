@@ -30,6 +30,7 @@ contributions are most welcome!
    cookbooks
    teams
    payments
+   experimental
    upgrading
    release-notes
 
