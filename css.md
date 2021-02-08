@@ -41,3 +41,11 @@ You are welcome to leave them in and use them throughout your project.
 
 If you prefer, you can also replace them with the native framework classes (for example, replacing all instances
 of `pg-column` with `column` on Bulma, or `col-md` on Bootstrap).
+
+
+## Building for Multiple CSS Frameworks
+
+If you chose to build for multiple CSS frameworks, you can change frameworks
+by changing the `CSS_FRAMEWORK` value in your `settings.py` file.
+Valid options are `'bulma'`, `'bootstrap'`, nad `'tailwind'` - though note that [Tailwind CSS is experimental
+and not yet supported](/experimental/).

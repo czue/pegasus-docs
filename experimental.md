@@ -1,25 +1,9 @@
 # Experimental Features
 
 The following features are not yet supported but are in experimental development.
-These features might undergo substantial changes before being officially released.
+These features might undergo substantial changes before being officially released - or never be released at all.
 
 However, you are welcome to try them and provide feedback!
-
-## Bootstrap CSS support
-
-As of version 0.12.1, it is possible to build Pegasus using [Bootstrap CSS (version 5)](https://getbootstrap.com/).
-See below for details on building Pegasus for a different CSS framework.
-
-The Bootstrap implementation ships with Pegasus still has quirks.
-See below for the list of known issues and limitations that are still to be addressed
-with the Bootstrap implementation.
-
-### Known issues
-
-Known larger issues with the Bootstrap build:
-
-- Examples are not yet properly styled
-- Teams and invitations UI is not fully styled
 
 ## Tailwind CSS support
 
@@ -49,28 +33,7 @@ Known issues with the Tailwind build:
 - CSS files are not yet [optimized for production](https://tailwindcss.com/docs/optimizing-for-production)
 - CSS files are not bundled with Pegasus, but need to be built locally, as per above.
 
-## Customizing your CSS framework
+## Using Tailwind
 
-There are two options for changing Pegasus's CSS framework:
-
-1. **Build for a specific framework.** Choose this option if you're sure you want to use Tailwind or Bootstrap instead of Bulma.
-2. **Build for multiple frameworks.** You can toggle between them via a Django setting.
-   Choose this option if you want to try out Tailwind or Bootstrap.
-
-To build with either of these options,
-first create a config file with the following contents:
-
-```yaml
-default_context:
-  _css_framework: bootstrap  # or replace with "tailwind" or "multiple"
-```
-
-Then run Pegasus, passing in the config file, as follows:
-
-```
-pegasus path/to/pegasus.zip --config-file my-config.yaml
-```
-
-If you chose to build for multiple CSS frameworks, you can change frameworks
-by changing the `CSS_FRAMEWORK` value in your `settings.py` file.
-Valid options are `'bulma'`, `'bootstrap'`, nad `'tailwind'`.
+The only way to use Tailwind is to [build Pegasus for multiple CSS frameworks](/css/),
+then follow the instructions to change the framework to Tailwind in `settings.py`.
