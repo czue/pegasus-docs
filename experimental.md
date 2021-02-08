@@ -35,5 +35,5 @@ Known issues with the Tailwind build:
 
 ## Using Tailwind
 
-The only way to use Tailwind is to [build Pegasus for multiple CSS frameworks](/css/),
+The only way to use Tailwind is to [build Pegasus for multiple CSS frameworks](/css/##building-for-multiple-css-frameworks),
 then follow the instructions to change the framework to Tailwind in `settings.py`.

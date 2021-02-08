@@ -9,7 +9,8 @@ color scheme is the same.
 
 TODO: Add screenshots.
 
-If you're not sure which framework you want to use, you can also build Pegasus for both frameworks,
+If you're not sure which framework you want to use, you can also
+[build Pegasus for both frameworks](##building-for-multiple-css-frameworks),
 and change dynamically at runtime.
 
 ## CSS File Structure
