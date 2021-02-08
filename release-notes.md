@@ -3,6 +3,40 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.13.0
+
+This release adds support for the [Bootstrap CSS framework](https://getbootstrap.com/) and includes several changes
+to how the CSS files are structured in Pegasus.
+See the new [CSS documentation](/css/) for an overview of the new structure.
+
+Major changes:
+
+- Full support for Bootstrap CSS!
+- Restructure CSS files, creating framework-level subfolders, splitting `site-base` and `site-<framework>` files out, 
+  and making Sass imports implicit in the Bulma files.
+- Examples CSS overhaul, converting styles to `pg-` classes and adding the `pegasus/<framework>.sass` files to
+  style examples and JavaScript.
+
+Minor changes:
+
+- Improved UI of object demo tables on small screens.
+- Remove unused "tagline" CSS styles and replace with the CSS frameworks' vertical centering utilities.
+- Update progress bar styles to use CSS variables instead of Sass variables.
+- Remove unused redundant "section" classes from a number of places.
+- Split profile page into multiple HTML templates.
+- Remove duplicate cookie-handling code JavaScript on profile page and use the same JS code used in other places.
+- Remove unused `plan-price` and `plan-tagline` classes from subscription page.
+- Fixed bad reference to `subsriptions.sass` when not building with subscriptions.
+- Remove unused `has-vcentered-cells` class.
+- Start splitting out teams JavaScript into multiple files.
+- Remove redundant `custom-file-upload` CSS class.
+- Add /404 and /500 endpoints for viewing custom 404 and 500 pages.
+- Remove unnecessary raw string formatting from severeal `urls.py` files.
+- Upgrade Django to `3.1.6`
+
+
+*February 8, 2021*
+
 ## Version 0.12.1
 
 This release continues the overhaul of the Pegasus CSS and templates to include experimental support for 
