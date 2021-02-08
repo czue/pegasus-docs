@@ -7,13 +7,13 @@ Pegasus sites can be built using [Bootstrap 5](https://getbootstrap.com/) or [Bu
 The look and feel of the site is slightly different between the two, but the overall layout and
 color scheme is the same.
 
-**Bootstrap Version**
+**Bootstrap Version:**
 
 ![Bootstrap Home](images/bootstrap-home.png)
 
-**Bulma Version**
+**Bulma Version:**
 
-![Bulma Home](images/bootstrap-home.png)
+![Bulma Home](images/bulma-home.png)
 
 If you're not sure which framework you want to use, you can also
 [build Pegasus for both frameworks](##building-for-multiple-css-frameworks),
