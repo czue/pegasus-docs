@@ -23,6 +23,7 @@ contributions are most welcome!
    configuration
    subscriptions
    front-end
+   css
    celery
    code-structure
    deployment
