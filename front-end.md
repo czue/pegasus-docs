@@ -12,8 +12,9 @@ static file system, as represented in the diagram below.
 
 ![Build Pipeline](images/js-pipeline-with-django.png)
 
-Pegasus's styles use the [Bulma CSS framework](https://bulma.io/), and building the 
-CSS files is included as part of the front-end build pipeline.
+Pegasus's styles use either the [Bootstrap](https://getbootstrap.com/) or [Bulma](https://bulma.io/) CSS frameworks,
+and building the CSS files is included as part of the front-end build pipeline.
+For more details on CSS in Pegasus, see the [CSS documentation](/css/).
 
 **For a much more detailed overview of the rationale behind this architecture,
 and the details of the set up see the [Modern JavaScript for Django Developers](https://www.saaspegasus.com/guides/modern-javascript-for-django-developers/)
