@@ -8,25 +8,31 @@ Pegasus ships with a stub landing page, however most projects will want to highl
 Unless you are planning on building a marketing site on a different platform, this is likely one of the first 
 things you'll do.
 
-To modify the default landing page, simply edit the `./apps/web/templates/web/landing_page.html` file
+To modify the default landing page, simply edit the `./templates/web/landing_page.html` file
 and make any customizations you like.
 
 If you want to start from Pegasus's example landing page, then just copy the contents of
-`./pegasus/apps/examples/templates/pegasus/examples/example_landing_page.html` into the landing page file.
+`./templates/pegasus/examples/example_landing_page.html` into the landing page file.
+
+Note that Pegasus's own landing page is only available in the Bulma CSS version.
+For Bootstrap builds we recommend starting from a landing page option
+or themes from the web, for example [here](https://themes.getbootstrap.com/)
+or [here](https://dev.to/bootstrap/bootstrap-5-templates-91p).
 
 ## Update the logged-in experience
 
 After you've tweaked your landing page, you'll likely want to dive into the nuts and bolts that make up your app.
 
-To modify the logged-in default page, edit the `./apps/web/templates/web/app_home.html` file to your liking.
+To modify the logged-in default page, edit the `./templates/web/app_home.html` file to your liking.
 
 ### Changing the navigation
 
-There are two levels of navigation that ship with Pegasus, the top nav and the sidebar nav. You'll likely want to modify both.
+There are two levels of navigation that ship with Pegasus, the top nav and the sidebar nav.
+You'll likely want to modify both.
 
-To change the top nav edit the `./apps/web/templates/web/components/top_nav.html` file.
+To change the top nav edit the `./templates/web/components/top_nav.html` file.
 
-To change the sidebar nav edit the `./apps/web/templates/web/components/app_nav.html` file.
+To change the sidebar nav edit the `./templates/web/components/app_nav.html` file.
 
 ## Python Packages
 
@@ -50,11 +56,9 @@ If you are using Docker in development, you'll also have to [rebuild your contai
 
 **Customizing styles requires setting up the [front-end build pipeline](/front-end).**
 
-This project uses Bulma's styles by default.
-Bulma is very easy to customize to your needs, 
-though you can always drop Bulma for your preferred CSS framework.
+Both Bootstrap and Bulma are designed to be customized to your needs.
 
-Then to change styles, edit the generated `site.scss` file in `assets/styles` with any custom styles you want
+To change styles, edit the generated `site-<framework>.scss` file in `assets/styles` with any custom styles you want
 and run this command to rebuild them:
 
 ```bash
@@ -68,9 +72,10 @@ the primary color/theme across the site:
 $primary: #2e7636;  // change primary color to green
 ```
 
+Just make sure to put this change at the top of your file before the `@import` statements!
+
 ## Javascript
 
 The project uses a webpack build pipeline to compile the javascript files.
 
-The main javascript architecture is a series of page-specific React applications
-that access data from Django Rest Framework using [CoreAPI](https://www.coreapi.org/).
+For more details on how it works see the [front-end documentation](/front-end/).
