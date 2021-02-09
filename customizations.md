@@ -73,6 +73,7 @@ $primary: #2e7636;  // change primary color to green
 ```
 
 Just make sure to put this change at the top of your file before the `@import` statements!
+More details on customizing themes can be found in the [CSS docs](/css/).
 
 ## Javascript
 

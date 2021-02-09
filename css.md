@@ -49,6 +49,41 @@ You are welcome to leave them in and use them throughout your project.
 If you prefer, you can also replace them with the native framework classes (for example, replacing all instances
 of `pg-column` with `column` on Bulma, or `col-md` on Bootstrap).
 
+## Customizing your CSS theme
+
+### Bootstrap
+
+Pegasus's file structure is based on [the Bootstrap documentation](https://getbootstrap.com/docs/5.0/customize/sass/#importing).
+Any of the variables used in Bootstrap can be changed by modifying the `assets/styles/site-bootstrap.scss` file.
+
+A complete list of available variables can be found in `./node_modules/bootstrap/scss/variables`.
+
+Try adding the following lines to the top of your file to see how it changes things:
+
+```scss
+$primary: #2e7636;  // change primary color to green
+$body-color: #00008B;  // change main text to blue
+```
+
+You'll have to run `npm run dev` to see the changes take.
+
+The [Bootstrap documentation](https://getbootstrap.com/docs/5.0/customize/sass/) has much more detail
+on cusotmizing your theme!
+
+### Bulma
+
+Bulma is readily customizable via [Sass variables](https://bulma.io/documentation/customize/variables/).
+Any of the variables used by Bulma can be changed by modifying the `assets/styles/site-bulma.scss` file.
+
+Try adding the following lines to the top of your file to see how it changes things:
+
+```scss
+$primary: #2e7636;  // change primary color to green
+$body-color: #00008B;  // change main text to blue
+```
+
+You'll have to run `npm run dev` to see the changes take.
+
 
 ## Building for Multiple CSS Frameworks
 
