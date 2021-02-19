@@ -90,6 +90,18 @@ heroku run python manage.py migrate
 
 Note: if you're using Heroku's Python module, migrations will run automatically.
 
+
+### Setting allowed hosts
+
+In your `settings_heroku.py` file make sure to change the `ALLOWED_HOSTS` setting 
+to include whatever app you're deploying.
+
+```
+ALLOWED_HOSTS = [
+    'myapp.herokuapp.com',
+]
+```
+
 ### Deploying
 
 Both builds can be deployed using Heroku's standard git integration.
