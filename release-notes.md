@@ -3,6 +3,20 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.13.1
+
+This is a minor maintenance release with a few small changes and fixes.
+
+- Fix Docker image when deploying to Heroko containers
+- Fix SSL mixed content issues on Heroku Docker builds
+- Remove teams JavaScript files if not using teams.
+- Add `body_wrapper` block for overriding the whole base template
+- Label closing `endblock` tags in base template
+- Add `.DS_Store` files to `.gitignore`
+- Minor compatibility fixes to `teams` CSS.
+
+*February 24, 2021*
+
 ## Version 0.13.0
 
 This release adds support for the [Bootstrap CSS framework](https://getbootstrap.com/) and includes several changes
