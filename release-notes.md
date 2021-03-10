@@ -3,6 +3,23 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.13.2
+
+This is a minor release primarily focusing on an improved Docker experience and
+updates to the experimental TailwindCSS support:
+
+- Update development `Dockerfile` from `alpine` to `buster` and install front-end dependencies.
+- Add `Makefile` with self-documenting targets for various common operations ([see docs](/docker/))
+- Update generated `README` with better Docker instructions
+- Use double quotes for description and name settings to reduce issues with apostrophes
+
+Changes affecting [experimental features](/experimental) only:
+
+- Properly support for using PurgeCSS with Tailwind
+- Include (purged) Tailwind bundle files with Pegasus
+
+*March 10, 2021*
+
 ## Version 0.13.1
 
 This is a minor maintenance release with a few small changes and fixes.
