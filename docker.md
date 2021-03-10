@@ -23,30 +23,34 @@ following the [getting started guide](/getting-started/).
 cd {{ project_name }}
 ```
 
-### Create and start your Docker containers
+### Run the initialization script
 
 ```python
-docker-compose up
+make init
 ```
 
-Or to run in the background:
- 
-```python
-docker-compose up -d
-```
-
-### Create and run database migrations
-
-```python
-docker-compose exec web python manage.py makemigrations
-docker-compose exec web python manage.py migrate --noinput
-```
+This will spin up a database, web worker, celery worker, and Redis broker and create and
+run your database migrations.
 
 ### Load server
 
 Visit [http://localhost:8000/](http://localhost:8000/) in a browser and you
 should be up and running!
 
+## Using the Makefile
+
+Pegasus ships with a self-documenting `Makefile` that will run common commands for you,
+including starting your containers, performing database operations, and building your front end.
+
+You can run `make` to see list helper functions, and you can view the source
+of the `Makefile` file in case you need to add to it or run any once-off commands.
+
+For example, you can run management commands in containers using the same method 
+used in the `Makefile`. E.g.
+
+```
+docker-compose exec web python manage.py createsuperuser
+```
 
 ## Architecture and how it works
 
@@ -75,9 +79,10 @@ Python requirements are automatically installed when the container builds.
 However, keep in mind that if you go this route, you will need to run all commmands inside the containers
 as per the instructions below. 
 
-## Running management commands
+## Running once-off management commands
 
-Running commands on the server can be done using `docker-compose`, as per the `migrate` command above.
+Running commands on the server can be done using `docker-compose`, by following
+the pattern used in the `Makefile`.
 
 For example, to bootstrap Stripe subscriptions, run:
 
@@ -89,6 +94,8 @@ Or to promote a user to superuser, run:
 ```
 docker-compose exec web python manage.py promote_user_to_superuser me@example.com
 ```
+
+Commonly used commands can be added to the `Makefile` for convenience.
 
 ## Updating Python packages
 
@@ -102,7 +109,7 @@ docker-compose build
 After than you can run
 
 ```
-docker-compose up
+make start
 ``` 
 
 to run your project with the latest dependencies.
