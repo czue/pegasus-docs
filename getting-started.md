@@ -96,8 +96,13 @@ Just fill in your project information for all the sections and let it complete.
 
 Once the command runs a new folder with your project's name will be created.
 
-**The remaining instructions are for non-Docker development.
-For instructions on getting set up with Docker see the [Docker docs](/docker/).**
+## Choose how you'll run your project
+
+The easiest way to get up and running from here is to use Docker.
+Head over to the [Docker docs](/docker/) to finalize your set up.
+
+Alternatively, if you prefer not to use Docker, you can follow the steps below.
+
 
 ## Enter the project directory
 
