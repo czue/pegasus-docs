@@ -32,6 +32,10 @@ make init
 This will spin up a database, web worker, celery worker, and Redis broker and create and
 run your database migrations.
 
+Note: users of older versions of Windows may [need to install "make" separately to use it](https://stackoverflow.com/questions/32127524/how-to-install-and-use-make-in-windows).
+Alternatively, you can just inspect the `Makefile` in the repository and run the commands manually
+(e.g. `docker-compose up -d`).
+
 ### Load server
 
 Visit [http://localhost:8000/](http://localhost:8000/) in a browser and you
