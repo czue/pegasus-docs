@@ -171,11 +171,15 @@ Next, install and configure the `doctl` command line tool by following [these in
 Additionally, you must connect Digital Ocean to your project's Github repository.
 This can be done from inside App Platform, or by following [this link](https://cloud.digitalocean.com/apps/github/install).
 
+To use celery you will also need to create a managed Redis database,
+which can be done from [this link](https://cloud.digitalocean.com/databases/new?engine=redis).
+
 ### Deploying
 
 Once you've configured the prerequisites, deploying is just a few steps.
 
 1. Edit the `/deploy/app-spec.yaml` file. In particular, make sure to set your Github repository and branch.
+   If you aren't using Celery, you should remove the sections related to redis, and the celery-worker.
 2. Run `doctl apps create --spec deploy/app-spec.yaml`
 
 That's it!
@@ -203,6 +207,12 @@ for initializing your Stripe plan data.
 App platform builds use the `settings_do.py` file.
 You can add settings here, and use environment variables to manage any secrets,
 following the `SECRET_KEY` example.
+
+### Celery Support
+
+To run celery workers on Digital Ocean you will need to first add a managed Redis database, then the celery
+worker image.
+
 
 ## Google Cloud
 
