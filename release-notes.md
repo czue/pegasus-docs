@@ -3,6 +3,59 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.14
+
+Version 0.14 is a major release with a focus on Teams and package upgrades.
+It also upgrades Pegasus to Django's 3.2 LTS release.
+Details are below:
+
+**Teams Upgrade**
+
+- Make team name optional on signup, and auto-generate a team if none specified.
+- Update team-based URL-routing to be more consistent (put all team urls behind `/a/team-slug/`)
+- Migrate teams React code to functional components / hooks
+- Add URL-routing and back button support to teams page
+- Restrict ability to edit/delete teams to team admins only
+- Restrict ability to manage team invitations via API to team admins only
+- Add manage/view team page to main team navigation
+- Other minor teams JS cleanup (replace `var` with `const`, etc.)
+- Delete `team_nav.html` when not using teams
+- Improve loading screen for teams page and extract to shared component
+
+**Package Upgrades**
+
+- Upgrade all python packages to latest versions (including Django to 3.2 LTS)
+- Updated settings file to the version that ships with Django 3.2
+- Update formatting of requirements files to the latest version used by `pip-tools`
+- Upgrade all JS packages to latest versions 
+- Switch from deprecated node-sass to dart-sass
+
+**Other updates**
+
+- Set base URL in React object demo from Django
+- Fix doc strings of npm-related `make` commands
+- Extract logic for getting CoreAPI JavaScript client to a shared function
+- Add support for celery workers to Digital Ocean deployments (and [updated docs](/deployment))
+- Add `make dbshell` docker command to get a database shell
+- Remove some tailwind files that were accidentally included in non-tailwind builds
+
+**Changes affecting [experimental features](/experimental) only:**
+
+- Improve Tailwind styling of examples, teams and other built-in pages
+- Add `@tailwind/forms` plug in for improved form styling
+- Split Pegasus Tailwind CSS classes into a new file to mirror Bootstrap/Bulma implementations
+- Fix collectstatic errors when building with tailwind and whitenoise (affected Heroku and Digital Ocean deployments)
+- Remove broken landing page and pricing page examples, and point people to Tailwind UI instead 
+
+**Upgrade notes:**
+- Django added the new [Default primary key field type](https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field)
+  setting. If you wish to use the default in 3.2 you will have to add DB migrations for it. Otherwise you
+  can change the value of `DEFAULT_AUTO_FIELD` to `'django.db.models.AutoField'` in your `settings.py` file.
+- Bootstrap users may need to run `npm update bootstrap` before building static assets to get all styling 
+  of the examples working again.
+
+*April 28, 2021*
+
 ## Version 0.13.2
 
 This is a minor release primarily focusing on an improved Docker experience and
