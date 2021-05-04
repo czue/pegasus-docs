@@ -24,17 +24,23 @@ At its core, all Team-based views need the following:
 
 ### Urls
 
-See `apps.web.urls` for an example of these.
-The convention Pegasus uses is to make all team-based URLs of the form
-`https://example.com/a/<team_slug>/`. The `team_slug` is a human-readable, URL-friendly version
+See `apps.team.urls` for an example of how to set these up in your apps, and
+your main `apps.{project}.urls` file for how to add them to your site's URLs.
+
+Anything that goes into `team_urlpatterns` in `apps.{project}.urls` will automatically be added under the
+URL `https://example.com/a/<team_slug>/`. The `team_slug` is a human-readable, URL-friendly version
 of the team name that is auto-generated for you.
 
 ### Views
 
-See `apps.web.views` for example team views. 
-The most important elements of a team-based view are permissions.
+See `apps.team.views` for example team views.
+All views that are referenced under `team_urlpatterns` must contain `team_slug` as the first argument.
 
-Team permissions are not managed for you but have to be explicitly set on your views (and data models). 
+In addition to adding this field, you will likely want to use one of the built-in permission
+decorators (see below) to ensure the logged-in user can access the selected team.
+
+Additionally, you will have to scope any data model access to the relevant Team
+in any Database/ORM queries you make inside your viewsl.
 
 ### Permission Decorators
 
@@ -57,7 +63,7 @@ def a_team_view(request, team_slug):
 
 ```
 
-Note that `request.team` will automatically be populated. 
+Note that if you use this decorator, `request.team` will automatically be populated. 
 If the current user does not have access to the team they will see a 404 page.
 If no user is logged in they'll be redirected to a login view, just like the `login_required` decorator.
 
