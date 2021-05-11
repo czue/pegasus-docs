@@ -35,6 +35,12 @@ To compile the front-end JavaScript and CSS files it's expected that you have in
 - [Node.js](https://nodejs.org/)
 - [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
+Pegasus is developed and tested on the latest LTS releases, which (at the time of this writing)
+are Node version 14.16.1 and npm 6.14.12.
+Later versions may work, but aren't well-tested.
+Also it's recommended to use [`nvm`](https://github.com/nvm-sh/nvm) to manage different node/npm environments more easily.
+`nvm` is essentially `virtualenv` for Node.js/npm.
+
 ## Initial setup
 
 Getting started should be as simple as running:
