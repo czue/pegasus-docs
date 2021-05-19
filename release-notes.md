@@ -3,6 +3,24 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.14.1
+
+This is a minor release including the latest Django security updates, the official Bootstrap 5.0 version,
+and a few small features and fixes.
+
+- Fix incorrectly generated `urls.py` if you built with teams and without subscriptions
+- Add password confirmation field to sign up pages if configured by allauth
+- Add `project_settings` example for passing project-level settings to templates via context processor
+- Update `bootstrap` to `5.0.1`.
+- Update `django` from `3.2` to `3.2.3`
+- Remove unused `kombu` dependencies from requirements.
+
+**Changes affecting [experimental features](/experimental) only:**
+
+- Slightly improved styling of Tailwind sign up page
+
+May 19. 2021
+
 ## Version 0.14
 
 Version 0.14 is a major release with a focus on Teams and package upgrades.
