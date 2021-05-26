@@ -19,7 +19,7 @@ and has other styling quirks (see below).
 Known issues with the Tailwind build:
 
 - Mobile styles are not well supported
-- Several examples are not yet properly styled, including the landing page and pricing page
+- Several examples are not yet properly styled
 
 ## Using Tailwind
 
@@ -28,5 +28,5 @@ There are two ways to use Tailwind:
 To try out the tailwind build, you can [build Pegasus for multiple CSS frameworks](/css/##building-for-multiple-css-frameworks),
 then follow the instructions to change the framework to Tailwind in `settings.py`.
 
-If you're sure you want to use tailwind, you can also request access to the preview release
-that includes native tailwind support. This can be done by [getting in touch](https://www.saaspegasus.com/support/).
+If you're sure you want to use tailwind, you choose "tailwind" when building your project.
+Y
