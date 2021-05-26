@@ -3,6 +3,36 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.14.2
+
+This release upgrades `dj-stripe` to version `2.4.4` which should fix cross-environment migration issues.
+
+**Upgrade notes:**
+
+Projects using a "clean" 0.14 or 0.14.1 release may have been affected by [this issue in dj-stripe](https://github.com/dj-stripe/dj-stripe/issues/1344)
+where running `makemigrations` automatically generated a migration file inside the `dj-stripe` library code.
+Local app migrations would then add a dependency to this migration, which would not be available on other environments.
+
+This often manifested as an error along the lines of the following when setting up a second environment:
+
+```
+django.db.migrations.exceptions.NodeNotFoundError: 
+  Migration .0003_auto_20210524_1532 dependencies reference nonexistent parent node ('djstripe', '0008_auto_20210521_2314')`
+```
+
+To fix this there are a few steps:
+
+1. You should explicitly uninstall and reinstall `dj-stripe` instead of just installing requirements to ensure the 
+   generated migration file is removed. `pip uninstall dj-stripe && pip install dj-stripe==2.4.4`
+2. You should rebuild your own app's migrations to no longer depend on the generated `dj-stripe` migration,
+   by deleting the bad files and re-running `makemigrations` on a fresh environment.
+3. You will need to "fake" migrations for any existing DBs, by manually deleting relevant rows from the `django_migrations`
+   table and then running `./manage migrate <appname> --fake` for each affected app.
+   
+Please reach out for support on Slack if you run into any issues with this, and I'm happy to help!
+
+*May 26, 2021*
+
 ## Version 0.14.1
 
 This is a minor release including the latest Django security updates, the official Bootstrap 5.0 version,
@@ -19,7 +49,7 @@ and a few small features and fixes.
 
 - Slightly improved styling of Tailwind sign up page
 
-May 19. 2021
+*May 19. 2021*
 
 ## Version 0.14
 
