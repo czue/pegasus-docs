@@ -1,3 +1,4 @@
+
 Getting Started
 ===============
 
@@ -22,87 +23,23 @@ If you haven't already, you'll need to install the following.
 *Note: It is possible to use the template without `virtualenv`, 
 but it is highly recommended, and these instructions assume you are using it.*
 
-## Download Pegasus
+## Create and download your project codebase
 
-If you haven't already, you'll need to purchase a Pegasus License at [saaspegasus.com](http://www.saaspegasus.com/).
+If you haven't already, you'll need to purchase a Pegasus License at [saaspegasus.com](http://www.saaspegasus.com/licenses/).
 
-From the "Downloads" page, download the latest version of the Pegasus template file and save it somewhere on your local file system.
+Then, create a new project on [saaspegasus.com](https://www.saaspegasus.com/projects/),
+following the prompts and filling in whatever configuration options you want to use for your new project.
+Make sure that the "license" field at the bottom is set.
+
+Once you're done you can download your project's source code as a zip file.
+
+If you've chosen to use Docker in development (the quickest way to get up and running),
+continue to the [Docker instructions](/docker).
+Otherwise keep reading.
 
 ## Setup a Python 3.7+ virtualenv
 
-It's recommended that you setup your project in a `virtualenv`.
-[Here are some reasons why](https://help.pythonanywhere.com/pages/VirtualenvsExplained/).
-
-Follow one of the sections below depending on how you want to manage your virtualenvs.
- 
-### Using virtualenv
-
-After installing prerequisites, run the following command wherever you want to create
-the `virtualenv`. This will create the environment in the `{{ project_name_env }}` directory.
-You should replace the "python3.8" variable with whatever version you want to use, 
-but it *must be 3.7 or above*.
-
-```
-virtualenv -p python3.8 {{ project_name_env }}
-```
-
-To activate the environment then run:
-
-```
-source {{ project_name_env }}/bin/activate
-```
-
-***You will need to activate this environment every time you work on your project.***
-
-### Alternative instructions using virtualenvwrapper
-
-[Virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) is an optional convenience 
-tool that helps manage virturalenvs. 
- 
-If you choose to use `virtualenvwrapper` you can use the following command to create your environment.
-This can be run from anywhere since `virtualenvwrapper` manages the location of your envs for you.
-
-```
-mkvirtualenv -p python3.8 {{ project_name }}
-```
-
-Then to activate the environment you simply use:
-
-```
-workon {{ project_name }}
-```
-
-## Setup Pegasus
-
-To run pegasus you'll first need to install the installer and its dependencies.
-
-To do this, from inside your virtualenv just run:
-
-```
-pip install pegasus-installer
-```
-
-## Create your project
-
-Go into the directory where you wish to create your project and run the following command.
-You will need to replace `/path/to/pegasus.zip` with the path to the downloaded file above.
-
-```
-pegasus /path/to/pegasus.zip
-```
-
-The command will run you through a series of configuration prompts. 
-Just fill in your project information for all the sections and let it complete.
-
-Once the command runs a new folder with your project's name will be created.
-
-## Choose how you'll run your project
-
-The easiest way to get up and running from here is to use Docker.
-Head over to the [Docker docs](/docker/) to finalize your set up.
-
-Alternatively, if you prefer not to use Docker, you can follow the steps below.
-
+See [Using Virtual Environments](/using-virtualenvs/) for details on this process.
 
 ## Enter the project directory
 
