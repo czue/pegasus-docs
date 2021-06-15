@@ -25,13 +25,14 @@ but it is highly recommended, and these instructions assume you are using it.*
 
 ## Create and download your project codebase
 
-If you haven't already, you'll need to purchase a Pegasus License at [saaspegasus.com](http://www.saaspegasus.com/licenses/).
+If you haven't already, you'll need to [purchase a Pegasus License on saaspegasus.com](http://www.saaspegasus.com/licenses/).
 
-Then, create a new project on [saaspegasus.com](https://www.saaspegasus.com/projects/),
+Then, [create a new project on saaspegasus.com](https://www.saaspegasus.com/projects/),
 following the prompts and filling in whatever configuration options you want to use for your new project.
 Make sure that the "license" field at the bottom is set.
 
-Once you're done you can download your project's source code as a zip file.
+Once you're done, download your project's source code as a zip file.
+Unzip it to a folder where you want to do your development and you're ready to go!
 
 If you've chosen to use Docker in development (the quickest way to get up and running),
 continue to the [Docker instructions](/docker).
