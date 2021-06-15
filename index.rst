@@ -32,6 +32,7 @@ contributions are most welcome!
    teams
    payments
    experimental
+   using-virtualenvs
    upgrading
    release-notes
 
