@@ -37,7 +37,7 @@ This can be run from anywhere since `virtualenvwrapper` manages the location of 
 mkvirtualenv -p python3.8 {{ project_name }}
 ```
 
-Then to activate the environment you simply use:
+Then to activate the environment you use:
 
 ```
 workon {{ project_name }}
