@@ -1,12 +1,11 @@
 # Upgrading
 
-The recommended workflow for upgrading an existing Pegasus project to the latest version is as follows:
+The easiest way to upgrade an existing Pegasus project to the latest version is as follows:
 
-1. Make sure you have the latest version of Pegasus: `pip install --upgrade pegasus-installer`
-2. Create a new Pegasus project in a new directory:
-   - If you are upgrading from verison `0.12` and later, you can use
-     the generated configuration file to specify the default values: `pegasus path/to/pegasus.zip --config-file path/to/yourapp/pegasus-config.yaml --no-input`.
-   - If upgrading from an older version you will have to run: `pegasus path/to/pegasus.zip` and fill in the prompts again.
+1. If you haven't already, [create a project on saaspegasus.com](https://www.saaspegasus.com/projects/) for your project.
+   - If you are upgrading from verison `0.12` or later, you can find all the values you used in your `pegasus-config.yaml` 
+     file in your project's root folder.
+2. Download the code for your project for the latest Pegasus version.
 3. Copy your `.git` directory from your old project into your new project.
    E.g. `cp -r path/to/yourapp/.git path/to/newapp/`.
 4. In your new project directory, manually merge any changes you want to bring in,
