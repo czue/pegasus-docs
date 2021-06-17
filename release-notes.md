@@ -3,6 +3,17 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.14.3
+
+A very minor release:
+
+- Update Django to 3.2.4
+- Remove `DEFAULT_AUTO_FIELD` declaration from settings. 
+  This was causing issues with allauth migrations being generated, as a result of [this issue](https://github.com/pennersr/django-allauth/pull/2829).
+  Until more libraries have worked around these migration issues, Pegasus will just ship with the default setting.
+
+*June 17, 2021*
+
 ## Version 0.14.2
 
 This release upgrades `dj-stripe` to version `2.4.4` which should fix cross-environment migration issues.
