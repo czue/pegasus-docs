@@ -3,6 +3,14 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.14.4
+
+A very minor release:
+
+- Don't include `djstripe` and associated settings in `INSTALLED_APPS` if not using subscriptions
+
+*June 30, 2021*
+
 ## Version 0.14.3
 
 A very minor release:
