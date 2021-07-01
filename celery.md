@@ -1,7 +1,7 @@
 Celery
 ======
 
-[Celery](http://www.celeryproject.org/) is a distributed task queue used to run background tasks.
+[Celery](https://docs.celeryproject.org/) is a distributed task queue used to run background tasks.
 
 It is optional, but is required for the "background task" example to work.
 
