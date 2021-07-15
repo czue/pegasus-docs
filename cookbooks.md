@@ -34,10 +34,9 @@ take the following steps:
 
 ### Cleaning the front-end code
 
-1. In `assets/index.js` remove the `require('./javascript/pegasus/examples/object-lifecycle.js');` and `'./javascript/pegasus/pegasus.js'` lines.
-1. In `webpack.config.js`, delete the `'object-lifecycle'` and `'pegasus'` entries from `module.exports`.
+1. In `webpack.config.js`, delete the `'react-object-lifecycle'`, `vue-object-lifecycle` and `'pegasus'` entries from `module.exports`.
 1. Delete the `assets/javascript/pegasus/` folder.
-1. Delete `static/js/object-lifecycle-bundle.js` and `static/js/pegasus-bundle.js`
+1. Delete `static/js/react-object-lifecycle-bundle.js`, `static/js/vue-object-lifecycle-bundle.js` and `static/js/pegasus-bundle.js`
 
 ## Delete Teams Code
 
