@@ -1,8 +1,5 @@
 # Deployment
 
-**Deployment support is a new feature in Pegasus under active development (as of November 2020)!
-Watch this page for more updates and platforms, coming soon.**
-
 Pegasus can be deployed on any standard cloud infrastructure.
 The most common ways of deploying Pegasus are:
 
