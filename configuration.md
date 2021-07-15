@@ -92,6 +92,17 @@ ACCOUNT_EMAIL_VERIFICATION = 'optional'  # change to "mandatory" to require user
 
 *Note: The email verification step will be skipped if using a Google / social login.*
 
+### Disabling public sign ups
+
+If you'd like to prevent everyone from signing up for your app, you set the following in your `settings.py`,
+replacing the existing value:
+
+```python
+ACCOUNT_ADAPTER = 'apps.users.adapter.NoNewUsersAccountAdapter'
+```
+
+This will prevent all users from creating new accounts, though existing users can continue to login and use the app.
+
 ### Further configuration
 
 Allauth is highly configurable.
