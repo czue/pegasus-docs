@@ -3,6 +3,27 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.14.5
+
+Another grab-bag of minor fixes and improvements.
+
+- Reduce scope of hiding file inputs to just the profile upload form
+- Add `NoNewUsersAccountAdapter` to allow disabling public sign ups for an app
+- Extract Bulma and Bootstrap form rendering to helper template tags
+- Fix subscription details start date display (subscriptions builds only)
+- Explicitly set `DEFAULT_AUTO_FIELD` to `AutoField` in settings to remove runtime warnings.
+- Minor README improvements
+- Upgrade Django to 3.2.5
+
+Changes only affecting builds with teams enabled:
+
+- Fix error on sign up if email passes front-end validation but fails back-end validation
+- Change `/teams/` URL to go to the teams management page instead of API docs
+- Improve styling of teams page when no teams exist on Bootstrap
+- Fix React warning in teams JavaScript
+
+*July 15, 2021*
+
 ## Version 0.14.4
 
 A very minor release:
