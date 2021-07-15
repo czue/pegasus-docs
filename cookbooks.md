@@ -38,16 +38,6 @@ take the following steps:
 1. Delete the `assets/javascript/pegasus/` folder.
 1. Delete `static/js/react-object-lifecycle-bundle.js`, `static/js/vue-object-lifecycle-bundle.js` and `static/js/pegasus-bundle.js`
 
-## Delete Teams Code
-
-If you aren't using teams there are a few things you can cleanup on the front end code.
-
-1. In `assets/index.js` remove the `require('./javascript/pegasus/teams.js');` line.
-1. In `webpack.config.js`, delete the `teams` entry from `module.exports`.
-1. Delete `assets/javascript/pegasus/teams.js`.
-1. Delete `static/js/teams-bundle.js`
-
-
 ## Delete Stripe Code
 
 If you aren't using Stripe you can remove the code and dependencies by doing the following steps.
