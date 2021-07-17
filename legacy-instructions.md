@@ -128,7 +128,7 @@ Some examples of things you might want to do next include:
 - Start modifying the list of navigation tabs and logged-in user experience
 - Create a new django app and begin building out your data models in `models.py`
 
-For some initial pointers on where to to make Pegasus your own, head on over to the 
+For some initial pointers on where to make Pegasus your own, head on over to the 
 [Customizations Page](/customizations).
 
 For the nitty-gritty details on setting up things like email, error logging, sign up flow, analytics, and more 

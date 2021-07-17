@@ -40,7 +40,7 @@ In addition to adding this field, you will likely want to use one of the built-i
 decorators (see below) to ensure the logged-in user can access the selected team.
 
 Additionally, you will have to scope any data model access to the relevant Team
-in any Database/ORM queries you make inside your viewsl.
+in any Database/ORM queries you make inside your views.
 
 ### Permission Decorators
 
