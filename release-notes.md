@@ -3,6 +3,40 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.15
+
+Version 0.15 is a major release with two big features:
+
+**Stripe Checkout Support**
+
+Now you can use [Stripe Checkout](https://stripe.com/payments/checkout) for payments instead of - or in addition to -
+the Stripe Elements-based embedded UI. Stripe Checkout support has been added to the subscriptions page, as well
+as the payment example. You can build new Pegasus projects with Checkout, Elements, or toggle between them
+via a `settings.py` setting.
+
+**User Impersonation**
+
+This release also adds optional user impersonation functionality for superusers, allowing admins and support staff
+to "login as" another user with a few clicks. This is a great tool for troubleshooting user-specific issues.
+This feature depends on [django-hijack](https://github.com/django-hijack/django-hijack) and can be disabled
+at build time.
+
+**Other updates**
+
+- Make http/https in absolute URLs (e.g. email invitations) configurable via the `USE_HTTPS_IN_ABSOLUTE_URLS` setting
+- Start adding type hints to the codebase, primarily in helper functions. More coming soon!
+- Added more tests for teams helper functions 
+- Split out `subscription/views.py` into multiple files to make it clearer which views affect which functionality.
+- Break `upgrade_subscription.html` into multiple files to support elements and checkout-based flows.
+- Improve default string representation of user model
+- Improve the default styling of select widgets (Bootstrap builds only)
+- Clean up doc strings and code for team API permission helpers (teams builds only)
+- Rename `teams.util` to `teams.helpers` to be consistent with other apps (teams builds only)
+- Fix issue with `apps/subscriptions/__init__.py` not being created for certain configurations
+- Various minor cleanups of whitespace, url ordering, etc.
+
+*July 22, 2021*
+
 ## Version 0.14.5
 
 Another grab-bag of minor fixes and improvements.
