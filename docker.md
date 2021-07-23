@@ -80,7 +80,7 @@ The Python environment is run in the containers, which means you do not need to 
 own local environment if you are always using Docker for development.
 Python requirements are automatically installed when the container builds.
 
-However, keep in mind that if you go this route, you will need to run all commmands inside the containers
+However, keep in mind that if you go this route, you will need to run all commands inside the containers
 as per the instructions below. 
 
 ## Running once-off management commands
