@@ -5,7 +5,13 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ## Version 0.15
 
-Version 0.15 is a major release with two big features:
+Version 0.15 is a major release with two big features: Stripe Checkout and User Impersonation.
+
+For 3-minute summary you can watch the video below, or read on for details.
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/4dQ63KCd-E8" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
 
 **Stripe Checkout Support**
 
