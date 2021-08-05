@@ -20,8 +20,18 @@ PROJECT_METADATA = {
 }
 ```
 
-Of particular importance is the `URL` setting, which is used to generate absolute 
-URLs in your application.
+## Absolute URLs
+
+When you first install Pegasus it will use the `URL` value from `PROJECT_METADATA` above to create
+a Django `Site` object in your database. 
+This `Site` is used to generate absolute URLs which are needed whenever you link to the site externally---for
+example in emails, social authentication, or Stripe APIs.
+
+If you need to change the URL after installation, you can go to the site admin at `admin/sites/site/` and
+modify the values accordingly, leaving off any http/https prefix.
+
+In development you'll typically want a domain name of `localhost:8000` .
+
 
 ## Sending Email
 
@@ -110,6 +120,19 @@ It's recommended that you look into the various [configuration settings availabi
 for any advanced customization.
 
 
+## Stripe
+
+If you're using [Stripe](https://www.stripe.com/) to collect payments you'll need to fill in the following in `settings.py`
+(or populate them in the appropriate environment variables):
+
+```python
+STRIPE_LIVE_PUBLIC_KEY = os.environ.get("STRIPE_LIVE_PUBLIC_KEY", "<your publishable key>")
+STRIPE_LIVE_SECRET_KEY = os.environ.get("STRIPE_LIVE_SECRET_KEY", "<your secret key>")
+STRIPE_TEST_PUBLIC_KEY = os.environ.get("STRIPE_TEST_PUBLIC_KEY", "<your publishable key>")
+STRIPE_TEST_SECRET_KEY = os.environ.get("STRIPE_TEST_SECRET_KEY", "<your secret key>")
+STRIPE_LIVE_MODE = False  # Change to True in production
+```
+
 ## Google Analytics
 
 To enable Google Analytics, just add your analytics tracking ID to `settings.py`:
@@ -138,19 +161,6 @@ sentry_sdk.init(
 If you are starting from `settings_production.example.py` then you just need to populate `SENTRY_DSN` from your
 Sentry project settings.
 
-
-## Stripe
-
-If you're using [Stripe](https://www.stripe.com/) to collect payments you'll need to fill in the following in `settings.py`
-(or populate them in the appropriate environment variables):
-
-```python
-STRIPE_LIVE_PUBLIC_KEY = os.environ.get("STRIPE_LIVE_PUBLIC_KEY", "<your publishable key>")
-STRIPE_LIVE_SECRET_KEY = os.environ.get("STRIPE_LIVE_SECRET_KEY", "<your secret key>")
-STRIPE_TEST_PUBLIC_KEY = os.environ.get("STRIPE_TEST_PUBLIC_KEY", "<your publishable key>")
-STRIPE_TEST_SECRET_KEY = os.environ.get("STRIPE_TEST_SECRET_KEY", "<your secret key>")
-STRIPE_LIVE_MODE = False  # Change to True in production
-```
 
 ## Celery
 
