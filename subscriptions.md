@@ -71,6 +71,17 @@ Pegasus ships with webhook functionality ready to go, including default handling
 taken in Stripe's billing portal. That said, you are strongly encouraged
 to test locally using [Stripe's excellent guide](https://stripe.com/docs/webhooks/test).
 
+The minimum set of webhooks you should configure in stripe are:
+
+For the billing portal:
+
+- `customer.subscription.deleted` 
+- `customer.subscription.updated`
+
+For Stripe Checkout:
+
+- `checkout.session.completed`
+
 A few pieces of setup that are required:
 
 - For the webhook URL, it should be https://yourserver.com/stripe/webhook/. **The trailing slash is required.**
