@@ -3,6 +3,64 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.16
+
+This is a grab-bag release of mostly cleanup work and bug fixes.
+
+***Please review the breaking changes closely if you are upgrading an existing project!
+Not doing so could lead to unexpected behavior and demo data loss!***
+
+**Potentially breaking changes:**
+
+- Changed the `login_and_team_required` and `team_admin_required` view decorators to no longer allow superusers
+  to access the views. It is recommended to use the new user impersonation feature to allow superusers
+  to access teams they don't belong to.
+- Removed `user_can_access_team` and `user_can_administer_team` helper functions which provided team
+  access to superusers.
+- Removed `attrs` library dependency and switched its usages to `dataclasses`.
+- The `Employee` example data model has moved, and running `migrate` will drop all of your demo `Employee` data.
+
+
+**New: Improved Django form support:**
+
+- Added a Django forms implementation of the employee / object demo
+- Rename `bootstrap_form_fields` and `bulma_form_fields` templatetags to `form_fields` if not using 
+  multiple-css-framework support  
+- Add `render_form_fields` helper function to render an entire form. (Note: this currently only supports text-style, 
+  checkbox, and select input types.)
+- Add `render_checkbox_input` to bootstrap form rendering tags
+- Added a basic non-model form example
+
+**Fixes:**
+
+- Fix cryptography build issue affecting Heroku docker deployments
+- Improve textarea styling on Bootstrap forms
+- Better default styling of checkboxes in Bootstrap forms.
+- Don't require that `team_slug` be the first argument to a url to use the team-based decorator functions.
+
+**Cleanup:**
+
+- Remove redundant `null=True` from user avatars
+- More type hints
+- Split object / employee example out into its own app.
+- Added help text to employee example model fields
+- Changed some navigation and text around the employee app example
+- Remove inline style declarations from a few examples
+- Added some instructions about initializing your database to the README
+
+**Upgrade notes:**
+
+If you receive a warning like this when generating Database migrations:
+
+*You are trying to change the nullable field 'avatar' on customuser to non-nullable without a default;
+we can't do that (the database needs something to populate existing rows).*
+
+It is safe to choose option 2, "Ignore for now...".
+There won't be any NULL values in the database, since Django automatically populates `FileField`s with an
+empty string.
+
+*Aug 6, 2021*
+
 ## Version 0.15
 
 Version 0.15 is a major release with two big features: Stripe Checkout and User Impersonation.
