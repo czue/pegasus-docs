@@ -3,6 +3,12 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.16.1
+
+This minor release fixes styling issues with Tailwind builds that were accidentally introduced in 0.16.
+
+*Aug 9, 2021*
+
 ## Version 0.16
 
 This is a grab-bag release of mostly cleanup work and bug fixes.
@@ -19,7 +25,6 @@ Not doing so could lead to unexpected behavior and demo data loss!***
   access to superusers.
 - Removed `attrs` library dependency and switched its usages to `dataclasses`.
 - The `Employee` example data model has moved, and running `migrate` will drop all of your demo `Employee` data.
-
 
 **New: Improved Django form support:**
 
@@ -40,13 +45,15 @@ Not doing so could lead to unexpected behavior and demo data loss!***
 
 **Cleanup:**
 
+- Upgrade Django to 3.2.6
 - Remove redundant `null=True` from user avatars
-- More type hints
-- Split object / employee example out into its own app.
+- Added more type hints
+- Split object / employee example out into its own app and template folder.
 - Added help text to employee example model fields
 - Changed some navigation and text around the employee app example
 - Remove inline style declarations from a few examples
 - Added some instructions about initializing your database to the README
+- Update migrations to be compatible with latest Django / Pegasus code 
 
 **Upgrade notes:**
 
