@@ -3,6 +3,12 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.16.2
+
+This release upgrades `django-hijack` from 2.3 to 3.0 and adds hijack links to the admin site.
+
+*Aug 11, 2021*
+
 ## Version 0.16.1
 
 This minor release fixes styling issues with Tailwind builds that were accidentally introduced in 0.16.
