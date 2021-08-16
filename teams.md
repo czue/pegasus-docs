@@ -9,6 +9,14 @@ Some of those building blocks are documented here.
 
 **Note: all of the following examples assume you have setup Pegasus with teams enabled.**
 
+## Example Apps
+
+A Pegasus user Peter Cherna has created some [example applications](https://github.com/pcherna/pegasus-example-apps/)
+that demonstrate how to create different types of team-based models.
+They are a great place to start for inspiration and getting something up and running quickly!
+
+*Note: the example apps are not officially sanctioned/supported by Pegasus---though hopefully will be incorporated into a future release.*
+
 ## Models
 
 Teams use three primary models - `apps.users.CustomUser`, `apps.teams.Team`, and `apps.teams.Membership`.
