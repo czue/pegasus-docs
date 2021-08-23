@@ -3,6 +3,52 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.17
+
+This release adds an HTMX demo, a Teams example app, and more.
+
+This video provides a 4-minute overview of the key features, or read on for details.
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/Wpgmvc273Kw" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
+
+**The HTMX object demo**
+
+An [htmx](https://htmx.org/) reference implementation of the object demo was added.
+HTMX is a library that allows you to build rich single-page experiences without using any (native) JavaScript.
+
+**The Teams Example app**
+
+This release adds the Teams example app, which has Create, Read, Update, Delete views for an example
+model that is part of a team.
+
+As part of this work, a new base model class, `BaseTeamModel` was added which can be extended
+to create models that belong to a Team.
+
+Additionally, two view mixin classes, `LoginAndTeamRequiredMixin` and `TeamAdminRequiredMixin` were added,
+which can be used to easily create class-based model views on Team models.
+A test suite for these mixins was also added.
+
+*A big thanks to Peter Cherna, who's [Pegasus example apps](https://github.com/pcherna/pegasus-example-apps/)
+was a big inspiration for this example.*
+
+**Other changes**
+
+- Add generic breadcrumbs CSS classes compatible with Bulma, Bootstrap and Tailwind (used by example app)
+- Default all Pegasus apps to using `BigAutoField` instead of `AutoField` (see upgrade notes)
+- Use f-strings instead of string templates in management commands
+- Reduce indentation level in some html template files
+
+**Upgrade notes**
+
+The default ID for all Pegasus models was changed from `AutoField` to `BigAutoField`.
+If you are upgrading a project using `AutoField` you should *not* merge any changes to initial migration
+files in the affected apps. Then you can either:
+
+1) To change your apps from `AutoField` to `BigAutoField`, run `./manage.py makemigrations` and `./manage.py migrate` 
+1) To keep using `AutoField`, change the setting back to `AutoField` in `apps.py` for all Pegasus apps. 
+
 ## Version 0.16.2
 
 This release upgrades `django-hijack` from 2.3 to 3.0 and adds hijack links to the admin site.
