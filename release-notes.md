@@ -15,13 +15,15 @@ This video provides a 4-minute overview of the key features, or read on for deta
 
 **The HTMX object demo**
 
-An [htmx](https://htmx.org/) reference implementation of the object demo was added.
-HTMX is a library that allows you to build rich single-page experiences without using any (native) JavaScript.
+The object demo application now has an [htmx](https://htmx.org/) implementation.
+HTMX is a library that allows you to build rich, single-page, interactive experiences by adding HTML attributes.
+
+The provided demo application is a single page app with no native JavaScript, backed by Django forms.
 
 **The Teams Example app**
 
-This release adds the Teams example app, which has Create, Read, Update, Delete views for an example
-model that is part of a team.
+This release also adds a Teams example app, which has Create, Read, Update, Delete (CRUD) views for an example
+model that is part of a team (called a "Player").
 
 As part of this work, a new base model class, `BaseTeamModel` was added which can be extended
 to create models that belong to a Team.
@@ -35,7 +37,7 @@ was a big inspiration for this example.*
 
 **Other changes**
 
-- Add generic breadcrumbs CSS classes compatible with Bulma, Bootstrap and Tailwind (used by example app)
+- Add generic breadcrumbs CSS classes compatible with Bulma, Bootstrap and Tailwind (used by teams example)
 - Default all Pegasus apps to using `BigAutoField` instead of `AutoField` (see upgrade notes)
 - Use f-strings instead of string templates in management commands
 - Reduce indentation level in some html template files
@@ -48,6 +50,8 @@ files in the affected apps. Then you can either:
 
 1) To change your apps from `AutoField` to `BigAutoField`, run `./manage.py makemigrations` and `./manage.py migrate` 
 1) To keep using `AutoField`, change the setting back to `AutoField` in `apps.py` for all Pegasus apps. 
+
+*Aug 23, 2021*
 
 ## Version 0.16.2
 
