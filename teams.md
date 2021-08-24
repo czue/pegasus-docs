@@ -20,7 +20,7 @@ The example app includes:
 2. A set of class based views for working with that data model, limited to the context of a team.
 
 
-### Third party examples*
+#### Third party examples
 
 A Pegasus user Peter Cherna has created some more [example applications](https://github.com/pcherna/pegasus-example-apps/)
 that demonstrate additional team-based examples, including functional views, pagination, APIs and working with "global" objects.
