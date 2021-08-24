@@ -32,6 +32,8 @@ Additionally, two view mixin classes, `LoginAndTeamRequiredMixin` and `TeamAdmin
 which can be used to easily create class-based model views on Team models.
 A test suite for these mixins was also added.
 
+More details can be found in the [Teams documentation](/teams/).
+
 *A big thanks to Peter Cherna, who's [Pegasus example apps](https://github.com/pcherna/pegasus-example-apps/)
 was a big inspiration for this example.*
 
