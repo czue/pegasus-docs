@@ -51,7 +51,7 @@ files in the affected apps. Then you can either:
 1) To change your apps from `AutoField` to `BigAutoField`, run `./manage.py makemigrations` and `./manage.py migrate` 
 1) To keep using `AutoField`, change the setting back to `AutoField` in `apps.py` for all Pegasus apps. 
 
-*Aug 23, 2021*
+*Aug 24, 2021*
 
 ## Version 0.16.2
 
