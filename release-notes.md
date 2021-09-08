@@ -3,6 +3,12 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.17.1
+
+This fixes a crashing issue when resending team invitations.
+
+*Sep 8, 2021*
+
 ## Version 0.17
 
 This release adds an HTMX demo, a Teams example app, and more.
