@@ -1,4 +1,3 @@
-
 Getting Started
 ===============
 
@@ -22,6 +21,8 @@ If you haven't already, you'll need to install the following.
 
 *Note: It is possible to use the template without `virtualenv`, 
 but it is highly recommended, and these instructions assume you are using it.*
+
+If you're using Postgres, you'll also want to make sure [you have it installed](https://www.postgresql.org/download/).
 
 ## Create and download your project codebase
 
@@ -55,6 +56,10 @@ You should see a lot of newly created files for your project including a `manage
 ```
 pip install -r requirements.txt
 ```
+
+Note: if you have issues installing `psycopg2`, try installing the dependencies outlined in 
+[this thread](https://stackoverflow.com/questions/22938679/error-trying-to-install-postgres-for-python-psycopg2) 
+(specifically `python3-dev` and `libpq-dev`.
 
 ## Set up database (Postgres only)
 
