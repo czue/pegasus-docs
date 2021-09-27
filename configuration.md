@@ -165,3 +165,20 @@ Sentry project settings.
 ## Celery
 
 See the [celery docs](/celery) for set up and configuration of Celery.
+
+
+## Mailing List
+
+Pegasus includes support for subscribing users to a [Mailchimp](https://mailchimp.com/) email list upon signup.
+
+If you would like to enable this functionality you must:
+
+1. Install the `mailchimp3` Python package.
+2. Add the following variables to `settings.py`:
+
+```python
+MAILCHIMP_API_KEY = '<Mailchimp api key>'
+MAILCHIMP_LIST_ID = '<Mailchimp list ID>'
+```
+
+Note that it is your responsibility to notify your users / get their consent as per your local privacy regulations.
