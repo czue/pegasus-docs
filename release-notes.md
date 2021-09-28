@@ -3,6 +3,52 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.18
+
+This release adds a new Django + [HTMX](https://htmx.org/) implementation of Pegasus's team management functionality.
+Now, you can choose whether to use React or HTMX for your teams UI.
+
+This choice is configured by the new "Default Front-End Framework" setting in your project's Pegasus settings.
+The setting currently only impacts the Teams UI (and has no impact on Pegasus builds that don't use teams),
+but will be extended in future releases.
+
+The HTMX teams UI also has a few user-facing improvements:
+
+- You can now choose a role when inviting new team members.
+- Team deletion has moved to the team details page, and now has a confirmation dialog.
+- Editing the team name and ID now require the team admin role.
+
+Additionally, there are bug fixes and code-related improvements throughout the teams functionality:
+
+- Fixed "sign out" link on invitation acceptance page.
+- Improved workflow when attempting to accept an invitation to a team you already belong to.
+- Broke the teams `views.py` file into multiple Python modules.
+- Set `team_membership` on `request` object in team decorator functions, so it can be easily accessed in views/templates.
+- Cleaned up bits of HTML in existing teams React implementation.
+- Various doc strings, type hints, and formatting cleanup throughout code.
+- Combined `accept_invitation` and `accept_invitation_confirm` into a single view.
+- Remove a few teams-related templates when not building with teams enabled.
+
+Finally, there were minor updates to other functionality:
+
+- Bootstrap JavaScript is now built and used from the local install instead of using a pinned CDN. (Bootstrap builds only)
+- Extract Mailchimp mailing list logic to its own module and add [mailing list documentation](/configuration.html#mailing-list).
+- Fix quirks in HTMX example when back-end validation fails.
+- Minor cleanup of HTMX example code.
+- Rename `payments` and `tasks` view modules to `payments_views` and `tasks_views`.
+- Upgrade Django to `3.2.7`.
+- Changed default value of `USE_HTTPS_IN_ABSOLUTE_URLS` setting to `False`
+
+**Potentially breaking changes**
+
+The change of the default value of `USE_HTTPS_IN_ABSOLUTE_URLS` could impact production environments
+that have not overridden this setting. In particular, it would cause Stripe checkout / portal callbacks
+and invitation emails to have `http` links instead of `https` links.
+
+To fix this, add `USE_HTTPS_IN_ABSOLUTE_URLS = True` to all production settings files / environments.
+
+*Sep 28, 2021*
+
 ## Version 0.17.1
 
 This fixes a crashing issue when resending team invitations.
