@@ -8,7 +8,7 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 This release adds a new Django + [HTMX](https://htmx.org/) implementation of Pegasus's team management functionality.
 Now, you can choose whether to use React or HTMX for your teams UI.
 
-This choice is configured by the new "Default Front-End Framework" setting in your project's Pegasus settings.
+This choice is configured by the new "Front-End Framework" setting in your project's Pegasus settings.
 The setting currently only impacts the Teams UI (and has no impact on Pegasus builds that don't use teams),
 but will be extended in future releases.
 
