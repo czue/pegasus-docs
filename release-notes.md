@@ -3,6 +3,12 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.18.1
+
+This hotfix release fixes a bug affecting React builds that caused the sign up page to be broken.
+
+*Oct 3, 2021*
+
 ## Version 0.18
 
 This release adds a new Django + [HTMX](https://htmx.org/) implementation of Pegasus's team management functionality.
