@@ -95,6 +95,15 @@ heroku run python manage.py bootstrap_subscriptions
 
 to initialize your subscription data.
 
+### Building the front end
+
+If you're using Heroku's Python support you can configure Heroku to build your front-end files for you.
+
+To set this up, all you need to do is add the `heroku/nodejs` buildpack to your application from the settings page.
+
+Just make sure that this buildpack runs *before* the `heroku/python` buildpack, so that the compiled files
+are available when the `collectstatic` command runs.
+
 ### Celery support
 
 The Heroku environment supports Celery out-of-the-box.
