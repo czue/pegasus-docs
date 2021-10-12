@@ -80,16 +80,13 @@ npm run build
 
 This will compress your files, remove logging statements, etc.
 
-## Deployment best practices
+## Long-term best practices
 
 For ease of initial set up, the front-end bundle files are included with the Pegasus codebase.
 This allows you to get up and running with Pegasus without having to set up the front-end build pipeline.
 
-However, after you have set up the front-end toolchain it is recommended that you:
+However, keeping these files in source control will typically result in a lot of unnecessary changes and merge conflicts.
+Instead, it is recommended that you add the compiled CSS and JavaScript bundle files to your `.gitignore`
+so they are no longer managed by source control, and have your developers build them locally using the steps above.
 
-1. Add the bundle files to your .gitignore so they are no longer managed by source control.
-2. Build the bundle files on your production server (using `npm install && npm run build`) as part of your CI/CD
-   deployment process.
-
-This will ensure that the latest, optimized version of the front-end code is always deployed
-as part of your production environment.
+For production deployment, see the [production guidance](/deployment/production-checklist.html#optimize-your-front-end) on this.
