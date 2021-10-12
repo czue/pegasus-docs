@@ -46,7 +46,7 @@ Create migrations and migrate:
 Start with the relevant example views
 
 ```bash
-cp pegasus/apps/examples/views/payments.py apps/payments/views.py 
+cp pegasus/apps/examples/views/payments_views.py apps/payments/views.py
 ```
 
 You'll need to fix the models import (remove one of the periods from the import so it
@@ -67,10 +67,10 @@ And fix the URL references by replacing `pegasus_examples:` with `payments:` thr
 First copy the example templates into the new app:
 
 ```bash
-cp -r pegasus/apps/examples/templates/pegasus/examples/payments/ apps/payments/templates/payments/
+cp -r templates/pegasus/examples/payments/ templates/payments/
 ```
 
-Then edit the first line of `apps/payments/templates/payments/payments.html` to extend your app template
+Then edit the first line of `templates/payments/payments.html` to extend your app template
 instead of the example template:
 
 ```html
