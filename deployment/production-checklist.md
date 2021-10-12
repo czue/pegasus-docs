@@ -13,7 +13,7 @@ It's recommended to run this on your production application and address any crit
 The default Pegasus configuration will contain some warnings, to help prevent misconfigurations which
 can affect your site's availability. Not all warnings are serious issues and some may not be possible to address 
 (e.g. if part of your site must be available over HTTP instead of HTTPS).
-After running the `manage.py check -- deploy` command you should read through the documentation for any issues you get
+After running the `manage.py check --deploy` command you should read through the documentation for any issues you get
 and update the relevant settings where necessary. 
 
 ## Keep your secrets secret
