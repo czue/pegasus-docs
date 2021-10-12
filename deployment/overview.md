@@ -1,156 +1,33 @@
-# Deployment
+# Production Deployment
 
-Pegasus can be deployed on any standard cloud infrastructure.
+Pegasus---like Django---can be deployed on any standard cloud infrastructure.
+
 The most common ways of deploying Pegasus are:
 
-1. On a raw VPS / Virtual Machine, such Digital Ocean, Linode, or Amazon Lightsail
+1. On a raw VPS / Virtual Machine, such Digital Ocean, Linode, or Amazon EC2 or Lightsail
 2. On a platform-as-a-service (PaaS) platform, such as Heroku, or PythonAnywhere
-3. In a containerized way, using Docker, Kubernetes, or Google Cloud Platform
+3. In a containerized way, using Docker, and (optionally) Kubernetes
 
-Pegasus natively supports Heroku, Digital Ocean App Platform, and Google Cloud Run---though
-can be deployed on any infrastructure that supports Django apps.
-The following instructions are for specific supported platforms.
+Choosing the right deployment architecture involves a complex set of trade-offs, and there's no one-size-fits-all solution.
+PaaS and Docker-based solutions tend to be easier to get up and running, but can be more difficult to modify
+and are often more expensive at scale.
+Meanwhile, setting up a VPS can be error-prone but is a very cost-effective way to deploy small applications.
 
-If you would like to deploy to a platform that's not listed here, please get in touch by emailing 
+Much of the choice will also depend on the knowledge and comfort of you/your team with various tools and platforms.
+
+## Officially supported platforms
+
+Pegasus ships with configuration files to deploy to select platforms out-of-the-box.
+The officially supported platforms are:
+
+- Heroku (Python or Docker)
+- Digital Ocean App Platform (Docker-based)
+- Google Cloud Run (Docker-based)
+
+Heroku is the most common choice, and is the recommended option for staging sites or MVPs.
+
+If you would like to deploy to a platform that's not listed here, please get in touch on Slack or by emailing 
 cory@saaspegasus.com and I'm happy to help!
-
-## Deploying to containers with Docker
-
-As of version 0.10.2, Pegasus ships with [Docker support for development](/docker/).
-The Docker containers used for development can be modified to deploy to production environments
-that support containers - for example, Google Cloud Run/Kubernetes Engine, Amazon ECS,
-Heroku Container Registry, and Digital Ocean App Platform.
-
-Each environment has its own quirks in getting set up with containers - some of which are documented below.
-
-### Heroku Containers
-
-Pegasus supports deploying to [Heroku with Docker](https://devcenter.heroku.com/categories/deploying-with-docker)
-out of the box. For more details see the [Heroku documentation](#heroku).
-
-### Google Cloud Run
-
-Pegasus supports deploying to [Google Cloud Run](https://cloud.google.com/run).
-See the [Google Cloud documentation](#google-cloud) for details.
-Note that Celery is not yet supported on Google Cloud Run.
-
-## Heroku
-
-Pegasus supports deploying to Heroku as a standard Python application or using containers.
-
-### Building using Heroku's Python support
-
-To deploy with Heroku's Python module, first set up Pegasus using the "heroku" deploy platform option.
-This will create your Heroku `Procfile`, `runtime.txt`, and additional requirements/settings files
-needed for the Heroku platform.
-
-
-### Building using Heroku's Docker container support
-
-To deploy to Heroku using Docker, you should build Pegasus with the "heroku docker" deployment option.
-This will create your production `Dockerfile`, a `heroku.yml` file you can use [to build and deploy your 
-container](https://devcenter.heroku.com/articles/build-docker-images-heroku-yml), and 
-additional requirements/settings needed for the Heroku platform.
-
-After building and setting up Heroku you will also need to configure Heroku to
-deploy with containers by running:
-
-```
-heroku stack:set container
-```
-
-
-### Configure Django Settings
-
-The Heroku deployment uses its own settings module (which extends the normal `settings.py`).
-To tell Heroku to use it, set the `DJANGO_SETTINGS_MODULE` config var to `{ project_slug }.settings_heroku`.
-This can be done in the "settings" tab of your Heroku application (you may need to click to reveal the Config vars)
-or in the CLI using the following command (replacing the `project_slug` with your app name):
-
-```
-heroku config:set DJANGO_SETTINGS_MODULE={ project_slug }.settings_heroku
-```
-
-### Set up Database
-
-To set up your database, first enable the addon in the UI or by running:
-
-```
-heroku addons:create heroku-postgresql
-```
-
-Then run your initial migrations using:
-
-```
-heroku run python manage.py migrate
-```
-
-Note: if you're using Heroku's Python module, migrations will run automatically.
-
-
-### Setting allowed hosts
-
-In your `settings_heroku.py` file make sure to change the `ALLOWED_HOSTS` setting 
-to include whatever app you're deploying.
-
-```
-ALLOWED_HOSTS = [
-    'myapp.herokuapp.com',
-]
-```
-
-### Deploying
-
-Both builds can be deployed using Heroku's standard git integration.
-After you've connected your project's git repository to Heroku, just run:
-
-```
-git push heroku master
-```
-
-### Additional settings configuration
-
-If you need additional production settings, you can put them in the `settings_heroku.py` file,
-or include them as config vars like this:
-
-```python
-SECRET_KEY = os.environ.get('SECRET_KEY')
-```
-
-We recommend also setting `SECRET_KEY` in your Heroku config vars to avoid having it in version control.
-
-### Stripe support
-
-If you're using Stripe, you will need to set the `STRIPE_TEST_PUBLIC_KEY`, `STRIPE_TEST_SECRET_KEY`, 
-`STRIPE_LIVE_PUBLIC_KEY`, and `STRIPE_LIVE_SECRET_KEY` config vars (or whatever subset you are using).
-
-After setting up your Stripe variables, you can run:
-
-```
-heroku run python manage.py bootstrap_subscriptions
-```
-
-to initialize your subscription data.
-
-### Celery support
-
-The Heroku environment supports Celery out-of-the-box.
-
-However, you will need to install [the Heroku Redis addon](https://elements.heroku.com/addons/heroku-redis)
-from the UI or by running:
-
-```
-heroku addons:create heroku-redis
-```
-
-Additionally, you may need to run the following command to initialize a Celery worker:
-
-```
-heroku ps:scale worker=1
-```
-
-This process should be the same for Python and containerized builds.
-
 ## Digital Ocean
 
 Pegasus provides native support for Digital Ocean App Platform.
@@ -272,3 +149,23 @@ gcloud secrets versions add {project_slug}_settings --data-file .env.production
 ``` 
 
 See `settings_google.py` for examples of using these secrets in your settings file.
+## Deploying to containers with Docker
+
+Pegasus ships with [Docker support for development](/docker/).
+The Docker containers used for development can be modified to deploy to production environments
+that support containers - for example, Google Cloud Run/Kubernetes Engine, Amazon ECS,
+Heroku Container Registry, and Digital Ocean App Platform.
+
+Each environment has its own quirks in getting set up with containers - some of which are documented below.
+
+### Heroku Containers
+
+Pegasus supports deploying to [Heroku with Docker](https://devcenter.heroku.com/categories/deploying-with-docker)
+out of the box. For more details see the [Heroku documentation](#heroku).
+
+### Google Cloud Run
+
+Pegasus supports deploying to [Google Cloud Run](https://cloud.google.com/run).
+See the [Google Cloud documentation](#google-cloud) for details.
+Note that Celery is not yet supported on Google Cloud Run.
+

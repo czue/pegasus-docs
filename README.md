@@ -16,6 +16,22 @@ The maintainer uses the pip version via `pip install -r requirements.txt`
 
 To build docs run `make html`.
 
+## Viewing docs locally
+
+You can use python to serve your docs locally after building them:
+
+```python
+cd _build/html
+python -m http.server 8080
+```
+
+The docs should now be visible at [http://localhost:8080](http://localhost:8080).
+
+The following one-liner may be useful to clean, build, and serve the docs. Run this in the `_build/html` folder.
+
+```
+cd ../../ && rm -r _build && make html && cd _build/html/ && python -m http.server 8080
+```
 
 ## Deployment
 
