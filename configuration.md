@@ -30,7 +30,8 @@ example in emails, social authentication, or Stripe APIs.
 If you need to change the URL after installation, you can go to the site admin at `admin/sites/site/` and
 modify the values accordingly, leaving off any http/https prefix.
 
-In development you'll typically want a domain name of `localhost:8000` .
+In development you'll typically want a domain name of `localhost:8000`, and in production this should
+be the domain where your users access your app.
 
 
 ## Sending Email
