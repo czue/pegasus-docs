@@ -5,6 +5,9 @@ Celery
 
 It is optional, but is required for the "background task" example to work.
 
+**If you're using [Docker in development](/docker/) then Celery should automatically be configured and running.
+The following instructions are for running Celery outside of Docker, or in production.**
+
 ## Quick Start
 
 The easiest way to get going is to [download and install Redis](https://redis.io/download) 
