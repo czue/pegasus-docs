@@ -12,6 +12,9 @@ See [our deployment page](/deployment/) for more details.
 You need to install both [Docker](https://www.docker.com/get-started) and 
 [Docker Compose](https://docs.docker.com/compose/install/) prior to setting up your environment.
 
+Windows users may also need to install a 3rd-party package to run `make` commands.
+The easiest way to do that is via [these instructions](https://stackoverflow.com/a/57042516/8207).
+
 ## Getting Started
 
 First build your Pegasus project with Docker enabled and using Postgres as a database
