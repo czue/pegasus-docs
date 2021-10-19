@@ -26,11 +26,11 @@ take the following steps:
 
 ### Cleaning the back-end code
 
-1. In `settings.py`, remove `'pegasus.apps.examples.apps.PegasusExamplesConfig'` from `PEGASUS_APPS`.
-1. In your root `urls.py`, remove the line containing `include('pegasus.apps.examples.urls')`.
+1. In `settings.py`, remove `PEGASUS_APPS` and the reference in `INSTALLED_APPS`.
+1. In your root `urls.py`, remove the lines containing `include('pegasus.apps.examples.urls')` and `include('pegasus.apps.employees.urls')`.
 1. In `apps/web/templates/web/components/top_nav.html`, remove the section linking to the Examples Gallery.
-1. Delete the *entire* `pegasus/apps/examples` directory.
-1. Delete the *entire* `templates/pegasus/examples` directory.
+1. Delete the *entire* `pegasus/` directory.
+1. Delete the *entire* `templates/pegasus/` directory.
 
 ### Cleaning the front-end code
 
