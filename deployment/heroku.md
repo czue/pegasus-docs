@@ -22,7 +22,6 @@ deploy with containers by running:
 heroku stack:set container
 ```
 
-
 ### Configure Django Settings
 
 The Heroku deployment uses its own settings module (which extends the normal `settings.py`).
@@ -71,6 +70,8 @@ After you've connected your project's git repository to Heroku, just run:
 git push heroku master
 ```
 
+You can also configure Heroku to automatically build from a branch of your git repository.
+
 ### Additional settings configuration
 
 If you need additional production settings, you can put them in the `settings_heroku.py` file,
@@ -97,7 +98,10 @@ to initialize your subscription data.
 
 ### Building the front end
 
-If you're using Heroku's Python support you can configure Heroku to build your front-end files for you.
+As of Pegasus version 0.19, Heroku container builds will automatically build your front end files for you.
+You don't need to do anything to set this up. 
+
+If you're using Heroku's Python support you can also configure Heroku to build your front-end files for you.
 
 To set this up, all you need to do is add the `heroku/nodejs` buildpack to your application from the settings page.
 

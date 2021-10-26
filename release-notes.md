@@ -3,6 +3,57 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.19
+
+This release has two major updates - improved team member management and improved Heroku container deployment support.
+
+**Improved Team member management**
+
+From a user's perspective there are three main updates:
+
+- Admins can now change any team members' role from the new "member details" page.
+- Admins can also remove anyone from a team.
+- All team members (including admins) can leave teams they belong to.
+
+The following supporting changes were also made:
+
+- Added a comprehensive test suite supporting the above workflows.
+- Fixed a bug that prevented re-inviting the same email address to a team even if the previous invitation had already  
+  been accepted. Duplicate pending invitations are still prevented. 
+  This change also removed the DB constraint requiring team and email address to be unique.
+- Fixed bug where "resend invitation" and "cancel invitation" buttons were incorrectly showing up for non-admins.
+- Added helper `is_admin` method to team `Membership` objects.
+- Added a `CustomUserSerializer` to pass user information to the front end.
+- Added the `user_id` field to `MembershipSerializer`
+- Add the site name to body of team email invitations.
+- Add `__str__` function to team `Membership` objects.
+- Introduce `TeamPermissionError` exception class and start using it for permission-related failures.
+- Added better display of front-end validation issues when issuing invitations fails.
+- Various bits of formatting and cleanup in teams React code.
+
+**Heroku deployment improvements**
+
+A few updates were made to make deployments to Heroku containers faster and more comprehensive:
+
+- Bump `cryptography` to `3.4.8` and remove no-longer-necessary dependencies from production dockerfiles.
+  This results in vastly improved build times for Heroku docker deployments.
+- Build the front end files as part of Heroku container deployments
+- Run database migrations by default on Heroku container deployments
+- Set various production-recommended settings in `settings_heroku.py`. 
+  For more details see the new [production checklist](/deployment/production-checklist) in the documentation.
+
+**Other minor updates**
+
+- Added fall back to `username` on User display functions if the user does not have an associated email address.
+- Extracted logic for opening modals to a shared JavaScript function (Bulma builds only).
+- Remove commented out / unused code from `templates/web/components/top_nav.html` and modal dialogs. (Tailwind builds only).
+- Bump `django` to `3.2.8`
+- Add `pg-text-muted` helper CSS class
+- Add some more type hints to URL helpers
+- Extracted React form validation logic to `ValidationErrors` component.
+
+*Oct 27, 2021*
+
 ## Version 0.18.1
 
 This hotfix release fixes a bug affecting React builds that caused the sign up page to be broken.
