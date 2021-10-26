@@ -18,7 +18,7 @@ From a user's perspective there are three main updates:
 The following supporting changes were also made:
 
 - Added a comprehensive test suite supporting the above workflows.
-- Fixed a bug that prevented re-inviting the same email address to a team even if the previous invitation had already  
+- Fixed a bug that prevented re-inviting the same email address to a team even if the previous invitation had already
   been accepted. Duplicate pending invitations are still prevented. 
   This change also removed the DB constraint requiring team and email address to be unique.
 - Fixed bug where "resend invitation" and "cancel invitation" buttons were incorrectly showing up for non-admins.
