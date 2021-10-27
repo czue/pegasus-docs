@@ -52,7 +52,7 @@ A few updates were made to make deployments to Heroku containers faster and more
 - Add some more type hints to URL helpers
 - Extracted React form validation logic to `ValidationErrors` component.
 
-*Oct 26, 2021*
+*Oct 27, 2021*
 
 ## Version 0.18.1
 
