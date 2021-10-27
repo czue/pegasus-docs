@@ -58,6 +58,12 @@ A few updates were made to make deployments to Heroku containers faster and more
 - Add some more type hints to URL helpers
 - Extracted React form validation logic to `ValidationErrors` component.
 
+**Upgrade Notes**
+
+If you are upgrading from a previous version you should *not* merge any changes in the teams migration files,
+and run `./manage.py makemigrations` and `./manage.py migrate` to remove the DB constraint on team invitations
+after upgrading.
+
 *Oct 27, 2021*
 
 ## Version 0.18.1
