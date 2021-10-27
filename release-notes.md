@@ -5,9 +5,15 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ## Version 0.19
 
-This release has two major updates - improved team member management and improved Heroku container deployment support.
+This release has two major updates - improved team member management and improved Heroku deployment support.
 
 **Improved Team member management**
+
+Most of the changes below are summarized in this video:
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/KuRg48t_D2s" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
 
 From a user's perspective there are three main updates:
 
