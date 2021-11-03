@@ -26,7 +26,7 @@ First create your database clusters. Postgres is required and Redis is necessary
 In the commands below you'll need to replace `<your-project>` with the values from `deploy/app-spec.yaml`.
 
 ```
-doctl databases create <your-project>-db --engine pg --num-nodes 1 --version 13
+doctl databases create <your-project>-db --engine pg --num-nodes 1 --version 12
 doctl databases create <your-project>-redis --engine redis --num-nodes 1 --version 6
 ```
 
