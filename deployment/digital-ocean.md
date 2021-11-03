@@ -56,3 +56,6 @@ following the `SECRET_KEY` example.
 
 To run celery workers on Digital Ocean you will need to first add a managed Redis database, then the celery
 worker image.
+
+Then in your `app-spec.yaml` file make sure that the values for the `REDIS_URL` environment variables
+match the name you've chosen for your Redis database.
