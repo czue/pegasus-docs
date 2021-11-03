@@ -22,9 +22,18 @@ which can be done from [this link](https://cloud.digitalocean.com/databases/new?
 
 Once you've configured the prerequisites, deploying is just a few steps.
 
-1. Edit the `/deploy/app-spec.yaml` file. In particular, make sure to set your Github repository and branch.
-   If you aren't using Celery, you should remove the sections related to redis, and the celery-worker.
-2. Run `doctl apps create --spec deploy/app-spec.yaml`
+First create your database clusters. Postgres is required and Redis is necessary to use Celery.
+In the commands below you'll need to replace `<your-project>` with the values from `deploy/app-spec.yaml`.
+
+```
+doctl databases create <your-project>-db --engine pg --num-nodes 1 --version 13
+doctl databases create <your-project>-redis --engine redis --num-nodes 1 --version 6
+```
+
+Next edit the `/deploy/app-spec.yaml` file. In particular, make sure to set your Github repository and branch.
+If you aren't using Celery, you can remove the sections related to redis, and the celery-worker.
+
+Finally, run `doctl apps create --spec deploy/app-spec.yaml`
 
 That's it!
 In a few minutes your app should be online.
