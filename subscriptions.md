@@ -68,10 +68,10 @@ Webhooks are used to notify your app about events that happen in Stripe, e.g. fa
 More information can be found in [Stripe's webhook documentation](https://stripe.com/docs/webhooks).
 
 Pegasus ships with webhook functionality ready to go, including default handling of many events
-taken in Stripe's billing portal. That said, you are strongly encouraged
+taken in Stripe's checkout and billing portals. That said, you are strongly encouraged
 to test locally using [Stripe's excellent guide](https://stripe.com/docs/webhooks/test).
 
-The minimum set of webhooks you should configure in stripe are:
+The following minimum set of webhooks are connected by default:
 
 For the billing portal:
 
@@ -115,6 +115,61 @@ These include:
 1. Showing subscription details like plan, payment details, and renewal date.
 
 For additional questions on feature-gating don't hesitate to get in touch!
+
+## Per-Unit / Per-Seat Billing
+
+As of version 0.20, Pegasus supports per-unit / per-seat billing.
+Choose this option when building your project to enable it.
+
+**Using per-seat billing requires using Stripe Checkout.**
+
+For Team-based builds the default unit is Team members.
+For non-Team builds you will have to implement your own definition of what to use for billing quantities.
+
+### Choosing your billing model
+
+Refer to the [Stripe documentation] for how to set this up in your Price model.
+You can use any of:
+
+- Standard pricing (e.g. $10/user)
+- Package pricing (e.g. $50 / 5 new users)
+- Tiered pricing (graduated or volume) (e.g. $50 for up to 5 users, $5/user after that)
+
+### Displaying prices on the subscriptions page
+
+For per-unit billing you can no longer display a single upgrade price since it is dependent on the number of units.
+
+To avoid displaying an "unknown" price when showing the subscription, you can add a `price_displays` field to
+your `ProductMetadata` objects that takes the following format:
+
+```python
+ProductMetadata(
+    stripe_id='<stripe id>',
+    name=_('Graduated Pricing'),
+    description='A Graduated Pricing plan',
+    price_displays={
+        PlanInterval.month: 'From $10 per user',
+        PlanInterval.year: 'From $100 per user',
+    }
+),
+```
+
+This will show "From $10 per user" or "From $100 per user" when the monthly or annual plan is selected, respectively.
+
+### Keeping your Stripe data up to date
+
+When changes are made that impact a user's pricing, you will need to notify Stripe of the change.
+This can be done via a management command `./manage.py sync_subscriptions` or via a celery periodic task (TBD).
+
+To ensure this command works properly, you must implement two pieces of business logic:
+
+1. You must update the billing model's `billing_details_last_changed` field any time the number of units has change.
+2. You must override the `get_quantity` function on your billing model to tell Stripe how many units it contains.
+
+**If you use Teams with per-seat billing this will be automatically handled for you by default.**
+All you have to do is run the management command or connect the periodic task.
+
+For User-based, or more complex billing models with Teams you will have to implement these changes yourself.
 
 ## Troubleshooting
 
