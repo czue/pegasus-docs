@@ -121,6 +121,8 @@ For additional questions on feature-gating don't hesitate to get in touch!
 As of version 0.20, Pegasus supports per-unit / per-seat billing.
 Choose this option when building your project to enable it.
 
+**Using per-seat billing requires using Stripe Checkout.**
+
 For Team-based builds the default unit is Team members.
 For non-Team builds you will have to implement your own definition of what to use for billing quantities.
 
@@ -132,6 +134,27 @@ You can use any of:
 - Standard pricing (e.g. $10/user)
 - Package pricing (e.g. $50 / 5 new users)
 - Tiered pricing (graduated or volume) (e.g. $50 for up to 5 users, $5/user after that)
+
+### Displaying prices on the subscriptions page
+
+For per-unit billing you can no longer display a single upgrade price since it is dependent on the number of units.
+
+To avoid displaying an "unknown" price when showing the subscription, you can add a `price_displays` field to
+your `ProductMetadata` objects that takes the following format:
+
+```python
+ProductMetadata(
+    stripe_id='<stripe id>',
+    name=_('Graduated Pricing'),
+    description='A Graduated Pricing plan',
+    price_displays={
+        PlanInterval.month: 'From $10 per user',
+        PlanInterval.year: 'From $100 per user',
+    }
+),
+```
+
+This will show "From $10 per user" or "From $100 per user" when the monthly or annual plan is selected, respectively.
 
 ### Keeping your Stripe data up to date
 
