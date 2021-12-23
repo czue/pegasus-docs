@@ -126,6 +126,8 @@ Choose this option when building your project to enable it.
 For Team-based builds the default unit is Team members.
 For non-Team builds you will have to implement your own definition of what to use for billing quantities.
 
+Here is [a short video walkthrough of this feature](https://youtu.be/v_ayMEj924w).
+
 ### Choosing your billing model
 
 Refer to the [Stripe documentation] for how to set this up in your Price model.

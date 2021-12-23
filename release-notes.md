@@ -12,6 +12,12 @@ The biggest new feature is that per-seat (also known as per-unit) billing is now
 Team-based installments can now create and manage subscriptions based on the number of users in the team,
 with built-in infrastructure to track changes and keep them in sync with Stripe.
 
+You can find a 6-minute overview of the feature in this video:
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/v_ayMEj924w" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
+
 The implementation is customizable and can also be used by non-team builds with some additional configuration. 
 See [the updated Subscription documentation](https://docs.saaspegasus.com/subscriptions.html#per-unit-per-seat-billing)
 for an overview of this functionality, and bear in mind that it's a little complicated with several moving parts!
