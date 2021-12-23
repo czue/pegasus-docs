@@ -5,8 +5,6 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ## Version 0.20
 
-*Dec 23, 2021*
-
 This release involves a substantial update to Pegasus's subscriptions functionality.
 The biggest new feature is that per-seat (also known as per-unit) billing is now supported (for Stripe Checkout only).
 Team-based installments can now create and manage subscriptions based on the number of users in the team,
@@ -50,7 +48,7 @@ Also please note the announcment of a few features that will be removed soon!
 ### Changed
 
 - **Changed URLs of Stripe integration API calls to be more consistent**
-- **Removed `subscriptions.views.helpers` and merged into `subscriptions.helpers`**n
+- **Removed `subscriptions.views.helpers` and merged into `subscriptions.helpers`**
 - **Moved `SubscriptionModelMixin` from `apps.subscriptions.helpers` to `apps.subscriptions.models.SubscriptionModelBase` and made it an abstract model**
 - Add `created_at` to `Membership` admin
 - Add `subscription` and `has_active_subscription` to `Team` serializer
@@ -74,6 +72,7 @@ Also please note the announcment of a few features that will be removed soon!
 - Removed some subscriptions templates when building without subscriptions for certain CSS frameworks.
 - [tailwind-only] Removed reference to team name from logged-in homepage when not building with teams
 
+*Dec 23, 2021*
 
 ### Deprecated
 
