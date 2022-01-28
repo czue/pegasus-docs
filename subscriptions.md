@@ -8,7 +8,7 @@ Subscriptions in Pegasus have three components which must all be setup in order 
 1. **Stripe Billing data**. This is configured in Stripe.
 2. **Local Stripe models**. These are synced automatically from Stripe to your local database, using
    [`dj-stripe`](https://github.com/dj-stripe/dj-stripe).
-3. **Pegasus metadata**. This is configured in `apps/subsriptions/metadata.py` and used to augment
+3. **Pegasus metadata**. This is configured in `apps/subscriptions/metadata.py` and used to augment
    the data from Stripe.
 
 The easiest way to setup all three is to follow the guide below.
