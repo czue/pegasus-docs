@@ -8,6 +8,7 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ### Added
 
+- API Key support! See the new [API key documentation](/api-keys/) for details.
 - Example `DJSTRIPE_WEBHOOK_SECRET` to `.env.dev` file for local Docker deployments
 
 ### Package upgrades
@@ -19,7 +20,7 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 ### Changed
 
 - Updated how some type hints are done to reduce potential for circular imports caused by typing 
-- Updated headings of account pages to be more consistent with rest of site (Bulma builds only)
+- Updated headings of account pages to be more consistent with rest of site
 
 ### Fixed
 
