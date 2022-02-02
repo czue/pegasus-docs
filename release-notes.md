@@ -3,6 +3,46 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.21
+
+
+### Added
+
+- API Key support! See the new [API key documentation](/api-keys/) for details.
+- Example `DJSTRIPE_WEBHOOK_SECRET` to `.env.dev` file for local Docker deployments
+
+### Package upgrades
+
+- `django` to 3.2.11
+- `psycopg2-binary` to 2.9.3 (fixes installation issues on latest macOS processors)
+- `djangorestframework` to 3.13.1
+
+### Changed
+
+- Updated how some type hints are done to reduce potential for circular imports caused by typing 
+- Updated headings of account pages to be more consistent with rest of site
+
+### Fixed
+
+- Added missing closing `</section>` tag to `templates/accounts/password_change.html` (thanks Peter for reporting!)
+- Removed redundant tailwind imports from `assets/styles/pegasus/tailwind.css` which were causing
+  duplicate CSS definitions in the generated `site-tailwind.css` file (thanks Anna for reporting!)
+- Fixed bug that triggered an error when subscribing new users to a Mailchimp email list
+- The Docker development setup now works on the latest macOS processors
+
+### Removed
+
+- Building for multiple CSS frameworks has been removed. 
+  To try different CSS frameworks you will need to edit your project and download each codebase separately. 
+
+### Deprecated
+
+**The following features will likely be removed in an upcoming release. Let me know if you would miss these!**
+
+- **Stripe Elements support is deprecated and will be removed in favor of Stripe Checkout.**
+
+*Feb 2, 2022*
+
 ## Version 0.20
 
 This release involves a substantial update to Pegasus's subscriptions functionality.
@@ -25,7 +65,7 @@ Additionally there were a number of smaller, unrelated updates and fixes.
 
 You can read the complete notes below. The format for this release (and likely future releases) was borrowed from [keep a changelog](https://keepachangelog.com/).
 The most significant changes are in **bold**.
-Also please note the announcment of a few features that will be removed soon!
+Also please note the announcement of a few features that will be removed soon!
 
 
 ### Added

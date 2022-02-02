@@ -31,6 +31,7 @@ contributions are most welcome!
    cookbooks
    teams
    payments
+   api-keys
    experimental
    using-virtualenvs
    upgrading
