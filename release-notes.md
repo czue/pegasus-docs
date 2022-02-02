@@ -3,7 +3,7 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
-## Version
+## Version 0.21
 
 
 ### Added
@@ -24,9 +24,24 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ### Fixed
 
-- Added missing closing `</section>` tag to `templates/accounts/password_change.html` (thanks Peter for reporting!) 
+- Added missing closing `</section>` tag to `templates/accounts/password_change.html` (thanks Peter for reporting!)
+- Removed redundant tailwind imports from `assets/styles/pegasus/tailwind.css` which were causing
+  duplicate CSS definitions in the generated `site-tailwind.css` file (thanks Anna for reporting!)
 - Fixed bug that triggered an error when subscribing new users to a Mailchimp email list
-- Docker development environment now works on the latest macOS processors
+- The Docker development setup now works on the latest macOS processors
+
+### Removed
+
+- Building for multiple CSS frameworks has been removed. 
+  To try different CSS frameworks you will need to edit your project and download each codebase separately. 
+
+### Deprecated
+
+**The following features will likely be removed in an upcoming release. Let me know if you would miss these!**
+
+- **Stripe Elements support is deprecated and will be removed in favor of Stripe Checkout.**
+
+*Feb 2, 2022*
 
 ## Version 0.20
 
