@@ -5,6 +5,14 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ## Version 0.21
 
+This release has one major feature: API Keys.
+You can get an overview in this 2-minute video or check out [the documentation](/api-keys/) for details.
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/ivL10Y5P5L0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
+
+There are also a number of smaller fixes and upgrades.
 
 ### Added
 
