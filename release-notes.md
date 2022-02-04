@@ -3,6 +3,24 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.21.1
+
+This maintenance release simplifies how users are accessed via API key authentication,
+to make it easier to transition views.
+It mostly undoes a small handful of changes from the 0.21 release.
+
+### Changed
+
+- `HasUserAPIKey` permission class now populates `request.user` with the associated user, if a valid `UserAPIKey` is present.
+- API Views and Viewsets now continue to access users via `request.user` instead of the `get_user()` helper functions
+- `TeamSerializer` now accesses the user from the request instead of the explicit `["user"]` context. 
+
+### Removed
+
+- Now-redundant `UserAPIKeyMixin` class
+
+*Feb 4, 2022*
+
 ## Version 0.21
 
 This release has one major feature: API Keys.
@@ -22,7 +40,7 @@ There are also a number of smaller fixes and upgrades.
 ### Package upgrades
 
 - `django` to 3.2.11
-- `psycopg2-binary` to 2.9.3 (fixes installation issues on latest macOS processors)
+- `psycopg2-binary` to 2.9.3 (fixes installation issues on latest macOS processors) (thanks Eric for reporting!)
 - `djangorestframework` to 3.13.1
 
 ### Changed
