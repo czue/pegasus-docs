@@ -30,28 +30,12 @@ You can then enable API keys for any user-specific views, by following the instr
 More complex API key permissions---for example, associating a key with a single API or a single team---can
 be created by following [these instructions](https://florimondmanca.github.io/djangorestframework-api-key/guide/#api-key-models).
 
-## Enabling User-based API keys on a Rest Framework APIView
+To enable API-key support for an `APIView`, or `ViewSet`, use the `IsAuthenticatedOrHasUserAPIKey` permission class 
+in place of `IsAuthenticated`. This will allow either authenticated users or UserAPIKey users to access the APIs.
+In either case, the associated user object will be available as `request.user`.
 
-To enable API-key support for an `APIView`, you should do the following:
-
-1. Use the `IsAuthenticatedOrHasUserAPIKey` permission class, instead of `IsAuthenticated`.
-2. Replace all references to `request.user` with `apps.api.helpers.get_user_from_request(request)`.
-
-You can see this pattern in the `EmployeeDataAPIView` class that ships with the Pegasus examples.
-
-## Enabling User-based API keys on a REST Framework ViewSet
-
-To enable API-key support for an API ViewSet, you should do the following:
-
-1. Use the `IsAuthenticatedOrHasUserAPIKey` permission class, instead of `IsAuthenticated`.
-2. Ensure the view inherits from `UserAPIKeyMixin`, and that this class is listed *before* the default rest_framework class (e.g. `ModelViewSet`)
-3. Replace any references to `self.request.user` with `self.get_user()`, which will populate the user object from either
-   an authenticated user or an associated `UserAPIKey` object.
-4. In any associated `Serializer` logic, use `self.context['user']` to access the user, instead of `self.context['request'].user`.
-
-You can see some of these patterns in the `EmployeeViewSet` code that ships with the Pegasus examples,
-or, if you have enabled teams, in the `TeamViewSet` and `TeamSerializer` objects.
-
+You can see an example `APIView` in the `EmployeeDataAPIView` class that ships with the Pegasus examples,
+and an example `ViewSet` in the `EmployeeViewSet` code.
 
 ## Testing API keys
 
