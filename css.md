@@ -83,11 +83,3 @@ $body-color: #00008B;  // change main text to blue
 ```
 
 You'll have to run `npm run dev` to see the changes take.
-
-
-## Building for Multiple CSS Frameworks
-
-If you chose to build for multiple CSS frameworks, you can change frameworks
-by changing the `CSS_FRAMEWORK` value in your `settings.py` file.
-Valid options are `'bulma'`, `'bootstrap'`, nad `'tailwind'` - though note that [Tailwind CSS is experimental
-and not yet supported](/experimental/).
