@@ -3,11 +3,20 @@ CSS
 
 ## Supported Frameworks
 
-Pegasus sites can be built using [Bootstrap 5](https://getbootstrap.com/) or [Bulma](https://bulma.io/).
-The look and feel of the site is slightly different between the two, but the overall layout and
-color scheme is the same.
+Pegasus sites can be built with multiple different CSS frameworks and themes.
 
-**Bootstrap Version:**
+There are two [Bootstrap 5](https://getbootstrap.com/) themes, one based on Creative Tim's Material Kit and Material Dashboard products,
+and one that is "unthemeed". Additionally you can use [Bulma](https://bulma.io/) or, experimentally, Tailwind CSS.
+
+The look and feel of the site is slightly different between the two, but the overall layout is the same.
+
+**Bootstrap Material Theme:**
+
+![Material Home](images/material-home.png)
+
+You can also watch [this video](https://www.youtube.com/watch?v=WwcowKrwCl0) for more details.
+
+**Bootstrap Default Theme:**
 
 ![Bootstrap Home](images/bootstrap-home.png)
 
@@ -15,9 +24,11 @@ color scheme is the same.
 
 ![Bulma Home](images/bulma-home.png)
 
-If you're not sure which framework you want to use, you can also
-[build Pegasus for both frameworks](##building-for-multiple-css-frameworks),
-and change dynamically at runtime.
+**Tailwind Version (experimental):**
+
+![Tailwind Home](images/tailwind-home.png)
+
+If you're not sure which framework you want to use, you can change the setting on your project and download multiple copies of the codebase.
 
 ## CSS File Structure
 
@@ -51,7 +62,13 @@ of `pg-column` with `column` on Bulma, or `col-md` on Bootstrap).
 
 ## Customizing your CSS theme
 
-### Bootstrap
+### Bootstrap (material)
+
+The Material theme can be customized according to the [Material Dashboard documentation](https://www.creative-tim.com/learning-lab/bootstrap/overview/material-dashboard).
+
+The theme files live in the `assets/material-dashboard` folder. You can see the modifications that have been made for Pegasus support [on Github here](https://github.com/creativetimofficial/material-dashboard/compare/master...czue:pegasus-tweaks).
+
+### Bootstrap (default)
 
 Pegasus's file structure is based on [the Bootstrap documentation](https://getbootstrap.com/docs/5.0/customize/sass/#importing).
 Any of the variables used in Bootstrap can be changed by modifying the `assets/styles/site-bootstrap.scss` file.
