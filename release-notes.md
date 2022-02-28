@@ -3,6 +3,64 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.22
+
+The main feature of this release is a new front-end theme for Pegasus based off of the 
+[Material Kit](https://www.creative-tim.com/product/material-kit) and [Material Dashboard](https://www.creative-tim.com/product/material-dashboard)
+products from Creative Tim.
+
+You can get a sense of the theme in this 3-minute video:
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/WwcowKrwCl0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
+
+This release also adds support for Django 4.0. See note below for details.
+
+### Added
+
+- New Bootstrap Material theme based on Creative Tim's Material Kit / Material Dashboard
+- Added breadcrumbs to the Employee demo app pages
+- Unofficial support for Django 4.0 (see note below).
+
+### Package upgrades
+
+- `dj-stripe` to 2.6.1
+
+### Changed
+
+- All tables are now responsive (scrollable) on Bootstrap builds
+- Add vertical gutters to columns on Bootstrap builds
+- Better spacing of grid layouts in the examples
+- Default pegasus form input styling is now handled with `pg-input-group` class
+- Updated `djstripe_settings` import to be compatible with new version
+- Added top navigation bar to various account templates (password reset, password change, etc.). (thanks James for suggesting!)
+- Use `render_field` in more account templates
+- Heroku runtime now uses Python 3.8.12 (thanks Allen for reporting!)
+
+### Fixed
+
+- Fixed widget class overrides from not being populated for some widgets. 
+  This also fixes "select all" functionality in the Django admin for Bootstrap builds. (Thanks Will for reporting!)
+- Fixed connection strings for Redis on Heroku if you were not on the free tier, by adding `?ssl_cert_reqs=none` to Redis connection strings. (Thanks Reid for reporting!)
+- Fixed 500 error in payments example if the "Pay" button was clicked before the JavaScript on the page fully loads.
+- Replaced references to deprecated `ugettext` translation functions with `gettext` versions.
+- Removed unused `manage/<path:path>` url route in HTMX-based teams builds (thanks Peter for reporting!)
+
+### Django 4.0 support
+
+This version unofficially supports Django 4.0, however still ships with 3.2.12.
+
+This is due to one issue with the `dj-stripe` dependency [generating migration files](https://github.com/dj-stripe/dj-stripe/pull/1607)
+that may cause migration problems across multiple Pegasus environments (e.g. dev and prod, or two developer machines).
+This is a very similar issue to the one described in the [0.14.2 release notes](#0-14-2).
+
+If you wish to use Django 4.0, update the pinned version to 4.0.2 (or latest) in your `requirements.txt` file after downloading Pegasus,
+and all should work.
+
+*Feb 28, 2022*
+
+
 ## Version 0.21.1
 
 This maintenance release simplifies how users are accessed via API key authentication,
