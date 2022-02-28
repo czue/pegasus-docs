@@ -5,10 +5,11 @@ CSS
 
 Pegasus sites can be built with multiple different CSS frameworks and themes.
 
-There are two [Bootstrap 5](https://getbootstrap.com/) themes, one based on Creative Tim's Material Kit and Material Dashboard products,
-and one that is "unthemeed". Additionally you can use [Bulma](https://bulma.io/) or, experimentally, Tailwind CSS.
+There are two [Bootstrap 5](https://getbootstrap.com/) themes, one based on Creative Tim's [Material Kit](https://www.creative-tim.com/product/material-kit)
+and [Material Dashboard](https://www.creative-tim.com/product/material-dashboard) products,
+and one that is "unthemed". Additionally, you can use [Bulma](https://bulma.io/) and, experimentally, [Tailwind CSS](https://tailwindcss.com/).
 
-The look and feel of the site is slightly different between the two, but the overall layout is the same.
+The look and feel of the site is slightly different for each framework, but the overall layout is the same.
 
 **Bootstrap Material Theme:**
 
