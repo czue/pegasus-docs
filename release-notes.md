@@ -3,6 +3,12 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 0.22.1
+
+This is a hotfix release that fixes a crashing bug with Heroku deployments that don't use Redis (thanks James for reporting).
+
+*March 15, 2022*
+
 ## Version 0.22
 
 The main feature of this release is a new front-end theme for Pegasus based off of the 
@@ -36,7 +42,7 @@ This release also adds support for Django 4.0. See note below for details.
 - Updated `djstripe_settings` import to be compatible with new version
 - Added top navigation bar to various account templates (password reset, password change, etc.). (thanks James for suggesting!)
 - Use `render_field` in more account templates
-- Heroku runtime now uses Python 3.8.12 (thanks Allen for reporting!)
+- Heroku runtime now uses Python 3.8.12 (thanks Allan for reporting!)
 
 ### Fixed
 
