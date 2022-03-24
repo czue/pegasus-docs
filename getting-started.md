@@ -61,6 +61,13 @@ Note: if you have issues installing `psycopg2`, try installing the dependencies 
 [this thread](https://stackoverflow.com/questions/22938679/error-trying-to-install-postgres-for-python-psycopg2) 
 (specifically `python3-dev` and `libpq-dev`.
 
+On Macs you may also need to follow the instructions from [this thread](https://stackoverflow.com/a/58722268/8207). And specifically, run:
+
+```
+brew reinstall openssl
+export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
+```
+
 ## Set up database (Postgres only)
 
 If you installed with Postgres, edit the `DATABASES` value in `{{ project_name }}/settings.py` with
