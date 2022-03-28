@@ -13,7 +13,7 @@ See [the documentation](/github-actions/) for more details.
 
 ### Added
 
-- [Github Actions](https://github.com/features/actions) support.
+- [Github Actions support](/github-actions/).
 
 ### Changed
 
