@@ -3,6 +3,37 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2022.3
+
+The main feature of this release is [Github Actions](https://github.com/features/actions) support.
+Pegasus projects can now (optionally) run back end tests and build the front end automatically on Github.
+
+This should work automatically for all projects out-of-the-box.
+See [the documentation](/github-actions/) for more details.
+
+### Added
+
+- [Github Actions](https://github.com/features/actions) support.
+
+### Changed
+
+- Postgres database settings can now be configured by environment variables directly in `settings.py`
+- Upgrade default Python version to 3.9 (including in all Docker files)
+- Development Dockerfile now installs all npm packages when being built (thanks Brian for suggesting)
+- Upgraded ~all Python packages to their latest versions, apart from leaving Django on 3.2 LTS
+
+### Fixed
+
+- More consistent support for using Celery with all versions of Heroku and Redis secure/insecure URLs (thanks Brett for reporting).
+
+
+This release also introduces a new versioning convention, where future releases will be named: `yyyy.mm` or `yyyy.mm.n` in the case
+of multiple releases in the same month.
+This was done to make it clearer to customers when they last upgraded, because the previous release numbers were not meaningful,
+and because the author had developed decision fatigue about when to declare a "1.0" release.
+
+*March 28, 2022*
+
 ## Version 0.22.1
 
 This is a hotfix release that fixes a crashing bug with Heroku deployments that don't use Redis (thanks James for reporting).
