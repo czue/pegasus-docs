@@ -27,6 +27,7 @@ contributions are most welcome!
    celery
    code-structure
    deployment
+   github-actions
    docker
    cookbooks
    teams
