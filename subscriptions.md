@@ -179,10 +179,10 @@ Here's a quick example of how you might do this with User-based billing.
 
 Let's say your app allows users to define workspaces and they are billed based on the number of workspaces they create.
 
-You might have a worksapce model that looks like this:
+You might have a workspace model that looks like this:
 
 ```python
-class Workspace(models.Model)
+class Workspace(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='workspaces')
     # other workspace fields here
 ```
