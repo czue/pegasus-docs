@@ -169,9 +169,53 @@ To ensure this command works properly, you must implement two pieces of business
 2. You must override the `get_quantity` function on your billing model to tell Stripe how many units it contains.
 
 **If you use Teams with per-seat billing this will be automatically handled for you by default.**
-All you have to do is run the management command or connect the periodic task.
+All you have to do is run the management command or connect it to a periodic task.
 
 For User-based, or more complex billing models with Teams you will have to implement these changes yourself.
+
+#### A User-based example
+
+Here's a quick example of how you might do this with User-based billing.
+
+Let's say your app allows users to define workspaces and they are billed based on the number of workspaces they create.
+
+You might have a worksapce model that looks like this:
+
+```python
+class Workspace(models.Model)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='workspaces')
+    # other workspace fields here
+```
+
+Then you would want to update the `billing_details_last_changed` field of the `CustomUser` object every time a workspace
+was added or removed (step 1, above). That might look something like this, using [Django signals](https://docs.djangoproject.com/en/4.0/topics/signals/):
+
+```python
+@receiver(post_save, sender=Workspace)
+def update_billing_date_on_workspace_creation(sender, instance, created, **kwargs):
+    if created:
+        instance.team.billing_details_last_changed = timezone.now()
+        instance.team.save()
+
+
+@receiver(post_delete, sender=Workspace)
+def update_billing_date_on_workspace_deletion(sender, instance, **kwargs):
+    instance.team.billing_details_last_changed = timezone.now()
+    instance.team.save()
+```
+
+The other piece of code you would need to add is associating the `get_quantity` function on the user with the number of 
+workspaces they have.
+
+You'd want to add a method like this to `CustomUser`:
+
+```python
+class CustomUser(SubscriptionModelBase, AbstractUser):
+    # other stuff here
+    
+    def get_quantity(self):
+        return self.workspaces.count()
+```
 
 ## Troubleshooting
 
