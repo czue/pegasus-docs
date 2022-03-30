@@ -130,7 +130,7 @@ Here is [a short video walkthrough of this feature](https://youtu.be/v_ayMEj924w
 
 ### Choosing your billing model
 
-Refer to the [Stripe documentation] for how to set this up in your Price model.
+Refer to the [Stripe documentation](https://stripe.com/docs/products-prices/pricing-models) for how to set this up in your Price model.
 You can use any of:
 
 - Standard pricing (e.g. $10/user)
