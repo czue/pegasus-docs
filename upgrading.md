@@ -22,7 +22,7 @@ Follow these steps to create your patch file:
 3. Copy your `.git` directory from your "clean" project in step 1 into your new project in step 2.
    E.g. `cp -r path/to/yourapp/.git path/to/newapp/`.
 4. In your new project directory, *commit all of the changes* in a single commit. 
-5. Create a patchfile for the commit using [`git-format-patch`](https://git-scm.com/docs/git-format-patch).
+5. Create a patchfile for the commit using [git-format-patch](https://git-scm.com/docs/git-format-patch).
    The recommended command to run is `git format-patch -1 HEAD`.
 
 You should now see a file in your repository root with a name like `0001-branch-details.patch`. This is your patch file.
@@ -31,7 +31,7 @@ You should now see a file in your repository root with a name like `0001-branch-
 
 Now return to your main branch in your application's repository.
 
-First, use [`git-apply`](https://git-scm.com/docs/git-apply) to apply the patch.
+First, use [git-apply](https://git-scm.com/docs/git-apply) to apply the patch.
 The recommended command to run is:
 
 ```
