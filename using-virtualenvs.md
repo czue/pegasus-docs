@@ -10,11 +10,11 @@ Follow one of the sections below depending on how you want to manage your virtua
 
 After installing prerequisites, run the following command wherever you want to create
 the `virtualenv`. This will create the environment in the `{{ project_name_env }}` directory.
-You should replace the "python3.8" variable with whatever version you want to use, 
-but it *must be 3.7 or above*.
+You should replace the "python3.9" variable with whatever version you want to use, 
+but it *must be 3.8 or above*.
 
 ```
-virtualenv -p python3.8 {{ project_name_env }}
+virtualenv -p python3.9 {{ project_name_env }}
 ```
 
 To activate the environment then run:
@@ -34,7 +34,7 @@ If you choose to use `virtualenvwrapper` you can use the following command to cr
 This can be run from anywhere since `virtualenvwrapper` manages the location of your envs for you.
 
 ```
-mkvirtualenv -p python3.8 {{ project_name }}
+mkvirtualenv -p python3.9 {{ project_name }}
 ```
 
 Then to activate the environment you use:
