@@ -16,7 +16,7 @@ Else read on below for the play-by-play.
 
 If you haven't already, you'll need to install the following.
 
-- [Python 3.7 or higher](https://www.python.org/downloads/) (Python 3.9 is recommended)
+- [Python 3.8 or higher](https://www.python.org/downloads/) (Python 3.9 is recommended)
 - [Virtualenv](https://virtualenv.pypa.io/en/stable/)
 
 *Note: It is possible to use the template without `virtualenv`, 
@@ -39,7 +39,7 @@ If you've chosen to use Docker in development (the quickest way to get up and ru
 continue to the [Docker instructions](/docker).
 Otherwise keep reading.
 
-## Setup a Python 3.7+ virtualenv
+## Setup a Python 3.8+ virtualenv
 
 See [Using Virtual Environments](/using-virtualenvs/) for details on this process.
 

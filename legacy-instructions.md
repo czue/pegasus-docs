@@ -8,7 +8,7 @@ Legacy Installation
 From the ["Downloads" page](https://www.saaspegasus.com/releases/), download the latest version of the Pegasus template
 file and save it somewhere on your local file system.
 
-## Setup a Python 3.7+ virtualenv
+## Setup a Python 3.8+ virtualenv
 
 See [Using Virtual Environments](/using-virtualenvs/) for details on this process.
 
