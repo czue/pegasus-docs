@@ -71,7 +71,7 @@ DEFAULT_FROM_EMAIL = 'you@{{project_name}.com'
 ADMINS = [('Your Name', 'you@{{project_name}}.com'),]
 ```
 
-See [Sending email](https://docs.djangoproject.com/en/2.2/topics/email/) in the django docs for more information.
+See [Sending email](https://docs.djangoproject.com/en/3.2/topics/email/) in the django docs for more information.
 
 ## User Sign Up
 

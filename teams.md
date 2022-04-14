@@ -34,7 +34,7 @@ features from them will be continually incorporated into future releases.*
 
 Teams use three primary models - `apps.users.CustomUser`, `apps.teams.Team`, and `apps.teams.Membership`.
 
-The `Membership` model uses [Django's "through" support](https://docs.djangoproject.com/en/2.2/ref/models/fields/#django.db.models.ManyToManyField.through) 
+The `Membership` model uses [Django's "through" support](https://docs.djangoproject.com/en/3.2/ref/models/fields/#django.db.models.ManyToManyField.through) 
 to extend the `User`/`Team` relationship with additional fields.
 
 By default, a `role` field is added to represent the `User`'s role in the `Team` (admin or member).
