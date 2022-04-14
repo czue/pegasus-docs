@@ -2,6 +2,11 @@
 
 Pegasus supports deploying to Heroku as a standard Python application or using containers.
 
+Before getting started, first take the following steps in Heroku:
+
+1. In the Heroku dashboard, create a new app.
+2. Set up the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line) and run `heroku login` locally.
+
 ### Building using Heroku's Python support
 
 To deploy with Heroku's Python module, first set up Pegasus using the "heroku" deploy platform option.
@@ -33,21 +38,22 @@ or in the CLI using the following command (replacing the `project_slug` with you
 heroku config:set DJANGO_SETTINGS_MODULE={ project_slug }.settings_heroku
 ```
 
-### Set up Database
+### Set up Databases
 
-To set up your database, first enable the addon in the UI or by running:
+To set up your Postgres database, first enable the addon in the UI or by running:
 
 ```
 heroku addons:create heroku-postgresql
 ```
 
-Then run your initial migrations using:
+Database migrations should be handled automatically by Heroku.
+
+If you want to use Redis as a cache or to use Celery, you will need to install [the Heroku Redis addon](https://elements.heroku.com/addons/heroku-redis)
+from the UI or by running:
 
 ```
-heroku run python manage.py migrate
+heroku addons:create heroku-redis
 ```
-
-Note: if you're using Heroku's Python module, migrations will run automatically.
 
 
 ### Setting allowed hosts
@@ -67,10 +73,11 @@ Both builds can be deployed using Heroku's standard git integration.
 After you've connected your project's git repository to Heroku, just run:
 
 ```
-git push heroku master
+git push heroku main
 ```
 
 You can also configure Heroku to automatically build from a branch of your git repository.
+
 
 ### Additional settings configuration
 
@@ -111,13 +118,6 @@ are available when the `collectstatic` command runs.
 ### Celery support
 
 The Heroku environment supports Celery out-of-the-box.
-
-However, you will need to install [the Heroku Redis addon](https://elements.heroku.com/addons/heroku-redis)
-from the UI or by running:
-
-```
-heroku addons:create heroku-redis
-```
 
 Additionally, you may need to run the following command to initialize a Celery worker:
 
