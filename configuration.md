@@ -142,7 +142,7 @@ To enable Google Analytics, add your analytics tracking ID to `settings.py`:
 GOOGLE_ANALYTICS_ID = 'UA-XXXXXXX-1' 
 ```
 
-Pegasus uses gtag.js by default, which is a simpler version of Google Analytics that can be rolled out
+Pegasus uses a "global site tag" with gtag.js by default, which is a simpler version of Google Analytics that can be rolled out
 with zero additional configuration.
 If you use Google Tag Manager, you can make changes in `templates/web/components/google_analytics.html` to
 match the snippet provided by Google.
