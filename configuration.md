@@ -136,18 +136,27 @@ STRIPE_LIVE_MODE = False  # Change to True in production
 
 ## Google Analytics
 
-To enable Google Analytics, just add your analytics tracking ID to `settings.py`:
+To enable Google Analytics, add your analytics tracking ID to `settings.py`:
 
 ```python
 GOOGLE_ANALYTICS_ID = 'UA-XXXXXXX-1' 
 ```
 
+Pegasus uses gtag.js by default, which is a simpler version of Google Analytics that can be rolled out
+with zero additional configuration.
+If you use Google Tag Manager, you can make changes in `templates/web/components/google_analytics.html` to
+match the snippet provided by Google.
+
+See [this article](https://support.google.com/tagmanager/answer/7582054) for more on the differences between
+gtag.js and Google Tag Manager.
+
+
 ## Sentry
 
 [Sentry](https://sentry.io/) is the gold standard for tracking errors in Django applications and
-Pegasus can connect to it with just a few lines of configuration.
+Pegasus can connect to it with a few lines of configuration.
 
-To get setup, simply add the following code snippet to your `settings.py` file:
+To get setup, add the following code snippet to your `settings.py` file:
 
 ```python
 import sentry_sdk
@@ -159,7 +168,7 @@ sentry_sdk.init(
 )
 ```
 
-If you are starting from `settings_production.example.py` then you just need to populate `SENTRY_DSN` from your
+If you are starting from `settings_production.example.py` then you need to populate `SENTRY_DSN` from your
 Sentry project settings.
 
 
