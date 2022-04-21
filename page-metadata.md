@@ -34,7 +34,7 @@ def my_new_view(request):
     return render('a/template.html', {'page_title': 'My New Page'})
 ```
 
-Pegasus will then set your title to be "My New Page | <project name>".
+Pegasus will then set your title to be `My New Page | <project name>`.
 
 If you'd like to change the way the title is formatted (e.g. remove the project name), you can change
 that behavior in `web.templatetags.meta_tags.get_title`.
