@@ -26,6 +26,7 @@ contributions are most welcome!
    css
    celery
    code-structure
+   page-metadata
    deployment
    github-actions
    docker
