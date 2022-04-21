@@ -81,7 +81,6 @@ with a sensible set of defaults and templates.
 ### Google / Social login
 
 Pegasus optionally ships with a "Login with Google" option. 
-Just enter "y" to the option during installation to start with a default configuration.
 
 You'll separately need to follow the steps [listed here](https://django-allauth.readthedocs.io/en/latest/providers.html#google)
 to configure things on the Google side and in the Django Admin.
