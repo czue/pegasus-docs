@@ -1,10 +1,56 @@
 # Upgrading
 
-Upgrading Pegasus is currently a manual process though there are some plans to improve it in the future.
+Upgrading Pegasus is currently a manual process though there are plans to improve it in the future.
 
-## Using patches
-The following is the recommended way to upgrade a Pegasus project.
-This process can also be used when changing any Pegasus configuration variables.
+New projects are recommended to use the branch-based approach.
+Older projects can use the patch-based approach.
+
+The upgrade process can also be used when changing any Pegasus configuration variables.
+
+## Using branches (recommended)
+
+With this option you maintain a "pure" Pegasus branch in your repository with no other modifications.
+Then, you merge this branch into your main app when you upgrade.
+
+### 1. Create a branch for the upgrade
+
+First [checkout the first commit](https://stackoverflow.com/questions/43197105/how-do-you-jump-to-the-first-commit-in-git)
+in your repository and create a new branch from there.
+
+After finding and checking out the initial commit, run:
+
+```
+git branch pegasus
+git checkout pegasus
+```
+
+*Note: if you created the `pegasus` branch when you set up your codebase you can skip this step.*
+
+Next, make sure the branch is up-to-date with your current Pegasus version:
+
+1. Download your Pegasus project on your *current* version and unzip the code.
+2. Copy the `.git` folder from your main project into the downloaded codebase.
+3. Make sure you are on the `pegasus` branch (`git checkout pegasus`)
+4. Commit all changes (`git add .` then `git commit -am "ready to upgrade"`)
+
+### 2. Upgrade the code in the branch
+
+1. Upgrade your project on saaspegasus.com
+2. Download the latest codebase and unzip the code.
+3. Copy the `.git` folder from step 1 into this new folder.
+4. Commit all changes (`git add .` then `git commit -am "upgrade to latest Pegasus"`)
+
+### 3. Merge into your main branch
+
+1. Checkout the main branch (`git checkout main`)
+2. Merge the code (`git merge pegasus`)
+
+In the merging step you should look at the modifications being made, and you may have to manually resolve conflicts that come up.
+
+## Using patches (if you can't use branches)
+
+You can also follow a similar process to the above using Git patches.
+Patches do not require working in the same repository or having a previously created branch.
 
 At a high level you will:
 
@@ -13,7 +59,7 @@ At a high level you will:
 
 Here we'll walk through the steps in more detail.
 
-### Creating the patch file
+### 1. Creating the patch file
 
 Follow these steps to create your patch file:
 
@@ -27,7 +73,7 @@ Follow these steps to create your patch file:
 
 You should now see a file in your repository root with a name like `0001-branch-details.patch`. This is your patch file.
 
-### Applying the patch file
+### 2. Applying the patch file
 
 Now return to your main branch in your application's repository.
 
@@ -67,45 +113,6 @@ In this example, the type annotations were added to the function signature:
 -def is_member(user, team):
 +def is_member(user: CustomUser, team: apps.teams.models.Team) -> bool:
 ```
-
-## No-longer recommended options
-
-You can also upgrade without using patch files through one of the two approaches below.
-Both of these have been used by community members, though the “opt in” approach is more common.
-
-These approaches are typically **more work** and **more error prone** than the patch option,
-but they don't involve diff files which may be unfamiliar/intimidating to some people.
-
-### The "Opt-In" approach
-
-In the "opt-in" approach, you view a diff of two clean Pegasus builds and manually bring any changes across to your main project.
-
-It works like this:
-
-1. Download a "clean" version of your Pegasus project on your *current* version, and commit it to a git branch or repository.
-2. Upgrade your Pegasus version, and download the new codebase.
-3. Copy your `.git` directory from your "clean" project into your new project.
-   E.g. `cp -r path/to/yourapp/.git path/to/newapp/`.
-4. In your new project directory, view the diff files and manually copy any changes you want to bring in into your main project.
-   **Don't make any changes in the "clean" branch/repo.**
-5. When you've finished, commit the new version into the "clean" branch/repo - which will allow you to repeat the process on the next release.
-
-### The "Opt-Out" approach
-
-In the "opt-out" approach, you copy a clean, upgraded Pegasus build on top of your existing codebase,
-then merge or reject all changes.
-
-Here are the steps:
-
-1. Create a new branch in your existing project for the merge.
-2. Download the code for your project for the latest Pegasus version.
-3. Copy your `.git` directory from your *current* project into your new project.
-   E.g. `cp -r path/to/yourapp/.git path/to/newapp/`.
-4. In your new project directory, manually merge any changes you want to bring in, and *reject* any changes you don't want.
-   *You should reject the deletion of any files you have added - likely entire apps and directories.*
-5. When you're finished, commit the result and push it to Github/Gitlab.
-6. Create a pull request, review the changes, and when you're happy, merge it.
-7. Pull the changes back into your original project directory from Github/Gitlab.
 
 ## Other notes
 
