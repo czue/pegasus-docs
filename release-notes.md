@@ -46,6 +46,7 @@ and some Docker development improvements.
 ### Documentation
 
 - Added [page metadata documentation](/page-metadata/) for working with project / page metadata (e.g. page titles).
+- Updated the [upgrading documentation](/upgrading/) to recommend a branch-based approach.
 - Updated the [Sentry documentation](configuration.html#sentry) with the new setup and testing instructions.
 
 *April 22, 2022*
