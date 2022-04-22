@@ -35,6 +35,27 @@ Make sure that the "license" field at the bottom is set.
 Once you're done, download your project's source code as a zip file.
 Unzip it to a folder where you want to do your development and you're ready to go!
 
+## Set up source control
+
+It is highly recommended to use git for source control.
+[Install git](https://git-scm.com/downloads) and then run the following commands:
+
+```
+git init
+git add .
+git commit -am "initial project creation"
+```
+
+It is also recommended to create a `pegasus` branch at this time for future upgrades.
+
+```
+git branch pegasus
+```
+
+You can read [more about upgrading here](/upgrading).
+
+## Get up and running
+
 If you've chosen to use Docker in development (the quickest way to get up and running),
 continue to the [Docker instructions](/docker).
 Otherwise keep reading.
