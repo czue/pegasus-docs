@@ -155,20 +155,11 @@ gtag.js and Google Tag Manager.
 [Sentry](https://sentry.io/) is the gold standard for tracking errors in Django applications and
 Pegasus can connect to it with a few lines of configuration.
 
-To get setup, add the following code snippet to your `settings.py` file:
+If you build with Sentry enabled, all you need to do is populate the `SENTRY_DSN` setting - either
+directly in your `settings.py` or via an environment variable.
 
-```python
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
-
-sentry_sdk.init(
-    dsn='https://****@sentry.io/12345',
-    integrations=[DjangoIntegration()]
-)
-```
-
-If you are starting from `settings_production.example.py` then you need to populate `SENTRY_DSN` from your
-Sentry project settings.
+After setting it up on production, you can test your Sentry integration by visiting `https://<yourdomain>/simulate_error`.
+This should trigger an exception which will be logged by Sentry.
 
 
 ## Celery
