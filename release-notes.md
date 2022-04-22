@@ -3,6 +3,53 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2022.4
+
+Version 2022.4 is a mix of new features and maintenance improvements.
+Major updates include new "Login with Twitter" functionality, allowing users to manage their own social accounts,
+and some Docker development improvements.
+
+### Added
+
+- **Added "login with Twitter" as a first-class supported authentication option.**
+- **Users can now see and manage (connect and disconnect) social accounts (Google and Twitter) from their profile pages.**
+- Added new Docker makefile targets, including `make start-bg` to run docker containers in the background (previous default behavior), 
+  and `make restart` to restart docker containers
+- Added view to simulate errors (by raising an Exception). This is helpful for testing Sentry integrations.
+- Added ability to override page titles in templates using the `{% page_title %}` block.
+- Added better page titles to several app pages.
+- Continued adding translation markup in user-facing text that was modified (this will be an incremental effort towards full-site translation)
+
+### Changed
+
+- **Upgraded version of node that runs in the Docker container from 14 to 16.**
+- **Sentry is now a first-class build option enabled in the UI. If enabled, it will be automatically included in requirements and configured in `settings.py`.**
+- README file now includes Docker-specific instructions for everything that was included (Docker builds only)
+- Made more settings variables configured via environment variables.
+- Docker `make start` command now runs in the foreground instead of in the background.
+- Merged `meta.html` partial template into `base.html` to enable overridding blocks inside of it.
+- The `socialicon` CSS class is now shared in all CSS frameworks and also sets the max width/height of the icon.
+- Updated outdated Django docs references to Django 3.2
+- Extracted social login buttons to their own templates which are shared on signup and login pages.
+- Upgraded Django to 3.2.13
+
+### Fixed
+
+- Filter out inactive (archived) Stripe prices/plans from the list of plans
+
+### Removed
+
+- Removed `dev-requirements` files. Pip tools should now be installed with `pip install --upgrade pip-tools`.
+- No longer call `npm install` in the `Dockerfile`, since it wasn't working as expected.
+- Cleaned up unnecessary `type="application/javascript"` markup from many `<script>` tags.
+
+### Documentation
+
+- Added [page metadata documentation](/page-metadata/) for working with project / page metadata (e.g. page titles).
+- Updated the [Sentry documentation](configuration.html#sentry) with the new setup and testing instructions.
+
+*April 22, 2022*
+
 ## Version 2022.3
 
 The main feature of this release is [Github Actions](https://github.com/features/actions) support.
