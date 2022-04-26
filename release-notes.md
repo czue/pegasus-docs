@@ -3,6 +3,13 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2022.4.1
+
+This is a hotfix release, which fixes the `make init` command to start containers in the background
+so that migrations will properly run.
+
+*April 26, 2022*
+
 ## Version 2022.4
 
 Version 2022.4 is a mix of new features and maintenance improvements.
