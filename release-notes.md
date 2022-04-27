@@ -6,7 +6,7 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 ## Version 2022.4.2
 
 This is a hotfix release, which adds a missing closing `</div>` tag to the signup template on Tailwind
-builds when not using teams
+builds when not using teams.
 
 *April 27, 2022*
 
