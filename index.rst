@@ -18,7 +18,7 @@ contributions are most welcome!
    :maxdepth: 2
    :caption: All Documentation:
 
-   getting-started
+   installation
    customizations
    configuration
    subscriptions

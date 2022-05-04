@@ -44,123 +44,12 @@ You can read [more about upgrading here](/upgrading).
 
 ## Get up and running
 
-If you've chosen to use Docker in development (the quickest way to get up and running),
-continue to the [Docker instructions](/docker).
-Otherwise keep reading.
+There are two supported ways of running your project.
 
-## Install Prerequisites
+The quickest way to get up and running is to use Docker for development.
+For that option, continue to the [Docker instructions](/docker).
 
-If you haven't already, you'll need to install the following.
+For a more customizable approach that is more effort to set up, but can be easier to maintain,
+you can follow the instructions on [native installation](/native).
 
-- [Python 3.8 or higher](https://www.python.org/downloads/) (Python 3.9 is recommended)
-- [Virtualenv](https://virtualenv.pypa.io/en/stable/)
-
-*Note: It is possible to use the template without `virtualenv`, 
-but it is highly recommended, and these instructions assume you are using it.*
-
-If you're using Postgres, you'll also want to make sure [you have it installed](https://www.postgresql.org/download/).
-
-## Setup a Python 3.8+ virtualenv
-
-See [Using Virtual Environments](/using-virtualenvs/) for details on this process.
-
-## Enter the project directory
-
-```
-cd {{ project_name }}
-```
-
-You should see a lot of newly created files for your project including a `manage.py` file.
-
-## Install package requirements
-
-```
-pip install -r requirements.txt
-```
-
-Note: if you have issues installing `psycopg2`, try installing the dependencies outlined in 
-[this thread](https://stackoverflow.com/questions/22938679/error-trying-to-install-postgres-for-python-psycopg2) 
-(specifically `python3-dev` and `libpq-dev`.
-
-On Macs you may also need to follow the instructions from [this thread](https://stackoverflow.com/a/58722268/8207). And specifically, run:
-
-```
-brew reinstall openssl
-export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
-```
-
-## Set up database (Postgres only)
-
-If you installed with Postgres, edit the `DATABASES` value in `{{ project_name }}/settings.py` with
-the appropriate details.
-
-You will also need to create a database for your project if you haven't already:
-
-```bash
-sudo -u postgres createdb {{ project_name }}
-```
-
-## Create database migrations
-
-```bash
-python ./manage.py makemigrations
-```
-
-## Run database migrations
-
-```bash
-python ./manage.py migrate
-```
-
-## Run server
-
-```bash
-python ./manage.py runserver
-```
-
-Go to [http://localhost:8000](http://localhost:8000) and you should see the default Pegasus landing page!
-
-![Landing Page](images/pegasus-landing-page.png)
-
-## Create a User
-
-To create your first user account, just go through the sign up flow in your web browser.
-
-From there you should be able to access all built-in functionality and examples.
-
-## (Optional) Enable admin access
-
-Follow [these instructions](cookbooks#use-the-django-admin-ui) to enable access to the Django Admin site.
-
-## (Optional) Set up your Stripe Subscriptions
-
-If you've installed with subscriptions, you'll want to set things up next.
-
-Head to the [subscriptions documentation](/subscriptions) and follow the steps there!
-
-## (Optional) Set up Background Tasks
-
-For the progress bar example to work you'll need a Celery environment running.
-
-Head to [celery](/celery) and follow the steps there!
-
-## Building Your Application
-
-At this point, Pegasus has installed scaffolding for all of the user management, authentication, and (optionally) 
-team views and Stripe subscriptions, and given you a beautiful base UI template and clear code 
-structure to work from. 
- 
-Now that you're up and running it's time for the fun part: building your new application!
-
-The can obviously be done however you like.
-Some examples of things you might want to do next include:
-
-- Customize your landing page and setup a pricing page
-- Start modifying the list of navigation tabs and logged-in user experience
-- Create a new django app and begin building out your data models in `models.py`
-
-For some initial pointers on where to to make Pegasus your own, head on over to the 
-[Customizations Page](/customizations).
-
-For the nitty-gritty details on setting up things like email, error logging, sign up flow, analytics, and more 
-go to [Settings and Configuration](/configuration).
+After you've gotten up and running, you'll likely want to complete some [post-installation steps](/post-install).
