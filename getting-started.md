@@ -12,18 +12,6 @@ Here's everything you need to start your first Pegasus project.
 Visual learner? The above video should get you going.
 Else read on below for the play-by-play.
 
-## Install Prerequisites
-
-If you haven't already, you'll need to install the following.
-
-- [Python 3.8 or higher](https://www.python.org/downloads/) (Python 3.9 is recommended)
-- [Virtualenv](https://virtualenv.pypa.io/en/stable/)
-
-*Note: It is possible to use the template without `virtualenv`, 
-but it is highly recommended, and these instructions assume you are using it.*
-
-If you're using Postgres, you'll also want to make sure [you have it installed](https://www.postgresql.org/download/).
-
 ## Create and download your project codebase
 
 If you haven't already, you'll need to [purchase a Pegasus License on saaspegasus.com](http://www.saaspegasus.com/licenses/).
@@ -59,6 +47,18 @@ You can read [more about upgrading here](/upgrading).
 If you've chosen to use Docker in development (the quickest way to get up and running),
 continue to the [Docker instructions](/docker).
 Otherwise keep reading.
+
+## Install Prerequisites
+
+If you haven't already, you'll need to install the following.
+
+- [Python 3.8 or higher](https://www.python.org/downloads/) (Python 3.9 is recommended)
+- [Virtualenv](https://virtualenv.pypa.io/en/stable/)
+
+*Note: It is possible to use the template without `virtualenv`, 
+but it is highly recommended, and these instructions assume you are using it.*
+
+If you're using Postgres, you'll also want to make sure [you have it installed](https://www.postgresql.org/download/).
 
 ## Setup a Python 3.8+ virtualenv
 
