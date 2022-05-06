@@ -42,13 +42,19 @@ git branch pegasus
 
 You can read [more about upgrading here](/upgrading).
 
-## Get up and running
+## Get up and running with Docker
 
 If you've chosen to use Docker in development (the quickest way to get up and running),
 continue to the [Docker instructions](/docker).
-Otherwise keep reading.
 
-## Install Prerequisites
+Then skip ahead to the [post-install steps](#post-installation-steps).
+
+
+## Get up and running with native Python
+
+Follow these instructions to run your application in your system's Python.
+
+### Install Prerequisites
 
 If you haven't already, you'll need to install the following.
 
@@ -60,11 +66,11 @@ but it is highly recommended, and these instructions assume you are using it.*
 
 If you're using Postgres, you'll also want to make sure [you have it installed](https://www.postgresql.org/download/).
 
-## Setup a Python 3.8+ virtualenv
+### Setup a Python 3.8+ virtualenv
 
 See [Using Virtual Environments](/using-virtualenvs/) for details on this process.
 
-## Enter the project directory
+### Enter the project directory
 
 ```
 cd {{ project_name }}
@@ -72,7 +78,7 @@ cd {{ project_name }}
 
 You should see a lot of newly created files for your project including a `manage.py` file.
 
-## Install package requirements
+### Install package requirements
 
 ```
 pip install -r requirements.txt
@@ -89,7 +95,7 @@ brew reinstall openssl
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
 ```
 
-## Set up database (Postgres only)
+### Set up database (Postgres only)
 
 If you installed with Postgres, edit the `DATABASES` value in `{{ project_name }}/settings.py` with
 the appropriate details.
@@ -100,19 +106,19 @@ You will also need to create a database for your project if you haven't already:
 sudo -u postgres createdb {{ project_name }}
 ```
 
-## Create database migrations
+### Create database migrations
 
 ```bash
 python ./manage.py makemigrations
 ```
 
-## Run database migrations
+### Run database migrations
 
 ```bash
 python ./manage.py migrate
 ```
 
-## Run server
+### Run server
 
 ```bash
 python ./manage.py runserver
@@ -122,25 +128,29 @@ Go to [http://localhost:8000](http://localhost:8000) and you should see the defa
 
 ![Landing Page](images/pegasus-landing-page.png)
 
-## Create a User
+## Post-installation steps
+
+Once up and running, you'll want to review these common next-steps.
+
+### Create a User
 
 To create your first user account, just go through the sign up flow in your web browser.
 
 From there you should be able to access all built-in functionality and examples.
 
-## (Optional) Enable admin access
+### Enable admin access
 
 Follow [these instructions](cookbooks#use-the-django-admin-ui) to enable access to the Django Admin site.
 
-## (Optional) Set up your Stripe Subscriptions
+### Set up your Stripe Subscriptions
 
 If you've installed with subscriptions, you'll want to set things up next.
 
 Head to the [subscriptions documentation](/subscriptions) and follow the steps there!
 
-## (Optional) Set up Background Tasks
+### Set up Background Tasks
 
-For the progress bar example to work you'll need a Celery environment running.
+For the progress bar example to work---and to run background tasks of your own---you'll need a Celery environment running.
 
 Head to [celery](/celery) and follow the steps there!
 
