@@ -53,6 +53,7 @@ Then skip ahead to the [post-install steps](#post-installation-steps).
 ## Get up and running with native Python
 
 Follow these instructions to run your application in your system's Python.
+If you're using Docker you can skip this section.
 
 ### Install Prerequisites
 
