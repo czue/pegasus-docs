@@ -12,6 +12,14 @@ the Django admin.
 After going through the sign up flow, to convert your newly-created user into an admin, 
 run the following command, being sure to replace the email address with the one you used to sign up:
 
+**Docker:**
+
+```
+docker-compose exec web python ./manage.py promote_user_to_superuser yourname@example.com
+```
+
+**Native:**
+
 ```
 python ./manage.py promote_user_to_superuser yourname@example.com
 ``` 
