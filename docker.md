@@ -17,7 +17,7 @@ The easiest way to do that is via [these instructions](https://stackoverflow.com
 
 ## Getting Started
 
-First build your Pegasus project with Docker enabled and using Postgres as a database
+First set up your Pegasus project with Docker enabled and using Postgres as a database
 following the [getting started guide](/getting-started/).
 
 ### Enter the project directory
