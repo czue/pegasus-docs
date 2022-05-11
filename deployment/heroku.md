@@ -6,6 +6,7 @@ Before getting started, first take the following steps in Heroku:
 
 1. In the Heroku dashboard, create a new app.
 2. Set up the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line) and run `heroku login` locally.
+3. Connect your app, by running `heroku git:remote -a {{ heroku_app_name }}`
 
 ### Building using Heroku's Python support
 
