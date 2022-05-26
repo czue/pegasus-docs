@@ -121,6 +121,16 @@ make start
 
 to run your project with the latest dependencies.
 
+## Debugging
+
+You can use debug tools like `pdb` or `ipdb` by enabling service ports.
+
+This can be done by running your web container with the following:
+
+```
+docker-compose run --service-ports web
+```
+
 ## Other Resources
 
 - [Dockerizing Django with Postgres, Gunicorn, and Nginx](https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/)
