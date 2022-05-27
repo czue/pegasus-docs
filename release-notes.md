@@ -3,6 +3,50 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+### Added
+
+- Save the Stripe `Customer` object on the User model and re-use it on new subscriptions (prevents users from having
+  to re-enter their cards muliple times for multiple subscriptions)
+- **An `active_subscription_required` decorator for easier subscription feature-gating. [Docs](/subscriptions.html#using-the-active-subscription-required-decorator)**
+- Added a periodic task to sync subscriptions with Stripe every day when per-seat billing is enabled.
+- Added a slug field to `ProductMetadata` to be able to uniquely refer to products in code.
+- Docker projects now include a `.env.dev.example` file to use as a reference for sharing across team members
+  (the `.env.dev` file that ships with Pegasus was .gitignored)
+- Stripe subscriptions are now created with a human-readable description with the team/user associated with the subscription. 
+- Added Docker-based instructions for running tests while watching for changes.
+- Added `sync_subscription_model_with_stripe` helper function (logic was previously only in `sync_subscriptions` management command)
+- Show expiration date on subscription details when auto-renewal has been turned off
+
+
+### Fixed
+
+- Fixed bootstrap button CSS classes in a few templates to use the `pg-` class styles instead of the legacy Bulma version. (thanks Lisa for reporting)
+- Removed unreachable template code in `view_subscription.html`.
+- Fixed subscription payment display amount when subscription quantity is > 1
+- Fixed typo in `update_billing_date_on_membership_deletion` doc string
+- `URLField` now renders with same styles as other inputs
+- Don't sync Stripe subscriptions if they don't need to be changed (per-seat billing only)
+
+### Changed
+
+- Heroku-based docker deployments now use a `buster` base image instead of `alpine`. This helps to simplify build issues when adding certain packages / libraries.
+- Dev docker set up now starts celery with the beat flag enabled
+- Improved layout of `socialaccount/signup.html` (shown when someone signs up with a social account but the email is already in use). (thanks Lisa for reporting)
+- Increased size of titles in socialaccount templates.
+- Reduced whitespace in HTML templates that were modified from 4-spaces to 2-spaces.
+- Updated migration file in api app to match latest expected column sizes
+- `upgrade_subscription_checkout.html` template has been combined with `upgrade_subscription.html`
+- Upgrade htmx version from 1.5 to 1.7
+- Improved error message when running `bootstrap_subscriptions` with bad Stripe credentials
+- Extracted `get_price_display_with_currency` helper function from `get_friendly_currency_amount`
+- Simplified team-based subscription views to no longer have redundant functions
+
+
+### Removed
+
+- The deprecated Stripe elements support for subscriptions has been removed. Subscriptions require using Checkout moving forwards.
+
+
 ## Version 2022.4.2
 
 This is a hotfix release, which adds a missing closing `</div>` tag to the signup template on Tailwind
