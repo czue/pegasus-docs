@@ -114,7 +114,32 @@ These include:
 1. Restricting access to an entire page based on the user/team's subscription.
 1. Showing subscription details like plan, payment details, and renewal date.
 
-For additional questions on feature-gating don't hesitate to get in touch!
+### Using the `active_subscription_required` decorator
+
+One common use-case is restricting access to a page based on the user's subscription.
+
+Pegasus ships with a decorator that allows you to do this.
+You can use it as follows:
+
+```python
+@active_subscription_required
+@login_required
+def subscription_gated_page(request, subscription_holder=None):
+    return TemplateResponse(request, 'subscriptions/subscription_gated_page.html')
+```
+
+If the user doesn't have an active subscription, they'll be redirected to the subscription page to upgrade.
+
+You can also restrict access based on a specific plan (or set of plans), as follows:
+
+```python
+@active_subscription_required(limit_to_plans=["pro", "enterprise"])
+@login_required
+def subscription_gated_page(request, subscription_holder=None):
+    return TemplateResponse(request, 'subscriptions/subscription_gated_page.html')
+```
+
+In this case the user will only be allowed to view the page if they have a pro or enterprise plan.
 
 ## Per-Unit / Per-Seat Billing
 
