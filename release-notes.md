@@ -9,7 +9,7 @@ This release improves many of the details of the Stripe subscriptions integratio
 To streamline these changes, Stripe Elements support has been removed, and subscriptions
 will be Checkout-based moving forwards.
 
-The release also has a number of minor fixes and improvements.
+The release also many small fixes and improvements.
 
 ### Added
 
@@ -57,6 +57,7 @@ The release also has a number of minor fixes and improvements.
 
 - **The deprecated Stripe elements support for subscriptions has been removed. Subscriptions require using Checkout moving forwards.**
 
+*May 30, 2022*
 
 ## Version 2022.4.2
 
