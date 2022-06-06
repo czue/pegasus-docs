@@ -33,4 +33,4 @@ The above setup uses [Redis](https://redis.io/) as a message broker and result b
 If you want to use a different message broker, for example [RabbitMQ](https://www.rabbitmq.com/),
 you will need to modify the `CELERY_BROKER_URL` and `CELERY_RESULT_BACKEND` values in `settings.py`.
 
-More details can be found in the [Celery documentation](https://docs.celeryq.dev/en/latest/getting-started/brokers/index.html).
+More details can be found in the [Celery documentation](https://docs.celeryq.dev/en/stable/getting-started/backends-and-brokers/index.html).
