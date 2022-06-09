@@ -41,7 +41,8 @@ release = ''
 extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.ifconfig',
-    'recommonmark',
+    'myst_parser',
+    'sphinxcontrib.gtagjs',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -78,7 +79,7 @@ pygments_style = None
 # a list of builtin themes.
 #
 # html_theme = 'alabaster'
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'furo'
 
 
 # Theme options are theme-specific and customize the look and feel of a theme
@@ -88,7 +89,7 @@ html_theme = 'sphinx_rtd_theme'
 # html_theme_options = {}
 html_theme_options = {
     # 'canonical_url': 'https://docs.saaspegasus.com/',
-    'analytics_id': 'UA-94102737-10',
+    # 'analytics_id': 'UA-94102737-10',
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -111,7 +112,6 @@ html_static_path = ['_static']
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'Pegasusdoc'
-
 
 # -- Options for LaTeX output ------------------------------------------------
 
@@ -188,3 +188,7 @@ epub_exclude_files = ['search.html']
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
+
+gtagjs_ids = [
+    "UA-94102737-10",
+]

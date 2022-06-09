@@ -1,3 +1,4 @@
-sphinx
-recommonmark
-sphinx_rtd_theme
+Sphinx==5.0.1
+myst-parser==0.18.0
+furo==2022.6.4.1
+sphinxcontrib-gtagjs==0.2.0
