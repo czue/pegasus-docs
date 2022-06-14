@@ -21,6 +21,27 @@ in the `models.py` folder there.
 
 For more information on Wagtail, check out their [excellent documentation](https://docs.wagtail.org/).
 
+## Customizing Wagtail
+
+Pegasus's default wagtail set up is intentionally bare-bones and is meant to provide a starting point for hosting a
+simple blog attached to your site.
+
+Wagtail can be used to build any complicated site and UI you can imagine.
+One of the most powerful features in Wagtail is the [`StreamField` functionality](https://docs.wagtail.org/en/stable/topics/streamfield.html)
+which allows you to combine other Wagtail components into a "stream-like" UI.
+StreamFields are a great way to build pages more complicated than a blog.
+
+### CodeRed Extensions
+
+Some Pegasus customers recommend [CodeRed extensions](https://github.com/coderedcorp/coderedcms) as a great
+way to build more complicated websites with Wagtail.
+CodeRed ships with a large number of components that can be used in StreamFields to build rich, dynamic content.
+
+One downside of using CodeRed is that they only support Bootstrap version 4.
+The easiest way to manage this with Pegasus is to use Bootstrap 4 in the wagtail/content area,
+and Bootstrap 5 (the version used by Pegasus) everywhere else.
+This works fine, but does introduce a more complicated CSS set up to maintain. 
+
 ## Alternatives to Wagtail
 
 Some companies prefer to manage their marketing sites completely separate from their application.
