@@ -49,4 +49,4 @@ In this scenario it's recommended to create a separate marketing site using some
 Wordpress, Webflow, Wix, Squarespace, or any number of other options. You can host this site
 at `yourdomain.com` and then host your Pegasus app separately at `app.yourdomain.com` (or similar).
 
-If you choose to set up your content this way, you likely don't want to include wagtail in your Pegasus build.
+If you choose to set up your content this way, you should build Pegasus without wagtail.
