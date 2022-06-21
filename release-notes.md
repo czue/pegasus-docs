@@ -32,6 +32,7 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 - Fixed `pyparsing` version conflict between regular and production requirements (Google Cloud builds only)
 - Fixed subscription price displays when using graduated pricing. (Thanks Lachlan for reporting)
+- Remove Heroku Dockerfile from build if not using it
 
 ## Version 2022.5
 
