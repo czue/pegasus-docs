@@ -8,6 +8,14 @@ It's great for creating marketing sites, blogs, and other mostly-static content.
 Pegasus optionally ships with a built-in Wagtail instance that can be used as a starting point
 for adding a content section and blog to any Pegasus app.
 
+## Video Overview
+
+This video provides an overview of the Pegasus/Wagtail functionality:
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/YVRhuQ9CyuQ" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
+
 ## Pegasus and Wagtail
 
 If you want to try Wagtail make sure you enable the "Use Wagtail" option in the Pegasus codebase creator.
