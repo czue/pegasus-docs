@@ -3,6 +3,32 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+### Added
+
+- Pegasus now supports Wagtail! [Documentation](/wagtail/).
+- Pegasus now generates a sitemap for you. [Documentation](/page-metadata.html#sitemaps).
+- Add `get_protocol` helper function to return the string "http" or "https" depending on `settings.USE_HTTPS_IN_ABSOLUTE_URLS`
+
+### Changed
+
+- Social sign ups will now automatically create a default team if not there.
+- Split the top navigation for the app template into its own template (`top_nav_app.html`). (Material Theme Only)
+- Show top navigation menu even if user is logged in (but hide the sign up / sign in buttons) (Material Theme Only)
+- Increase top margin on 404 and 500 error pages (Bootstrap only)
+- Reduced whitespace in some html templates.
+- Changed reference of `djstripe_sync_plans_from_stripe` to `bootstrap_subscriptions` in subscription error message. 
+- Removed "[project name]" prefix from signup / password reset emails
+- The `login_and_team_required` decorator now falls back to the default team from the session/user if not available from URL
+  (thanks Van for the suggestion)
+- Add link to the profile page to set a password if the user only has a social account setup.
+- Improve the default UI for setting a password.
+- Refactor: use `get_protocol` and f-strings in `absolute_url` helper function
+
+### Fixed
+
+- Fixed `pyparsing` version conflict between regular and production requirements (Google Cloud builds only)
+- Fixed subscription price displays when using graduated pricing. (Thanks Lachlan for reporting)
+
 ## Version 2022.5
 
 This release improves many of the details of the Stripe subscriptions integration.
