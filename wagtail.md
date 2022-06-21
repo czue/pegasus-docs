@@ -20,6 +20,15 @@ This video provides an overview of the Pegasus/Wagtail functionality:
 
 If you want to try Wagtail make sure you enable the "Use Wagtail" option in the Pegasus codebase creator.
 
+After you set up your application run:
+
+```shell
+./manage.py bootstrap_content
+```
+
+to initialize a few pages of content.
+If you use Docker, the `make init` target will do this automatically for you.
+
 Out-of-the-box, Pegasus will create a "content" are of your site (available at the `/content/` URL),
 a blog index page (available at `/content/blog/`) and a few example blog posts.
 All your content can be edited via the Wagtail admin UI (available to superusers at `/cms/` by default).
