@@ -46,3 +46,11 @@ For example:
 ```html
 {% block page_title %}This title will be used instead of the Pegasus versions{% endblock %}
 ```
+
+## Sitemaps
+
+As of version 2022.6, Pegasus will automatically generate a basic [sitemap](https://developers.google.com/search/docs/advanced/sitemaps/overview) for your site at `sitemap.xml`.
+Out of the box, the sitemap will only contain your application's homepage, but can be readily extended by adding
+URLs in `apps/web/sitemaps.py`.
+
+If you have [enabled Wagtail](/wagtail/), your sitemap will also include any content managed by Wagtail.
