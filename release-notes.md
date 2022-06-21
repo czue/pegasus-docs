@@ -3,28 +3,43 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2022.6
+
+The main feature of this release is a brand-new integration with Wagtail.
+[Wagtail](https://wagtail.org/) is a powerful CMS (Content Management System) built on top of Django.
+You can use it to create rich websites that can be edited directly via an authoring admin interface without writing any code.
+It's great for creating marketing sites, blogs, and other mostly-static content.
+
+You can learn more about Wagtail and Pegasus in this 5-minute overview, or by heading over to the [Wagtail documentation](/wagtail).
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/WwcowKrwCl0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
+
+Complete release notes are below:
+
 ### Added
 
 - **Pegasus now supports Wagtail! [Documentation](/wagtail/).** There are a fair number of changes to support this work, most
   of which are only relevant if you enable wagtail support. The main ones includ a new `content` app, a large number of new Python package dependencies
   (all stemming from `wagtail`), and some updates to the site navigation.
-- Pegasus now generates a sitemap for you. [Documentation](/page-metadata.html#sitemaps).
-- HTML email templates were added for the default email confirmation and password reset emails.
+- **Pegasus now generates a sitemap for you.** [Documentation](/page-metadata.html#sitemaps).
+- **Responsive HTML email templates were added for the default email confirmation and password reset emails.**
 - Add `get_protocol` helper function to return the string "http" or "https" depending on `settings.USE_HTTPS_IN_ABSOLUTE_URLS`
 
 ### Changed
 
+- Social sign ups will now automatically create a default team if not there.
+- The `login_and_team_required` decorator now falls back to the default team from the session/user if not available from URL
+  (thanks Van for the suggestion)
+- Add link to the profile page to set a password if the user only has a social account setup.
+- Improve the default UI for setting a password.
 - Split the top navigation for the app template into its own template (`top_nav_app.html`). (Material Theme Only)
 - Show top navigation menu even if user is logged in (but hide the sign up / sign in buttons) (Material Theme Only)
 - Increase top margin on 404 and 500 error pages (Bootstrap only)
 - Reduced whitespace in some html templates.
 - Changed reference of `djstripe_sync_plans_from_stripe` to `bootstrap_subscriptions` in subscription error message. 
 - Removed "[project name]" prefix from signup / password reset emails
-- Social sign ups will now automatically create a default team if not there.
-- The `login_and_team_required` decorator now falls back to the default team from the session/user if not available from URL
-  (thanks Van for the suggestion)
-- Add link to the profile page to set a password if the user only has a social account setup.
-- Improve the default UI for setting a password.
 - Refactor: use `get_protocol` and f-strings in `absolute_url` helper function
 - Removed "More coming soon" text from the Pegasus examples homepage.
 
@@ -33,6 +48,8 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - Fixed `pyparsing` version conflict between regular and production requirements (Google Cloud builds only)
 - Fixed subscription price displays when using graduated pricing. (Thanks Lachlan for reporting)
 - Remove Heroku Dockerfile from build if not using it
+
+*June 21, 2022*
 
 ## Version 2022.5
 
