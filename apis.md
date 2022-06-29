@@ -1,7 +1,9 @@
 APIs
 ====
 
-## Working with APIs in Pegasus
+Pegasus comes with a rich ecosystem of APIs that can used by your app's front end as well as exposed to third-party developers.
+
+## APIs in Pegasus
 
 APIs in Pegasus consist of three pieces:
 
@@ -24,7 +26,25 @@ HTTP requests directly. However, using a client can greatly simplify the code yo
 Additionally, getting API docs "for free" from the schemas can be a big win if you plan to make your project's 
 API third-party-developer-facing.
 
-<details to follow...>
+## API Documentation
+
+By default, your Pegasus app ships with two built-in sets of API documentation available at the `/api/schema/swagger-ui/` endpoint
+([http://localhost:8000/api/schema/swagger-ui](http://localhost:8000/api/schema/swagger-ui) in development) and `/api/schema/redoc/` endpoint
+([http://localhost:8000/api/schema/redoc/](http://localhost:8000/api/schema/redoc/) in development).
+
+The API docs will look something like this:
+
+**Swagger API docs:**
+
+![Swagger API Docs](/images/swagger-api-docs.png)
+
+**Redoc API docs:**
+
+![Redoc API Docs](/images/redoc-api-docs.png)
+
+## API Clients
+
+
 
 ## API Keys
 
