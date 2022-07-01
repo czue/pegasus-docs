@@ -249,7 +249,7 @@ class CustomUser(SubscriptionModelBase, AbstractUser):
 There are two settings that determine how Stripe will call back to your site.
 
 If Stripe is returning to the *wrong site entirely* it is likely a problem with your Django `Site` configuration.
-See the documentation on [absolute URLs](/configuration.html#absolute-urls) to fix this.
+See the documentation on [absolute URLs](https://docs.saaspegasus.com/configuration.html#absolute-urls) to fix this.
 
 If Stripe is returning to the correct site, *but over HTTP instead of HTTPS* (or vice versa) then you
 need to change the `USE_HTTPS_IN_ABSOLUTE_URLS` setting in `settings.py` or a production settings file.
