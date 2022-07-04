@@ -105,23 +105,27 @@ class EmployeeViewSet(viewsets.ModelViewSet):
 
 The IDs in the Python code will be converted to camelCase in the JavaScript client.
 
+### Generating the OpenAPI3 schema.yml file
+
+In a new Pegasus installation, the OpenAPI3 `schema.yml` will be available at the `/api/schema/` endpoint
+([http://localhost:8000/api/schema/](http://localhost:8000/api/schema/) in dev).
+
+If you plan to use the `schema.yml` file in production, it is more efficient to create it once and serve it as a static file.
+This can be done by running:
+
+```
+./manage.py spectacular --file static/api/schema.yml
+```
+
+Then you can reference the file by using `{% static /api/schema.yml %}` in a Django template.
+
 ### Generating the API client
 
-Anytime you change your APIs you will need to create a new API client to keep things in sync.
+Anytime you change your APIs you should create a new API client to keep things in sync.
 This can be done using the [OpenAPI Generator](https://openapi-generator.tech/) project.
 The [typescript-fetch](https://openapi-generator.tech/docs/generators/typescript-fetch) client is the one used by Pegasus.
 
-The steps for updating the API client are:
-
-**Update your `schema.yaml` file**
-
-```
-./manage.py spectacular --file static/api/schema.yaml
-```
-
-**Generate a new API client**
-
-First install the `openapi-generator-cli`:
+To generate your API client, first install the `openapi-generator-cli` (this library also requires `java`):
 
 ```
 npm install @openapitools/openapi-generator-cli -g
@@ -130,15 +134,20 @@ npm install @openapitools/openapi-generator-cli -g
 Then run it as follows:
 
 ```
-openapi-generator-cli generate -i static/api/schema.yaml -g typescript-fetch -o ./assets/javascript/api-client/
+openapi-generator-cli generate -i http://localhost:8000/api/schema/ -g typescript-fetch -o ./assets/javascript/api-client/
 ```
 
-Finally, you'll have to rebuild your front end:
+The above assumes your Django server is running at http://localhost:8000, but you can replace that
+value with any URL or file system reference to your `schema.yml` file.
+
+After re-creating the client, you'll have to rebuild your front end:
 
 ```
 npm run dev
 ```
 
+Note that introducing breaking changes to your APIs can also break your API client!
+If you're unsure if you introduced breaking changes it is worth testing any functionality that depends on the API client.
 
 ## API Keys
 
