@@ -22,6 +22,7 @@ So you only have to maintain your APIs in a single place, and everything else is
 
 Using the schemas and clients is optional. You can always interact with a Pegasus API by making the appropriate
 HTTP requests directly. However, using a client can greatly simplify the code you write and improve the development experience.
+Front end code in Pegasus that interacts with APIs uses it by default.
 
 Additionally, getting API docs "for free" from the schemas can be a big win if you plan to make your project's 
 API third-party-developer-facing.
