@@ -106,20 +106,17 @@ Commonly used commands can be added to the `Makefile` for convenience.
 
 ## Updating Python packages
 
-If you add or modify anything in your `requirements.txt` files, you will have to rebuild
-your containers. This can be done by running:
+If you add or modify anything in your `requirements.in` (and `requirements.txt`) files, you will have to rebuild
+your containers.
+
+The easiest way to add new packages is to add them to `requirements.in` and then run:
 
 ```
-docker-compose build
+make requirements
 ``` 
 
-After than you can run
-
-```
-make start
-``` 
-
-to run your project with the latest dependencies.
+Which will rebuild your `requirements.txt` file, rebuild your Docker containers,
+and then restart your app with the latest dependencies.
 
 ## Debugging
 
