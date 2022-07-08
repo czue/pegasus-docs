@@ -44,8 +44,8 @@ Details related to this change:
 
 - Added new `drf-spectacular` Python dependency and removed the `coreapi` Python dependency.
 - Added `@extend_schema` markup to most APIs to improve and simplify the generated OpenAPI3 schemas
-- Added new default endpoints for the OpenAPI3 schema.yml file, Swagger API docs, and Redoc API docs.
-- Added a new TypeScript API client that ships with the front end code. 
+- **Added new default endpoints for the OpenAPI3 schema.yml file, Swagger API docs, and Redoc API docs.**
+- **Added a new TypeScript API client that ships with the front end code.** 
 - Updated all JS client code to use the new client, including the employee demos, React-based team management views, and chart demo.
 - Removed no-longer-used coreAPI helper functions from `assets/javascript/api.js`.
 - Removed no-longer-needed `assets/javascript/teams/api.js`.
@@ -361,7 +361,7 @@ It mostly undoes a small handful of changes from the 0.21 release.
 ## Version 0.21
 
 This release has one major feature: API Keys.
-You can get an overview in this 2-minute video or check out [the documentation](/api-keys/) for details.
+You can get an overview in this 2-minute video or check out [the documentation](/apis/) for details.
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
     <iframe src="https://www.youtube.com/embed/ivL10Y5P5L0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
@@ -371,7 +371,7 @@ There are also a number of smaller fixes and upgrades.
 
 ### Added
 
-- API Key support! See the new [API key documentation](/api-keys/) for details.
+- API Key support! See the new [API key documentation](/apis/) for details.
 - Example `DJSTRIPE_WEBHOOK_SECRET` to `.env.dev` file for local Docker deployments
 
 ### Package upgrades
