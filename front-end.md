@@ -36,7 +36,7 @@ To compile the front-end JavaScript and CSS files it's expected that you have in
 - [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
 Pegasus is developed and tested on the latest LTS releases, which (at the time of this writing)
-are Node version 14.16.1 and npm 6.14.12.
+are Node version 16.15.0 and npm 8.5.5
 Later versions may work, but aren't well-tested.
 Also it's recommended to use [`nvm`](https://github.com/nvm-sh/nvm) to manage different node/npm environments more easily.
 `nvm` is essentially `virtualenv` for Node.js/npm.
@@ -47,6 +47,12 @@ Getting started should be as simple as running:
 
 ```bash
 npm install
+```
+
+or in Docker:
+
+```
+make npm-install
 ```
 
 In your project's root directory.
@@ -70,12 +76,24 @@ You can also set it up to watch for changes by running:
 npm run dev-watch
 ```
 
+or in Docker:
+
+```
+make npm-watch
+```
+
 ## Building for production
 
 To build for production, run:
 
 ```bash
 npm run build
+```
+
+or in Docker:
+
+```
+make npm-build
 ```
 
 This will compress your files, remove logging statements, etc.
@@ -90,3 +108,25 @@ Instead, it is recommended that you add the compiled CSS and JavaScript bundle f
 so they are no longer managed by source control, and have your developers build them locally using the steps above.
 
 For production deployment, see the [production guidance](/deployment/production-checklist.html#optimize-your-front-end) on this.
+
+
+## TypeScript and type checking
+
+Since the 2022.6 release, Pegasus includes TypeScript as part of the front end code.
+You can write TypeScript or JavaScript code and it will be transpiled to work in a browser as part of the
+build pipeline.
+
+The build pipeline does *not* explicitly do type checking.
+To do type checking you can run:
+
+```
+npm run type-check
+```
+
+Or in Docker:
+
+```
+npm run type-check-watch
+```
+
+Type checks will also automatically run on new pull requests if you have enabled Github Actions on your project.

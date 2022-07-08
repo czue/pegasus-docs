@@ -43,6 +43,7 @@ extensions = [
     'sphinx.ext.ifconfig',
     'myst_parser',
     'sphinxcontrib.gtagjs',
+    'sphinx_reredirects',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -192,3 +193,7 @@ todo_include_todos = True
 gtagjs_ids = [
     "UA-94102737-10",
 ]
+
+redirects = {
+     "api-keys": "apis.html"
+}

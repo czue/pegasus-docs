@@ -3,6 +3,83 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2022.7
+
+This release was largely focused on addressing technical debt and further modernizing some of the front end code
+that ships with Pegasus.
+
+Due to the large number of updates, a few major changes have been grouped together.
+
+### Added TypeScript support
+
+The Pegasus front-end build pipeline now supports [TypeScript](https://www.typescriptlang.org/).
+You can continue to write code in normal JavaScript, or introduce TypeScript incrementally on new code, 
+on a file-by-file basis. Future versions of Pegasus are likely to incrementally port more code to TypeScript,
+similar to how types have been incrementally introduced into the Python code.
+
+Related changes:
+
+- Added TypeScript transpilation to the front end build pipeline.
+- Added `npm run type-check` and  `npm run type-check-watch` targets.
+- Added `make npm-type-check` target for Docker environments.
+- Run type checks as part of the Github Actions front end build step
+
+### Upgraded all JavaScript packages
+
+The `npm-check-updates` command was run on the entire front end, and with the exception of TailwindCSS,
+*every package in `package.json` was upgraded to the latest version*.
+
+Some of the larger updates (for which there were also code changes to make them compatible) include:
+
+- Upgraded Vue.js from version 2 to version 3 and made Employee app compatible with Vue 3.
+- Upgraded React to version 18 and react-router to version 6, and updated all code to be compatible with new versions.
+
+### Overhauled the API documentation and API clients
+
+This release removed the deprecated CoreAPI-based API schemas and JavaScript client and replaced it with OpenApi3 schemas
+(using [drf-spectacular](https://drf-spectacular.readthedocs.io/)) and generated client code.
+For more information on using APIs in your Pegasus app, see the new [API docs](/apis/).
+
+Details related to this change:
+
+- Added new `drf-spectacular` Python dependency and removed the `coreapi` Python dependency.
+- Added `@extend_schema` markup to most APIs to improve and simplify the generated OpenAPI3 schemas
+- **Added new default endpoints for the OpenAPI3 schema.yml file, Swagger API docs, and Redoc API docs.**
+- **Added a new TypeScript API client that ships with the front end code.** 
+- Updated all JS client code to use the new client, including the employee demos, React-based team management views, and chart demo.
+- Removed no-longer-used coreAPI helper functions from `assets/javascript/api.js`.
+- Removed no-longer-needed `assets/javascript/teams/api.js`.
+- Removed no-longer-needed `app.Api` from the front end code.
+- Added `openapitools.json` to `.gitignore`
+- Added [documentation related to these changes](/apis/).
+
+### Other Additions
+
+- `project_meta` context processor now includes `server_url` (the absolute URL of your app) in the context.
+- `get_server_root` helper function to support the above.
+- Doc strings for helper functions in `apps/web/meta.py`
+- Type hints for various helper methods inside Django models.
+- Add `pip-tools` to dev Dockerfile so `requirements.txt` can be built in the container. (Thanks Brett for the suggestion!) 
+- Add `make pip-compile` target for rebuilding `requirements.txt` and `make requirements` file for rebuilding requirements.txt, 
+  and rebuilding/restarting your Docker containers.
+- Team management URL is now included in team API urls. (React UI only)
+
+### Other Fixes
+
+- Properly handle team name and slug validation in team editing UI (React UI only)
+- Changing the team slug now properly refreshes the page, so links don't break. (React UI only)
+- Fixed typo in variable name in `get_team_api_url_templates`.
+
+### Other Changes
+
+- **Switched chart examples and supporting code from `c3.js` to [`Chart.js`](https://www.chartjs.org/).**
+- Upgraded Django to the latest LTS security release (3.2.14).
+- Dev docker set up now starts celery with the beat flag enabled.
+- Increased the top margin between the navigation and content in content base template. (Bootstrap only, thanks Will for suggesting!)
+- Deleted some accidentally-included commented out code in the Vue employee demo. 
+
+*July 8, 2022*
+
 ## Version 2022.6
 
 The main feature of this release is a brand-new integration with Wagtail.
@@ -89,7 +166,6 @@ The release also many small fixes and improvements.
 
 - **Upgraded Python packages to their latest versions.**
 - **Heroku-based docker deployments now use a `buster` base image instead of `alpine`. This helps to simplify build issues when adding certain packages / libraries.**
-- Dev docker set up now starts celery with the beat flag enabled.
 - Simplified team-based subscription views to no longer have redundant functions
 - Improved layout of `socialaccount/signup.html` (shown when someone signs up with a social account but the email is already in use). (thanks Lisa for reporting)
 - Updated migration file in api app to match latest expected column sizes
@@ -285,7 +361,7 @@ It mostly undoes a small handful of changes from the 0.21 release.
 ## Version 0.21
 
 This release has one major feature: API Keys.
-You can get an overview in this 2-minute video or check out [the documentation](/api-keys/) for details.
+You can get an overview in this 2-minute video or check out [the documentation](/apis/) for details.
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
     <iframe src="https://www.youtube.com/embed/ivL10Y5P5L0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
@@ -295,7 +371,7 @@ There are also a number of smaller fixes and upgrades.
 
 ### Added
 
-- API Key support! See the new [API key documentation](/api-keys/) for details.
+- API Key support! See the new [API key documentation](/apis/) for details.
 - Example `DJSTRIPE_WEBHOOK_SECRET` to `.env.dev` file for local Docker deployments
 
 ### Package upgrades
