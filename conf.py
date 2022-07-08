@@ -195,5 +195,5 @@ gtagjs_ids = [
 ]
 
 redirects = {
-     "api-keys": "api-keys.html"
+     "api-keys": "apis.html"
 }
