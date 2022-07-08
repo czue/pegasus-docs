@@ -21,21 +21,22 @@ contributions are most welcome!
    getting-started
    customizations
    configuration
-   subscriptions
+   code-structure
    front-end
    css
-   celery
-   code-structure
    page-metadata
    deployment
    github-actions
    docker
-   cookbooks
+   subscriptions
    teams
    payments
    apis
+   wagtail
+   celery
    experimental
    using-virtualenvs
+   cookbooks
    upgrading
    release-notes
 
