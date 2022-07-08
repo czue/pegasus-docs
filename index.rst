@@ -22,11 +22,10 @@ contributions are most welcome!
    customizations
    configuration
    code-structure
+   using-virtualenvs
    front-end
    css
    page-metadata
-   deployment
-   github-actions
    docker
    subscriptions
    teams
@@ -34,8 +33,9 @@ contributions are most welcome!
    apis
    wagtail
    celery
+   deployment
+   github-actions
    experimental
-   using-virtualenvs
    cookbooks
    upgrading
    release-notes
