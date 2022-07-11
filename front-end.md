@@ -107,7 +107,7 @@ However, keeping these files in source control will typically result in a lot of
 Instead, it is recommended that you add the compiled CSS and JavaScript bundle files to your `.gitignore`
 so they are no longer managed by source control, and have your developers build them locally using the steps above.
 
-For production deployment, see the [production guidance](/deployment/production-checklist.html#optimize-your-front-end) on this.
+For production deployment, see the [production guidance](https://docs.saaspegasus.com/deployment/production-checklist.html#optimize-your-front-end) on this.
 
 
 ## TypeScript and type checking

@@ -47,8 +47,7 @@ You can read [more about upgrading here](/upgrading).
 If you've chosen to use Docker in development (the quickest way to get up and running),
 continue to the [Docker instructions](/docker).
 
-Then skip ahead to the [post-install steps](#post-installation-steps).
-
+Then skip ahead to the [post-install steps](https://docs.saaspegasus.com/getting-started.html#post-installation-steps).
 
 ## Get up and running with native Python
 

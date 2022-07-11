@@ -28,7 +28,7 @@ For supported deployment platforms, recommendations for managing secrets can be 
 The front-end files that ship with Pegasus are the developer-friendly versions.
 In production, these should be optimized.
 
-First you should add the compiled files to your `.gitignore` as described in the [front end docs](/front-end.html#long-term-best-practices).
+First you should add the compiled files to your `.gitignore` as described in the [front end docs](https://docs.saaspegasus.com/front-end.html#long-term-best-practices).
 Then, as part of your CI/CD deployment process, you should build the bundle files directly on your production server 
 (using `npm install && npm run build`).
 
