@@ -141,7 +141,8 @@ From there you should be able to access all built-in functionality and examples.
 
 ### Enable admin access
 
-Follow [these instructions](/cookbooks#use-the-django-admin-ui) to enable access to the Django Admin site.
+Use [the `promote_user_to_superuser` management command](https://docs.saaspegasus.com/cookbooks.html#use-the-django-admin-ui)
+to enable access to the Django Admin site.
 
 ### Set up your Stripe Subscriptions
 
