@@ -12,6 +12,14 @@ The upgrade process can also be used when changing any Pegasus configuration var
 With this option you maintain a "pure" Pegasus branch in your repository with no other modifications.
 Then, you merge this branch into your main app when you upgrade.
 
+This process is outlined below, and also in the below screencast which shows a full end-to-end upgrade process on a real Pegasus project.
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/f2hS-k1InMY" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
+
+Here are the steps to take:
+
 ### 1. Create a branch for the upgrade
 
 First [checkout the first commit](https://stackoverflow.com/questions/43197105/how-do-you-jump-to-the-first-commit-in-git)
@@ -45,7 +53,13 @@ Next, make sure the branch is up-to-date with your current Pegasus version:
 1. Checkout the main branch (`git checkout main`)
 2. Merge the code (`git merge pegasus`)
 
+Alternatively you may wish to do this in a new branch and then submit a pull request to the main branch from there:
+
+1. Create a new branch off of the main branch (`git checkout main; git checkout -b upgrade-pegasus`)
+2. Merge the code (`git merge pegasus`)
+
 In the merging step you should look at the modifications being made, and you may have to manually resolve conflicts that come up.
+You may also need to run `./manage.py makemigrations` to create any database migrations that were not included with Pegasus. 
 
 ## Using patches (if you can't use branches)
 
