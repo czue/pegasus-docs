@@ -3,6 +3,15 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2022.7.1
+
+This is a hotfix release that fixes an "Undefined variable" error when building the front end
+with the Bootstrap Material theme, and Bootstrap 5.2.
+
+More details on the root issue can be [found here](https://github.com/twbs/bootstrap/issues/36785).
+
+*July 22, 2022*
+
 ## Version 2022.7
 
 This release was largely focused on addressing technical debt and further modernizing some of the front end code
