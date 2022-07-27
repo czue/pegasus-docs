@@ -5,34 +5,50 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ## Version 2022.8
 
-- Log config
-- Team delete UI for React builds
-- Deleting a team or user now automatically cancels any subscription associated with that team/user
-- Tailwind 3 + official support
-
 ### Official Tailwind CSS support
 
-- Upgraded Tailwind to version 3 and dependencies to latest versions
+Pegasus now officially supports TailwindCSS!
+Some of the larger changes include:
+
+- Upgraded TailwindCSS to version 3 and all dependencies to the latest versions.
 - Added a [daisyUI](https://daisyui.com/) dependency and overhauled most of the tailwind templates with daisyUI components.
+- Overhauled navigation bar and menus, and added a daisyUI-based mobile dropdown menu for mobile navigation.
+- All Tailwind pages are now mobile-friendly.
 - Added `tailwindcss/typography` plugin for content.
-- Improved tailwind-based Django form rendering and integrated with daisyUI components
+- Improved tailwind-based Django form rendering and integrated the forms with daisyUI components.
+- Improved styling of app notifications/messages.
+- Added modal dialogs to the team deletion and membership removal workflows (team builds only).
+- Removed many no-longer-used classes form `site-tailwind.css`
+
+See the updated [Tailwind docs](https://docs.saaspegasus.com/css#tailwind) for more information and customizations.
 
 ### Added
 
-- New `pg-content` `pg-align-items-center`, `pg-columns-reversed` shared helper CSS classes
-- Use `pg-content` instead of `content` in various places (including Pegasus examples, wagtail pages)
+- **Pegasus now ships with a default, customizable logging configuration.**
+- Added several new helper CSS classes, including `pg-content` (for content), `pg-columns-reversed` (for reversed columns),
+ `pg-align-items-center` (a flexbox utility), and various `pg-text-` classes for coloring text. 
+- Use `pg-content` instead of `content` in many places (including Pegasus examples and wagtail content pages)
 
 ### Changed
 
-- Replaced underscores with hyphens in example URLs
-- Fixed several inconsistencies between using the `pg-` Pegasus helper CSS classes instead of CSS-framework-specific ones. 
-  Affected places included: several places in the Pegasus examples, `app_home.html`, the user `profile_form.html` and 
-  social account connections page, the React teams editing UI, subscription helper pages, and more.
-- Upgraded bootstrap to version 5.2 and fixed a build error in the material theme. 
+- **React-based team deletion now works like the HTMX version, with a pop-up confirmation modal.**
+  The "Delete" button was removed from the team list UI.
+- **Deleting a team/user will now automatically cancel any subscription associated with that team/user.** (thanks Florian for reporting!)
+- **Updated may templates to use `pg-` Pegasus helper CSS classes instead of CSS-framework-specific ones.** 
+  Affected places include: several places in the Pegasus examples, `app_home.html`, the user `profile_form.html` and 
+  social account connections page, the React teams editing UI, subscription helper pages, default landing page,
+  password reset pages, team invitation pages, user impersonation, 404 / 500 pages and more.
+- Replaced underscores with hyphens in example URLs.
+- Increased margins between buttons and forms/controls in a few templates.
+- Improved styling of the default email management page.
+- Upgraded several NPM packages to the latest versions including Bootstrap version to 5.2.
 
 ### Fixed
 
-- Removed empty if/else block from `team_nav.html` if building without subscriptions
+- **Fixed bug where non-admins did not see a link to manage their own membership from the team details page.**
+- Fixed styling issues with some tables on small screens.
+- Removed empty if/else block from `team_nav.html` if building without subscriptions.
+
 
 ## Version 2022.7.1
 
