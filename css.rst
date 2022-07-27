@@ -11,3 +11,5 @@ Read on for help on choosing a CSS theme, and documentation on working with CSS 
 .. toctree::
 
    css/overview
+   css/file-structure
+   css/pegasus-css
