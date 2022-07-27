@@ -34,7 +34,7 @@ See the updated [Tailwind docs](https://docs.saaspegasus.com/css#tailwind) for m
 - **React-based team deletion now works like the HTMX version, with a pop-up confirmation modal.**
   The "Delete" button was removed from the team list UI.
 - **Deleting a team/user will now automatically cancel any subscription associated with that team/user.** (thanks Florian for reporting!)
-- **Updated may templates to use `pg-` Pegasus helper CSS classes instead of CSS-framework-specific ones.** 
+- **Updated many templates to use `pg-` Pegasus helper CSS classes instead of CSS-framework-specific ones.**
   Affected places include: several places in the Pegasus examples, `app_home.html`, the user `profile_form.html` and 
   social account connections page, the React teams editing UI, subscription helper pages, default landing page,
   password reset pages, team invitation pages, user impersonation, 404 / 500 pages and more.
