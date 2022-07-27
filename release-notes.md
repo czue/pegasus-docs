@@ -24,7 +24,7 @@ See the updated [Tailwind docs](https://docs.saaspegasus.com/css#tailwind) for m
 
 ### Added
 
-- **Pegasus now ships with a default, customizable logging configuration.**
+- **Pegasus now ships with a default, customizable logging configuration.** [Documentation](https://docs.saaspegasus.com/configuration.html#logging).
 - Added several new helper CSS classes, including `pg-content` (for content), `pg-columns-reversed` (for reversed columns),
  `pg-align-items-center` (a flexbox utility), and various `pg-text-` classes for coloring text. 
 - Use `pg-content` instead of `content` in many places (including Pegasus examples and wagtail content pages)
