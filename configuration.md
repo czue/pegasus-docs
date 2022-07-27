@@ -182,3 +182,21 @@ MAILCHIMP_LIST_ID = '<Mailchimp list ID>'
 ```
 
 Note that it is your responsibility to notify your users / get their consent as per your local privacy regulations.
+
+## Logging
+
+Pegasus ships with a default Django log configuration which outputs logs to the console as follows:
+* Django log messages at level INFO and above
+* Pegasus log messages at level INFO and above
+
+The Pegasus loggers are all namespaced with the project name e.g. `{{project_name}}.subscriptions`.
+
+### Changing log levels
+There are two environment variables which can be used to control the log levels of either Django messages
+or Pegasus message:
+
+* `DJANGO_LOG_LEVEL`
+* `{{project_name.upper()}}_LOG_LEVEL`
+
+Alternatively the entire log configuration can be overridden using the `LOGGING` setting as described in the
+[Django docs](https://docs.djangoproject.com/en/4.0/topics/logging/).
