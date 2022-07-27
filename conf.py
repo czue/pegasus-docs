@@ -195,5 +195,6 @@ gtagjs_ids = [
 ]
 
 redirects = {
-     "api-keys": "apis.html"
+    "api-keys": "apis.html",
+    "experimental": "css/tailwind.html",
 }
