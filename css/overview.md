@@ -16,17 +16,17 @@ Below are screenshots of the app in each of the four themes:
 
 **Bootstrap Material Theme:**
 
-![Material Home](/images/material-home.png)
+![Material Home](/images/css/material-home.png)
 
 You can also watch [this video](https://www.youtube.com/watch?v=WwcowKrwCl0) for more details.
 
 **Bootstrap Default Theme:**
 
-![Bootstrap Home](/images/bootstrap-home.png)
+![Bootstrap Home](/images/css/bootstrap-home.png)
 
 **Bulma:**
 
-![Bulma Home](/images/bulma-home.png)
+![Bulma Home](/images/css/bulma-home.png)
 
 If you're not sure which framework you want to use,
 you can change the setting on your project and download multiple copies of the codebase to try out different ones.
