@@ -11,6 +11,12 @@ The Material theme is based on Creative Tim's [Material Kit](https://www.creativ
 and [Material Dashboard](https://www.creative-tim.com/product/material-dashboard) products.
 It's flashier than the default theme, though is more opinionated and less compatible with other products.
 
+You can watch a 3-minute tour of the Material theme here:
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/WwcowKrwCl0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
+
 ## Customizing the default theme
 
 Pegasus's file structure is based on [the Bootstrap documentation](https://getbootstrap.com/docs/5.0/customize/sass/#importing).
