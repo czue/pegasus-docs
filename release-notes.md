@@ -5,10 +5,13 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ## Version 2022.8
 
+The major addition in this release is official support for Tailwind CSS.
+There were also a number of smaller fixes and improvements.
+
 ### Official Tailwind CSS support
 
-Pegasus now officially supports TailwindCSS!
-Some of the larger changes include:
+Pegasus now officially supports [Tailwind CSS](https://tailwindcss.com/)!
+Some of the larger changes to the Tailwind functionality include:
 
 - Upgraded TailwindCSS to version 3 and all dependencies to the latest versions.
 - Added a [daisyUI](https://daisyui.com/) dependency and overhauled most of the tailwind templates with daisyUI components.
@@ -18,16 +21,15 @@ Some of the larger changes include:
 - Improved tailwind-based Django form rendering and integrated the forms with daisyUI components.
 - Improved styling of app notifications/messages.
 - Added modal dialogs to the team deletion and membership removal workflows (team builds only).
-- Removed many no-longer-used classes form `site-tailwind.css`
+- Removed many no-longer-used classes form `site-tailwind.css`.
 
-See the updated [Tailwind docs](https://docs.saaspegasus.com/css#tailwind) for more information and customizations.
+See the updated [Tailwind docs](/css/tailwind.html) for more information and customization options.
 
-### Added
+### Other Additions
 
 - **Pegasus now ships with a default, customizable logging configuration.** [Documentation](https://docs.saaspegasus.com/configuration.html#logging).
 - Added several new helper CSS classes, including `pg-content` (for content), `pg-columns-reversed` (for reversed columns),
  `pg-align-items-center` (a flexbox utility), and various `pg-text-` classes for coloring text. 
-- Use `pg-content` instead of `content` in many places (including Pegasus examples and wagtail content pages)
 
 ### Changed
 
@@ -37,7 +39,7 @@ See the updated [Tailwind docs](https://docs.saaspegasus.com/css#tailwind) for m
 - **Updated many templates to use `pg-` Pegasus helper CSS classes instead of CSS-framework-specific ones.**
   Affected places include: several places in the Pegasus examples, `app_home.html`, the user `profile_form.html` and 
   social account connections page, the React teams editing UI, subscription helper pages, default landing page,
-  password reset pages, team invitation pages, user impersonation, 404 / 500 pages and more.
+  password reset pages, team invitation pages, user impersonation, wagtail / blog pages, 404 / 500 pages and more.
 - Replaced underscores with hyphens in example URLs.
 - Increased margins between buttons and forms/controls in a few templates.
 - Improved styling of the default email management page.
@@ -45,10 +47,11 @@ See the updated [Tailwind docs](https://docs.saaspegasus.com/css#tailwind) for m
 
 ### Fixed
 
-- **Fixed bug where non-admins did not see a link to manage their own membership from the team details page.**
+- **Fixed bug where non-admins did not see a link to manage their own membership from the team details page.** (React builds only)
 - Fixed styling issues with some tables on small screens.
 - Removed empty if/else block from `team_nav.html` if building without subscriptions.
 
+*August 1, 2022*
 
 ## Version 2022.7.1
 
