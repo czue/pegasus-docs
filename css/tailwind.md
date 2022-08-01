@@ -2,7 +2,18 @@
 
 As of version 2022.8 Pegasus officially supports [Tailwind CSS](https://tailwindcss.com/) (Version 3).
 
+## Demo
+Here's a quick overview of what it looks like:
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/mNxVfmoDaOQ" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
+
+## Customization
+
 Pegasus uses [daisyUI](https://daisyui.com/) to provide default, well-styled components with convenient CSS classes.
+Components from daisyUI can be brought in as needed by your app.
+A full list of available components can be found at the [daisyUI component library](https://daisyui.com/components/). 
 
 ## Changing your theme
 
@@ -15,3 +26,9 @@ To change themes, just add a `data-theme` attribute to your `<html>` declaration
 
 For a list of the available themes, and information about creating your on theme,
 see the [daisyUI theme documentation](https://daisyui.com/docs/themes/) and their online [theme generator](https://daisyui.com/theme-generator/).
+
+## Other products / themes
+
+[Tailwind UI](https://tailwindui.com/) is a great product for building more complex pages, including marketing sites and app UIs.
+It another great option for getting help with UI components and pages, and should integrate seamlessly with the current Pegasus templates.
+  
