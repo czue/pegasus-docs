@@ -3,6 +3,64 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2022.8
+
+The major addition in this release is official support for Tailwind CSS.
+There were also a number of smaller fixes and improvements.
+
+### Official Tailwind CSS support
+
+Pegasus now officially supports [Tailwind CSS](https://tailwindcss.com/)!
+Some of the larger changes to the Tailwind functionality include:
+
+- Upgraded TailwindCSS to version 3 and all dependencies to the latest versions.
+- Added a [daisyUI](https://daisyui.com/) dependency and overhauled most of the tailwind templates with daisyUI components.
+- Overhauled navigation bar and menus, and added a daisyUI-based mobile dropdown menu for mobile navigation.
+- All Tailwind pages are now mobile-friendly.
+- Added `tailwindcss/typography` plugin for content.
+- Improved tailwind-based Django form rendering and integrated the forms with daisyUI components.
+- Improved styling of app notifications/messages.
+- Added modal dialogs to the team deletion and membership removal workflows (team builds only).
+- Removed many no-longer-used classes form `site-tailwind.css`.
+
+See the updated [Tailwind docs](/css/tailwind.html) for more information and customization options.
+
+### Other Additions
+
+- **Pegasus now ships with a default, customizable logging configuration.** [Documentation](https://docs.saaspegasus.com/configuration.html#logging).
+- Added several new helper CSS classes, including `pg-content` (for content), `pg-columns-reversed` (for reversed columns),
+ `pg-align-items-center` (a flexbox utility), and various `pg-text-` classes for coloring text. 
+
+### Changed
+
+- **React-based team deletion now works like the HTMX version, with a pop-up confirmation modal.**
+  The "Delete" button was removed from the team list UI.
+- **Deleting a team/user will now automatically cancel any subscription associated with that team/user.** (thanks Florian for reporting!)
+- **Updated many templates to use `pg-` Pegasus helper CSS classes instead of CSS-framework-specific ones.**
+  Affected places include: several places in the Pegasus examples, `app_home.html`, the user `profile_form.html` and 
+  social account connections page, the React teams editing UI, subscription helper pages, default landing page,
+  password reset pages, team invitation pages, user impersonation, wagtail / blog pages, 404 / 500 pages and more.
+- Replaced underscores with hyphens in example URLs.
+- Increased margins between buttons and forms/controls in a few templates.
+- Improved styling of the default email management page.
+- Upgraded several NPM packages to the latest versions including Bootstrap version to 5.2.
+- Overhauled [CSS docs](/css/). 
+- Mark `help_text` as safe in form_tags (allows adding links and other HTML to your help text)
+- Add trailing slash to urls in `apps/web/urls.py`.
+- Updated default CI configuration to build all pull requests (was previously all pull requests to `main` only)
+
+
+### Fixed
+
+- **Fixed bug where non-admins did not see a link to manage their own membership from the team details page.** (React builds only)
+- Fixed styling issues with some tables on small screens.
+- Removed empty if/else block from `team_nav.html` if building without subscriptions.
+- Fixed a bug in `@active_subscription_required` decorator where an invalid subscription could cause a crashing error
+  instead of redirecting to the subscription management page.
+- In object home examples, list "four" technologies intead of "three"
+
+*August 1, 2022*
+
 ## Version 2022.7.1
 
 This is a hotfix release that fixes an "Undefined variable" error when building the front end

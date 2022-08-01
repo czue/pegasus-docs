@@ -35,7 +35,6 @@ contributions are most welcome!
    celery
    deployment
    github-actions
-   experimental
    cookbooks
    upgrading
    release-notes
