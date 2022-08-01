@@ -56,7 +56,7 @@ See the updated [Tailwind docs](/css/tailwind.html) for more information and cus
 - Fixed styling issues with some tables on small screens.
 - Removed empty if/else block from `team_nav.html` if building without subscriptions.
 - Fixed a bug in `@active_subscription_required` decorator where an invalid subscription could cause a crashing error
-  instead of redirecting to the subscription management page.
+  instead of redirecting to the subscription management page. (thanks Jon for reporting!)
 - In object home examples, list "four" technologies intead of "three"
 
 *August 1, 2022*
