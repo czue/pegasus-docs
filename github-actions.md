@@ -15,7 +15,7 @@ The Django tests are configured in `.github/tests.yml`.
 
 By default, it will:
 
- - Run on every push to the `main` branch and every pull request to the `main` branch.
+ - Run on every push to the `main` branch and every pull request.
  - Run on Python version 3.8, 3.9, and 3.10.
  - Use the latest version of Postgres
  - Run `./manage.py tests`
@@ -27,7 +27,7 @@ All of these can be changed by modifying the relevant sections of the `.github/t
 The front end build is configured in `.github/build_frontend.yml`.
 
 By default, it will:
- - Run on every push to the `main` branch and every pull request to the `main` branch.
+ - Run on every push to the `main` branch and every pull request.
  - Run on Node version 14, 16, and 17
  - Run `npm run build`
 
