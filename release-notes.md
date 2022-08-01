@@ -31,7 +31,7 @@ See the updated [Tailwind docs](/css/tailwind.html) for more information and cus
 - Added several new helper CSS classes, including `pg-content` (for content), `pg-columns-reversed` (for reversed columns),
  `pg-align-items-center` (a flexbox utility), and various `pg-text-` classes for coloring text. 
 
-### Changed
+### Other Changes
 
 - **React-based team deletion now works like the HTMX version, with a pop-up confirmation modal.**
   The "Delete" button was removed from the team list UI.
@@ -50,14 +50,14 @@ See the updated [Tailwind docs](/css/tailwind.html) for more information and cus
 - Updated default CI configuration to build all pull requests (was previously all pull requests to `main` only)
 
 
-### Fixed
+### Other Fixes
 
 - **Fixed bug where non-admins did not see a link to manage their own membership from the team details page.** (React builds only)
 - Fixed styling issues with some tables on small screens.
 - Removed empty if/else block from `team_nav.html` if building without subscriptions.
 - Fixed a bug in `@active_subscription_required` decorator where an invalid subscription could cause a crashing error
   instead of redirecting to the subscription management page. (thanks Jon for reporting!)
-- In object home examples, list "four" technologies intead of "three"
+- In object home examples, list "four" technologies instead of "three"
 
 *August 1, 2022*
 
