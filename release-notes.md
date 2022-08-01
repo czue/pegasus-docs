@@ -23,7 +23,7 @@ Some of the larger changes to the Tailwind functionality include:
 - Added modal dialogs to the team deletion and membership removal workflows (team builds only).
 - Removed many no-longer-used classes form `site-tailwind.css`.
 
-See the updated [Tailwind docs](/css/tailwind.html) for more information and customization options.
+See the updated [Tailwind docs](/css/tailwind/) for more information and customization options.
 
 ### Other Additions
 

@@ -11,4 +11,4 @@ $body-color: #00008B;  // change main text to blue
 ```
 
 **You'll have to run `npm run dev` to see the changes take.**
-For more details on building the CSS files, see the [front end documentation](/front-end.html).
+For more details on building the CSS files, see the [front end documentation](/front-end/).
