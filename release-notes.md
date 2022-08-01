@@ -44,12 +44,20 @@ See the updated [Tailwind docs](/css/tailwind.html) for more information and cus
 - Increased margins between buttons and forms/controls in a few templates.
 - Improved styling of the default email management page.
 - Upgraded several NPM packages to the latest versions including Bootstrap version to 5.2.
+- Overhauled [CSS docs](/css/). 
+- Mark `help_text` as safe in form_tags (allows adding links and other HTML to your help text)
+- Add trailing slash to urls in `apps/web/urls.py`.
+- Updated default CI configuration to build all pull requests (was previously all pull requests to `main` only)
+
 
 ### Fixed
 
 - **Fixed bug where non-admins did not see a link to manage their own membership from the team details page.** (React builds only)
 - Fixed styling issues with some tables on small screens.
 - Removed empty if/else block from `team_nav.html` if building without subscriptions.
+- Fixed a bug in `@active_subscription_required` decorator where an invalid subscription could cause a crashing error
+  instead of redirecting to the subscription management page.
+- In object home examples, list "four" technologies intead of "three"
 
 *August 1, 2022*
 
