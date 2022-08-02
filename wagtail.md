@@ -38,6 +38,19 @@ in the `models.py` folder there.
 
 For more information on Wagtail, check out their [excellent documentation](https://docs.wagtail.org/).
 
+## Adding Blog Posts
+
+For blog posts to show up properly, their parent page should be the "Blog" index page, and their
+type should be "Blog page".
+
+You can add new blog posts by following these steps:
+
+1. Open the Wagtail admin at the `/cms/` url.
+2. In the sidebar, click on "Pages" and then the arrow (>) next to "Welcome to your content area!", then click on "Blog".
+3. On the Blog page, click "add child page" and choose the "Blog page" option.
+4. Fill in the details of your blog post
+5. On the bottom of the page, click the up arrow (^), and click "Publish".
+
 ## Customizing Wagtail
 
 Pegasus's default wagtail set up is intentionally bare-bones and is meant to provide a starting point for hosting a
