@@ -3,6 +3,17 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2022.8.2
+
+This is another hotfix release. Thanks Daniel for reporting!
+
+### Fixes
+
+- Fix error loading API Schema file when building without API keys enabled.
+- Removed unused site-bundle.js file.
+
+*August 3, 2022*
+
 ## Version 2022.8.1
 
 This is a hotfix release with a few fixes from the last build.
