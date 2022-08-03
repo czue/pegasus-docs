@@ -7,9 +7,8 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 This is another hotfix release. Thanks Daniel for reporting!
 
-### Fixes
-
 - Fix error loading API Schema file when building without API keys enabled.
+- Added a test that would have caught the above error.
 - Removed unused site-bundle.js file.
 
 *August 3, 2022*
