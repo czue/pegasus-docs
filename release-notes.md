@@ -3,6 +3,20 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2022.8.1
+
+This is a hotfix release with a few fixes from the last build.
+Thanks to Jim and Logan for quickly reporting issues!
+
+### Fixes 
+
+- Fix environment variable name used for database port in settings.py.
+- Removes accidentally added text from the landing page (Tailwind builds only).
+- Added instructions to run `./manage.py makemigrations` when setting up a database to the README.
+
+*August 3, 2022*
+
+
 ## Version 2022.8
 
 The major addition in this release is official support for Tailwind CSS.
