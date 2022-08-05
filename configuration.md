@@ -22,17 +22,29 @@ PROJECT_METADATA = {
 
 ## Absolute URLs
 
+In most of Django/Pegasus, URLs are *relative*, represented as paths like `/account/login/` and so forth.
+But in some cases you need a complete URL, including the *protocol* (http vs https) and *server* (e.g. www.example.com).
+These are necessary whenever you use a link in an email, with an external site (e.g. Stripe API callbacks and social authentication),
+and in some places when APIs are accessed from your front end.
+
+### Setting your site's protocol
+
+The *protocol* is configured by the `USE_HTTPS_IN_ABSOLUTE_URLS` variable in `settings.py`.
+You should set this to `True` when using https and `False` when not (typically only in development).
+
+### Setting your server URL
+
 When you first install Pegasus it will use the `URL` value from `PROJECT_METADATA` above to create
-a Django `Site` object in your database. 
-This `Site` is used to generate absolute URLs which are needed whenever you link to the site externally---for
-example in emails, social authentication, or Stripe APIs.
+a Django `Site` object in your database.
+The domain name of this `Site` will be used for your server address. 
 
 If you need to change the URL after installation, you can go to the site admin at `admin/sites/site/` and
 modify the values accordingly, leaving off any http/https prefix.
 
+![Site Settings](images/site-admin.png)
+
 In development you'll typically want a domain name of `localhost:8000`, and in production this should
 be the domain where your users access your app.
-
 
 ## Sending Email
 
