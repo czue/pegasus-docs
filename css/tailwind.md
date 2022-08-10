@@ -9,11 +9,28 @@ Here's a quick overview of what it looks like:
     <iframe src="https://www.youtube.com/embed/mNxVfmoDaOQ" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div>
 
+## Development
+
+Because TailwindCSS only includes the styles found in your HTML / JavaScript files, you will need to actively rebuild
+your CSS files any time you add new styles/components to your templates.
+The easiest way to do this is by running:
+
+```
+npm run dev-watch
+```
+
+Or in Docker:
+
+```
+make npm-watch
+```
+
 ## Customization
 
 Pegasus uses [daisyUI](https://daisyui.com/) to provide default, well-styled components with convenient CSS classes.
 Components from daisyUI can be brought in as needed by your app.
 A full list of available components can be found at the [daisyUI component library](https://daisyui.com/components/). 
+
 
 ## Changing your theme
 
@@ -31,4 +48,5 @@ see the [daisyUI theme documentation](https://daisyui.com/docs/themes/) and thei
 
 [Tailwind UI](https://tailwindui.com/) is a great product for building more complex pages, including marketing sites and app UIs.
 It another great option for getting help with UI components and pages, and should integrate seamlessly with the current Pegasus templates.
-  
+
+Note that you will have to rebuild styles when adding TailwindUI components, as described in the "Development" section above.
