@@ -18,7 +18,7 @@ from django.utils.translation import gettext_lazy
 
 LANGUAGES = [
     ('en', gettext_lazy('English')),
-    ('de', gettext_lazy('German')),
+    ('fr', gettext_lazy('French')),
 ]
 ```
 
@@ -34,8 +34,3 @@ python ./manage.py makemessage --all --ignore node_modules --ignore venv
 python ./manage.py makemessages -d djangojs --all --ignore node_modules --ignore venv
 python ./manage.py compilemessages
 ```
-
-### Important note
-Since string extraction is done by the xgettext command, only syntaxes supported by gettext are supported
-by Django. In particular, Python f-strings are not yet supported by xgettext, and JavaScript template
-strings need gettext 0.21+.
