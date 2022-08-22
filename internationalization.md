@@ -34,3 +34,7 @@ python ./manage.py makemessage --all --ignore node_modules --ignore venv
 python ./manage.py makemessages -d djangojs --all --ignore node_modules --ignore venv
 python ./manage.py compilemessages
 ```
+
+## Technical notes
+Pegasus is configured to use cookies to track the current locale instead of prefixed URLs.
+This allows localization to work for both authenticated and unauthenticated users.
