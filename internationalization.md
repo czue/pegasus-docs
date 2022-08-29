@@ -2,7 +2,7 @@
 
 ## Localization
 
-Pegasus ships with full support localizing user facing text.
+Pegasus ships with full support for localizing user facing text.
 
 Currently, not all the user facing text is properly tagged for localization but this will be addressed
 in future releases.
@@ -39,6 +39,6 @@ python ./manage.py compilemessages
 Pegasus is configured to use cookies to track the current locale instead of prefixed URLs.
 This allows localization to work for both authenticated and unauthenticated users.
 
-More information on this in the Django docs: [How Django discoveres language preference][1]
+More information on this approach is available the Django docs: [How Django discoveres language preference][1]
 
 [1]: https://docs.djangoproject.com/en/4.1/topics/i18n/translation/#how-django-discovers-language-preference
