@@ -35,6 +35,38 @@ python ./manage.py makemessages -d djangojs --all --ignore node_modules --ignore
 python ./manage.py compilemessages
 ```
 
+### Basic Usage
+
+**In Python:**
+```python
+from django.utils.translation import gettext
+
+def my_view(request):
+    output = gettext("Welcome to my site.")
+    return HttpResponse(output)
+```
+
+See the [Django docs](https://docs.djangoproject.com/en/4.0/topics/i18n/translation/#internationalization-in-python-code) for more.
+
+**In Django templates:**
+```djangotemplate
+{% load i18n %}
+<title>{% translate "This is the title." %}</title>
+```
+
+See the [Django docs](https://docs.djangoproject.com/en/4.0/topics/i18n/translation/#internationalization-in-template-code) for more.
+
+**In JavaScript:**
+```javascript
+document.write(gettext('this is to be translated'));
+```
+
+See the [Django docs](https://docs.djangoproject.com/en/4.0/topics/i18n/translation/#internationalization-in-javascript-code) for more.
+
+**In Wagtail:**
+
+See the [Wagtail docs](wagtail.md#internationalization).
+
 ## Technical notes
 Pegasus is configured to use cookies to track the current locale instead of prefixed URLs.
 This allows localization to work for both authenticated and unauthenticated users.
