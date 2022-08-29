@@ -12,6 +12,10 @@ This includes support for text localization in Python, Django templates, JavaScr
 
 See the new [Internationalization docs](internationalization.md) for more information options.
 
+### Other Changes
+
+- Attach team models to the request in middleware instead of view decorator
+
 ### Fixes
 
 - Fix database port environment variable
