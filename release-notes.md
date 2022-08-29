@@ -3,6 +3,22 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2022.9
+The major addition in this release is support for internationalization. Here is a quick demo:
+
+TODO
+
+This includes support for text localization in Python, Django templates, JavaScript and Wagtail.
+
+See the new [Internationalization docs](internationalization.md) for more information options.
+
+### Fixes
+
+- Fix database port environment variable
+- Fix blog index page listing unpublished posts
+
+*September 5, 2022*
+
 ## Version 2022.8.2
 
 This is another hotfix release. Thanks Daniel and Jacob for reporting bugs!
