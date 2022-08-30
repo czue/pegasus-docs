@@ -14,11 +14,14 @@ See the new [Internationalization docs](internationalization.md) for more inform
 
 ### Other Changes
 
-- Attach team models to the request in middleware instead of view decorator
+- **Attach team models to the request in middleware instead of view decorator.**
+
+  If you use *teams* and are upgrading from a older version you must make sure that your
+  middleware includes `apps.teams.middleware.TeamsMiddleware`. It should be placed directly
+  after `django.contrib.auth.middleware.AuthenticationMiddleware`.
 
 ### Fixes
 
-- Fix database port environment variable
 - Fix blog index page listing unpublished posts
 
 *September 5, 2022*
