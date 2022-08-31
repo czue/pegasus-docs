@@ -61,11 +61,15 @@ of the team name that is auto-generated for you.
 
 The `apps.teams.middleware.TeamsMiddleware` must be included in the list of middleware. It must be placed
 after `django.contrib.auth.middleware.AuthenticationMiddleware`. The purpose of this middleware is to
-set `request.team` based on the current request. It uses the `team_slug` from the request path to load
-the team. It will also populate `request.team_membership` based on the authenticated user.
+set `request.team` and `request.team_membership` based on the current request. It will attempt to load
+the team as follows:
 
-If there is no team matching the `team_slug` the request will terminate with a 404. Apart from this
-the middleware does not do any validation of the team or the team membership. That is left to the
+* From the `team_slug` in the request path if available
+* From the the current session if available
+* From the user's list of teams if available
+
+If the `team_slug` is available from the request path but it does not match a team then the request will terminate
+with a 404. Apart from this the middleware does not do any validation of the team or the team membership. That is left to the
 decorators described below.
 
 ### Views
