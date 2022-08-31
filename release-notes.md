@@ -22,7 +22,7 @@ See the new [Internationalization docs](internationalization.md) for more inform
 
 ### Fixes
 
-- Fix blog index page listing unpublished posts
+- Don't show pages on the blog index if they are published then unpublished (Wagtail only, thanks Peter for reporting!)
 
 *September 5, 2022*
 
