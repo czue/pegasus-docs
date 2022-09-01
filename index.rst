@@ -31,6 +31,7 @@ contributions are most welcome!
    teams
    payments
    apis
+   internationalization
    wagtail
    celery
    deployment
