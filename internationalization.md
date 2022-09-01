@@ -2,9 +2,9 @@
 
 ## Localization
 
-Pegasus ships with full support for localizing user facing text.
+Pegasus ships with full support for localizing user-facing text.
 
-Currently, not all the user facing text is properly tagged for localization but this will be addressed
+Currently, not all the user-facing text is properly tagged for localization but this will be incrementally addressed
 in future releases.
 
 For full documentation on localization see the [Django docs](https://docs.djangoproject.com/en/4.0/topics/i18n/).
@@ -28,7 +28,8 @@ When adding a new language you will need to create the language files by running
 python ./manage.py makemessages -l [new lang code] --ignore node_modules --ignore venv
 ```
 
-In steady state the language files can be kept up to date by running:
+After running this, you can update the language files as new strings are added by running:
+
 ```shell
 python ./manage.py makemessage --all --ignore node_modules --ignore venv
 python ./manage.py makemessages -d djangojs --all --ignore node_modules --ignore venv
@@ -65,12 +66,13 @@ See the [Django docs](https://docs.djangoproject.com/en/4.0/topics/i18n/translat
 
 **In Wagtail:**
 
-See the [Wagtail docs](wagtail.md#internationalization).
+See the [Wagtail docs](https://docs.saaspegasus.com/wagtail#internationalization).
 
 ## Technical notes
-Pegasus is configured to use cookies to track the current locale instead of prefixed URLs.
+
+Pegasus is configured to use cookies to track the current locale.
 This allows localization to work for both authenticated and unauthenticated users.
 
-More information on this approach is available the Django docs: [How Django discoveres language preference][1]
+More information on this approach is available the Django docs: [How Django discovers language preference][1]
 
 [1]: https://docs.djangoproject.com/en/4.1/topics/i18n/translation/#how-django-discovers-language-preference
