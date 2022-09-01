@@ -70,7 +70,32 @@ CodeRed ships with a large number of components that can be used in StreamFields
 One downside of using CodeRed is that they only support Bootstrap version 4.
 The easiest way to manage this with Pegasus is to use Bootstrap 4 in the wagtail/content area,
 and Bootstrap 5 (the version used by Pegasus) everywhere else.
-This works fine, but does introduce a more complicated CSS set up to maintain. 
+This works fine, but does introduce a more complicated CSS set up to maintain.
+
+### Internationalization
+
+Pegasus ships with Wagtail fully configured to support internationalization using the
+`wagtail.locales` and `wagtail.contrib.simple_translation` apps bundled with Wagtail.
+
+There are [alternative plugins][1] available which provide more advanced translation support
+if necessary.
+
+By default, Wagtail is configured to use the same set of languages as Django:
+
+```python
+LANGUAGES = WAGTAIL_CONTENT_LANGUAGES = [
+    ('en', 'English'),
+    ('fr', 'French'),
+]
+```
+
+Full details on Wagtail localization can be found in the Wagtail [documentation][2].
+
+Details on the Pegasus configuration for internationalization can be found on the
+[internationalization](internationalization.md) page.
+
+[1]: https://docs.wagtail.org/en/stable/advanced_topics/i18n.html#translation-workflow
+[2]: https://docs.wagtail.org/en/stable/advanced_topics/i18n.html
 
 ## Alternatives to Wagtail
 

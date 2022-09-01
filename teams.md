@@ -57,6 +57,21 @@ Anything that goes into `team_urlpatterns` in `apps.{project}.urls` will automat
 URL `https://example.com/a/<team_slug>/`. The `team_slug` is a human-readable, URL-friendly version
 of the team name that is auto-generated for you.
 
+### Middleware
+
+The `apps.teams.middleware.TeamsMiddleware` must be included in the list of middleware. It must be placed
+after `django.contrib.auth.middleware.AuthenticationMiddleware`. The purpose of this middleware is to
+set `request.team` and `request.team_membership` based on the current request. It will attempt to load
+the team as follows:
+
+* From the `team_slug` in the request path if available
+* From the the current session if available
+* From the user's list of teams if available
+
+If the `team_slug` is available from the request path but it does not match a team then the request will terminate
+with a 404. Apart from this the middleware does not do any validation of the team or the team membership. That is left to the
+decorators described below.
+
 ### Views
 
 See `apps.team.views` for example team views.
@@ -96,7 +111,6 @@ class ATeamView(View):
     # other view details go here 
 ```
 
-Note that if you use this decorator, `request.team` (or `self.request.team` for CBVs) will automatically be populated. 
 If the current user does not have access to the team they will see a 404 page.
 If no user is logged in they'll be redirected to a login view, just like the `login_required` decorator.
 
