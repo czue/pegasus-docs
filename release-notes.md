@@ -4,27 +4,51 @@ Version History and Release Notes
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
 ## Version 2022.9
-The major addition in this release is support for internationalization. Here is a quick demo:
 
-TODO
+The major addition in this release is support for internationalization, a.k.a. translating your app into multiple languages.
+Here is a quick demo:
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/MhxKdkUFUj8" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
 
 This includes support for text localization in Python, Django templates, JavaScript and Wagtail.
+Translations can be set anonymously (via a cookie) or based on the logged-in user's selected language.
 
 See the new [Internationalization docs](internationalization.md) for more information options.
+
+Major related changes:
+
+- Added a language selector to the site footer for users who aren't logged in. 
+- Added a `language` field to the `CustomUser` model and profile page.
+- Added `UserLocaleMiddleware` to set the user's language whenever they are logged-in.
+- Update wagtail bootstrap code to generate localizable pages.
+- Added translations markup to a substantial subset of code across Django views, templates and JavaScript.
+  More translation markup will be added incrementally with new releases.
+- Replaced `trans` templatetag with `translate` in a number of places. 
 
 ### Other Changes
 
 - **Attach team models to the request in middleware instead of view decorator.**
-
-  If you use *teams* and are upgrading from a older version you must make sure that your
-  middleware includes `apps.teams.middleware.TeamsMiddleware`. It should be placed directly
-  after `django.contrib.auth.middleware.AuthenticationMiddleware`.
+  This means that `request.team` will be available on every request.
+  For details see the updated [teams middleware docs](https://docs.saaspegasus.com/teams#middleware),
+  as well as the upgrade notes below. 
+- Added tests for the above middleware, and updated other tests to be compatible with it.
+- Added a context processor so that `team` is always available in the template context.
+  Also removed code setting `team` in context in `TeamObjectViewMixin`.
 
 ### Fixes
 
 - Don't show pages on the blog index if they are published then unpublished (Wagtail only, thanks Peter for reporting!)
 
-*September 5, 2022*
+### Upgrade notes
+
+- If you use *teams* and are upgrading from a older version you must make sure that your
+  middleware includes `apps.teams.middleware.TeamsMiddleware`. It should be placed directly
+  after `django.contrib.auth.middleware.AuthenticationMiddleware`.
+
+
+*September 1, 2022*
 
 ## Version 2022.8.2
 
