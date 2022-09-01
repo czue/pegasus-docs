@@ -15,7 +15,7 @@ Here is a quick demo:
 This includes support for text localization in Python, Django templates, JavaScript and Wagtail.
 Translations can be set anonymously (via a cookie) or based on the logged-in user's selected language.
 
-See the new [Internationalization docs](internationalization.md) for more information options.
+See the new [Internationalization docs](internationalization.md) for more information.
 
 Major related changes:
 
@@ -30,7 +30,8 @@ Major related changes:
 ### Other Changes
 
 - **Attach team models to the request in middleware instead of view decorator.**
-  This means that `request.team` will be available on every request.
+  This means that `request.team` will be available on every request, so team navigation will be available
+  even on pages like a user profile that are not team-specific.
   For details see the updated [teams middleware docs](https://docs.saaspegasus.com/teams#middleware),
   as well as the upgrade notes below. 
 - Added tests for the above middleware, and updated other tests to be compatible with it.
