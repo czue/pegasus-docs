@@ -68,9 +68,9 @@ the team as follows:
 * From the the current session if available
 * From the user's list of teams if available
 
-If the `team_slug` is available from the request path but it does not match a team then the request will terminate
-with a 404. Apart from this the middleware does not do any validation of the team or the team membership. That is left to the
-decorators described below.
+If the `team_slug` is available from the request path but it does not match a team that the user has access to 
+then the request will terminate with a 404. Apart from this the middleware does not do any validation of the
+team or the team membership. That is left to the decorators described below.
 
 ### Views
 
