@@ -21,6 +21,7 @@ Pegasus ships with configuration files to deploy to select platforms out-of-the-
 The officially supported platforms are:
 
 - [Heroku](/deployment/heroku/) (Python or Docker)
+- [Render](/deployment/render/) (Python or Docker)
 - [Digital Ocean App Platform](/deployment/digital-ocean/) (Docker-based)
 - [Google Cloud Run](/deployment/google-cloud/) (Docker-based)
 
