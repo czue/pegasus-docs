@@ -207,6 +207,7 @@ You should replace `<your-api-key>` with the API key displayed when it is create
 When API client requests fail you will get error messages in parts of the application that use the API clients,
 including the Teams UI (if you are using React), and the React/Vue employee examples.
 
-The most common reason that API client requests fail is a mismatch in the absolute URL configured in the server.
-This can be fixed by modifying the Django Site object and settings, as described in the documentation on
-[absolute URLs](https://docs.saaspegasus.com/configuration.html#absolute-urls).
+The most common reason that API client requests fail is a mismatch between the absolute URL configured in the server
+and the servers *actual* URL.
+This mismatch be fixed by modifying the Django Site object and settings to match the URL you're loading the site from,
+as described in the documentation on [absolute URLs](https://docs.saaspegasus.com/configuration.html#absolute-urls).
