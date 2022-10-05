@@ -143,6 +143,11 @@ From there you should be able to access all built-in functionality and examples.
 Use [the `promote_user_to_superuser` management command](https://docs.saaspegasus.com/cookbooks.html#use-the-django-admin-ui)
 to enable access to the Django Admin site.
 
+### Confirm your site URL
+
+For Stripe callbacks, email links, and JavaScript API clients to work, you must make sure that you have
+[configured absolute URLs correctly](https://docs.saaspegasus.com/configuration.html#absolute-urls).
+
 ### Set up your Stripe Subscriptions
 
 If you've installed with subscriptions, you'll want to set things up next.
