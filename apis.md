@@ -115,10 +115,10 @@ If you plan to use the `schema.yml` file in production, it is more efficient to 
 This can be done by running:
 
 ```
-./manage.py spectacular --file static/api/schema.yml
+./manage.py spectacular --file static/api-schema.yml
 ```
 
-Then you can reference the file by using `{% static /api/schema.yml %}` in a Django template.
+Then you can reference the file by using `{% static /api-schema.yml %}` in a Django template.
 
 ### Generating the API client
 

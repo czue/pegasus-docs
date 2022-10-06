@@ -3,6 +3,39 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2022.10
+
+This release adds two-factor authentication, and has a number of smaller improvements and fixes.
+
+### Added
+
+- **Two-factor authentication.** Users can now set up two-factor authentication on their account (using Google Authenticator or similar),
+  and will be required to enter a token to login. This is configured from the user's profile page.
+  More [documentation here](2fa.md).
+
+### Changed
+
+- Improved UI feedback in React Teams UI and Employee example when the API client can't load data.
+- Wagtail and admin login pages now redirect to the main login page (this prevents users from bypassing two-factor
+  authentication, if enabled).
+- Added top navigation bar to tailwind account pages.
+- The teams middleware will now raise a 404 if a user tries to access a page associated with a team they were not
+  a member of. Previously this was only enforced by the `login_and_team_required` decorator, not the middleware.
+  Also added/updated tests for this case.
+- Added type hints in a few more places.
+- Made minor improvements to API schemas, including fixing some warnings that arose during schema generation.
+- Upgraded generated API client to version 6.2.0, and brought in changes from above schema changes.
+- Upgraded Django to the latest security LTS release (3.2.16)
+
+### Fixed
+
+- Fix an issue in Bootstrap builds where some material styles were being applied to the initial download even if you
+  didn't choose the material theme.
+- Fixed a bug where certain pages would fail to load if teams were enabled but the logged in user was not a member
+  of any teams.
+
+*October 6, 2022*
+
 ## Version 2022.9
 
 The major addition in this release is support for internationalization, a.k.a. translating your app into multiple languages.
