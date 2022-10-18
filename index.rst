@@ -33,6 +33,7 @@ contributions are most welcome!
    apis
    internationalization
    wagtail
+   flags
    celery
    deployment
    github-actions
