@@ -30,14 +30,14 @@ For full details on configuring flags see the [Flag Attributes][flag-attribs] of
 
 [flag-attribs]: https://waffle.readthedocs.io/en/stable/types/flag.html#flag-attributes
 
-Flags may be used in views, templates, Javascript and more. For full details see the [Waffle docs][waffle-usage]
+Flags may be used in views, templates, JavaScript and more. For full details see the [Waffle docs][waffle-usage]
 
 [waffle-usage]: https://waffle.readthedocs.io/en/stable/usage/index.html
 
 ## Usage with *Teams*
 
 If you are using [Teams](/teams.md), Pegasus ships with a [custom flag model][custom-model] which allows you
-to activate flags on a per team basis as well as the default options.
+to activate flags on a per-team basis in addition to the other default options.
 
 [custom-model]: https://waffle.readthedocs.io/en/stable/types/flag.html#custom-flag-models
 
