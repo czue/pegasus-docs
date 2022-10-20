@@ -3,6 +3,40 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2022.11
+
+### Settings Overhaul
+
+
+
+### Added
+
+- **Render deployment support.**
+- **Fly.io deployment support.**
+- Added translation markup to a handful of pages.
+
+
+### Changed
+
+- Switched Google / Twitter brand icons to be displayed inline, and use icon-sized images.
+- Replaced "icon" CSS class with "pg-icon" to avoid conflicts with framework classes.
+- Upgraded font awesome to the latest version (6.2) and load the CSS from a CDN.
+- Added `--noinput` to heroku migrations command.
+
+
+### Fixed
+
+- Fixed styling bug in showing a user's connected accounts on Tailwind builds
+- Properly hide delete button text on small screens in HTMX object demo
+
+
+
+### Removed
+
+- Deleted no-longer-needed static images for Twitter / Google logos.
+- Removed unused "is-small" class from various icon markup.
+
+
 ## Version 2022.10
 
 This release adds two-factor authentication, and has a number of smaller improvements and fixes.
