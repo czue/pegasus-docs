@@ -116,7 +116,7 @@ To add a navigation element to your new page, just paste the following snippet i
 ```html
 <li>
   <a href="{% url 'payments:payments' %}">
-    <span class="icon"><i class="fa fa-dollar"></i></span><span class="is-hidden-tablet-only">Payments</span>
+    <span class="pg-icon"><i class="fa fa-dollar"></i></span><span class="is-hidden-tablet-only">Payments</span>
   </a>
 </li>
 ```
