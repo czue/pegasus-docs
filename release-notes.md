@@ -7,6 +7,13 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ### Settings Overhaul
 
+- Switch environment variables in settings to use `django-environ`
+- Support configuring database with single `DATABASE_URL` setting if defined.
+- Always use whitenoise for static files if deployment is configured for it.
+- Move redis configuration to default `settings.py` and allow overriding with environment variables.
+- Allow `STRIPE_LIVE_MODE` to be set by environment variable.
+- Rename platform-specific settings files (e.g. `settings_heroku.py`) to `settings_production.py`.
+- Something about requirements renames. (TBD)
 
 
 ### Added
