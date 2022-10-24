@@ -14,7 +14,7 @@ Once you've logged into Render you can create your app as follows:
 
 1. In the Render dashboard, create a new blueprint
 2. Connect your GitHub or Gitlab account and select your project's repository
-3. Configure the branch you want to deploy from
+3. Configure the *Service Group Name* and select the branch you want to deploy from
 4. Review the configuration, add settings and click 'Approve'
 
 This will kick off the process to create your PostgreSQL database and Redis instances as well
