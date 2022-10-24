@@ -13,20 +13,75 @@ The create an account with `fly auth signup` or login with `fly auth login`.
 Once you have logged in via the CLI you can create your app and the services it will need.
 For each of the commands below follow the prompts given.
 
-```shell
-# Answer 'yes' to the first question:
-#   An existing fly.toml file was found for app wedding-plan
-#   Would you like to copy its configuration to the new app? (y/N) y
+In the example below the "Chicago, Illinois (US) (ord)" region is selected. You may change
+the region to suit your needs, but it should be consistent throughout the commands.
 
-$ fly launch --dockerfile Dockerfile.web --no-deploy
+1. Create your app in Fly.io
 
-$ fly postgres create
-$ fly postgres attach attach {postgres name} -a {app name}
-# this will set the DATABASE_URL secret for you
+    ```shell
+    $ fly launch --dockerfile Dockerfile.web \
+      --dockerignore-from-gitignore \
+      --no-deploy \
+      --name {app-name} \
+      --region ord
+    
+    # Answer 'yes' to the first question:
 
-$ fly redis create
-$ fly secrets set REDIS_URL={url}
-```
+    An existing fly.toml file was found for app {app-name}
+    ? Would you like to copy its configuration to the new app? Yes
+    
+    Creating app in /path/to/app/source
+    Using dockerfile Dockerfile.web
+    Selected App Name: {app-name}
+    
+    # Select the organization you want to deploy the app to:
+
+    ? Select organization: My Org (my_org)
+    
+    Created app {app-name} in organization my_org
+    Wrote config file fly.toml
+    Your app is ready. Deploy with `flyctl deploy`
+    ```
+
+2. Create the app database
+
+    ```shell
+    $ fly postgres create --name {app-name}-db --region ord
+    
+    # ? Select Organization: My Org
+    # ? Select configuration: Development - Single node, 1x shared CPU, 256MB RAM, 1GB disk
+    ```
+
+3. Attach the DB to your app
+
+    ```shell
+    $ fly postgres attach {app-name}-db -a {app-name}
+    
+    Postgres cluster {app-name}-db is now attached to {app-name}
+    The following secret was added to wedding-plan1:
+      DATABASE_URL=postgres://.....
+    ```
+
+4. Create the Redis instance
+    
+    ```shell
+    $ fly redis create --name {app-name}-redis --region ord
+    
+    ? Select Organization: My Org (my_org)
+    ? Would you like to enable eviction? Yes
+    ? Select an Upstash Redis plan Free: 100 MB Max Data Size
+    Your Upstash Redis database {app-name}-redis is ready.
+    Apps in the personal org can connect to at redis://.....
+
+    ```
+
+5. Set the `REDIS_URL` secret
+
+    Using the Redis URL from the command above run:
+
+    ```shell
+    $ fly secrets set REDIS_URL={url}
+    ```
 
 ### Deploying
 
