@@ -31,7 +31,7 @@ Heroku is the most common choice, and is the recommended option for staging site
 If you would like to deploy to a platform that's not listed here, please get in touch on Slack or by emailing 
 cory@saaspegasus.com and I'm happy to help!
 
-## Other options
+### Other options
 
 The maintainer of Pegasus hosts Pegasus apps on a virtual private server, using gunicorn and nginx.
 I'm happy to help support deployments like this, and am hoping to offer more automated tooling for them in the future.

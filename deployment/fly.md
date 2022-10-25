@@ -91,18 +91,12 @@ You are now ready to deploy your app.
 $ fly deploy
 ```
 
+**After deploying, review the [production checklist](/deployment/production-checklist.md) for a list
+of common next steps**
+
 ### Running Database Migrations
 
 Database migrations are applied via during deploy. This is configured in the `fly.toml` file.
-
-You may also need to run additional commands to get up and running, e.g. `./manage.py bootstrap_subscriptions`
-for initializing your Stripe plan data. This can be done via a shell:
-
-```shell
-$ fly ssh console
-
-app $ ./manage.py [command]
-```
 
 ### Settings and Secrets
 
@@ -114,6 +108,16 @@ Secrets are managed in Fly.io via the web UI or on the command line using the CL
 
 ```shell
 $ fly secrets set MY_VAR=secret_value
+```
+
+### Running One-Off Commands
+
+You can one-off commands via a shell:
+
+```shell
+$ fly ssh console
+
+app $ ./code/manage.py [command]
 ```
 
 ### Celery Support
