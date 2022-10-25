@@ -12,3 +12,4 @@ This section outlines everything you need to know to deploy your Pegasus app to 
    deployment/digital-ocean
    deployment/google-cloud
    deployment/production-checklist
+   deployment/troubleshooting
