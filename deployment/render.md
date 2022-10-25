@@ -15,18 +15,22 @@ Once you've logged into Render you can create your app as follows:
 1. In the Render dashboard, create a new blueprint
 2. Connect your GitHub or Gitlab account and select your project's repository
 3. Configure the *Service Group Name* and select the branch you want to deploy from
-4. Review the configuration, add settings and click 'Approve'
+4. Review the configuration, add settings and click 'Apply'
 
 This will kick off the process to create your PostgreSQL database and Redis instances as well
-as deploy your application.
+as deploy your web application.
 
-### Running Database Migrations
+### Start Script
 
-Database migrations are applied via the Docker startup script or else the build script if you are
-not using Docker.
+The `docker_startup.sh` file is run by Render to start your app.
+This allows running "release" commands along with the web process, as [described here](https://community.render.com/t/release-command-for-db-migrations/247/2).
 
-You may also need to run additional commands to get up and running, e.g. `./manage.py bootstrap_subscriptions`
-for initializing your Stripe plan data. This can be done via a Render shell (paid plan required).
+Out of the box the `docker_startup.sh` file is where your database migrations will run,
+just before your app starts.
+
+If there are other commands, like `./manage.py bootstrap_subscriptions` that you want to run on every deploy you can add them here.
+
+You can also run one-off commands in the Render shell (paid plan required).
 
 ### Settings and Secrets
 
