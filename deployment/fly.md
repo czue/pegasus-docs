@@ -101,7 +101,7 @@ for initializing your Stripe plan data. This can be done via a shell:
 ```shell
 $ fly ssh console
 
-app $ ./manage.py [command]
+app $ ./code/manage.py [command]
 ```
 
 ### Settings and Secrets
