@@ -53,6 +53,18 @@ Ensure that you have configured the following variables (if you are using them):
 
 Refer to your [chosen platform's documentation](/deployment.rst) for details on how to set environment variables in that platform.
 
+## Sync Stripe data
+
+After setting up your Stripe variables per above, you'll want to run:
+
+```
+python manage.py bootstrap_subscriptions
+```
+
+to initialize your subscription data.
+
+See your [chosen platform's documentation](/deployment.rst) for how to run one-off commands.
+
 ## Optimize your front end
 
 The front-end files that ship with Pegasus are the developer-friendly versions.
