@@ -59,7 +59,7 @@ heroku addons:create heroku-redis
 
 ### Setting allowed hosts
 
-In your `settings_production.py` file make sure to change the `ALLOWED_HOSTS` setting 
+In your `settings_production.py` file make sure to change the `ALLOWED_HOSTS` setting
 to include whatever app you're deploying.
 
 ```
