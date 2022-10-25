@@ -56,18 +56,6 @@ from the UI or by running:
 heroku addons:create heroku-redis
 ```
 
-
-### Setting allowed hosts
-
-In your `settings_production.py` file make sure to change the `ALLOWED_HOSTS` setting
-to include whatever app you're deploying.
-
-```
-ALLOWED_HOSTS = [
-    'myapp.herokuapp.com',
-]
-```
-
 ### Deploying
 
 Both builds can be deployed using Heroku's standard git integration.
@@ -79,6 +67,20 @@ git push heroku main
 
 You can also configure Heroku to automatically build from a branch of your git repository.
 
+### Setting environment variables
+
+To set environment variables run:
+
+```
+heroku config:set {variable_name}={ value }
+```
+
+e.g.
+
+```
+heroku config:set SECRET_KEY={some long randomly generated text}
+```
+
 
 ### Additional settings configuration
 
@@ -89,20 +91,16 @@ or include them as config vars like this:
 SECRET_KEY = env('SECRET_KEY')
 ```
 
-We recommend also setting `SECRET_KEY` in your Heroku config vars to avoid having it in version control.
+**It is strongly advised to put any secrets in your environment instead of directly in your settings file.**
 
-### Stripe support
+### Running one-off commands
 
-If you're using Stripe, you will need to set the `STRIPE_TEST_PUBLIC_KEY`, `STRIPE_TEST_SECRET_KEY`, 
-`STRIPE_LIVE_PUBLIC_KEY`, and `STRIPE_LIVE_SECRET_KEY` config vars (or whatever subset you are using).
-
-After setting up your Stripe variables, you can run:
+You can run once-off commands using the `heroku` CLI. E.g.
 
 ```
 heroku run python manage.py bootstrap_subscriptions
 ```
 
-to initialize your subscription data.
 
 ### Building the front end
 
