@@ -36,6 +36,9 @@ That's it!
 In a few minutes your app should be online.
 You can [find and view it here](https://cloud.digitalocean.com/apps).
 
+**After deploying, review the [production checklist](/deployment/production-checklist.md) for a list
+of common next steps**
+
 ### Settings and Secrets
 
 App platform builds use the `settings_production.py` file.
