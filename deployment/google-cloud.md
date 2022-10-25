@@ -48,8 +48,8 @@ Pegasus will also generate this command for you as the last line of `./scripts/g
 ### Settings and Secrets
 
 To tell Google Cloud to use your production settings you will need to set the
-`DJANGO_SETTINGS_MODULE=[project_slug].settings_google`.
-If you use Pegasus's `cloudmigrate.yaml` file this will be handled automatically for you
+`DJANGO_SETTINGS_MODULE=[project_slug].settings_production`.
+If you use Pegasus's `cloudmigrate.yaml` file this will be handled automatically for you.
 
 You can use Google Secret Manager to add additional settings and secrets by adding them
 to `.env.production` and uploading it to Secret Manager using:
@@ -58,4 +58,4 @@ to `.env.production` and uploading it to Secret Manager using:
 gcloud secrets versions add {project_slug}_settings --data-file .env.production
 ``` 
 
-See `settings_google.py` for examples of using these secrets in your settings file.
+See `settings_production.py` for examples of using these secrets in your settings file.

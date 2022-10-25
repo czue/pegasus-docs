@@ -68,8 +68,6 @@ a web container running your Django process, and a Celery container for backgrou
 ### Settings
 
 The docker environment sets environment variables using the included `.env.dev` file.
-This file also tells your Docker environment to use `settings_docker.py` (which extends `settings.py`)
-as the `DJANGO_SETTINGS_MODULE`.
 
 The `.env.dev` file is automatically ignored by git, so you can put any additional secrets there.
 It generally should not be checked into source control.

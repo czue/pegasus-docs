@@ -57,7 +57,7 @@ for initializing your Stripe plan data.
 
 ### Settings and Secrets
 
-App platform builds use the `settings_do.py` file.
+App platform builds use the `settings_production.py` file.
 You can add settings here, and use environment variables to manage any secrets,
 following the `SECRET_KEY` example.
 
