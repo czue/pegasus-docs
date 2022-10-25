@@ -36,6 +36,14 @@ That's it!
 In a few minutes your app should be online.
 You can [find and view it here](https://cloud.digitalocean.com/apps).
 
+### Settings and Secrets
+
+App platform builds use the `settings_production.py` file.
+You can add settings here, and use environment variables to manage any secrets, following the pattern used
+throughout the file.
+
+Environment variables can be managed in the Digital Ocean dashboard [as described here](https://docs.digitalocean.com/products/app-platform/how-to/use-environment-variables/).
+
 ### Running One-Off Commands
 
 The easiest way to run once-off commands in your app is to click the "console" tab in app platform and just type in the command.
@@ -45,12 +53,6 @@ See the screenshot below for what it looks like:
 
 You may also need to run additional commands to get up and running, e.g. `./manage.py bootstrap_subscriptions`
 for initializing your Stripe plan data.
-
-### Settings and Secrets
-
-App platform builds use the `settings_production.py` file.
-You can add settings here, and use environment variables to manage any secrets, following the pattern used
-throughout the file.
 
 ### Celery Support
 

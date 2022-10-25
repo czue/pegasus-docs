@@ -30,13 +30,15 @@ just before your app starts.
 
 If there are other commands, like `./manage.py bootstrap_subscriptions` that you want to run on every deploy you can add them here.
 
-You can also run one-off commands in the Render shell (paid plan required).
-
 ### Settings and Secrets
 
 Render builds use the `settings_production.py` file.
 You can add settings here or in the base `settings.py` file, and use environment variables to manage any secrets,
 following the `SECRET_KEY` example.
+
+### Running One-Off Commands 
+
+You can run one-off commands in the Render shell (paid plan required) or [via SSH](https://render.com/docs/ssh).
 
 ### Celery Support
 
