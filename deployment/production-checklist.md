@@ -77,7 +77,7 @@ Then, as part of your CI/CD deployment process, you should build the bundle file
 This will ensure that the latest, optimized version of the front-end code is always deployed
 as part of your production environment.
 
-Some platThe platform-specific docs have some guidance on setting this up where possible.
+The platform-specific docs have some guidance on setting this up where possible.
 
 ## Update other configuration options
 
