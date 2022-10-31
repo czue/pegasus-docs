@@ -5,43 +5,76 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ## Version 2022.11
 
-### Settings Overhaul
+There are a number of larger changes in this release.
 
-- Switch environment variables in settings to use `django-environ`
+### Feature: Feature flag support
+
+- TBD
+
+### Cleanup: Settings Overhaul
+
+- Switch environment variables in settings to use `django-environ` and made more settings configurable via environment variables
 - Support configuring database with single `DATABASE_URL` setting if defined.
-- Always use whitenoise for static files if deployment is configured for it.
-- Move redis configuration to default `settings.py` and allow overriding with environment variables.
-- Allow `STRIPE_LIVE_MODE` to be set by environment variable.
-- Rename platform-specific settings files (e.g. `settings_heroku.py`) to `settings_production.py`.
-- Something about requirements renames. (TBD)
+- Use whitenoise for static files in development if deployment is configured for it.
+- Moved redis configuration to default `settings.py` and allow overriding with environment variables.
+- Renamed all platform-specific settings files (e.g. `settings_heroku.py`) to `settings_production.py`.
+- Removed `settings_docker.py` which was used in development with Docker. Docker-specific settings are now overridden
+  via environment variables in the `.env.dev` file.
+
+### Feature: Render deployment option
+
+Pegasus now officially supports deploying to [Render](https://render.com/).
+See the new [Render deploy documentation](./deployment/render.md).
+
+### Feature: Fly.io deployment option
+
+Pegasus now officially supports deploying to [fly.io](https://fly.io/).
+See the new [Fly.io deploy documentation](./deployment/fly.md).
+
+### Feature + Cleanup: Subscription updates
+
+**Enabled backend support for subscriptions with multiple products.**
+
+Related changes:
+
+- Switched all references to djstripe's deprecated `Plan` model to use the `Price` model.
+- Updated Subscription serialization to support multiple items / prices / products and changed
+  `PlanSerializer` to `PriceSerializer`
+- `active_subscription_required` decorator now checks all prices/products associated with a subscription if
+  `limit_to_plans` is specified.
+- Removed `get_product_and_metadata_for_subscription` and `get_subscription_metadata` functions.
+- Added `SubscriptionWrapper` class to help encapsulate more complex subscription logic to a single place.
+
+**Enabled backend support for metered billing.**
+
+Related changes:
+
+- Fixed crashes on subscription details page if your plan used metered billing.
+- Added demo form for reporting usage to Stripe for metered plans.
 
 
-### Added
+### Other Additions
 
-- **Render deployment support.**
-- **Fly.io deployment support.**
 - Added translation markup to a handful of pages.
 
+### Other Changes
 
-### Changed
-
+- **Upgraded font awesome to the latest version (6.2) and load the CSS from a CDN.**
 - Switched Google / Twitter brand icons to be displayed inline, and use icon-sized images.
 - Replaced "icon" CSS class with "pg-icon" to avoid conflicts with framework classes.
-- Upgraded font awesome to the latest version (6.2) and load the CSS from a CDN.
 - Added `--noinput` to heroku migrations command.
+- Deployments that run Celery now run it with the `--beat` option by default.
 
-
-### Fixed
+### Other Fixes
 
 - Fixed styling bug in showing a user's connected accounts on Tailwind builds
 - Properly hide delete button text on small screens in HTMX object demo
-
-
+- Replaced many instances of `trans` with `translate` and `blocktrans` with `blocktranslate`.
+- Removed unused "is-small" class from various icon markup.
 
 ### Removed
 
 - Deleted no-longer-needed static images for Twitter / Google logos.
-- Removed unused "is-small" class from various icon markup.
 
 
 ## Version 2022.10
