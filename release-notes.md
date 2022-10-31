@@ -13,13 +13,16 @@ There are a number of larger changes in this release.
 
 ### Cleanup: Settings Overhaul
 
-- Switch environment variables in settings to use `django-environ` and made more settings configurable via environment variables
+- Switch environment variables in settings to use `django-environ` and made more settings configurable via environment variables.
 - Support configuring database with single `DATABASE_URL` setting if defined.
 - Use whitenoise for static files in development if deployment is configured for it.
 - Moved redis configuration to default `settings.py` and allow overriding with environment variables.
 - Renamed all platform-specific settings files (e.g. `settings_heroku.py`) to `settings_production.py`.
 - Removed `settings_docker.py` which was used in development with Docker. Docker-specific settings are now overridden
   via environment variables in the `.env.dev` file.
+- Replaced usage of `django-heroku` with normal settings. Previously this was used
+  to configure the database URL and whitenoise for Heroku. Both of those changes
+  have been rolled into the default settings files.
 
 ### Feature: Render deployment option
 
@@ -37,9 +40,9 @@ See the new [Fly.io deploy documentation](./deployment/fly.md).
 
 Related changes:
 
-- Switched all references to djstripe's deprecated `Plan` model to use the `Price` model.
+- Switched all references of djstripe's deprecated `Plan` model to use the `Price` model.
 - Updated Subscription serialization to support multiple items / prices / products and changed
-  `PlanSerializer` to `PriceSerializer`
+  `PlanSerializer` to `PriceSerializer`.
 - `active_subscription_required` decorator now checks all prices/products associated with a subscription if
   `limit_to_plans` is specified.
 - Removed `get_product_and_metadata_for_subscription` and `get_subscription_metadata` functions.
