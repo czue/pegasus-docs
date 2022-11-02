@@ -23,21 +23,22 @@ as deploy your web application.
 **After deploying, review the [production checklist](/deployment/production-checklist.md) for a list
 of common next steps**
 
-### Start Script
+### Build Script
 
-The `docker_startup.sh` file is run by Render to start your app.
-This allows running "release" commands along with the web process, as [described here](https://community.render.com/t/release-command-for-db-migrations/247/2).
+The `build.sh` file is run by Render to run the commands needed to build the app,
+as [described here](https://render.com/docs/deploy-django#create-a-build-script).
+This is also where "release" commands like `collectstatic` and `migrate` run.
 
-Out of the box the `docker_startup.sh` file is where your database migrations will run,
-just before your app starts.
-
-If there are other commands, like `./manage.py bootstrap_subscriptions` that you want to run on every deploy you can add them here.
+If there are other commands (e.g. `./manage.py bootstrap_subscriptions`)
+that you want to run on every deploy you can add them to `build.sh`.
 
 ### Settings and Secrets
 
 Render builds use the `settings_production.py` file.
 You can add settings here or in the base `settings.py` file, and use environment variables to manage any secrets,
-following the `SECRET_KEY` example.
+following the examples in these files.
+
+Environment variables can be managed from the "Environment" tab on your app's dashboard.
 
 ### Running One-Off Commands 
 
@@ -47,4 +48,4 @@ You can run one-off commands in the Render shell (paid plan required) or [via SS
 
 To run celery workers on Render you will need a paid plan.
 
-Then in your `render.yaml` file uncomment the 'celery' section.
+Then in your `render.yaml` file uncomment the 'celery' section and rebuild from the steps above.
