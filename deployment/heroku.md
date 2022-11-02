@@ -84,7 +84,6 @@ e.g.
 heroku config:set SECRET_KEY={some long randomly generated text}
 ```
 
-
 ### Additional settings configuration
 
 If you need additional production settings, you can put them in the `settings_production.py` file,
