@@ -43,10 +43,13 @@ Related changes:
 - Switched all references of djstripe's deprecated `Plan` model to use the `Price` model.
 - Updated Subscription serialization to support multiple items / prices / products and changed
   `PlanSerializer` to `PriceSerializer`.
+- Changed suffix in property names in `ProductWithMetadata` class from `_plan` to `_price`.
 - `active_subscription_required` decorator now checks all prices/products associated with a subscription if
   `limit_to_plans` is specified.
 - Removed `get_product_and_metadata_for_subscription` and `get_subscription_metadata` functions.
-- Added `SubscriptionWrapper` class to help encapsulate more complex subscription logic to a single place.
+- Added `SubscriptionWrapper` class to help encapsulate more complex subscription logic to a single place,
+  and use it instead of `Subscription` objects and lots of extra context variables in templates.
+- Added `InvoiceFacade` class to provide a few utilities to help display a Stripe Invoice object.
 
 **Enabled backend support for metered billing.**
 
@@ -63,22 +66,26 @@ Related changes:
 ### Other Changes
 
 - **Upgraded font awesome to the latest version (6.2) and load the CSS from a CDN.**
+- Upgraded djstripe to version 2.6.2
 - Switched Google / Twitter brand icons to be displayed inline, and use icon-sized images.
 - Replaced "icon" CSS class with "pg-icon" to avoid conflicts with framework classes.
 - Added `--noinput` to heroku migrations command.
 - Deployments that run Celery now run it with the `--beat` option by default.
+- Removed icons from subscription plan selector.
 
 ### Other Fixes
 
-- Fixed styling bug in showing a user's connected accounts on Tailwind builds
-- Properly hide delete button text on small screens in HTMX object demo
+- Fixed styling bug in showing a user's connected accounts on Tailwind builds.
+- Properly hide delete button text on small screens in HTMX object demo.
 - Replaced many instances of `trans` with `translate` and `blocktrans` with `blocktranslate`.
-- Removed unused "is-small" class from various icon markup.
+- Set the page title of Wagtail blog posts to the blog post title.
+- Fix active tab highlighting in examples navigation for some CSS frameworks.
 
 ### Removed
 
 - Deleted no-longer-needed static images for Twitter / Google logos.
-
+- Removed unused "is-small" class from various icon markup.
+- Removed unused styling block for `th` elements in `subscriptions.sass`
 
 ## Version 2022.10
 
