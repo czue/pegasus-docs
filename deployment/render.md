@@ -32,6 +32,10 @@ This is also where "release" commands like `collectstatic` and `migrate` run.
 If there are other commands (e.g. `./manage.py bootstrap_subscriptions`)
 that you want to run on every deploy you can add them to `build.sh`.
 
+If you enable celery, it will use the `build_celery.sh` file, which runs the basic build steps,
+but not the "release" commands.
+You generally should not need to modify this file.
+
 ### Settings and Secrets
 
 Render builds use the `settings_production.py` file.
@@ -46,6 +50,14 @@ You can run one-off commands in the Render shell (paid plan required) or [via SS
 
 ### Celery Support
 
-To run celery workers on Render you will need a paid plan.
+To run celery workers on Render you will need to upgrade to a paid plan.
 
 Then in your `render.yaml` file uncomment the 'celery' section and rebuild from the steps above.
+
+If you previously deployed your application you can choose "Update Existing Resources" to avoid having
+to recreate your app / database / redis instance.
+
+### Troubleshooting
+
+**Sometimes Render fails to build on the first deployment.**
+Retrying the deployment from the same commit seems to resolve this.

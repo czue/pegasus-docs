@@ -100,9 +100,9 @@ Database migrations are applied via during deploy. This is configured in the `fl
 
 ### Settings and Secrets
 
-Fly.io is configured to use the `settings_production.py` file.
-You can add settings here or in the base `settings.py` file. Use environment variables to manage any secrets,
-following the `SECRET_KEY` example.
+Fly.io builds use the `settings_production.py` file.
+You can add settings here or in the base `settings.py` file, and use environment variables to manage any secrets,
+following the examples in these files.
 
 Secrets are managed in Fly.io via the web UI or on the command line using the CLI:
 
