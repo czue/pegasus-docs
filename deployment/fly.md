@@ -1,6 +1,6 @@
 ## Fly.io
 
-Pegasus supports deploying to [Fly.io](https://fly.io/) as a standard Python application or using containers.
+Pegasus supports container-based deployment to [Fly.io](https://fly.io/).
 
 ### Prerequisites
 
