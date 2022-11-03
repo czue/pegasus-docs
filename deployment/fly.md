@@ -58,7 +58,7 @@ the region to suit your needs, but it should be consistent throughout the comman
     $ fly postgres attach {app-name}-db -a {app-name}
     
     Postgres cluster {app-name}-db is now attached to {app-name}
-    The following secret was added to wedding-plan1:
+    The following secret was added to <app name>:
       DATABASE_URL=postgres://.....
     ```
 
