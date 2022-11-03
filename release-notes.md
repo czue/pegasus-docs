@@ -5,11 +5,17 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ## Version 2022.11
 
-There are a number of larger changes in this release.
+There are a number of big updates in this release.
 
 ### Feature: Feature flag support
 
-- TBD
+Pegasus now supports using feature flags with waffle.
+For full details, see the new [feature flag documentation](./flags.md).
+
+Included in the implementation:
+
+- A new example page showing how to use feature flags in Python, Django templates, and JavaScript
+- A custom `Flag` model that allows turning features on and off for an entire `Team`.
 
 ### Cleanup: Settings Overhaul
 
