@@ -253,3 +253,17 @@ See the documentation on [absolute URLs](https://docs.saaspegasus.com/configurat
 
 If Stripe is returning to the correct site, *but over HTTP instead of HTTPS* (or vice versa) then you
 need to change the `USE_HTTPS_IN_ABSOLUTE_URLS` setting in `settings.py` or a production settings file.
+
+**Stripe webhooks are failing with a signature error.**
+
+If you get an error like "No signatures found matching the expected signature for payload" or similar there are a few things to check:
+
+First, double check all of your API keys and secrets in your environment/settings files. These are:
+
+- `STRIPE_LIVE_PUBLIC_KEY` and `STRIPE_LIVE_SECRET_KEY` (for live mode), or `STRIPE_TEST_PUBLIC_KEY` and `STRIPE_TEST_SECRET_KEY` (for test mode)
+- `STRIPE_LIVE_MODE` should match whether you're in live / test mode.
+- `DJSTRIPE_WEBHOOK_SECRET` should match the secret from the Stripe dashboard.
+
+If you have confirmed these are correct, also double check that you are on the *latest Stripe API version*.
+As of the time of this writing, that is 2022-08-01. Your API version can be found in the "Developers" section
+of the Stripe dashboard.

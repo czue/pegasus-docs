@@ -3,6 +3,171 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2022.11
+
+There are a number of big updates in this release.
+
+### Feature: Feature flag support
+
+Pegasus now supports using feature flags with waffle.
+For full details, see the new [feature flag documentation](./flags.md).
+
+Included in the implementation:
+
+- A custom `Flag` model that allows turning features on and off for an entire `Team`.
+- A new example page showing how to use feature flags in Python, Django templates, and JavaScript
+- Added some helper CSS classes to display badges (used in the example)
+
+### Cleanup: Settings Overhaul
+
+The main change is to move most configurable settings into environment variables (now managed by
+[`django-environ`](https://django-environ.readthedocs.io/en/latest/)), and reduce the number of settings files used.
+
+Supporting/related work:
+
+- **Switch environment variables in settings to use `django-environ` and made more settings configurable via environment variables.**
+- Support configuring database with single `DATABASE_URL` setting if defined.
+- Moved redis configuration to default `settings.py` and allow overriding with environment variables.
+- Renamed all platform-specific settings files (e.g. `settings_heroku.py`) to `settings_production.py`.
+- **Removed `settings_docker.py` which was used in development with Docker. Docker-specific settings are now overridden
+  via environment variables in the `.env.dev` file.**
+- Replaced usage of `django-heroku` with normal settings. Previously this was used
+  to configure the database URL and whitenoise for Heroku. Both of those changes
+  have been rolled into the default settings files.
+
+### Feature: Render deployment option
+
+Pegasus now officially supports deploying to [Render](https://render.com/).
+See the new [Render deploy documentation](./deployment/render.md).
+
+### Feature: Fly.io deployment option
+
+Pegasus now officially supports deploying to [fly.io](https://fly.io/).
+See the new [Fly.io deploy documentation](./deployment/fly.md).
+
+### Feature + Cleanup: Subscription updates
+
+Most of these changes are backend cleanups to help improve future Subscription work.
+*Full support for multiple subscriptions and metered billing will hopefully be in an upcoming release.*
+
+**Enabled backend support for subscriptions with multiple products.**
+
+Related changes:
+
+- Switched all references of djstripe's deprecated `Plan` model to use the `Price` model.
+- Updated Subscription serialization to support multiple items / prices / products and changed
+  `PlanSerializer` to `PriceSerializer`.
+- Changed suffix in property names in `ProductWithMetadata` class from `_plan` to `_price`.
+- `active_subscription_required` decorator now checks all prices/products associated with a subscription if
+  `limit_to_plans` is specified.
+- Removed `get_product_and_metadata_for_subscription` and `get_subscription_metadata` functions.
+- Added `SubscriptionWrapper` class to help encapsulate more complex subscription logic to a single place,
+  and use it instead of `Subscription` objects and lots of extra context variables in templates.
+- Added `InvoiceFacade` class to provide a few utilities to help display a Stripe Invoice object.
+
+**Enabled backend support for [usage-based/metered billing](https://stripe.com/docs/billing/subscriptions/usage-based).**
+
+Related changes:
+
+- Fixed crashes on subscription signup and details pages if your plan was configured with metered billing.
+- Added demo form for reporting usage to Stripe for metered plans.
+
+**Changed the Stripe Customer object to be associated with the Team (instead of the User) for Team-based projects.**
+
+Related changes:
+
+- Remove `customer` from the `CustomUser` model and add it to `SubscriptionModelBase` (which will go to the `Team` 
+  on team-based builds)
+- Set the `DJSTRIPE_SUBSCRIBER_MODEL` to the Team object, if using teams.
+- Updated logic that gets/sets the customer to use the Team instead of the user.
+- No longer force using the logged-in User's email address at checkout (for team based builds),  
+  so they can specify a different billing email.
+- No longer re-use credit cards / Customers when the same user signs up for subscriptions in multiple teams.
+
+*See the upgrading guide below for details on navigating this change.*
+
+### Other Changes
+
+- **Upgraded font awesome to the latest version (6.2) and load the CSS from a CDN.**
+- Upgraded djstripe to version 2.6.2
+- Added user and team metadata to the Stripe subscription object during Checkout, so Subscriptions
+  can be more easily linked back to your app from the Stripe Dashboard.
+- Added translation markup to a handful of pages.
+- Switched Google / Twitter brand icons to be displayed inline, and use icon-sized images.
+- **Replaced "icon" CSS class with "pg-icon" to avoid conflicts with framework classes.**
+  In particular, this fixes some issues with Creative Tim themes beyond what's included in Pegasus.
+- Removed icons from subscription plan selector.
+- **Use whitenoise for static files in development if deployment is configured for it.**
+  This makes development environments more like production, though is largely invisible.
+- **All docker-based deployments now build front end assets as part of the deploy step**.
+  Previously this was only done for Heroku-based deploys.
+- **All docker-based deployments are now based off the `buster` image.** 
+- Added `--noinput` to heroku migrations command.
+- Deployments that run Celery now run it with the `--beat` option by default, and a concurrency of 2.
+- Increased length of generated secret key in production environment files.
+- Upgraded Node versions that run on CI to 16, 18, and 19 to reflect the current releases.
+- Upgraded Github actions versions for several steps to fix Node deprecation warnings.
+- Production Dockerfiles now run gunicorn by default (this can be overridden in the platform-specific tools,
+  e.g. to run celery)
+- Rebuilt the JavaScript API client to reflect the latest API views and serializers.
+
+### Other Fixes
+
+- Fixed all schema warnings from `drf-specatcular`, by adding inline serializers or annotations to several APIs.
+- Fixed styling bug in showing a user's connected accounts on Tailwind builds.
+- Properly hide delete button text on small screens in HTMX object demo.
+- Replaced many instances of `trans` with `translate` and `blocktrans` with `blocktranslate`.
+- Set the page title of Wagtail blog posts to the blog post title.
+- Fix active tab highlighting in examples navigation for some CSS frameworks.
+
+### Removed
+
+- Deleted no-longer-needed static images for Twitter / Google logos.
+- Removed unused "is-small" class from various icon markup.
+- Removed unused styling block for `th` elements in `subscriptions.sass`
+
+### Upgrading
+
+The major change that requires care in upgrading is the migration of the `customer` field from the User to the Team
+for team-based builds.
+
+If you do NOT have any live customers associated with your Users the migration process is standard,
+just run `./manage.py makemigrations` followed by `./manage.py migrate`.
+**Note: this will drop all User-->Customer relationships.** 
+
+If you DO have live customers associated with your Users, and you want to preserve this data,
+the migration process is more complicated:
+
+First, add the following line *back* to the `CustomUser` model:
+
+```python
+   customer = models.ForeignKey(Customer, null=True, blank=True, on_delete=models.SET_NULL)
+```
+
+Next, create and run migrations:
+
+```bash
+./manage.py makemigrations 
+./manage.py migrate
+```
+
+Next you need to move the `Customer` from the user to their team. You can do this by running:
+
+```
+./manage.py migrate_customers_to_teams
+```
+
+If the customer only had a single subscription, it will be correctly applied to the right team.
+If the customer had multiple subscriptions, the command will print out errors *which you must resolve manually*.
+You can either choose to drop this information, or associate the customer with a single Team. 
+
+Once you are happy with how you've migrated the data you can remove the `customer` field from above
+from the user, and run `./manage.py makemigrations` followed by `./manage.py migrate` to drop it from the user table.
+
+Feel free to reach out in #support on Slack if you need any assistance with this process!
+
+*Nov 4 2022*
+
 ## Version 2022.10
 
 This release adds two-factor authentication, and has a number of smaller improvements and fixes.

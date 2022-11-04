@@ -128,7 +128,7 @@ This will prevent all users from creating new accounts, though existing users ca
 ### Further configuration
 
 Allauth is highly configurable.
-It's recommended that you look into the various [configuration settings availabile within allauth](https://django-allauth.readthedocs.io/en/latest/configuration.html)
+It's recommended that you look into the various [configuration settings available within allauth](https://django-allauth.readthedocs.io/en/latest/configuration.html)
 for any advanced customization.
 
 

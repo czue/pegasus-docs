@@ -15,9 +15,6 @@ Next, install and configure the `doctl` command line tool by following [these in
 Additionally, you must connect Digital Ocean to your project's Github repository.
 This can be done from inside App Platform, or by following [this link](https://cloud.digitalocean.com/apps/github/install).
 
-To use celery you will also need to create a managed Redis database,
-which can be done from [this link](https://cloud.digitalocean.com/databases/new?engine=redis).
-
 ### Deploying
 
 Once you've configured the prerequisites, deploying is just a few steps.
@@ -27,7 +24,7 @@ In the commands below you'll need to replace `<your-project>` with the values fr
 
 ```
 doctl databases create <your-project>-db --engine pg --num-nodes 1 --version 12
-doctl databases create <your-project>-redis --engine redis --num-nodes 1 --version 6
+doctl databases create <your-project>-redis --engine redis --num-nodes 1 --version 7
 ```
 
 Next edit the `/deploy/app-spec.yaml` file. In particular, make sure to set your Github repository and branch.
@@ -39,15 +36,20 @@ That's it!
 In a few minutes your app should be online.
 You can [find and view it here](https://cloud.digitalocean.com/apps).
 
-### Running Database Migrations
+**After deploying, review the [production checklist](/deployment/production-checklist.md) for a list
+of common next steps**
 
-You'll need to run database migrations to get your app working properly.
-The easiest way to do this is to click the "console" tab in app platform and just type in the command:
+### Settings and Secrets
 
-```
-./manage.py migrate
-```
+App platform builds use the `settings_production.py` file.
+You can add settings here, and use environment variables to manage any secrets, following the pattern used
+throughout the file.
 
+Environment variables can be managed in the Digital Ocean dashboard [as described here](https://docs.digitalocean.com/products/app-platform/how-to/use-environment-variables/).
+
+### Running One-Off Commands
+
+The easiest way to run once-off commands in your app is to click the "console" tab in app platform and just type in the command.
 See the screenshot below for what it looks like:
 
 ![Console Migrations](/images/deployment/running-migrations-do.png)
@@ -55,16 +57,9 @@ See the screenshot below for what it looks like:
 You may also need to run additional commands to get up and running, e.g. `./manage.py bootstrap_subscriptions`
 for initializing your Stripe plan data.
 
-### Settings and Secrets
-
-App platform builds use the `settings_do.py` file.
-You can add settings here, and use environment variables to manage any secrets,
-following the `SECRET_KEY` example.
-
 ### Celery Support
 
-To run celery workers on Digital Ocean you will need to first add a managed Redis database, then the celery
-worker image.
+Celery should work out-of-the box.
 
-Then in your `app-spec.yaml` file make sure that the values for the `REDIS_URL` environment variables
-match the name you've chosen for your Redis database.
+If you have issues running celery, ensure that you have created a Redis database, and that the values for the
+`REDIS_URL` environment variables match the name you've chosen.

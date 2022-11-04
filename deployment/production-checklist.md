@@ -14,14 +14,56 @@ The default Pegasus configuration will contain some warnings, to help prevent mi
 can affect your site's availability. Not all warnings are serious issues and some may not be possible to address 
 (e.g. if part of your site must be available over HTTP instead of HTTPS).
 After running the `manage.py check --deploy` command you should read through the documentation for any issues you get
-and update the relevant settings where necessary. 
+and update the relevant settings where necessary.
 
-## Keep your secrets secret
+*Note: The "unable to guess serializer" warnings are safe to ignore, and will be fixed in a future version of Pegasus.*
 
-Your secrets---like production database passwords or Stripe API keys---should never be checked into source control.
-Instead, you should either put secrets in environment variables or in a .gitignored production settings file that
-lives only on the server.
-For supported deployment platforms, recommendations for managing secrets can be found in the platform-specific documentation.
+## Set your `ALLOWED_HOSTS`
+
+In your app's `settings_production.py` be sure to update the [`ALLOWED_HOSTS` setting](https://docs.djangoproject.com/en/4.1/ref/settings/#allowed-hosts)
+with the domain(s) you want the site to be available from, replacing the `'*'` that is there by default:
+
+```python
+ALLOWED_HOSTS = [
+    'example.com',  # use your app's domain here
+]
+```
+
+Failure to do this opens up your site to more HTTP host header attacks.
+
+## Update your Django Site
+
+In order for absolute URLs and JavaScript API clients to work, your Django site should match your application's domain.
+See the documentation on [absolute URLs](https://docs.saaspegasus.com/configuration.html#absolute-urls) to do this.
+
+## Set up email
+
+If you haven't already, you'll want to set up your site to [send email](https://docs.saaspegasus.com/configuration.html#sending-email)
+
+## Make sure your secrets are set
+
+Application secrets (e.g. API keys, passwords, etc.) are managed in environment variables.
+Ensure that you have configured the following variables (if you are using them):
+
+- All apps should set `SECRET_KEY` to a long, randomly-generated value.
+- If you're using Stripe, you should set the `STRIPE_TEST_PUBLIC_KEY`, `STRIPE_TEST_SECRET_KEY`, 
+`STRIPE_LIVE_PUBLIC_KEY`, and `STRIPE_LIVE_SECRET_KEY` config vars (or whatever subset you are using).
+- If you set up email, ensure whatever keys/secrets you need are set.
+- If you're using Mailchimp, set `MAILCHIMP_API_KEY` and `MAILCHIMP_LIST_ID`.
+
+Refer to your [chosen platform's documentation](/deployment.rst) for details on how to set environment variables in that platform.
+
+## Sync Stripe data
+
+After setting up your Stripe variables per above, you'll want to run:
+
+```
+python manage.py bootstrap_subscriptions
+```
+
+to initialize your subscription data.
+
+See your [chosen platform's documentation](/deployment.rst) for how to run one-off commands.
 
 ## Optimize your front end
 
@@ -36,3 +78,8 @@ This will ensure that the latest, optimized version of the front-end code is alw
 as part of your production environment.
 
 The platform-specific docs have some guidance on setting this up where possible.
+
+## Update other configuration options
+
+See [the configuration page](/configuration.md) for a larger list of options,
+including social login, sign up flow changes, analytics, logging, and so on.
