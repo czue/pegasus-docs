@@ -18,7 +18,6 @@ Included in the implementation:
 - A new example page showing how to use feature flags in Python, Django templates, and JavaScript
 - Added some helper CSS classes to display badges (used in the example)
 
-
 ### Cleanup: Settings Overhaul
 
 The main change is to move most configurable settings into environment variables (now managed by
@@ -90,8 +89,6 @@ Related changes:
 ### Other Changes
 
 - **Upgraded font awesome to the latest version (6.2) and load the CSS from a CDN.**
-- **Use whitenoise for static files in development if deployment is configured for it.**
-  This makes development environments more like production, though is largely invisible.
 - Upgraded djstripe to version 2.6.2
 - Added user and team metadata to the Stripe subscription object during Checkout, so Subscriptions
   can be more easily linked back to your app from the Stripe Dashboard.
@@ -99,10 +96,17 @@ Related changes:
 - Switched Google / Twitter brand icons to be displayed inline, and use icon-sized images.
 - **Replaced "icon" CSS class with "pg-icon" to avoid conflicts with framework classes.**
   In particular, this fixes some issues with Creative Tim themes beyond what's included in Pegasus.
+- Removed icons from subscription plan selector.
+- **Use whitenoise for static files in development if deployment is configured for it.**
+  This makes development environments more like production, though is largely invisible.
+- **All docker-based deployments now build front end assets as part of the deploy step**.
+  Previously this was only done for Heroku-based deploys.
+- **All docker-based deployments are now based off the `buster` image.** 
 - Added `--noinput` to heroku migrations command.
 - Deployments that run Celery now run it with the `--beat` option by default, and a concurrency of 2.
-- Removed icons from subscription plan selector.
+- Increased length of generated secret key in production environment files.
 - Upgraded Node versions that run on CI to 16, 18, and 19 to reflect the current releases.
+- Upgraded Github actions versions for several steps to fix Node deprecation warnings.
 - Production Dockerfiles now run gunicorn by default (this can be overridden in the platform-specific tools,
   e.g. to run celery)
 - Rebuilt the JavaScript API client to reflect the latest API views and serializers.
@@ -121,7 +125,6 @@ Related changes:
 - Deleted no-longer-needed static images for Twitter / Google logos.
 - Removed unused "is-small" class from various icon markup.
 - Removed unused styling block for `th` elements in `subscriptions.sass`
-
 
 ### Upgrading
 
