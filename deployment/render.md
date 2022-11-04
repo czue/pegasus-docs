@@ -1,6 +1,6 @@
 ## Render
 
-Pegasus supports deploying to [Render](https://render.com/) as a standard Python application or using containers.
+Pegasus supports deploying to [Render](https://render.com/) as a standard Python application.
 
 ### Prerequisites
 
@@ -18,7 +18,7 @@ Once you've logged into Render you can create your app as follows:
 4. Review the configuration, add settings and click 'Apply'
 
 This will kick off the process to create your PostgreSQL database and Redis instances as well
-as deploy your web application.
+as deploy your web application (configured in your project's `render.yaml` file).
 
 **After deploying, review the [production checklist](/deployment/production-checklist.md) for a list
 of common next steps**
@@ -61,3 +61,11 @@ to recreate your app / database / redis instance.
 
 **Sometimes Render fails to build on the first deployment.**
 Retrying the deployment from the same commit seems to resolve this.
+
+
+### Container-based deployment
+
+It is possible to use Render's docker-based support to deploy Pegasus apps, but it is not recommended
+because there is no "release" phase, which makes it difficult to set up things like database migraitons.
+
+More details can be found in [this support thread](https://community.render.com/t/release-command-for-db-migrations/247/7).
