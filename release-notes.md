@@ -166,7 +166,7 @@ from the user, and run `./manage.py makemigrations` followed by `./manage.py mig
 
 Feel free to reach out in #support on Slack if you need any assistance with this process!
 
-*Nov 3 2022*
+*Nov 4 2022*
 
 ## Version 2022.10
 
