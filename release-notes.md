@@ -3,6 +3,24 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2022.11.1
+
+This release is a minor/hotfix update with a few small changes.
+
+### Added
+
+- Added `clear_cached_subscription` helper function to `SubscriptionModelBase`
+
+### Changed
+
+- Upgraded dj-stripe to 2.7.2. This fixes several crashing errors when using more complex subscription/billing models.
+
+### Fixed
+
+- Catch and fix Stripe errors when trying to view a cancelled subscription that has not been synchronized with Stripe 
+
+*Nov 4 2022*
+
 ## Version 2022.11
 
 There are a number of big updates in this release.
