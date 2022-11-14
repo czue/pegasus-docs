@@ -20,13 +20,14 @@ Much of the choice will also depend on the knowledge and comfort of you/your tea
 Pegasus ships with configuration files to deploy to select platforms out-of-the-box.
 The officially supported platforms are:
 
+- [Render](/deployment/render/) (Python-based)
+- [Fly](/deployment/fly/) (Docker-based)
 - [Heroku](/deployment/heroku/) (Python or Docker)
-- [Fly](/deployment/fly/) (Python or Docker)
-- [Render](/deployment/render/) (Python or Docker)
 - [Digital Ocean App Platform](/deployment/digital-ocean/) (Docker-based)
 - [Google Cloud Run](/deployment/google-cloud/) (Docker-based)
 
-Heroku is the most common choice, and is the recommended option for staging sites or MVPs.
+Render and Fly are comparable, and are the recommended options for staging sites or MVPs,
+since they are easy to set up and have a generous free tier.
 
 If you would like to deploy to a platform that's not listed here, please get in touch on Slack or by emailing 
 cory@saaspegasus.com and I'm happy to help!
