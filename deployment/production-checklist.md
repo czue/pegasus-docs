@@ -65,6 +65,19 @@ to initialize your subscription data.
 
 See your [chosen platform's documentation](/deployment.rst) for how to run one-off commands.
 
+## Set up media files
+
+Some functionality, like user profile pictures, requires saving user-uploaded files.
+In development these are saved to the file system, but in most production environments the file system
+is not usable for it. Instead you need to set up an external storage to handle these.
+
+The most common choice of external storage is [Amazon S3](https://aws.amazon.com/s3/).
+[This guide](https://testdriven.io/blog/storing-django-static-and-media-files-on-amazon-s3/) is an excellent resource
+on setting up S3 and using it to host both public and private media files (you can ignore the part about static files,
+unless you also want to host those there).
+
+Future versions of Pegasus should improve on this process.
+
 ## Optimize your front end
 
 The front-end files that ship with Pegasus are the developer-friendly versions.
