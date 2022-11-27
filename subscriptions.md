@@ -123,8 +123,8 @@ Pegasus ships with a decorator that allows you to do this.
 You can use it as follows:
 
 ```python
-@active_subscription_required
 @login_required
+@active_subscription_required
 def subscription_gated_page(request, subscription_holder=None):
     return TemplateResponse(request, 'subscriptions/subscription_gated_page.html')
 ```
@@ -134,8 +134,8 @@ If the user doesn't have an active subscription, they'll be redirected to the su
 You can also restrict access based on a specific plan (or set of plans), as follows:
 
 ```python
-@active_subscription_required(limit_to_plans=["pro", "enterprise"])
 @login_required
+@active_subscription_required(limit_to_plans=["pro", "enterprise"])
 def subscription_gated_page(request, subscription_holder=None):
     return TemplateResponse(request, 'subscriptions/subscription_gated_page.html')
 ```
