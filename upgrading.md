@@ -134,3 +134,11 @@ After upgrading you may also need to reinstall requirements (`pip install -r req
 npm packages (`npm install`), etc. depending on what has changed.
 
 You will also need to rebuild your front end if you've made any changes there (`npm run dev` or `npm run build`)
+
+If you are using docker you can use the 'upgrade' Make target:
+
+```
+make upgrade
+```
+
+This will rebuild the Docker images and run any database migrations that are needed.
