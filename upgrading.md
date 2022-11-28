@@ -141,4 +141,4 @@ If you are using docker you can use the 'upgrade' Make target:
 make upgrade
 ```
 
-This will rebuild the Docker images and run any database migrations that are needed.
+This will rebuild the Docker images and create and run any database migrations that are needed.
