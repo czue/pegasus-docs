@@ -36,6 +36,7 @@ contributions are most welcome!
    flags
    celery
    deployment
+   media-storage
    github-actions
    cookbooks
    upgrading
