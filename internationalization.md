@@ -39,7 +39,7 @@ python ./manage.py makemessages -l [new lang code] --ignore node_modules --ignor
 After running this, you can update the language files as new strings are added by running:
 
 ```shell
-python ./manage.py makemessage --all --ignore node_modules --ignore venv
+python ./manage.py makemessages --all --ignore node_modules --ignore venv
 python ./manage.py makemessages -d djangojs --all --ignore node_modules --ignore venv
 python ./manage.py compilemessages
 ```
