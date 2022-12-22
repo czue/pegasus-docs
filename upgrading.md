@@ -12,10 +12,10 @@ The upgrade process can also be used when changing any Pegasus configuration var
 With this option you maintain a "pure" Pegasus branch in your repository with no other modifications.
 Then, you merge this branch into your main app when you upgrade.
 
-This process is outlined below, and also in the below screencast which shows a full end-to-end upgrade process on a real Pegasus project.
+This process is outlined below, and also in the below screencast which shows a live example on a real Pegasus project.
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
-    <iframe src="https://www.youtube.com/embed/f2hS-k1InMY" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    <iframe src="https://www.youtube.com/embed/A6fjoXw6f5g" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div>
 
 Here are the steps to take:
