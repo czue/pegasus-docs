@@ -26,10 +26,10 @@ Complete the following steps in order to setup your first subscription workflow.
 4. Run `./manage.py bootstrap_subscriptions`. If things are setup correctly,
    you should see output that includes "Synchronized plan plan_[plan_id]" for each plan you created,
    and an output starting with `ACTIVE_PRODUCTS = ` containing the products you just created.
-5. Paste the `ACTIVE_PRODUCTS` output from the previous step into `apps/subsriptions/metadata.py`
+5. Paste the `ACTIVE_PRODUCTS` output from the previous step into `apps/subscriptions/metadata.py`
    overriding what is there. Update any other details you want, for example,
    the "description" and "features" fields.
-6. Optionally edit the `ACTIVE_PLAN_INTERVALS` variable in `apps/subsriptions/metadata.py`
+6. Optionally edit the `ACTIVE_PLAN_INTERVALS` variable in `apps/subscriptions/metadata.py`
    if you don't plan to include both monthly and annual offerings.
 
 Now login and click the "Subscription" tab in the navigation. 
