@@ -53,17 +53,25 @@ The moving around of `.env` files may impact existing development environments.
 
 If you wish to preserve the previous behavior that allowed accepting an invitation from any email address:
 
-1. Remove the email address check in `apps.teams.forms.TeamSignupForm`
-2. In `templates/account/signup.html` change the following line
+1. Remove the email address validation check in `apps.teams.forms.TeamSignupForm` by deleting these three lines:
 
+```python
+    if invite.email != email:
+        raise forms.ValidationError(_(
+            'You must sign up with the email address that the invitation was sent to.'
+        ))
 ```
-<input type="hidden" name="{{ form.email.name }}" value="{{ invitation.email }}"/>
+
+2. In `templates/account/signup.html` make the email field editable by changing the following line
+
+```html
+    <input type="hidden" name="{{ form.email.name }}" value="{{ invitation.email }}"/>
 ```
 
 to:
 
 ```
-{% render_text_input form.email %}
+    {% render_text_input form.email %}
 ```
 
 *Dec 27 2022*
