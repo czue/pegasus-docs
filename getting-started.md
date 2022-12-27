@@ -54,6 +54,8 @@ Then skip ahead to the [post-install steps](https://docs.saaspegasus.com/getting
 Follow these instructions to run your application in your system's Python.
 If you're using Docker you can skip this section.
 
+*A video walkthrough of most of these steps is [available here](https://www.youtube.com/watch?v=kUoKm81OFqk).*
+
 ### Install Prerequisites
 
 If you haven't already, you'll need to install the following.
