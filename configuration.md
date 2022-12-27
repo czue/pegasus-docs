@@ -2,6 +2,32 @@
 
 This section describes some of the settings and configuration details you can change inside Pegasus.
 
+## Settings and environment files
+
+Pegasus uses environment variables and `django-environ` to manage settings.
+You *can* modify values directly in `settings.py`, but the recommended way to modify any setting
+that varies across environments is to use a `.env` file.
+
+Out-of-the-box, Pegasus will include multiple `.env` files for your settings:
+
+**`.env` is for a native Python environment.**
+It will be picked up by default if you run `./manage.py runserver`.
+It is typically not checked into source control (since it may include secrets like API keys),
+so is included in the `.gitignore`.
+
+**`.env.docker` is for a Docker-based environment.**
+It will override anything set in `.env` if you run with docker.
+It is also typically not checked into source control, so is ignored.
+
+**`.env.example` is an example file.**
+It is not used for anything, but can be checked into source control so that
+developers can use it as a starting point for their `.env` or `.env.docker` files.
+
+Newly downloaded projects will include a `.env` and `.env.docker` file, but projects
+pulled from git will typically only include a `.env.example` file.
+
+*Note: Pegasus versions prior to 2023.1 may not include all of these files.*
+
 ## Project Metadata
 
 When you first setup Pegasus it populated the `PROJECT_METADATA` setting in `settings.py` with various 
