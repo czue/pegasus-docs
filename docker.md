@@ -123,6 +123,8 @@ This can be done by running your web container with the following:
 docker-compose run --service-ports web
 ```
 
+If you want to set up debugging with PyCharm, it's recommended to follow [this guide on the topic](https://testdriven.io/blog/django-debugging-pycharm/).
+
 ## Other Resources
 
 - [Dockerizing Django with Postgres, Gunicorn, and Nginx](https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/)
