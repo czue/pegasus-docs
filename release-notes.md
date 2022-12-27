@@ -3,6 +3,71 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2022.12
+
+This is a maintenance release that addresses many small things.
+
+### Added
+
+- Added a `make upgrade` target to update docker containers and a local database after upgrading.
+- Added a Redis instance to Github actions CI setup, so that any tests which depend on Redis can run without modification.
+- Added default error pages and url routes for 400 and 403 errors.
+
+### Changed
+
+- **Updated usage of `.env` files. Python environments now use `.env`, docker uses `.env.docker`, and the example
+  was renamed from `.env.dev.example` to `.env.example`. [Details here](./configuration.md).** See upgrade notes.
+- **Invitations can now only be accepted from the email address that was invited.** See upgrade notes.
+- Blog posts in wagtail are now listed in descending order (by date)
+- Optimized the `Dockerfile.dev` so that requirements are installed prior to copying the complete source code of the project.
+  This results in substantially reduced image build times when requirements have not changed.
+- Replaced instances of `%` string formatting with `str.format()`
+- Update `make pip-compile` and `make requirements` build targets to also build production requirements. (thanks Brett!)
+- Updated error pages to use a shared base template.
+- Added translation markup to a handful of places.
+
+
+### Fixed
+
+- Remove `customer` from the user admin for team builds
+  (this was causing the User admin to error for team-based builds if subscriptions were enabled).
+- Update the `bootstrap_content` management command to publish content (in addition to creating it).
+- Fixed crashing error on `@active_subscription_required` decorator if user was not logged-in.
+- Fixed image responsiveness on Wagtail blog posts on Bootstrap-based builds.
+- Set `LOGIN_URL` in settings, which prevents issues arising if you change the default location of `allauth` urls.
+- Fixed image styling on the teams list page if you weren't a member of any teams. (htmx builds)
+- Fixed a minor markdown-styling issue in the README.
+- Automatically sync Stripe API keys from settings/environment to database when running `bootstrap_subscriptions`.
+  This fixes the following error on new projectsc: "You don't have any API Keys in the database. Did you forget to add them?"
+- Removed unused import of C3 styles from the charts example template.
+- Fixed a static image reference on the example pricing page.
+
+### Upgrade notes
+
+**`.env` updates**
+
+The moving around of `.env` files may impact existing development environments.
+ For those using Docker, it is recommended to rename your `.env.dev` to `.env.docker`.
+
+**Invitation changes**
+
+If you wish to preserve the previous behavior that allowed accepting an invitation from any email address:
+
+1. Remove the email address check in `apps.teams.forms.TeamSignupForm`
+2. In `templates/account/signup.html` change the following line
+
+```
+<input type="hidden" name="{{ form.email.name }}" value="{{ invitation.email }}"/>
+```
+
+to:
+
+```
+{% render_text_input form.email %}
+```
+
+*Dec 27 2022*
+
 ## Version 2022.11.1
 
 This release is a minor/hotfix update with a few small changes.
