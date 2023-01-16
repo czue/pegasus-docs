@@ -250,10 +250,15 @@ This works well if you have access to persistent storage on your site such as a 
 Docker volume however in many instances you will want to store user content in a separate system
 such as S3.
 
-This is very easy to configure using the [django-storages][django-storages] library which provides
+This is easy to configure using the [django-storages][django-storages] library which provides
 storage backends for a variety of different services.
 
 [django-storages]: https://django-storages.readthedocs.io/en/latest/index.html
+
+For S3 specifically, [this guide][django-s3-testdriven] is an excellent resource
+that includes the steps you need to take on S3, and includes public and private media files.
+
+[django-s3-testdriven]: https://testdriven.io/blog/storing-django-static-and-media-files-on-amazon-s3/
 
 ### Setting up django-storages
 

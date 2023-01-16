@@ -69,12 +69,12 @@ See your [chosen platform's documentation](/deployment.rst) for how to run one-o
 
 Some functionality, like user profile pictures, requires saving user-uploaded files.
 In development these are saved to the file system, but in most production environments the file system
-is not usable for it. Instead you need to set up an external storage to handle these.
+is not usable for it. Instead, you need to set up an external storage to handle these.
 
-The most common choice of external storage is [Amazon S3](https://aws.amazon.com/s3/).
-[This guide](https://testdriven.io/blog/storing-django-static-and-media-files-on-amazon-s3/) is an excellent resource
-on setting up S3 and using it to host both public and private media files (you can ignore the part about static files,
-unless you also want to host those there).
+There is guidance on configuring media files in the [settings and configuration docs](https://docs.saaspegasus.com/configuration.html#storing-media-files).
+
+The most common choice of external storage is [Amazon S3](https://aws.amazon.com/s3/),
+though many cloud providers have their own S3-compatible options, e.g. [Digital Ocean Spaces](https://www.digitalocean.com/products/spaces).
 
 Future versions of Pegasus should improve on this process.
 
