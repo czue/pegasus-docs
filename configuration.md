@@ -142,11 +142,10 @@ ACCOUNT_EMAIL_VERIFICATION = 'optional'  # change to "mandatory" to require user
 
 ### Customizing emails
 
-Pegasus comes with simple, responsive email templates for password reset and email address confirmation.
-These templates can be further customized by editing the files in the
-`templates/account/email` directory.
+Since version 2022.6, Pegasus ships with simple, responsive email templates for password reset and email address confirmation.
+These templates can be further customized by editing the files in the `templates/account/email` directory.
 
-See [the allauth email documentation][allauth-email] for more information.
+See [the allauth email documentation][allauth-email] for more information about customizing account emails.
 
 [allauth-email]: https://django-allauth.readthedocs.io/en/latest/advanced.html#sending-email
 
