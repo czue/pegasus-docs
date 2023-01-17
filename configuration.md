@@ -140,6 +140,16 @@ ACCOUNT_EMAIL_VERIFICATION = 'optional'  # change to "mandatory" to require user
 
 *Note: The email verification step will be skipped if using a Google / social login.*
 
+### Customizing emails
+
+Pegasus comes with simple, responsive email templates for password reset and email address confirmation.
+These templates can be further customized by editing the files in the
+`templates/account/email` directory.
+
+See [the allauth email documentation][allauth-email] for more information.
+
+[allauth-email]: https://django-allauth.readthedocs.io/en/latest/advanced.html#sending-email
+
 ### Disabling public sign ups
 
 If you'd like to prevent everyone from signing up for your app, you set the following in your `settings.py`,
