@@ -28,6 +28,42 @@ pulled from git will typically only include a `.env.example` file.
 
 *Note: Pegasus versions prior to 2023.1 may not include all of these files.*
 
+### Settings environment precedence
+
+Most settings are configured in the form:
+
+```python
+SOME_VALUE = env('SOME_VALUE', default='')
+```
+
+As mentioned above, *it is recommended to set these values in your environment / `.env` file*,
+which will always work as expected.
+
+The environment takes precedence over the default if it's set---even if it is set to an empty value.
+This can lead to confusing behavior.
+
+For example, if in your `.env` file you have this line:
+
+```
+SOME_VALUE=''
+```
+
+And in your `settings.py` you provide a default:
+
+```python
+SOME_VALUE = env('SOME_VALUE', default='my value')
+```
+
+The default will be ignored, and `SOME_VALUE` will be an empty string.
+
+To fix this, either *remove the value entirely from your `.env` file*,
+or *explicitly set the value in your `settings.py`* (instead of using the `default` argument).
+E.g.
+
+```python
+SOME_VALUE = 'my value'
+```
+
 ## Project Metadata
 
 When you first setup Pegasus it populated the `PROJECT_METADATA` setting in `settings.py` with various 
@@ -182,7 +218,7 @@ STRIPE_LIVE_MODE = False  # Change to True in production
 
 ## Google Analytics
 
-To enable Google Analytics, add your analytics tracking ID to `settings.py`:
+To enable Google Analytics, add your analytics tracking ID to your `.env` file or `settings.py` file:
 
 ```python
 GOOGLE_ANALYTICS_ID = 'UA-XXXXXXX-1' 
@@ -195,7 +231,6 @@ match the snippet provided by Google.
 
 See [this article](https://support.google.com/tagmanager/answer/7582054) for more on the differences between
 gtag.js and Google Tag Manager.
-
 
 ## Sentry
 
