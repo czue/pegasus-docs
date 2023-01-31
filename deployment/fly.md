@@ -125,7 +125,7 @@ app $ ./code/manage.py [command]
 Out of the box, Pegasus is configured to run Celery using the [multiprocess support][multiprocess] provided by
 Fly.io.
 
-For alternatives see https://fly.io/docs/app-guides/multiple-processes/
+For alternatives see [https://fly.io/docs/app-guides/multiple-processes/](https://fly.io/docs/app-guides/multiple-processes/)
 
 [multiprocess]: https://fly.io/docs/reference/configuration/#the-processes-section
  
