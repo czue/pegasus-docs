@@ -13,6 +13,22 @@ Your site deploys but you get a "400 Bad Request" when opening it in a browser.
 This is usually caused by a misconfigured `ALLOWED_HOSTS` setting.
 See [the section on `ALLOWED_HOSTS`](https://docs.saaspegasus.com/deployment/production-checklist.html#set-your-allowed-hosts) to fix.
 
+### App is online but all styles are broken
+
+**Problem:**
+
+Your app is working but all the pages look horrible and unstyled.
+
+**Solution:**
+
+It's likely that your static file set up is not correct.
+If you use Pegasus-supported deployments, this shouldn't happen,
+but if you've veered from them at all it's a common failure mode.
+
+To fix, Ensure that you are running `collectstatic` somewhere in your deployment pipeline,
+and that your `STATIC_ROOT` is properly configured.
+More on static files in production can be found in the [Django documentation](https://docs.djangoproject.com/en/4.1/howto/static-files/deployment/).
+
 ### JavaScript API clients not working
 
 **Problem**
