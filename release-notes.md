@@ -7,21 +7,24 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ### Added
 
+- **You can now build Pegasus projects without the built-in examples.**
 - More type hints to return values in subscriptions module.
 - `SubscriptionWrapper` object now has a `products` property to get associated Stripe products.
 
+
 ### Changed
 
-- **Upgraded all Python libraries to their latest versions**
+- **Upgraded all Python libraries to their latest versions (including Django to 4.1.5)**
 - **Upgraded all JavaScript libraries to their latest versions.**
 - Update HTMX installation to use the webpack build pipeline. (HTMX builds only)
 - Set CSRF token on the site body, for usage in HTMX, as [outlined here](https://django-htmx.readthedocs.io/en/latest/tips.html#make-htmx-pass-the-csrf-token).
 - Added site name to admin sign up notification.
+- Built-in admin emails now fail silently.
 - Made it possible to configure `ACCOUNT_EMAIL_VERIFICATION` separately by environment, so it can be enabled
   in production but disabled in dev.
 - Made it possible to view/edit User's selected language in the Django admin.
 - Updated `make pip-compile` to also compile your production requirements file (if relevant).
-- Fly.io HTTP checks will now check using the the site's HTTP HOST header.
+- Fly.io HTTP checks will now run using the site's configured HTTP HOST header.
 
 ### Fixed
 
