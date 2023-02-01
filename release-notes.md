@@ -7,7 +7,7 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 This release was driven by feedback from the Pegasus community.
 It includes many library upgrades (including updating to the latest Django),
-the ability to build without the Pegasus examples, and many small changes and fixes.
+the ability to build without the Pegasus examples, and small changes and fixes.
 
 ### Added
 
