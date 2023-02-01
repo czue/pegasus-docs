@@ -3,6 +3,48 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.1
+
+This release was driven by feedback from the Pegasus community.
+It includes many library upgrades (including updating to the latest Django),
+the ability to build without the Pegasus examples, and small changes and fixes.
+
+### Added
+
+- **You can now build Pegasus projects without the built-in examples.**
+- More type hints to return values in subscriptions module.
+- `SubscriptionWrapper` object now has a `products` property to get associated Stripe products.
+
+### Changed
+
+- **Upgraded all Python libraries to their latest versions (including Django to 4.1.6)**
+- **Upgraded all JavaScript libraries to their latest versions.**
+- **Update HTMX installation to use the webpack build pipeline. (HTMX builds only)**
+- Set CSRF token on the site body, for usage in HTMX, as [outlined here](https://django-htmx.readthedocs.io/en/latest/tips.html#make-htmx-pass-the-csrf-token).
+- Added site name to admin sign up notification.
+- Built-in admin emails now fail silently and don't cause sign-up errors if email sending fails.
+- Made it possible to configure `ACCOUNT_EMAIL_VERIFICATION` separately by environment, so it can be enabled
+  in production but disabled in dev.
+- Made it possible to view/edit User's selected language in the Django admin.
+- Updated `make pip-compile` to also compile your production requirements file (if relevant).
+- Fly.io HTTP checks will now run using the site's configured HTTP HOST header.
+
+### Fixed
+
+- Fixed a bug introduced in 2022.12 that resulted in a duplicate team being created
+  when users created an account while accepting a team invitation (Bootstrap and Tailwind only).
+- Cleaned up styling of Monthly/Annual selector buttons on subscription UI (Tailwind only).
+- Made icons in menus consistent sizes, to prevent minor alignment issues with wider/narrower icons (Tailwind only).
+- Fixed an issue preventing user profile data from being saved if internationalization was enabled, but only a single
+  language was configured.
+
+### Upgrading
+
+If you don't want to upgrade Django to 4.1 this upgrade *should* be backwards compatible.
+Pin the Django version to 3.2.x in your requirements file and [rebuild requirements](https://docs.saaspegasus.com/customizations.html#python-packages).
+
+*Feb 1, 2023*
+
 ## Version 2022.12
 
 This is a maintenance release with many small fixes and quality-of-life improvements suggested by the community.

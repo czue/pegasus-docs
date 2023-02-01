@@ -28,8 +28,10 @@ Now you should be able to access the django admin at http://localhost:8000/admin
 
 ## Delete Pegasus Examples
 
-The Pegasus examples are great for seeing a fully-working end-to-end feature,
-but in your app you probably don't want them around long term.
+On versions 2023.2 and later, you can remove the Pegasus examples by updating your build configuration
+and re-downloading (or [upgrading](upgrading.md)) your codebase.
+
+For earlier versions you can use the following instructions:
 
 ### Remove the navigation elements
 
