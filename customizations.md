@@ -50,7 +50,9 @@ pip-compile requirements/requirements.in
 pip install -r requirements/requirements.txt
 ``` 
 
-If you are using Docker in development, you'll also have to [rebuild your containers](https://docs.saaspegasus.com/docker.html#updating-python-packages).
+If you are using Docker in development, you'll also have to rebuild your containers.
+
+The easiest way to do everything is to run `make requirements` as [described here](https://docs.saaspegasus.com/docker.html#updating-python-packages).
 
 ## Styles
 
