@@ -3,7 +3,7 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
-## Version 2023.1
+## Version 2023.2
 
 This release was driven by feedback from the Pegasus community.
 It includes many library upgrades (including updating to the latest Django),
