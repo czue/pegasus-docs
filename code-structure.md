@@ -50,11 +50,11 @@ The module starts with up to five apps, depending on your configuration.
 
 This is where the Pegasus examples live.
 
-In general it is not expected that you'll need to modify much in this module, though feel free to do so!
+In general, it is not expected that you'll need to modify much in this module, though feel free to do so!
 
 ## The `requirements` folder
 
-This is where you define your project's Python requrements.
+This is where you define your project's Python requirements.
 
 Requirements are managed using `pip-tools`. 
 For more information on using it see [their documentation](https://github.com/jazzband/pip-tools).
