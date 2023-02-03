@@ -77,3 +77,25 @@ from the `assets` folder as well as images.
 This folder contains your project's Django templates.
 There is one sub-folder for each application that has templates.
 The majority of the project's base template layouts are in the `templates/web` folder.
+
+## Code formatting
+
+For projects that have enabled the `Autoformat code` option, the code will have been formatted
+using [black](https://black.readthedocs.io/en/stable/) and [isort](https://pycqa.github.io/isort/).
+
+The project will also include [pre-commit](https://pre-commit.com/) as a dependency in the requirements file
+as well as the `.pre-commit-config.yaml` file in the root directory. pre-commit is a tool for managing pre-commit
+hooks.
+
+After installing the project dependencies you can install the pre-commit hooks:
+
+```
+$ pre-commit install
+pre-commit installed at .git/hooks/pre-commit
+```
+
+The default configuration that ships with Pegasus will run `isort` and `black` prior to every Git
+commit. If there are fixes that are needed you will be notified in the shell output.
+
+See the [pre-commit docs](https://pre-commit.com/#quick-start) for more information on using and
+configuring pre-commit.
