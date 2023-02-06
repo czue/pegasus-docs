@@ -96,3 +96,21 @@ The platform-specific docs have some guidance on setting this up where possible.
 
 See [the configuration page](/configuration.md) for a larger list of options,
 including social login, sign up flow changes, analytics, logging, and so on.
+
+## Consider switching to `psycopg2` source distribution
+
+For ease of development, Pegasus ships with the `psycopg2-binary` package which is used for connecting
+to PostgreSQL however the [psycopg documentation](https://www.psycopg.org/docs/install.html#psycopg-vs-psycopg-binary)
+recommends using the source distribution (`psycopg2`) in production environments.
+
+The issues mentioned in the documentation mostly impact non-Docker deployments.
+
+### Switching from `psycopg2-binary` to `psycopg2`
+
+1. In `requirements/requirements.in`, replace `psycopg2-binary` with `psycopg2`
+2. [Re-build](../customizations.md#python-packages) your requirement TXT files
+
+If you are using the Dockerfiles shipped with Pegasus you should not need to make any changes
+however if you are running your Pegasus app directly on a VM you will need to make sure the
+[build prerequisites](https://www.psycopg.org/docs/install.html#build-prerequisites) are installed before
+deploying the requirements changes.
