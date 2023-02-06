@@ -117,6 +117,9 @@ For more information on using and configuring pre-commit check out the
 
 
 ### Tool configurations
+The configuration for the tools can be found in the [`pyproject.toml`][toml] file.
+
+[toml]: https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html#what-on-earth-is-a-pyproject-toml-file
 
 **isort**
 
