@@ -41,7 +41,8 @@ You'll inevitably want to add new Python packages to your project.
 Pegasus uses [pip tools](https://github.com/jazzband/pip-tools) to manage Python dependencies.
 This allows for more explicit dependency management than a standard `requirements.txt` file.
 
-You can install pip tools by running `pip install --upgrade pip-tools`.
+Pip tools is included as a dependency in the `dev-requirements.txt` file so if you've followed the local setup
+steps it should already be installed.
 
 Then, to add/modify your requirements, edit `requirements/requirements.in` with the new package and run:
 
