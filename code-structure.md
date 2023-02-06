@@ -85,7 +85,7 @@ using [black](https://black.readthedocs.io/en/stable/) and [isort](https://pycqa
 
 The project will also include [pre-commit](https://pre-commit.com/) as a dependency in the requirements file
 as well as the `.pre-commit-config.yaml` file in the root directory. pre-commit is a tool for managing pre-commit
-hooks.
+hooks - which can be used to ensure your code matches the correct format when it's committed.
 
 After installing the project dependencies you can install the pre-commit hooks:
 
