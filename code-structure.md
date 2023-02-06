@@ -102,10 +102,10 @@ commit. If there are fixes that are needed you will be notified in the shell out
 **Manually running hooks**
 ```shell
 # run all hooks against currently staged files
-pre--commit run
+pre-commit run
 # run all the hooks against all the files. This is a useful invocation if you are using pre-commit in CI.
 pre-commit run --all-files
-# run the isort hook against all staged files
+# only run the isort hook against all staged files
 pre-commit run isort
 ```
 
