@@ -99,7 +99,7 @@ including social login, sign up flow changes, analytics, logging, and so on.
 
 ## Consider switching to `psycopg2` source distribution
 
-Pegasus ships with the `psycopg2-binary` package which is used for connecting
+For ease of development, Pegasus ships with the `psycopg2-binary` package which is used for connecting
 to PostgreSQL however the [psycopg documentation](https://www.psycopg.org/docs/install.html#psycopg-vs-psycopg-binary)
 recommends using the source distribution (`psycopg2`) in production environments.
 
