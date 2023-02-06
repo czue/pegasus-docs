@@ -90,12 +90,48 @@ hooks - which can be used to ensure your code matches the correct format when it
 After installing the project dependencies you can install the pre-commit hooks:
 
 ```
-$ pre-commit install
+$ pre-commit install --install-hooks
 pre-commit installed at .git/hooks/pre-commit
 ```
 
 The default configuration that ships with Pegasus will run `isort` and `black` prior to every Git
 commit. If there are fixes that are needed you will be notified in the shell output.
 
-See the [pre-commit docs](https://pre-commit.com/#quick-start) for more information on using and
-configuring pre-commit.
+### pre-commit Usage
+
+**Manually running hooks**
+```shell
+# run all hooks against currently staged files
+pre--commit run
+# run all the hooks against all the files. This is a useful invocation if you are using pre-commit in CI.
+pre-commit run --all-files
+# run the isort hook against all staged files
+pre-commit run isort
+```
+
+**Temporarily disable hooks**
+See https://pre-commit.com/#temporarily-disabling-hooks
+
+For more information on using and configuring pre-commit check out the 
+[pre-commit docs](https://pre-commit.com/#quick-start) 
+
+
+### Tool configurations
+
+**isort**
+
+| Parameter    | Value   |
+|--------------|---------|
+| Filter Files | `true`  |
+| Profile      | `black` | 
+| Line Length  | `120`   |
+
+[iSort docs](https://pycqa.github.io/isort/docs/configuration/options)
+
+**black**
+
+| Parameter    | Value   |
+|--------------|---------|
+| Line Length  | `120`   |
+
+[Black docs](https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html)
