@@ -3,6 +3,19 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.2.1
+
+(this is a currently unreleased version)
+
+### Added
+
+- (writeup about pre-commit, black, etc. with links to docs)
+
+### Fixed
+
+- Removed "https" prefix from fly.io host checks, which caused them to fail.
+
+
 ## Version 2023.2
 
 This release was driven by feedback from the Pegasus community.
