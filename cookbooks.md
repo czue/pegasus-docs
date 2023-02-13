@@ -32,7 +32,7 @@ As of February, 2023 all Pegasus projects have the option to auto-format your Py
 
 To migrate a project from non-formatted to formatted code, you can go through the following steps:
 
-1. First, do a full Pegasus upgrade to the version you want to update to, as described [here])(./upgrading.md).
+1. First, do a full Pegasus upgrade to the version you want to update to, as described [here](./upgrading.md).
    Do *not* check the "autoformat" checkbox yet.
 2. Next, run the formatting tools on your project's `main` branch: 
    1. Install black and isort: `pip install black isort`
