@@ -26,6 +26,23 @@ python ./manage.py promote_user_to_superuser yourname@example.com
 
 Now you should be able to access the django admin at http://localhost:8000/admin
 
+## Migrating to auto-formatted code
+
+As of February, 2023 all Pegasus projects have the option to auto-format your Python code.
+
+To migrate a project from non-formatted to formatted code, you can go through the following steps:
+
+1. First, do a full Pegasus upgrade to the version you want to update to, as described [here])(./upgrading.md).
+   Do *not* check the "autoformat" checkbox yet.
+2. Next, run the formatting tools on your project's `main` branch: 
+   1. Install black and isort: `pip install black isort`
+   2. Run black: `black --extend-exclude migrations --line-length 120 .`
+   3. Run isort: `isort -l 120 --profile black .`
+3. Commit the result:
+   1. `git add .`
+   2. `git commit -m "apply formatting changes"`
+4. Finally, check the "autoformat" box on your Pegasus project, and do another upgrade according to the same process.
+
 ## Delete Pegasus Examples
 
 On versions 2023.2 and later, you can remove the Pegasus examples by updating your build configuration
