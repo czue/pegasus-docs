@@ -28,7 +28,7 @@ Now you should be able to access the django admin at http://localhost:8000/admin
 
 ## Migrating to auto-formatted code
 
-As of February, 2023 all Pegasus projects have the option to auto-format your python code.
+As of February, 2023 all Pegasus projects have the option to auto-format your Python code.
 
 To migrate a project from non-formatted to formatted code, you can go through the following steps:
 
