@@ -14,7 +14,8 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 ### Fixed
 
 - Removed "https" prefix from fly.io host checks, which caused them to fail.
-
+- Fixed the url in the "Add a Password" link on the user's profile to go to the set password page.
+  This link is only visible if the user signs up via social auth. (Thanks Blake for reporting) 
 
 ## Version 2023.2
 
