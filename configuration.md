@@ -319,3 +319,18 @@ that includes the steps you need to take on S3, and includes public and private 
    Select the provider from the [list of available providers][providers] use and follow the setup instructions.
 
 [providers]: https://django-storages.readthedocs.io/en/latest/index.html
+
+### Django Debug Toolbar
+
+Pegasus ships with [Django Debug Toolbar](https://github.com/jazzband/django-debug-toolbar#readme)
+as an optional pacakge. This section describes how the feature is configured in Pegasus.
+
+The `django-debug-toolbar` package is placed in the `dev-requirements.txt` file which means it will only
+be available in dev environments. Should you wish to use it in a production environment you will need
+to add it to your `prod-requirements.in` file and [re-build](customizations.md#python-packages) your `prod-requirements.txt` file.
+
+The toolbar is disabled by default. To enable it add the `ENABLE_DEBUG_TOOLBAR` setting to your `.env` file:
+
+```
+ENABLE_DEBUG_TOOLBAR=True
+```
