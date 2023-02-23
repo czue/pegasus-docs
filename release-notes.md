@@ -11,11 +11,23 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 - (writeup about pre-commit, black, etc. with links to docs)
 
+### Changed
+
+- Added `SOCIALACCOUNT_LOGIN_ON_GET = True` to `settings.py`.
+  This removes the extra confirmation page for social sign ups, improving the UX, though does
+  open up a minor security risk [outlined here](https://github.com/pennersr/django-allauth/blob/master/ChangeLog.rst#security-notice-1).
+  Remove this line if you prefer to keep the extra page.
+
+
 ### Fixed
 
 - Removed "https" prefix from fly.io host checks, which caused them to fail.
 - Fixed the url in the "Add a Password" link on the user's profile to go to the set password page.
-  This link is only visible if the user signs up via social auth. (Thanks Blake for reporting) 
+  This link is only visible if the user signs up via social auth. (Thanks Blake for reporting)
+- Added a workaround for an allauth bug that causes occasional 500 errors when users tried to sign in
+  with a social account that was already tied to an existing email address. [Details here](https://github.com/pennersr/django-allauth/blob/master/ChangeLog.rst#backwards-incompatible-changes-).
+  (Thanks Simon for finding and fixing)
+
 
 ## Version 2023.2
 
