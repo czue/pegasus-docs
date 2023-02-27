@@ -287,7 +287,7 @@ Alternatively the entire log configuration can be overridden using the `LOGGING`
 
 SaaS Pegasus ships with optional configuration for storing dynamic media files in S3 e.g. user profile pictures.
 If you do not have this enabled the [default Django configuration][default] will be used which requires
-you have persistent storage available to your site such as a Docker volume.
+you to have persistent storage available for your site such as a Docker volume.
 
 [default]: https://docs.djangoproject.com/en/4.1/topics/files/
 
