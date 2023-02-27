@@ -76,8 +76,6 @@ There is guidance on configuring media files in the [settings and configuration 
 The most common choice of external storage is [Amazon S3](https://aws.amazon.com/s3/),
 though many cloud providers have their own S3-compatible options, e.g. [Digital Ocean Spaces](https://www.digitalocean.com/products/spaces).
 
-Future versions of Pegasus should improve on this process.
-
 ## Optimize your front end
 
 The front-end files that ship with Pegasus are the developer-friendly versions.
