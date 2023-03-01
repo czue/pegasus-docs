@@ -28,6 +28,7 @@ Subscriptions to Alpine
   This removes the extra confirmation page for social sign ups, improving the UX, though does
   open up a minor security risk [outlined here](https://github.com/pennersr/django-allauth/blob/master/ChangeLog.rst#security-notice-1).
   Remove this line if you prefer to keep the extra page.
+- Saving a user profile now shows a confirmation message. (thanks Viktor for suggesting!)
 
 
 ### Fixed
@@ -42,7 +43,13 @@ Subscriptions to Alpine
 
 ### Removed
 
-- The no-longer-used `get_payment_metadata_from_request` helper function.
+- Removed the no-longer-used `get_payment_metadata_from_request` helper function.
+- Removed legacy styling markup from subscription details page. (thanks Viktor for reporting!)	
+
+### Documentation
+
+- Added write up about [the front end files]().
+- Added write up about managing [test vs live Stripe products]()
 
 ## Version 2023.2
 
