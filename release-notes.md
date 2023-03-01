@@ -11,8 +11,19 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 - (writeup about pre-commit, black, etc. with links to docs)
 
+Subscriptions to Alpine
+
+- Migrated subscription selection flow from JavaScript to Alpine.js.
+- Removed helper functions on `ProductWithMetadata` related to monthly/annual pricing (e.g. `monthly_price`).
+- Updated `ProductWithMetadata` serialization format remove monthly/annual/default prices, and add a dictionary of prices based on billing interval.
+- Support more than two billing intervals (can now add any of Annual / Monthly / Weekly / Daily)
+- Migrated help text under the billing interval selector to the `PlanIntervalMetadata` helper class and removed front-end styling.
+- Added `payment_amount` field to the Product/Price API serializer.
+
+
 ### Changed
 
+- Upgraded generated API client to version 6.4.0
 - Added `SOCIALACCOUNT_LOGIN_ON_GET = True` to `settings.py`.
   This removes the extra confirmation page for social sign ups, improving the UX, though does
   open up a minor security risk [outlined here](https://github.com/pennersr/django-allauth/blob/master/ChangeLog.rst#security-notice-1).
@@ -28,6 +39,10 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
   with a social account that was already tied to an existing email address. [Details here](https://github.com/pennersr/django-allauth/blob/master/ChangeLog.rst#backwards-incompatible-changes-).
   (Thanks Simon for finding and fixing)
 
+
+### Removed
+
+- The no-longer-used `get_payment_metadata_from_request` helper function.
 
 ## Version 2023.2
 
