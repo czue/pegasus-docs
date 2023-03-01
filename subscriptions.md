@@ -243,6 +243,55 @@ class CustomUser(SubscriptionModelBase, AbstractUser):
         return self.workspaces.count()
 ```
 
+## Stripe in Production
+
+In development you will use your Stripe test account, but when it comes time to go to production,
+you will want to switch to the live account.
+
+This entails:
+
+1. Setting `STRIPE_LIVE_MODE` to `True` in your settings/environment.
+2. Populating `STRIPE_LIVE_PUBLIC_KEY` and `STRIPE_LIVE_SECRET_KEY` in your environment.
+3. Updating your `ACTIVE_PRODUCTS` to support both test and live mode (see below)
+
+### Managing Test and Live Stripe Products
+
+When you run `bootstrap_subscriptions` Pegasus will generate a list of your `ACTIVE_PRODUCTS` that includes
+hard-coded Stripe Product IDs.
+This works great in development, but presents a problem when trying to enable live mode.
+
+One way to workaround this is to replace the hard-coded product IDs with values from your django settings.
+
+E.g. in `apps/subscriptions/metadata.py` change from:
+
+```python
+ACTIVE_PRODUCTS = [
+    ProductMetadata(
+        stripe_id='prod_abc',  # change this line for every product
+        slug='starter',
+        ...
+```
+
+To:
+
+```python
+ACTIVE_PRODUCTS = [
+    ProductMetadata(
+        stripe_id=settings.STRIPE_PRICE_STARTER,  # to something like this
+        slug='starter',
+        ...
+```
+
+Then in your `settings.py` file, you can define these values based on the `STRIPE_LIVE_MODE` setting:
+
+```python
+STRIPE_LIVE_MODE = env.bool("STRIPE_LIVE_MODE", False)
+
+STRIPE_PRICE_STARTER = "prod_xyz" if STRIPE_LIVE_MODE else "prod_abc"
+```
+
+You will have to do this for each of your products.
+
 ## Troubleshooting
 
 **Stripe is not returning to the right site after accessing checkout or the billing portal.**
