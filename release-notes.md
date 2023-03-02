@@ -3,13 +3,17 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
-## Version 2023.2.1
+## Version 2023.3
 
 (this is a currently unreleased version)
 
 ### Added
 
 - (writeup about pre-commit, black, etc. with links to docs)
+- Added a `make npm-dev` command to build front end for development in Docker.
+- Added a wrapping `meta` block to `base.html` to make overriding the page-level metadata more flexible.
+  Wagtail blog post pages now use this to override the page title and description for social sharing. 
+- Added `.direnv` and `.envrc` files to `.gitignore`
 
 Subscriptions to Alpine
 
@@ -23,12 +27,18 @@ Subscriptions to Alpine
 
 ### Changed
 
-- Upgraded generated API client to version 6.4.0
+- **Removed stripe packages, dependencies, and all related code if you build without subscriptions and without examples.**
+  (thanks Brett for suggesting!)
+- Moved stripe `card_element.html` component to `pegasus/examples/payments/components/card_element.html`, and only
+  include it if you build with examples.
+- Upgraded generated API client to version 6.4.0.
+- Upgraded django to 4.1.7 and celery-progress to 0.2. 
 - Added `SOCIALACCOUNT_LOGIN_ON_GET = True` to `settings.py`.
   This removes the extra confirmation page for social sign ups, improving the UX, though does
   open up a minor security risk [outlined here](https://github.com/pennersr/django-allauth/blob/master/ChangeLog.rst#security-notice-1).
   Remove this line if you prefer to keep the extra page.
 - Saving a user profile now shows a confirmation message. (thanks Viktor for suggesting!)
+- `make upgrade` now rebuilds your `requirements.txt` files and your front end. (thanks Brett for suggesting!)
 
 
 ### Fixed
@@ -39,12 +49,14 @@ Subscriptions to Alpine
 - Added a workaround for an allauth bug that causes occasional 500 errors when users tried to sign in
   with a social account that was already tied to an existing email address. [Details here](https://github.com/pennersr/django-allauth/blob/master/ChangeLog.rst#backwards-incompatible-changes-).
   (Thanks Simon for finding and fixing)
+- Fixed issue with `make npm-type-check` not being available if Wagtail wasn't enabled.
 
 
 ### Removed
 
 - Removed the no-longer-used `get_payment_metadata_from_request` helper function.
-- Removed legacy styling markup from subscription details page. (thanks Viktor for reporting!)	
+- Removed the no-longer-used `catch_stripe_errors` decorator.
+- Removed legacy styling markup from subscription details page. (thanks Viktor for reporting!)
 
 ### Documentation
 
