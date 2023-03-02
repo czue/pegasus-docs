@@ -15,11 +15,21 @@ Pegasus ships with full support for localizing user-facing text.
 Currently, not all the user-facing text is properly tagged for localization but this will be incrementally addressed
 in future releases.
 
-For full documentation on localization see the [Django docs](https://docs.djangoproject.com/en/4.0/topics/i18n/).
+For full documentation on localization see the [Django docs](https://docs.djangoproject.com/en/4.1/topics/i18n/).
 
-### Configuration
+## Big picture
 
-Define the list of languages that will be available on your site:
+Big picture there are two steps to translation:
+
+1. **Define the text you want to translate (in Python, HTML, or JavaScript)**. This step happens in your project's code.
+2. **Add a translation for that text to other languages**. This step happens in your project's translation files, 
+   which can be found in the `locale/<lang_code>/LC_MESSAGES/` folders (there will be one for each language).
+
+## Managing enabled languages
+
+There are two steps to updating the list of languages that will be available on your site.
+The first step is to define it in `settings.LANGUAGES`.
+Out of the box this will be English and French:
 
 ```python
 from django.utils.translation import gettext_lazy
@@ -27,24 +37,27 @@ from django.utils.translation import gettext_lazy
 LANGUAGES = [
     ('en', gettext_lazy('English')),
     ('fr', gettext_lazy('French')),
+    # add other languages here
 ]
 ```
 
-When adding a new language you will need to create the language files by running:
+The second step is to create the translations folder for the language.
+This can be done by running:
 
 ```shell
 python ./manage.py makemessages -l [new lang code] --ignore node_modules --ignore venv
 ```
 
-After running this, you can update the language files as new strings are added by running:
+Or in Docker:
+
 
 ```shell
-python ./manage.py makemessages --all --ignore node_modules --ignore venv
-python ./manage.py makemessages -d djangojs --all --ignore node_modules --ignore venv
-python ./manage.py compilemessages
+docker-compose exec web python manage.py makemessages -l [new lang code] --ignore node_modules --ignore venv
 ```
 
-### Basic Usage
+## Marking text in your app for translation
+
+All text you want to be translatable must be tagged in your application. This can be done as follows:
 
 **In Python:**
 ```python
@@ -75,6 +88,50 @@ See the [Django docs](https://docs.djangoproject.com/en/4.0/topics/i18n/translat
 **In Wagtail:**
 
 See the [Wagtail docs](https://docs.saaspegasus.com/wagtail#internationalization).
+
+## Creating / updating translation files
+
+After you've marked text for translation, you'll need to update your language files.
+This can be done by running:
+
+```shell
+python ./manage.py makemessages --all --ignore node_modules --ignore venv
+python ./manage.py makemessages -d djangojs --all --ignore node_modules --ignore venv
+```
+
+Or in Docker:
+
+```
+make translations
+```
+
+## Adding actual translations for other languages
+
+To add a translation for another language you need to edit that languages messages (.po) file.
+
+For example, to edit a French translation, you would update
+`locale/fr/LC_MESSAGES/django.po`.
+Then search for the text you want to translate, and add the French translation:
+
+```
+msgid "My Team"
+msgstr "Mon Équipe"
+```
+
+The above lines will replace "My Team" with "Mon Équipe" whenever the French language is configured.
+
+After editing any message (.po) file, you will have to compile the messages for the updates to show up in your app.
+This can be done by:
+
+```shell
+python ./manage.py compilemessages
+```
+
+Or in Docker:
+
+```
+make translations
+```
 
 ## Technical notes
 
