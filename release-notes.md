@@ -10,8 +10,8 @@ This release includes several new features as well a lot of maintenance work.
 ### Code formatting
 
 Pegasus will (optionally) now auto-format your Python code using [black](https://black.readthedocs.io).
-In addition to formatting, Pegasus now ships with [pre-commit hooks](https://pre-commit.com), which you
-can install to ensure your code matches the expected format.
+In addition to formatting, Pegasus now ships with [pre-commit hooks](https://pre-commit.com)---which you
+can install to ensure your code matches the expected format---and adds format checks to your Github actions CI.
 Much more detail can be found in the new [code formatting docs](https://docs.saaspegasus.com/code-structure.html#code-formatting).
 This option is enabled by default for new projects, and it's recommended that all existing Pegasus projects upgrade to this format,
 as it will make future merges/upgrades much easier.
@@ -50,6 +50,7 @@ The subscriptions UI was updated to use Alpine, and more features will move to A
 - Added a wrapping `meta` block to `base.html` to make overriding the page-level metadata more flexible.
   Wagtail blog post pages now use this to override the page title and description for social sharing. 
 - Added `.direnv` and `.envrc` files to `.gitignore`
+- Added global `[x-cloak]` style to hide elements in Alpine.
 
 ### Changed
 
@@ -60,7 +61,7 @@ The subscriptions UI was updated to use Alpine, and more features will move to A
 - As a result, **Pegasus now supports more than two billing intervals (you can now add any of Annual / Monthly / Weekly / Daily)**
 - Migrated help text under the billing interval selector to the `PlanIntervalMetadata` helper class and removed front-end styling.
 - Added `payment_amount` field to the Product/Price API serializer.
-- **Removed stripe packages, dependencies, and all related code if you build without subscriptions and without examples.**
+- **Removed stripe packages, dependencies, and all related code/styles if you build without subscriptions and without examples.**
   (thanks Brett for suggesting!)
 - Moved stripe `card_element.html` component to `pegasus/examples/payments/components/card_element.html`, and only
   include it if you build with examples.
@@ -86,6 +87,7 @@ The subscriptions UI was updated to use Alpine, and more features will move to A
 - [Details here](https://github.com/pennersr/django-allauth/blob/master/ChangeLog.rst#backwards-incompatible-changes-).
   (Thanks Simon for finding and fixing!)
 - Fixed issue with `make npm-type-check` not being available if Wagtail wasn't enabled.
+- Stop logging errors adding people to the mailing list if they were already on it.
 - Improved styling of documentation link when subscriptions were improperly configured dn Tailwind builds.
 
 ### Removed
