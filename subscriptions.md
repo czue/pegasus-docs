@@ -22,14 +22,15 @@ Complete the following steps in order to setup your first subscription workflow.
    [Stripe's documentation](https://stripe.com/docs/billing/subscriptions/set-up-subscription) for help on doing this.
 2. Update the `STRIPE_*` variables in `settings.py` or in your os environment variables to match
    the keys from Stripe. See [this page](https://stripe.com/docs/keys) to find your API keys.
-3. Update your API keys in the Django admin as per [dj-stripe's instructions here](https://dj-stripe.dev/api_keys/#adding-new-api-keys)
-4. Run `./manage.py bootstrap_subscriptions`. If things are setup correctly,
+3. Run `./manage.py bootstrap_subscriptions`. If things are setup correctly,
    you should see output that includes "Synchronized plan plan_[plan_id]" for each plan you created,
    and an output starting with `ACTIVE_PRODUCTS = ` containing the products you just created.
-5. Paste the `ACTIVE_PRODUCTS` output from the previous step into `apps/subscriptions/metadata.py`
+   This will also automatically update your API keys in the Django admin, as
+   described in [dj-stripe's instructions](https://dj-stripe.dev/api_keys/#adding-new-api-keys).
+4. Paste the `ACTIVE_PRODUCTS` output from the previous step into `apps/subscriptions/metadata.py`
    overriding what is there. Update any other details you want, for example,
    the "description" and "features" fields.
-6. Optionally edit the `ACTIVE_PLAN_INTERVALS` variable in `apps/subscriptions/metadata.py`
+5. Optionally edit the `ACTIVE_PLAN_INTERVALS` variable in `apps/subscriptions/metadata.py`
    if you don't plan to include both monthly and annual offerings.
 
 Now login and click the "Subscription" tab in the navigation. 
