@@ -15,6 +15,7 @@ can install to ensure your code matches the expected format.
 Much more detail can be found in the new [code formatting docs](https://docs.saaspegasus.com/code-structure.html#code-formatting).
 This option is enabled by default for new projects, and it's recommended that all existing Pegasus projects upgrade to this format,
 as it will make future merges/upgrades much easier.
+Guidance on upgrading [can be found here](https://docs.saaspegasus.com/cookbooks.html#migrating-to-auto-formatted-code).
 
 ### S3 production media support
 
@@ -99,6 +100,7 @@ The subscriptions UI was updated to use Alpine, and more features will move to A
 - **Added write up about [the front end files](https://docs.saaspegasus.com/front-end.html#providing-site-wide-javascript).**
 - **Added write up about managing [test vs live Stripe products](https://docs.saaspegasus.com/subscriptions.html#stripe-in-production)**
 - **Improved the [internationalization/translation docs](./internationalization.md).**
+- **Added [a cookbook for how to enable auto-formatting on your existing project](https://docs.saaspegasus.com/cookbooks.html#migrating-to-auto-formatted-code).**
 
 *March 3, 2023*
 
