@@ -28,7 +28,7 @@ follow the new [S3 media documentation](https://docs.saaspegasus.com/configurati
 
 Pegasus now (optionally) ships with the popular [django-debug-toolbar](https://github.com/jazzband/django-debug-toolbar) package.
 You can enable this option in your project configuration, and it will be enabled by default in development
-environments and turned off in production. More details in [the documentation](https://docs.saaspegasus.com/configuration.html#django-debug-doolbar).
+environments and turned off in production. More details in [the documentation](https://docs.saaspegasus.com/configuration.html#django-debug-toolbar).
 
 ### Alpine.js support
 
