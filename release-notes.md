@@ -5,33 +5,65 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ## Version 2023.3
 
-(this is a currently unreleased version)
+This release includes several new features as well a lot of maintenance work.
+
+### Code formatting
+
+Pegasus will (optionally) now auto-format your Python code using [black](https://black.readthedocs.io).
+In addition to formatting, Pegasus now ships with [pre-commit hooks](https://pre-commit.com), which you
+can install to ensure your code matches the expected format.
+Much more detail can be found in the new [code formatting docs](https://docs.saaspegasus.com/code-structure.html#code-formatting).
+This option is enabled by default for new projects, and it's recommended that all existing Pegasus projects upgrade to this format,
+as it will make future merges/upgrades much easier.
+
+### S3 production media support
+
+You can now use S3 to store your project's production media with just a few lines of configuration.
+To use S3, enable the "S3 media storage" option in your project's configuration, and then
+follow the new [S3 media documentation](https://docs.saaspegasus.com/configuration.html#setting-up-s3-media-storage).
+
+### Django debug toolbar
+
+Pegasus now (optionally) ships with the popular [django-debug-toolbar](https://github.com/jazzband/django-debug-toolbar) package.
+You can enable this option in your project configuration, and it will be enabled by default in development
+environments and turned off in production. More details in [the documentation](https://docs.saaspegasus.com/configuration.html#django-debug-doolbar).
+
+### Alpine.js support
+
+The [Alpine.js](https://alpinejs.dev/) library has been officially added as a dependency to all Pegasus builds.
+Using Alpine allows replacing large amounts of custom JavaScript with a small amount of markup.
+The subscriptions UI was updated to use Alpine, and more features will move to Alpine in the future.
+
+*Below is the complete changelog for this release:*
 
 ### Added
 
-- (writeup about pre-commit, black, etc. with links to docs)
+- **Added pre-commit/black support, as described above and in the [code formatting docs](https://docs.saaspegasus.com/code-structure.html#code-formatting)**
+- **Added django-debug-toolbar, as described above and in [the `debug-toolbar` documentation](https://docs.saaspegasus.com/configuration.html#django-debug-doolbar)**
+- **Added S3 media support, as described above and in the [S3 media documentation](https://docs.saaspegasus.com/configuration.html#setting-up-s3-media-storage).**
+- **Added Alpine.js as a top-level JavaScript dependency, included on all pages.**
+- **Added `dev-requirements.in` and `dev-requirements.txt`, for requirements that should only be installed in development
+  (e.g. `pip-tools`, `debug-toolbar`, `black`, etc.** 
+- Added health checks to Docker postgres and redis, to ensure they are ready before other containers start. (thanks Moritz for suggesting!)
 - Added a `make npm-dev` command to build front end for development in Docker.
 - Added a wrapping `meta` block to `base.html` to make overriding the page-level metadata more flexible.
   Wagtail blog post pages now use this to override the page title and description for social sharing. 
 - Added `.direnv` and `.envrc` files to `.gitignore`
 
-Subscriptions to Alpine
-
-- Migrated subscription selection flow from JavaScript to Alpine.js.
-- Removed helper functions on `ProductWithMetadata` related to monthly/annual pricing (e.g. `monthly_price`).
-- Updated `ProductWithMetadata` serialization format remove monthly/annual/default prices, and add a dictionary of prices based on billing interval.
-- Support more than two billing intervals (can now add any of Annual / Monthly / Weekly / Daily)
-- Migrated help text under the billing interval selector to the `PlanIntervalMetadata` helper class and removed front-end styling.
-- Added `payment_amount` field to the Product/Price API serializer.
-
-
 ### Changed
 
+- **Migrated subscription selection flow from JavaScript to Alpine.js** and deleted a lot of custom JavaScript
+  code that was no longer necessary as a result.
+- Updated `ProductWithMetadata` serialization format remove monthly/annual/default prices,
+  and add a dictionary of prices based on billing interval.
+- As a result, **Pegasus now supports more than two billing intervals (you can now add any of Annual / Monthly / Weekly / Daily)**
+- Migrated help text under the billing interval selector to the `PlanIntervalMetadata` helper class and removed front-end styling.
+- Added `payment_amount` field to the Product/Price API serializer.
 - **Removed stripe packages, dependencies, and all related code if you build without subscriptions and without examples.**
   (thanks Brett for suggesting!)
 - Moved stripe `card_element.html` component to `pegasus/examples/payments/components/card_element.html`, and only
   include it if you build with examples.
-- Upgraded generated API client to version 6.4.0.
+- Upgraded generated API client to version 6.4.0, and regenerated the API client.
 - Upgraded django to 4.1.7 and celery-progress to 0.2. 
 - Added `SOCIALACCOUNT_LOGIN_ON_GET = True` to `settings.py`.
   This removes the extra confirmation page for social sign ups, improving the UX, though does
@@ -39,6 +71,8 @@ Subscriptions to Alpine
   Remove this line if you prefer to keep the extra page.
 - Saving a user profile now shows a confirmation message. (thanks Viktor for suggesting!)
 - `make upgrade` now rebuilds your `requirements.txt` files and your front end. (thanks Brett for suggesting!)
+- `STRIPE_LIVE_MODE` is now automatically set to `True` in Render deployments. (Thanks Adrian for suggesting!)
+- Regenerated translation files for latest code changes.
 
 
 ### Fixed
@@ -47,21 +81,26 @@ Subscriptions to Alpine
 - Fixed the url in the "Add a Password" link on the user's profile to go to the set password page.
   This link is only visible if the user signs up via social auth. (Thanks Blake for reporting)
 - Added a workaround for an allauth bug that causes occasional 500 errors when users tried to sign in
-  with a social account that was already tied to an existing email address. [Details here](https://github.com/pennersr/django-allauth/blob/master/ChangeLog.rst#backwards-incompatible-changes-).
-  (Thanks Simon for finding and fixing)
+  with a social account that was already tied to an existing email address, by using a `CustomSocialSignupForm`.
+- [Details here](https://github.com/pennersr/django-allauth/blob/master/ChangeLog.rst#backwards-incompatible-changes-).
+  (Thanks Simon for finding and fixing!)
 - Fixed issue with `make npm-type-check` not being available if Wagtail wasn't enabled.
-
+- Improved styling of documentation link when subscriptions were improperly configured dn Tailwind builds.
 
 ### Removed
 
+- Removed helper functions on `ProductWithMetadata` related to monthly/annual pricing (e.g. `monthly_price`).
 - Removed the no-longer-used `get_payment_metadata_from_request` helper function.
 - Removed the no-longer-used `catch_stripe_errors` decorator.
 - Removed legacy styling markup from subscription details page. (thanks Viktor for reporting!)
 
 ### Documentation
 
-- Added write up about [the front end files]().
-- Added write up about managing [test vs live Stripe products]()
+- **Added write up about [the front end files](https://docs.saaspegasus.com/front-end.html#providing-site-wide-javascript).**
+- **Added write up about managing [test vs live Stripe products](https://docs.saaspegasus.com/subscriptions.html#stripe-in-production)**
+- **Improved the [internationalization/translation docs](./internationalization.md).**
+
+*March 3, 2023*
 
 ## Version 2023.2
 
