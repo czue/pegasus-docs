@@ -19,7 +19,7 @@ as it will make future merges/upgrades much easier.
 ### S3 production media support
 
 You can now use S3 to store your project's production media with just a few lines of configuration.
-To use S3, enable the "S3 media storage" option in your project's configuration, and then
+To use S3, enable the "Use S3 for storing public media files" option in your project's configuration, and then
 follow the new [S3 media documentation](https://docs.saaspegasus.com/configuration.html#setting-up-s3-media-storage).
 
 ### Django debug toolbar
