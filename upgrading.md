@@ -135,10 +135,11 @@ npm packages (`npm install`), etc. depending on what has changed.
 
 You will also need to rebuild your front end if you've made any changes there (`npm run dev` or `npm run build`)
 
-If you are using docker you can use the 'upgrade' Make target:
+If you are using docker you can use the 'upgrade' make target to do this:
 
 ```
 make upgrade
 ```
 
 This will rebuild the Docker images and create and run any database migrations that are needed.
+**Note: your web container needs to be running when you run this or it will fail.**

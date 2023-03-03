@@ -50,11 +50,11 @@ The module starts with up to five apps, depending on your configuration.
 
 This is where the Pegasus examples live.
 
-In general it is not expected that you'll need to modify much in this module, though feel free to do so!
+In general, it is not expected that you'll need to modify much in this module, though feel free to do so!
 
 ## The `requirements` folder
 
-This is where you define your project's Python requrements.
+This is where you define your project's Python requirements.
 
 Requirements are managed using `pip-tools`. 
 For more information on using it see [their documentation](https://github.com/jazzband/pip-tools).
@@ -77,3 +77,64 @@ from the `assets` folder as well as images.
 This folder contains your project's Django templates.
 There is one sub-folder for each application that has templates.
 The majority of the project's base template layouts are in the `templates/web` folder.
+
+## Code formatting
+
+For projects that have enabled the `Autoformat code` option, the code will have been formatted
+using [black](https://black.readthedocs.io/en/stable/) and [isort](https://pycqa.github.io/isort/).
+
+The project will also include [pre-commit](https://pre-commit.com/) as a dependency in the requirements file
+as well as the `.pre-commit-config.yaml` file in the root directory. pre-commit is a tool for managing pre-commit
+hooks - which can be used to ensure your code matches the correct format when it's committed.
+
+After installing the project dependencies you can install the pre-commit hooks:
+
+```
+$ pre-commit install --install-hooks
+pre-commit installed at .git/hooks/pre-commit
+```
+
+The default configuration that ships with Pegasus will run `isort` and `black` prior to every Git
+commit. If there are fixes that are needed you will be notified in the shell output.
+
+### pre-commit Usage
+
+**Manually running hooks**
+```shell
+# run all hooks against currently staged files
+pre-commit run
+# run all the hooks against all the files. This is a useful invocation if you are using pre-commit in CI.
+pre-commit run --all-files
+# only run the isort hook against all staged files
+pre-commit run isort
+```
+
+**Temporarily disable hooks**
+See https://pre-commit.com/#temporarily-disabling-hooks
+
+For more information on using and configuring pre-commit check out the 
+[pre-commit docs](https://pre-commit.com/#quick-start) 
+
+
+### Tool configurations
+The configuration for the tools can be found in the [`pyproject.toml`][toml] file.
+
+[toml]: https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html#what-on-earth-is-a-pyproject-toml-file
+
+**isort**
+
+| Parameter    | Value   |
+|--------------|---------|
+| Filter Files | `true`  |
+| Profile      | `black` | 
+| Line Length  | `120`   |
+
+[iSort docs](https://pycqa.github.io/isort/docs/configuration/options)
+
+**black**
+
+| Parameter    | Value   |
+|--------------|---------|
+| Line Length  | `120`   |
+
+[Black docs](https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html)

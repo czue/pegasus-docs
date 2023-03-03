@@ -285,37 +285,62 @@ Alternatively the entire log configuration can be overridden using the `LOGGING`
 
 ## Storing media files
 
-SaaS Pegasus ships with the [default Django configuration][default] for storing files that are uploaded by users
-such as profile pictures etc.
+SaaS Pegasus ships with optional configuration for storing dynamic media files in S3 e.g. user profile pictures.
+If you do not have this enabled the [default Django configuration][default] will be used which requires
+you to have persistent storage available for your site such as a Docker volume.
 
 [default]: https://docs.djangoproject.com/en/4.1/topics/files/
 
-This works well if you have access to persistent storage on your site such as a filesystem or
-Docker volume however in many instances you will want to store user content in a separate system
-such as S3.
+### Setting up S3 media storage
 
-This is easy to configure using the [django-storages][django-storages] library which provides
-storage backends for a variety of different services.
+This section assumes you have set up your SaaS Pegasus project with the **S3 media file storage** enabled.
 
-[django-storages]: https://django-storages.readthedocs.io/en/latest/index.html
+In order to use S3 for media storage you will need to create an S3 bucket and provide authentication
+credentials for writing data to the bucket.
 
-For S3 specifically, [this guide][django-s3-testdriven] is an excellent resource
-that includes the steps you need to take on S3, and includes public and private media files.
+Once you have done the S3 setup (see below), you can update your `.env` file as follows:
+
+```python
+USE_S3_MEDIA=True
+AWS_ACCESS_KEY_ID=<IAM user's access key>
+AWS_SECRET_ACCESS_KEY=<IAM user's secret key>
+```
+
+With this configuration your media files will be accessible at
+`https://{{ project_name }}-media.s3.amazonaws.com/media/`.
+
+[This guide][django-s3-testdriven] is an excellent resource with step-by-step instructions for the S3
+setup.
 
 [django-s3-testdriven]: https://testdriven.io/blog/storing-django-static-and-media-files-on-amazon-s3/
 
-### Setting up django-storages
+#### Additional settings
 
-1. Install the package
+AWS_STORAGE_BUCKET_NAME
+: Name of the S3 bucket to use. Defaults to `{{project_name}}-media`.
 
-    ```
-    pip install django-storages
-    ```
+AWS_S3_CUSTOM_DOMAIN
+: Name of the AWS custom domain name. Defaults to `{{project_name}}-media`.
 
-    You should also add it to your `requirements.in` file and [re-build](customizations.md#python-packages) your `requirements.txt` file.
+### Alternative storage backends
 
-2. Follow the instructions in the django-storages docs
+Should you wish to use a different storage backed e.g. [Digital Ocean Spaces](https://www.digitalocean.com/products/spaces)
+you can follow the setup described in the [django-storages][django-storages] documentation.
 
-   Select the provider from the [list of available providers][providers] use and follow the setup instructions.
+[django-storages]: https://django-storages.readthedocs.io/en/latest/index.html
 
-[providers]: https://django-storages.readthedocs.io/en/latest/index.html
+### Django Debug Toolbar
+
+Pegasus ships with [Django Debug Toolbar](https://github.com/jazzband/django-debug-toolbar#readme)
+as an optional pacakge. This section describes how the feature is configured in Pegasus.
+
+The `django-debug-toolbar` package is placed in the `dev-requirements.txt` file which means it will only
+be available in dev environments. Should you wish to use it in a production environment you will need
+to add it to your `prod-requirements.in` file and [re-build](customizations.md#python-packages) your `prod-requirements.txt` file.
+
+By default, the toolbar is enabled in development environments via the `ENABLE_DEBUG_TOOLBAR` setting 
+in your `.env` file(s). You can change this setting in any environment to turn it on/off.
+
+```
+ENABLE_DEBUG_TOOLBAR=True
+```

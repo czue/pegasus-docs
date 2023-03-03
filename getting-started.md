@@ -82,7 +82,10 @@ You should see a lot of newly created files for your project including a `manage
 
 ### Install package requirements
 
-```
+```shell
+pip install -r requirements/dev-requirements.txt
+
+# for production installs use
 pip install -r requirements.txt
 ```
 
