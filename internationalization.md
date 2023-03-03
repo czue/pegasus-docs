@@ -105,6 +105,8 @@ Or in Docker:
 make translations
 ```
 
+Note: if you get any errors you may need to [install gettext](https://stackoverflow.com/q/35101850/8207).
+
 ## Adding actual translations for other languages
 
 To add a translation for another language you need to edit that languages messages (.po) file.
