@@ -3,6 +3,29 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.3.1
+
+This release fixes a bug (introduced in `2022.12`) that caused the `AUTH_PASSWORD_VALIDATORS` setting to be ignored
+when building with teams enabled.
+
+You can also manually patch this bug with the following change:
+
+In `apps/teams/forms.py` replace this line:
+
+```python
+        cleaned_data = super(SignupForm, self).clean()
+```
+
+with
+
+```python
+        cleaned_data = super().clean()
+```
+
+Apologies to any affected users! Will be adding a test for this in a future release.
+
+*March 5, 2023*
+
 ## Version 2023.3
 
 This release includes several new features as well a lot of maintenance work.
