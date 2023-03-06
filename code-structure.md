@@ -138,3 +138,8 @@ The configuration for the tools can be found in the [`pyproject.toml`][toml] fil
 | Line Length  | `120`   |
 
 [Black docs](https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html)
+
+### Upgrading
+
+See [this cookbook](https://docs.saaspegasus.com/cookbooks.html#migrating-to-auto-formatted-code)
+for guidance on how to enable code formatting on an existing Pegasus project.
