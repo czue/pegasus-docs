@@ -3,6 +3,17 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.3.2
+
+This release fixes two small bugs (introduced in `2023.3`):
+
+- Fixed a syntax error in `render.yaml` that caused deployments to fail. Also removed unnecessary variables
+  from that file if you weren't using subscriptions or sentry.
+- Fixed an issue in the code formatting CI setup that caused the formatting checks to fail on commits made
+  directly to a branch. Now formatting CI is only run on pull requests.
+
+*March 6, 2023*
+
 ## Version 2023.3.1
 
 This release fixes a bug (introduced in `2022.12`) that caused the `AUTH_PASSWORD_VALIDATORS` setting to be ignored
