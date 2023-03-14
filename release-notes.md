@@ -3,6 +3,43 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.3.3
+
+The main feature in this minor version is an OpenAI demo,
+showing how you can quickly integrate ChatGPT and DALL-E 2 into your Pegasus apps.
+
+Here's a 3-minute demo video:
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/7DnIdEV2ygY" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
+
+There are also some small fixes (details below).
+
+### Added
+
+- ChatGPT and DALL-E 2 demos. To use these you need to check the "OpenAI demos" box in your project settings.
+- You can now disable translations when building, which removes locale files and related code.
+
+### Changed
+
+- `dev-requirements.in` and `prod-requirements.in` now constrain package versions to those included in `requirements.in`.
+  This should prevent library version conflicts between files.
+- Remove `apps.utils.slug` and related test code if not building with teams enabled.
+- Remove entire JavaScript API client if not building with any APIs enabled.
+- Remove `storage_backends` if not building with S3 media support.
+
+## Fixed
+
+- Removed extraneous packages that were accidentally be included in `dev-requirements.txt` even if you
+  had built without certain features enabled.
+  If you saw a big diff after running `pip-compile requirements/dev-requirements.in` on a recent build,
+  this was why.
+- Made all package versions consistent between `requirements.txt` and `dev-requirements.txt`
+
+
+*March 14, 2023*
+
 ## Version 2023.3.2
 
 This release fixes two small bugs (introduced in `2023.3`):
