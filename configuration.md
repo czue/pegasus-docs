@@ -120,12 +120,12 @@ EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
 ```
 
 And populate the `ANYMAIL` setting with the required information. For example, to use [Mailgun](https://www.mailgun.com/)
-you'd just populate the following values:
+you'd populate the following values:
 
 ```python
 ANYMAIL = {
     "MAILGUN_API_KEY": "key-****",
-    "MAILGUN_SENDER_DOMAIN": '{{project_name}}.com',
+    "MAILGUN_SENDER_DOMAIN": 'mg.{{project_name}}.com',  # should match what's in mailgun
 }
 ```
 
