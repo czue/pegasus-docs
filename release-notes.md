@@ -3,6 +3,16 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.4
+
+(This is an unreleased version)
+
+### Changed
+
+- Add `restart: unless-stopped` to web container docker-compose config, so that the web process still restarts
+  on things like syntax errors.
+
+
 ## Version 2023.3.3
 
 The main feature in this minor version is an OpenAI demo,
