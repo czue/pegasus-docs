@@ -3,6 +3,25 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.3.4
+
+Another minor release with a few small fixes.
+
+### Changed
+
+- Add `restart: unless-stopped` to web container docker-compose config, so that the web process still restarts
+  on things like syntax errors. (Thanks Moritz for suggesting)
+- Code formatting checks in Github Actions now run on the entire codebase instead of just the diffs in pull requests.
+
+### Fixed
+
+- Upgraded `cryptography` to version `39.0.2` which patches some high-severity vulnerabilities. (Thanks Michael for reporting)
+- Fixed an issue with `boto3` accidentally not being included in requirements files when you enabled S3 media. (Thanks Elliott for reporting)
+- Fixed an issue caused by [this issue behavior in Github Actions](https://github.com/actions/runner/issues/1189)
+  that always caused code formatting checks to fail. (Thanks Elliott for reporting)
+
+*March 22, 2023*
+
 ## Version 2023.3.3
 
 The main feature in this minor version is an OpenAI demo,
