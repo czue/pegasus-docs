@@ -3,6 +3,14 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.3.5
+
+A hotfix release, which fixes an issue introduced in `2023.3` where alpine.js was not properly
+included in the base template if you built with React instead of HTMX.
+This resulted in the subscription selection UI not appearing properly.
+
+*March 25, 2023*
+
 ## Version 2023.3.4
 
 Another minor release with a few small fixes.
