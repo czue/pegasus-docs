@@ -50,3 +50,11 @@ see the [daisyUI theme documentation](https://daisyui.com/docs/themes/) and thei
 It another great option for getting help with UI components and pages, and should integrate seamlessly with the current Pegasus templates.
 
 Note that you will have to rebuild styles when adding TailwindUI components, as described in the "Development" section above.
+
+## Troubleshooting
+
+### Styles aren't working after adding new components
+
+Every time you use a new Tailwind class you need to rebuild your front end as described in the "[Development](#development)" section above.
+
+After doing that, if they are still not showing up, be sure that you have hard-refreshed your browser (Ctrl-Shift-R) on most browers.
