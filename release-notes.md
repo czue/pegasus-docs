@@ -3,10 +3,42 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.4
+
+(This is an unreleased version)
+
+- Fixed a bug where `./manage.py bootstrap_content` didn't work if you didn't have translations enabled.
+- Fixed a bug where `black` and `isort` occassionally conflicted on import styles.
+- Added `OPENAI_API_KEY` to `.env` file if building with OpenAI examples.
+- Added an "I agree to terms" checkbox on sign up.
+- Fixed a few single-quotes strings in commented code to use double-quotes
+- Upgrade all python packages to latest compatible versions (say something about Django 4.2 and Wagtail 5.0)
+- Add a missing trailing slash in a teams url.
+- Add a default empty string to `AWS_ACCESS_KEY_ID` in settings.py 
+  (this avoids potential crashes during collectstatic if not set).
+- **Changed default Python version to 3.11**
+  - Updated README, docs, Docker images, and all deploy targets to default to 3.11 
+  - Updated Github Actions to run tests on 3.11 only. Older versions can be manually added back.
+- **Changed default Node version to 18**
+  - Updated README, docs, Docker images, and all deploy targets to default to 18.
+  - Updated Github Actions to run tests on 18 and 19 only. Older versions can be manually added back.
+- **Upgrade all Python packages to their latest versions.**
+- **Upgrade all node packages to their latest versions.**
+- Fixed a bug where custom form classes were not applied to input fields on Tailwind. (thanks Lars for reporting)
+- Always include `"allauth.socialaccount"` in `INSTALLED_APPS`,
+  otherwise deleting users fails ([details](https://django-allauth.readthedocs.io/en/latest/installation.html) - thanks Jonathan for reporting)
+- Add apps directory to places tailwind looks for templates
+- Removed internal subscriptions API endpoints from the generated API documentation.
+- Switched template setting to use `loaders` instead of `APP_DIRS` and disable template caching in develpoment (thanks Michael for suggesting)
+- Added link to impersonate a user on tailwind to navigation
+- Added a basic `robots.txt` file that disables crawling on the admin and wagtail admin sites.
+- Switched all instances of `docker-compose` (v1) to `docker compose` (v2). More details in the [Docker docs](https://docs.docker.com/compose/compose-v2/). 
+
 ## Version 2023.3.5
 
 A hotfix release, which fixes an issue introduced in `2023.3` where alpine.js was not properly
 included in the base template if you built with React instead of HTMX.
+
 This resulted in the subscription selection UI not appearing properly.
 
 *March 25, 2023*
