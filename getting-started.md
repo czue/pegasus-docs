@@ -60,7 +60,7 @@ If you're using Docker you can skip this section.
 
 If you haven't already, you'll need to install the following.
 
-- [Python 3.8 or higher](https://www.python.org/downloads/) (Python 3.9 is recommended)
+- [Python 3.8 or higher](https://www.python.org/downloads/) (Python 3.11 is recommended)
 - [Virtualenv](https://virtualenv.pypa.io/en/stable/)
 
 *Note: It is possible to use the template without `virtualenv`, 
@@ -68,9 +68,10 @@ but it is highly recommended, and these instructions assume you are using it.*
 
 If you're using Postgres, you'll also want to make sure [you have it installed](https://www.postgresql.org/download/).
 
-### Setup a Python 3.8+ virtualenv
+### Setup a Python 3.11 virtualenv
 
 See [Using Virtual Environments](/using-virtualenvs/) for details on this process.
+Note: older versions of Python from at least 3.8 may work, but are not recommended.
 
 ### Enter the project directory
 

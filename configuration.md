@@ -113,7 +113,7 @@ be the domain where your users access your app.
 Pegasus is setup to use [django-anymail](https://github.com/anymail/django-anymail) to send email
 via Amazon SES, Mailgun, Postmark, and a variety of other email providers.
 
-To use one of these email backends, simply change the the email backend in `settings.py` to:
+To use one of these email backends, change the the email backend in `settings.py` to:
 
 ```python
 EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
