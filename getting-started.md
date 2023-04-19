@@ -44,7 +44,7 @@ You can read [more about upgrading here](/upgrading).
 
 ## Get up and running with Docker
 
-If you've chosen to use Docker in development (the quickest way to get up and running),
+If you've chosen to use Docker in development (the quickest and easiest way to get up and running),
 continue to the [Docker instructions](/docker).
 
 Then skip ahead to the [post-install steps](https://docs.saaspegasus.com/getting-started.html#post-installation-steps).

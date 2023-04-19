@@ -34,7 +34,7 @@ run your database migrations.
 
 Note: users of older versions of Windows may [need to install "make" separately to use it](https://stackoverflow.com/questions/32127524/how-to-install-and-use-make-in-windows).
 Alternatively, you can just inspect the `Makefile` in the repository and run the commands manually
-(e.g. `docker-compose up -d`).
+(e.g. `docker compose up -d`).
 
 ### Load server
 
@@ -53,14 +53,14 @@ For example, you can run management commands in containers using the same method
 used in the `Makefile`. E.g.
 
 ```
-docker-compose exec web python manage.py createsuperuser
+docker compose exec web python manage.py createsuperuser
 ```
 
 ## Architecture and how it works
 
 ### Containers 
 
-The Docker configuration is primarily in `docker-compose.yml`.
+The Docker configuration is primarily in `docker compose.yml`.
 
 There are four containers that start: a Postgres database, a Redis instance (for caching and use as a Celery broker),
 a web container running your Django process, and a Celery container for background jobs.
@@ -84,18 +84,18 @@ as per the instructions below.
 
 ## Running once-off management commands
 
-Running commands on the server can be done using `docker-compose`, by following
+Running commands on the server can be done using `docker compose`, by following
 the pattern used in the `Makefile`.
 
 For example, to bootstrap Stripe subscriptions, run:
 
 ```
-docker-compose exec web python manage.py bootstrap_subscriptions
+docker compose exec web python manage.py bootstrap_subscriptions
 ```
 
 Or to promote a user to superuser, run: 
 ```
-docker-compose exec web python manage.py promote_user_to_superuser me@example.com
+docker compose exec web python manage.py promote_user_to_superuser me@example.com
 ```
 
 Commonly used commands can be added to the `Makefile` for convenience.
@@ -121,7 +121,7 @@ You can use debug tools like `pdb` or `ipdb` by enabling service ports.
 This can be done by running your web container with the following:
 
 ```
-docker-compose run --service-ports web
+docker compose run --service-ports web
 ```
 
 If you want to set up debugging with PyCharm, it's recommended to follow [this guide on the topic](https://testdriven.io/blog/django-debugging-pycharm/).
