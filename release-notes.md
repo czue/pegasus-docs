@@ -5,34 +5,94 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ## Version 2023.4
 
-(This is an unreleased version)
+This is a large maintenance release with many upgrades, cleanups, and a few small fixes.
+The biggest changes are upgrading the default Python version to 3.11, Node version to 18,
+and Docker compose version to 2.
+
+### Python 3.11 update
+
+This release makes Python 3.11 the default supported version for everything in Pegasus.
+
+Details:
+
+- **Changed default Python version to 3.11.**
+  Older version of Python (back to 3.8) are still expected to work, but are no longer actively tested.
+- Updated references in README and docs to use 3.11 everywhere.
+- Updated development Docker image to use 3.11.
+- Updated all deploy targets to default to 3.11. 
+- Updated Github Actions to run tests on 3.11 only. Older versions can still be added back manually.
+- **Upgraded most Python packages to latest compatible Python 3.11 versions.** 
+  Django was not upgraded to 4.2, because Wagtail has not released support for it yet.
+  If you aren't using Wagtail, you can upgrade to 4.2 now with no known issues.
+
+### Node 18 update
+
+This release makes Node 18 the default supported version for everything in Pegasus.
+
+Details:
+
+- **Changed default Node version to 18**.
+  Node 16 is still expected to work, but is not actively tested.
+- Updated references in README and docs to use 18 everywhere.
+- Updated development Docker image to use 18.
+- Updated all deploy targets to default to 18. 
+- Updated Github Actions to run tests on 18 and 19 only. Older versions can be manually added back.
+- **Upgraded all node packages to their latest versions.**
+
+### Docker compose update
+
+This release switches Docker compose to use version 2. Version 1 will be removed from Docker in a few months.
+More details in the [Docker docs](https://docs.docker.com/compose/compose-v2/). 
+
+Details:
+
+- Switched all instances of `docker-compose` (v1) to `docker compose` (v2) in the `Makefile`.
+- Update all documentation to use `docker compose` instead of `docker-compose`
+
+### Other changes
+
+Smaller updates here.
+
+#### Added
+
+- Added an "I agree to terms" checkbox on sign up for all CSS frameworks.
+- Added link to impersonate a user to the app navigation on tailwind builds.
+- Added a basic `robots.txt` file that disables crawling on the admin and wagtail admin sites.
+
+#### Changed
+
+- Switched template setting to use `loaders` instead of `APP_DIRS` and disable template caching in development
+  (thanks Michael for suggesting)
+- Add apps directory to places Tailwind looks for templates, so that any CSS classes defined there are properly applied.
+
+#### Fixed
 
 - Fixed a bug where `./manage.py bootstrap_content` didn't work if you didn't have translations enabled.
-- Fixed a bug where `black` and `isort` occassionally conflicted on import styles.
+- Fixed a bug where `black` and `isort` occasionally conflicted on import styles.
 - Added `OPENAI_API_KEY` to `.env` file if building with OpenAI examples.
-- Added an "I agree to terms" checkbox on sign up.
-- Fixed a few single-quotes strings in commented code to use double-quotes
-- Upgrade all python packages to latest compatible versions (say something about Django 4.2 and Wagtail 5.0)
-- Add a missing trailing slash in a teams url.
-- Add a default empty string to `AWS_ACCESS_KEY_ID` in settings.py 
-  (this avoids potential crashes during collectstatic if not set).
-- **Changed default Python version to 3.11**
-  - Updated README, docs, Docker images, and all deploy targets to default to 3.11 
-  - Updated Github Actions to run tests on 3.11 only. Older versions can be manually added back.
-- **Changed default Node version to 18**
-  - Updated README, docs, Docker images, and all deploy targets to default to 18.
-  - Updated Github Actions to run tests on 18 and 19 only. Older versions can be manually added back.
-- **Upgrade all Python packages to their latest versions.**
-- **Upgrade all node packages to their latest versions.**
+- Changed a few single-quotes strings in commented code to use double-quotes to match black styling.
+- Added a missing trailing slash in a teams url.
+- Added a default empty string to `AWS_ACCESS_KEY_ID` in `settings.py`  
+  (this avoids potential crashes running `collectstatic` if it wasn't set in the environment).
 - Fixed a bug where custom form classes were not applied to input fields on Tailwind. (thanks Lars for reporting)
 - Always include `"allauth.socialaccount"` in `INSTALLED_APPS`,
   otherwise deleting users fails ([details](https://django-allauth.readthedocs.io/en/latest/installation.html) - thanks Jonathan for reporting)
-- Add apps directory to places tailwind looks for templates
-- Removed internal subscriptions API endpoints from the generated API documentation.
-- Switched template setting to use `loaders` instead of `APP_DIRS` and disable template caching in develpoment (thanks Michael for suggesting)
-- Added link to impersonate a user on tailwind to navigation
-- Added a basic `robots.txt` file that disables crawling on the admin and wagtail admin sites.
-- Switched all instances of `docker-compose` (v1) to `docker compose` (v2). More details in the [Docker docs](https://docs.docker.com/compose/compose-v2/). 
+
+#### Removed
+
+- Removed internal subscriptions API endpoints from the generated API documentation and API clients.
+
+### Upgrading / breaking changes
+
+- If you don't have Docker compose V2 installed you will need to install it to continue using the `Makefile`.
+  This is recommended, since V1 is being removed from Docker Desktop soon.
+- There are no known breaking changes related to the Python and Node upgrades, but it is recommended to upgrade
+  your projects if you haven't already.
+  You may need to [rebuild your Python requirements](https://docs.saaspegasus.com/customizations.html#python-packages)
+  on older versions to get backports packages.
+
+
+*April 20, 2023*
 
 ## Version 2023.3.5
 
