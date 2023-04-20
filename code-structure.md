@@ -38,11 +38,13 @@ It's where your settings, root urlconf and `wsgi.py` file will live.
 This is where your project's apps will live.
 It is pre-populated with Pegasus's default apps for you to further customize to your needs.
 
-The module starts with up to five apps, depending on your configuration.
+The module starts with several apps, depending on your configuration.
+Here are some of the main ones:
 
-- `subscriptions` is for functionality related to Stripe subscriptions.
+- `content` is where the [Wagtail CMS models](./wagtail.md) are configured.
+- `subscriptions` is for functionality related to [Stripe subscriptions](./subscriptions.md).
 - `users` is where your user models and views are defined.
-- `teams` is where team models and views are defined.
+- `teams` is where [team models and views](./teams.md) are defined.
 - `utils` is a set of functionality shared across the project.
 - `web` contains utilities and components related to the generic views, layouts and templates.
 
