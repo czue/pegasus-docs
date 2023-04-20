@@ -1,40 +1,84 @@
 Using Virtual Environments
 ==========================
 
-It's recommended that you setup your project in a `virtualenv`.
-[Here are some reasons why](https://help.pythonanywhere.com/pages/VirtualenvsExplained/).
+It's strongly recommended that you set up your project in a virtual environment.
 
 Follow one of the sections below depending on how you want to manage your virtualenvs.
+
+## Using your IDE
+
+Many IDEs will manage your environments for you.
+This is a great and simple option that you won't have to fiddle with.
+Check your specific IDE's docs for guidance on how to do this.
+
+- [Virtual environments in VS Code](https://code.visualstudio.com/docs/python/environments)
+- [Virtual environments in PyCharm](https://www.jetbrains.com/help/pycharm/creating-virtual-environment.html)
+
+**Be sure to choose Python 3.11 when setting up your virtual environment.**
+If you don't see 3.11 as an option, you may need to install it first.
+
+## Manually managing environments
+
+Follow these steps if you want to manage your virtual environments outside your IDE.
+Using `venv` is recommended if you're not sure which option to use. 
+
+### Using venv
+
+The easiest way to set up a virtual environment manually is to use Python's built in
+[`venv` tool](https://docs.python.org/3/library/venv.html#module-venv):
+
+```bash
+python3.11 -m venv /path/to/environment
+```
+
+In the command below, you should replace `python3.11` with the Python version you are using (3.9 or higher), and 
+`/path/to/environment/` with the location on your system where you want to store the environment.
+This location can be somewhere in your project directory or anywhere else on your system.
+`/home/<user>/.virtualenvs/<project>` is a common choice that works well with `virtualenvwrapper` (see below).
+
+To activate/use the environment run:
+
+```
+source /path/to/environment/bin/activate
+```
+
+**You will need to activate this environment every time you work on your project.**
  
 ### Using virtualenv
 
-After installing prerequisites, run the following command wherever you want to create
-the `virtualenv`. This will create the environment in the `{{ project_name_env }}` directory.
-You should replace the "python3.9" variable with whatever version you want to use, 
-but it *must be 3.8 or above*.
+[virtualenv](https://virtualenv.pypa.io/en/stable/) is an alternate option to `venv`.
+On later versions of Python there's no real reason to use it, but if you're familiar with it
+you can keep using it without any issues.
+First make sure [it's installed](https://virtualenv.pypa.io/en/stable/installation.html)
+and then run the following command:
 
-```
-virtualenv -p python3.9 {{ project_name_env }}
-```
-
-To activate the environment then run:
-
-```
-source {{ project_name_env }}/bin/activate
+```bash
+virtualenv -p python3.11 /path/to/environment
 ```
 
-***You will need to activate this environment every time you work on your project.***
+Like above, you should replace the `python3.11` variable with the version you want to use (3.9 or higher),
+and the `/path/to/environment` with wherever you want to set up the environment.
 
-### Alternative instructions using virtualenvwrapper
+Like with `venv`, to activate the environment run:
+
+```
+source /path/to/environment/bin/activate
+```
+
+And, like `venv`, **you will need to activate this environment every time you work on your project.**
+
+### Using virtualenvwrapper
 
 [Virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) is an optional convenience 
-tool that helps manage virturalenvs. 
+tool that helps manage virtural environments.
+You can use it with either `venv` or `virtualenv` above.
  
 If you choose to use `virtualenvwrapper` you can use the following command to create your environment.
-This can be run from anywhere since `virtualenvwrapper` manages the location of your envs for you.
+This can be run from anywhere since `virtualenvwrapper` manages the location of your envs for you
+(usually in `/home/<user>/.virtualenvs/`).
 
-```
-mkvirtualenv -p python3.9 {{ project_name }}
+```bash
+mkvirtualenv -p python3.11 {{ project_name }}
 ```
 
 Then to activate the environment you use:
@@ -43,3 +87,5 @@ Then to activate the environment you use:
 workon {{ project_name }}
 ```
 
+You can use `virtualenvwrapper` no matter how you created the environment.
+It provides a nice set of helper tools, but can be a bit finicky to set up.

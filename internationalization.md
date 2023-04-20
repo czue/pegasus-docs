@@ -52,7 +52,7 @@ Or in Docker:
 
 
 ```shell
-docker-compose exec web python manage.py makemessages -l [new lang code] --ignore node_modules --ignore venv
+docker compose exec web python manage.py makemessages -l [new lang code] --ignore node_modules --ignore venv
 ```
 
 ## Marking text in your app for translation

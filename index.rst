@@ -1,8 +1,8 @@
 .. Pegasus documentation master file, created by
    sphinx-quickstart on Mon Mar 18 15:47:15 2019.
 
-Welcome to Pegasus's documentation!
-===================================
+SaaS Pegasus's documentation
+============================
 
 Here you'll find everything you need to know about setting up and configuring Pegasus for your project.
 
@@ -16,7 +16,6 @@ contributions are most welcome!
 
 .. toctree::
    :maxdepth: 2
-   :caption: All Documentation:
 
    getting-started
    customizations

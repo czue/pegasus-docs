@@ -44,7 +44,7 @@ You can read [more about upgrading here](/upgrading).
 
 ## Get up and running with Docker
 
-If you've chosen to use Docker in development (the quickest way to get up and running),
+If you've chosen to use Docker in development (the quickest and easiest way to get up and running),
 continue to the [Docker instructions](/docker).
 
 Then skip ahead to the [post-install steps](https://docs.saaspegasus.com/getting-started.html#post-installation-steps).
@@ -58,17 +58,18 @@ If you're using Docker you can skip this section.
 
 ### Install Prerequisites
 
-If you haven't already, you'll need to install the following.
+If you haven't already, first install Python version 3.11.
 
-- [Python 3.8 or higher](https://www.python.org/downloads/) (Python 3.9 is recommended)
-- [Virtualenv](https://virtualenv.pypa.io/en/stable/)
+On Mac and windows you can [download Python 3.11 installers from here](https://www.python.org/downloads/).
+On Ubuntu it's recommended to [use the deadsnakes repo](https://www.debugpoint.com/install-python-3-11-ubuntu/).
 
-*Note: It is possible to use the template without `virtualenv`, 
-but it is highly recommended, and these instructions assume you are using it.*
+*Note: running on older Python versions may work, but 3.11 is what's tested and supported.*
 
 If you're using Postgres, you'll also want to make sure [you have it installed](https://www.postgresql.org/download/).
 
-### Setup a Python 3.8+ virtualenv
+To use [celery](./celery.md) you will also need to [install Redis](https://redis.io/docs/getting-started/installation/).
+
+### Setup a Python 3.11 virtual environment
 
 See [Using Virtual Environments](/using-virtualenvs/) for details on this process.
 
@@ -83,15 +84,14 @@ You should see a lot of newly created files for your project including a `manage
 ### Install package requirements
 
 ```shell
-pip install -r requirements/dev-requirements.txt
-
+pip install -r dev-requirements.txt
 # for production installs use
 pip install -r requirements.txt
 ```
 
 Note: if you have issues installing `psycopg2`, try installing the dependencies outlined in 
 [this thread](https://stackoverflow.com/questions/22938679/error-trying-to-install-postgres-for-python-psycopg2) 
-(specifically `python3-dev` and `libpq-dev`.
+(specifically `python3-dev` and `libpq-dev`).
 
 On Macs you may also need to follow the instructions from [this thread](https://stackoverflow.com/a/58722268/8207). And specifically, run:
 
@@ -129,7 +129,7 @@ python ./manage.py migrate
 python ./manage.py runserver
 ```
 
-Go to [http://localhost:8000](http://localhost:8000) and you should see the default Pegasus landing page!
+Go to [http://localhost:8000](http://localhost:8000) and you should see the default Pegasus landing page.
 
 ![Landing Page](images/pegasus-landing-page.png)
 
