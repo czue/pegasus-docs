@@ -49,15 +49,28 @@ Details:
 - Switched all instances of `docker-compose` (v1) to `docker compose` (v2) in the `Makefile`.
 - Update all documentation to use `docker compose` instead of `docker-compose`
 
+
+### Requirements update
+
+This release updates the Python requirements files (again).
+Apologies for the iteration on this---trying to find the best long-term workflow and hopefully this is it. 
+
+- The `requirements/dev-requirements.txt` (and `.in`) file no longer includes everything in `requirements/requirements.txt`.
+  It now only has the requirements used *only* in development.
+  And is constrained to use the same requirements as `requirements/requirements.txt` if any duplicate packages are
+  included, as [described here](https://pip-tools.readthedocs.io/en/latest/#workflow-for-layered-requirements).
+- Added a `dev-requirements.txt` file in the root of the project to install both normal and dev-requirements.
+
 ### Other changes
 
-Smaller updates here.
+Smaller updates in this release are below.
 
 #### Added
 
 - Added an "I agree to terms" checkbox on sign up for all CSS frameworks.
 - Added link to impersonate a user to the app navigation on tailwind builds.
 - Added a basic `robots.txt` file that disables crawling on the admin and wagtail admin sites.
+- You can now automatically remove the teams example. Uncheck "include Teams example" in your project settings. 
 
 #### Changed
 
