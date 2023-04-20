@@ -1,4 +1,4 @@
-# Heroku
+## Heroku
 
 Pegasus supports deploying to Heroku as a standard Python application or using containers.
 
