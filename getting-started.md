@@ -84,15 +84,14 @@ You should see a lot of newly created files for your project including a `manage
 ### Install package requirements
 
 ```shell
-pip install -r requirements/dev-requirements.txt
-
+pip install -r dev-requirements.txt
 # for production installs use
 pip install -r requirements.txt
 ```
 
 Note: if you have issues installing `psycopg2`, try installing the dependencies outlined in 
 [this thread](https://stackoverflow.com/questions/22938679/error-trying-to-install-postgres-for-python-psycopg2) 
-(specifically `python3-dev` and `libpq-dev`.
+(specifically `python3-dev` and `libpq-dev`).
 
 On Macs you may also need to follow the instructions from [this thread](https://stackoverflow.com/a/58722268/8207). And specifically, run:
 
@@ -130,7 +129,7 @@ python ./manage.py migrate
 python ./manage.py runserver
 ```
 
-Go to [http://localhost:8000](http://localhost:8000) and you should see the default Pegasus landing page!
+Go to [http://localhost:8000](http://localhost:8000) and you should see the default Pegasus landing page.
 
 ![Landing Page](images/pegasus-landing-page.png)
 
