@@ -12,7 +12,6 @@ and Docker compose version to 2.
 ### Python 3.11 update
 
 This release makes Python 3.11 the default supported version for everything in Pegasus.
-
 Details:
 
 - **Changed default Python version to 3.11.**
@@ -20,6 +19,7 @@ Details:
 - Updated references in README and docs to use 3.11 everywhere.
 - Updated development Docker image to use 3.11.
 - Updated all deploy targets to default to 3.11. 
+- Updated `black` and `isort` configs to 3.11.
 - Updated Github Actions to run tests on 3.11 only. Older versions can still be added back manually.
 - **Upgraded most Python packages to latest compatible Python 3.11 versions.** 
   Django was not upgraded to 4.2, because Wagtail has not released support for it yet.
@@ -28,7 +28,6 @@ Details:
 ### Node 18 update
 
 This release makes Node 18 the default supported version for everything in Pegasus.
-
 Details:
 
 - **Changed default Node version to 18**.
@@ -57,9 +56,10 @@ Apologies for the iteration on this---trying to find the best long-term workflow
 
 - The `requirements/dev-requirements.txt` (and `.in`) file no longer includes everything in `requirements/requirements.txt`.
   It now only has the requirements used *only* in development.
-  And is constrained to use the same requirements as `requirements/requirements.txt` if any duplicate packages are
+  And is (still) constrained to use the same requirements as `requirements/requirements.txt` if any duplicate packages are
   included, as [described here](https://pip-tools.readthedocs.io/en/latest/#workflow-for-layered-requirements).
 - Added a `dev-requirements.txt` file in the root of the project to install both normal and dev-requirements.
+- Updated usages of dev-requirements to use the new system, e.g. in Github Actions.
 
 ### Other changes
 
@@ -67,10 +67,11 @@ Smaller updates in this release are below.
 
 #### Added
 
+- **You can now automatically remove the teams example. Uncheck "include Teams example" in your project settings.** 
 - Added an "I agree to terms" checkbox on sign up for all CSS frameworks.
 - Added link to impersonate a user to the app navigation on tailwind builds.
-- Added a basic `robots.txt` file that disables crawling on the admin and wagtail admin sites.
-- You can now automatically remove the teams example. Uncheck "include Teams example" in your project settings. 
+- Added a basic `robots.txt` file that disables crawling on the admin and wagtail admin sites. (Thanks Alex for suggesting)
+- Added `OPENAI_API_KEY` to `.env` file if building with OpenAI examples enabled.
 
 #### Changed
 
@@ -82,7 +83,6 @@ Smaller updates in this release are below.
 
 - Fixed a bug where `./manage.py bootstrap_content` didn't work if you didn't have translations enabled.
 - Fixed a bug where `black` and `isort` occasionally conflicted on import styles.
-- Added `OPENAI_API_KEY` to `.env` file if building with OpenAI examples.
 - Changed a few single-quotes strings in commented code to use double-quotes to match black styling.
 - Added a missing trailing slash in a teams url.
 - Added a default empty string to `AWS_ACCESS_KEY_ID` in `settings.py`  
@@ -94,6 +94,13 @@ Smaller updates in this release are below.
 #### Removed
 
 - Removed internal subscriptions API endpoints from the generated API documentation and API clients.
+  If you'd like to keep these, you can remove the `exclude=True` line from the `extend_schema` declaration
+  in `subscriptions/views/api_views.py`, and then [rebuild the API client](https://docs.saaspegasus.com/apis.html#generating-the-api-client).
+
+#### Documentation
+
+- Overhauled the documentation on working with [virtual environments](./using-virtualenvs.md) and made
+  `venv` the default recommendation over `virtualenv`.
 
 ### Upgrading / breaking changes
 
