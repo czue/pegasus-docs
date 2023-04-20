@@ -58,19 +58,20 @@ If you're using Docker you can skip this section.
 
 ### Install Prerequisites
 
-If you haven't already, first install Python version 3.11 (anything above Python 3.8+ may work, but 3.11 is recommended).
+If you haven't already, first install Python version 3.11.
 
 On Mac and windows you can [download Python 3.11 installers from here](https://www.python.org/downloads/).
 On Ubuntu it's recommended to [use the deadsnakes repo](https://www.debugpoint.com/install-python-3-11-ubuntu/).
 
+*Note: running on older Python versions may work, but 3.11 is what's tested and supported.*
+
 If you're using Postgres, you'll also want to make sure [you have it installed](https://www.postgresql.org/download/).
 
-To use celery you will also need to [install Redis](https://redis.io/docs/getting-started/installation/).
+To use [celery](./celery.md) you will also need to [install Redis](https://redis.io/docs/getting-started/installation/).
 
 ### Setup a Python 3.11 virtual environment
 
 See [Using Virtual Environments](/using-virtualenvs/) for details on this process.
-Note: older versions of Python from at least 3.8 may work, but are not recommended.
 
 ### Enter the project directory
 
