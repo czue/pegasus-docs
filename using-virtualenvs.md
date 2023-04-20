@@ -5,18 +5,29 @@ It's strongly recommended that you set up your project in a virtual environment.
 
 Follow one of the sections below depending on how you want to manage your virtualenvs.
 
-### Using your IDE
+## Using your IDE
 
 Many IDEs will manage your environments for you.
 This is a great and simple option that you won't have to fiddle with.
 Check your specific IDE's docs for guidance on how to do this.
+
+- [Virtual environments in VS Code](https://code.visualstudio.com/docs/python/environments)
+- [Virtual environments in PyCharm](https://www.jetbrains.com/help/pycharm/creating-virtual-environment.html)
+
+**Be sure to choose Python 3.11 when setting up your virtual environment.**
+If you don't see 3.11 as an option, you may need to install it first.
+
+## Manually managing environments
+
+Follow these steps if you want to manage your virtual environments outside your IDE.
+Using `venv` is recommended if you're not sure which option to use. 
 
 ### Using venv
 
 The easiest way to set up a virtual environment manually is to use Python's built in
 [`venv` tool](https://docs.python.org/3/library/venv.html#module-venv):
 
-```
+```bash
 python3.11 -m venv /path/to/environment
 ```
 
@@ -31,16 +42,17 @@ To activate/use the environment run:
 source /path/to/environment/bin/activate
 ```
 
-***You will need to activate this environment every time you work on your project.***
+**You will need to activate this environment every time you work on your project.**
  
 ### Using virtualenv
 
 [virtualenv](https://virtualenv.pypa.io/en/stable/) is an alternate option to `venv`.
 On later versions of Python there's no real reason to use it, but if you're familiar with it
-you can keep using it. First make sure [it's installed](https://virtualenv.pypa.io/en/stable/installation.html)
+you can keep using it without any issues.
+First make sure [it's installed](https://virtualenv.pypa.io/en/stable/installation.html)
 and then run the following command:
 
-```
+```bash
 virtualenv -p python3.11 /path/to/environment
 ```
 
@@ -53,7 +65,7 @@ Like with `venv`, to activate the environment run:
 source /path/to/environment/bin/activate
 ```
 
-***You will need to activate this environment every time you work on your project.***
+And, like `venv`, **you will need to activate this environment every time you work on your project.**
 
 ### Using virtualenvwrapper
 
@@ -65,7 +77,7 @@ If you choose to use `virtualenvwrapper` you can use the following command to cr
 This can be run from anywhere since `virtualenvwrapper` manages the location of your envs for you
 (usually in `/home/<user>/.virtualenvs/`).
 
-```
+```bash
 mkvirtualenv -p python3.11 {{ project_name }}
 ```
 
