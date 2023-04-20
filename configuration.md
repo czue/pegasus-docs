@@ -82,6 +82,8 @@ PROJECT_METADATA = {
 }
 ```
 
+See the [project metadata documentation](./page-metadata.md) for more information about how this is used.
+
 ## Absolute URLs
 
 In most of Django/Pegasus, URLs are *relative*, represented as paths like `/account/login/` and so forth.
@@ -152,14 +154,14 @@ See [Sending email](https://docs.djangoproject.com/en/3.2/topics/email/) in the 
 The sign up workflow is managed by [django-allauth](https://www.intenct.nl/projects/django-allauth/)
 with a sensible set of defaults and templates.
 
-### Google / Social login
+### Social logins
 
-Pegasus optionally ships with a "Login with Google" option. 
+Pegasus optionally ships with a "Login with Google" and "Login with Twitter" options. 
 
-You'll separately need to follow the steps [listed here](https://django-allauth.readthedocs.io/en/latest/providers.html#google)
-to configure things on the Google side and in the Django Admin.
+You'll separately need to follow the steps [listed here](https://django-allauth.readthedocs.io/en/latest/providers.html)
+to configure things on the Google/Twitter side and in the Django Admin.
 
-It's easy to add or change social login details (e.g. login with Facebook, Twitter, Github, etc.) using allauth.
+It's easy to add or change social login details (e.g. login with Facebook, Github, etc.) using allauth.
 
 For details on how to set this up for a particular provider [see this page](https://django-allauth.readthedocs.io/en/latest/providers.html).
 
@@ -174,11 +176,11 @@ However, this can be easily changed by changing the following value in `settings
 ACCOUNT_EMAIL_VERIFICATION = 'optional'  # change to "mandatory" to require users to confirm email before signing in.
 ```
 
-*Note: The email verification step will be skipped if using a Google / social login.*
+*Note: The email verification step will be skipped if using a social login.*
 
 ### Customizing emails
 
-Since version 2022.6, Pegasus ships with simple, responsive email templates for password reset and email address confirmation.
+Pegasus ships with simple, responsive email templates for password reset and email address confirmation.
 These templates can be further customized by editing the files in the `templates/account/email` directory.
 
 See [the allauth email documentation][allauth-email] for more information about customizing account emails.
@@ -187,7 +189,7 @@ See [the allauth email documentation][allauth-email] for more information about 
 
 ### Disabling public sign ups
 
-If you'd like to prevent everyone from signing up for your app, you set the following in your `settings.py`,
+If you'd like to prevent everyone from signing up for your app, set the following in your `settings.py`,
 replacing the existing value:
 
 ```python
@@ -335,7 +337,7 @@ you can follow the setup described in the [django-storages][django-storages] doc
 
 [django-storages]: https://django-storages.readthedocs.io/en/latest/index.html
 
-### Django Debug Toolbar
+## Django Debug Toolbar
 
 Pegasus ships with [Django Debug Toolbar](https://github.com/jazzband/django-debug-toolbar#readme)
 as an optional pacakge. This section describes how the feature is configured in Pegasus.
