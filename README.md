@@ -18,21 +18,14 @@ To build docs run `make html`.
 
 ## Viewing docs locally
 
-You can use python to serve your docs locally after building them:
-
-```python
-cd _build/html
-python -m http.server 8080
-```
-
-The docs should now be visible at [http://localhost:8080](http://localhost:8080).
-
-The following one-liner may be useful to clean, build, and serve the docs. Run this in the `_build/html` folder.
+You can use `sphinx-autobuild` to serve your docs locally and watch for changes:
 
 ```
-cd ../../ && rm -r _build && make html && cd _build/html/ && python -m http.server 8080
+sphinx-autobuild . _build/html/
 ```
+
+The docs should now be visible at [http://localhost:8000](http://localhost:8000).
 
 ## Deployment
 
-Deployment is handled by Netlify. The latest master is automatically deployed.
+Deployment is handled by Netlify. The latest main branch is automatically deployed.
