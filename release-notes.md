@@ -3,6 +3,17 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.4.1
+
+This release fixes two bugs:
+
+- Fixes crash on sign up under certain conditions when teams was not enabled.
+- Fixes crash when saving user profile data when API keys were not enabled.
+
+Thanks to Simon for reporting these!
+
+*April 21, 2023*
+
 ## Version 2023.4
 
 This is a large maintenance release with many upgrades, cleanups, and a few small fixes.
