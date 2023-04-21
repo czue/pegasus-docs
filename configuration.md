@@ -340,7 +340,7 @@ you can follow the setup described in the [django-storages][django-storages] doc
 ## Django Debug Toolbar
 
 Pegasus ships with [Django Debug Toolbar](https://github.com/jazzband/django-debug-toolbar#readme)
-as an optional pacakge. This section describes how the feature is configured in Pegasus.
+as an optional package. This section describes how the feature is configured in Pegasus.
 
 The `django-debug-toolbar` package is placed in the `dev-requirements.txt` file which means it will only
 be available in dev environments. Should you wish to use it in a production environment you will need
