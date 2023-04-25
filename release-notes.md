@@ -3,6 +3,16 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.4.2
+
+Another small hotfix release:
+
+- Fixes crash on `robots.txt` if you built without wagtail.
+- Added tests that would have caught the above issue (and also check other important pages).
+- Removed unused `TermsSignupForm` when building with teams enabled.
+
+*Apr 25, 2023*
+
 ## Version 2023.4.1
 
 This release fixes two bugs:
