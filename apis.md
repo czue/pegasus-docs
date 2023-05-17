@@ -211,3 +211,10 @@ The most common reason that API client requests fail is a mismatch between the a
 and the servers *actual* URL.
 This mismatch be fixed by modifying the Django Site object and settings to match the URL you're loading the site from,
 as described in the documentation on [absolute URLs](https://docs.saaspegasus.com/configuration.html#absolute-urls).
+
+In *development* the most common issues are:
+
+1. Your Django Site is not set up for development. Ensure the site's domain name is `localhost:8000` in your Django admin, 
+   [as described here](https://docs.saaspegasus.com/configuration.html#absolute-urls).
+2. You are loading from a mismatched domain. Be sure you are loading your browser at http://localhost:8000 and not
+   http://127.0.0.1:8000. Or alternatively, if you want to use the 127.0.0.1 address, update the Django site accordingly to use that.
