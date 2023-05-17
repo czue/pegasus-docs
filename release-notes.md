@@ -3,6 +3,23 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Next release
+
+(not released)
+
+- **Upgrade to Django 4.2, Wagtail 5.0.**
+- Switched from deprecated `DEFAULT_FILE_STORAGE` and `STATICFILES_STORAGE` settings to `STORAGES` setting (added in Django 4.2).
+- Removed deprecated `USE_L10N` setting.
+- Set `EMAIL_SUBJECT_PREFIX` to be your app's name. This will be prepended to server admin emails.
+- Fixed a bug where the app would crash if people signed up but already had an account, when teams were enabled.
+- Add `makemigrations` and `migrate` steps to README on sqlite builds (thanks Patrick for suggesting).
+- Add `{% block top_nav_app %}` to `app_base.html` to the material theme, so that the app nav can be overridden
+  in sub-templates
+- Added make targets for running black (`make black`), isort (`make isort`), and both (`make format`)
+- Fixed crashing issues with running `./manage.py bootstrap_content` (and, resultingly, `make init`) multiple times in a row.
+- Added a 5MB file size limitation to profile pictures, and delete old profile pictures when new ones are uploaded. (Thanks Jonathan for the suggestions!)
+- Added `devtool: "eval-cheap-source-map"` to `webpack.config.js` to prevent source map warnings on Chrome.
+
 ## Version 2023.4.2
 
 Another small hotfix release:
