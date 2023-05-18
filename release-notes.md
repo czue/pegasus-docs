@@ -3,22 +3,62 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
-## Next release
+## Version 2023.5.
 
-(not released)
+The big feature this release is a major enhancement to the OpenAI ChatGPT integration.
+This release also upgrades to Django 4.2 LTS and comes with the usual fixes and improvements.
 
-- **Upgrade to Django 4.2, Wagtail 5.0.**
-- Switched from deprecated `DEFAULT_FILE_STORAGE` and `STATICFILES_STORAGE` settings to `STORAGES` setting (added in Django 4.2).
-- Removed deprecated `USE_L10N` setting.
-- Set `EMAIL_SUBJECT_PREFIX` to be your app's name. This will be prepended to server admin emails.
-- Fixed a bug where the app would crash if people signed up but already had an account, when teams were enabled.
-- Add `makemigrations` and `migrate` steps to README on sqlite builds (thanks Patrick for suggesting).
-- Add `{% block top_nav_app %}` to `app_base.html` to the material theme, so that the app nav can be overridden
-  in sub-templates
+### Chat UI Overhaul
+
+Here's a 3-minute demo video of the new ChatGPT functionality:
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/dT4kfQCCq1g" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
+
+**Details:**
+
+- Made the Chat UI interactive using HTMX/React (depending on your project configration) and Celery, and greatly improved
+  chat styling.
+- Moved chat example to a new chat app.
+- Added a chat history model and use it so that chats now have memory.
+- Added a chat list view unique to each user.
+- Added a `render_markdown` template filter, for converting Markdown to HTML in a template
+- Added serializers and admin for chat models.
+- Automatically set chat names based on the contents of the first message.
+- Add ability to set which chat model you use with the new `OPENAI_MODEL` setting.
+- Add `chat.css`/`chat.sass` files for framework-specific chat styling, with many helper UI classes related to the chat UI.
+- Removed previous Chat UI, including `PromptForm` class, and related view/template.
+
+### Other updates in this release
+
+#### Added
+
+- Added `makemigrations` and `migrate` steps to README on sqlite builds (thanks Patrick for suggesting).
+- Added `{% block top_nav_app %}` to `app_base.html` to the material theme, so that the app nav can be overridden in sub-templates
 - Added make targets for running black (`make black`), isort (`make isort`), and both (`make format`)
-- Fixed crashing issues with running `./manage.py bootstrap_content` (and, resultingly, `make init`) multiple times in a row.
+- Added `devtool: "eval-cheap-source-map"` to `webpack.config.js` to prevent source map warnings on Chrome. (Thanks Brett for suggesting)
+
+#### Changed
+
+- **Upgraded Django to 4.2 LTS, Wagtail to 5.0, and a handful of other Python packages to their latest versions.**
+- Switched from deprecated `DEFAULT_FILE_STORAGE` and `STATICFILES_STORAGE` settings to `STORAGES` setting (added in Django 4.2).
+- Set `EMAIL_SUBJECT_PREFIX` to be your app's name. This will be prepended to server admin emails.
 - Added a 5MB file size limitation to profile pictures, and delete old profile pictures when new ones are uploaded. (Thanks Jonathan for the suggestions!)
-- Added `devtool: "eval-cheap-source-map"` to `webpack.config.js` to prevent source map warnings on Chrome.
+
+#### Fixed
+
+- Fixed a bug where the app would crash if people signed up but already had an account, when teams were enabled.
+- Fixed crashing issues with running `./manage.py bootstrap_content` (and, resultingly, `make init`) multiple times in a row.
+- Removed accidentally included `team_nav.html` file on some CSS frameworks when teams was not enabled.
+- Fixed a bug where the `teams/manage/<path:path>` url route was accidentally included in HTMX builds and not included in React builds.
+- Fixed a bug where profile picture upload styling wasn't applied on some CSS frameworks.
+
+### Removed
+
+- Removed deprecated `USE_L10N` setting.
+
+*May 18, 2023*
 
 ## Version 2023.4.2
 
