@@ -3,7 +3,7 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
-## Version 2023.5.
+## Version 2023.5
 
 The big feature this release is a major enhancement to the OpenAI ChatGPT integration.
 This release also upgrades to Django 4.2 LTS and comes with the usual fixes and improvements.
