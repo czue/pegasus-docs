@@ -12,7 +12,7 @@ static file system, as represented in the diagram below.
 
 ![Build Pipeline](images/js-pipeline-with-django.png)
 
-Pegasus's styles use either the [Bootstrap](https://getbootstrap.com/) or [Bulma](https://bulma.io/) CSS frameworks,
+Pegasus's styles use either the [Tailwind](https://tailwindcss.com/),  [Bootstrap](https://getbootstrap.com/) or [Bulma](https://bulma.io/) CSS frameworks,
 and building the CSS files is included as part of the front-end build pipeline.
 For more details on CSS in Pegasus, see the [CSS documentation](/css/).
 
