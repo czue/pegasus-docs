@@ -3,6 +3,22 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.5.1
+
+This is a small hotfix release, that includes a fix to a build error when using Bootstrap 5.3 (release yesterday).
+
+Details:
+
+- **Fix build errors when using Bootstrap 5.3** (Thanks Allan for reporting/fixing).
+- Remove `WAGTAILADMIN_BASE_URL` setting if not building with wagtail.
+- Remove some accidentally included tailwind CSS files when not building with tailwind.
+- Update the default copyright year in site footer to 2023 if JavaScript was not enabled.
+- Add `date_joined` to user admin list display / filter.
+- Cropped message content in Chat admin page.
+- Added a note to README about configuring Redis if not using Docker (thanks Chris for suggesting)
+
+*May 31, 2023*
+
 ## Version 2023.5
 
 The big feature this release is a major enhancement to the OpenAI ChatGPT integration.
