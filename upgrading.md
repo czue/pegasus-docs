@@ -32,7 +32,9 @@ git branch pegasus
 git checkout pegasus
 ```
 
-*Note: if you created the `pegasus` branch when you set up your codebase you can skip this step.*
+*Note: if you created the `pegasus` branch when you set up your codebase you can skip this step.
+Alternatively, if you don't have any commit with pure pegasus code, see the instructions at the bottom
+of this page to create one.*
 
 Next, make sure the branch is up-to-date with your current Pegasus version:
 
@@ -143,3 +145,29 @@ make upgrade
 
 This will rebuild the Docker images and create and run any database migrations that are needed.
 **Note: your web container needs to be running when you run this or it will fail.**
+
+## If you don't have a "pure" Pegasus branch
+
+In some cases you may not have a "clean" Pegasus branch.
+This could happen if you did substantial development before your first commit, merged Pegasus into another project,
+or did several upgrades.
+
+In this case you can fake a pure Pegasus branch by taking the following steps.
+*Note: this process destroys `git blame` for most of your project.*
+
+1. Save your current code (from the "main" branch).
+2. Make a new branch (e.g. called "pure-pegasus")
+3. Download your codebase from saaspegasus.com on the *last release your project used/upgraded to*.
+4. Put the unmodified download of Pegasus 2022.3 onto that branch, without any of your own code.
+   The easiest way to do that is to copy the `.git` folder into your downloaded project and immediately commit the result.
+   This will "brutally" overwrite all your customizations in your git history. *Note this commit id.*
+5. Then repeat this process, but instead, do the reverse. Copy the `.git` folder from the Pegasus download back into your
+   (unmodified) copy of the `main` code and again commit the result.
+   This will create a single commit containing all customizations you've made to your project.
+6. Review this code and merge it back into `main`. If you did everything correctly you should have two huge commits
+   but the pull request will contain no changes.
+
+After this process git will believe that the pure pegasus code is fully merged to `main`.
+You can then use the commit id you noted in step 4 as the starting point for your upgrade
+([step 1](https://docs.saaspegasus.com/upgrading.html#create-a-branch-for-the-upgrade)),
+and jump to [step 2 above](https://docs.saaspegasus.com/upgrading.html#upgrade-the-code-in-the-branch).
