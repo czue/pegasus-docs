@@ -173,10 +173,10 @@ structure to work from.
  
 Now that you're up and running it's time for the fun part: building your new application!
 
-The can obviously be done however you like.
+This can obviously be done however you like.
 Some examples of things you might want to do next include:
 
-- Customize your landing page and setup a pricing page
+- Customize your landing page and set up a pricing page
 - Start modifying the list of navigation tabs and logged-in user experience
 - Create a new django app and begin building out your data models in `models.py`
 
