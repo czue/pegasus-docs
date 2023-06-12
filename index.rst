@@ -26,9 +26,10 @@ contributions are most welcome!
    css
    page-metadata
    docker
-   subscriptions
    teams
+   subscriptions
    payments
+   forms
    apis
    internationalization
    wagtail
