@@ -5,7 +5,7 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ## Version 2023.6
 
-This is a minor release with a few new things and a bugfix.
+This is a minor release with some form updates and a bugfix for material Bootstrap builds.
 
 ### Added
 - Added the ability to specify attrs on form fields, along with special helper parsing for Alpine.js forms.
