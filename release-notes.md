@@ -3,6 +3,26 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.6
+
+This is a minor release with some form updates and a bugfix for material Bootstrap builds.
+
+### Added
+- Added the ability to specify attrs on form fields, along with special helper parsing for Alpine.js forms.
+- Added a forms example using Alpine.js to demonstrate Alpine.js form functionality, including hiding/showing
+  a field based on the value of another field, rendering field values in labels, and changing the style of
+  a field based on its value.
+  The example is available at [http://localhost:8000/pegasus/forms/alpine/](http://localhost:8000/pegasus/forms/alpine/).
+- Added [documentation on forms](./forms.md) in Pegasus.
+- Added `.pg-bg-danger` and `.pg-bg-success` helper classes for setting success/danger background colors.
+
+### Fixed
+
+- Fixed some styling issues with Bootstrap 5.3 and the material theme.
+- Fixed the documentation for how to customize variables when using Bootstrap.
+
+*Jun 12, 2023*
+
 ## Version 2023.5.1
 
 This is a small hotfix release, that includes a fix to a build error when using Bootstrap 5.3 (release yesterday).

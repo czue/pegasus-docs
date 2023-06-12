@@ -24,11 +24,16 @@ Any of the variables used in Bootstrap can be changed by modifying the `assets/s
 
 A complete list of available variables can be found in `./node_modules/bootstrap/scss/variables`.
 
-Try adding the following lines to the top of your file to see how it changes things:
+Try adding the following lines to your file (after importing `functions`) to see how it changes things:
 
 ```scss
+// Configuration
+@import "~bootstrap/scss/functions";
+
 $primary: #2e7636;  // change primary color to green
 $body-color: #00008B;  // change main text to blue
+
+// rest of file here...
 ```
 
 **You'll have to run `npm run dev` to see the changes take.**
