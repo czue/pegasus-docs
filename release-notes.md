@@ -3,6 +3,12 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.6.1
+
+This is a hotfix release that fixes a bug in the new Alpine.js form/attrs released in 2023.6 for some CSS Frameworks.
+
+*Jun 17, 2023*
+
 ## Version 2023.6
 
 This is a minor release with some form updates and a bugfix for material Bootstrap builds.
