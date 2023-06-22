@@ -13,7 +13,7 @@ First create the app:
 
 ```bash
 mkdir apps/payments
-./manage.py startapp payments apps/payments
+python ./manage.py startapp payments apps/payments
 ```
 
 Then, in the created `apps/payments/apps.py` file, 
@@ -35,8 +35,8 @@ Then change the `related_name` attribute on the `user` field to `'payments'`
 Create migrations and migrate:
 
 ```bash
-./manage.py makemigrations
-./manage.py migrate
+python ./manage.py makemigrations
+python ./manage.py migrate
 ```
 
 ## Setup UI
@@ -116,7 +116,7 @@ To add a navigation element to your new page, just paste the following snippet i
 ```html
 <li>
   <a href="{% url 'payments:payments' %}">
-    <span class="pg-icon"><i class="fa fa-dollar"></i></span><span class="is-hidden-tablet-only">Payments</span>
+    <span class="pg-icon"><i class="fa fa-dollar"></i></span><span class="is-hidden-tablet-only">{% translate "Payments" %}</span>
   </a>
 </li>
 ```
