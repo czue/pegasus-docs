@@ -3,6 +3,11 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.7
+
+- More gracefully handle when a Stripe subscription is deleted (usually in test mode), by logging an
+  error and clearing it from the associated user/team object.
+
 ## Version 2023.6.1
 
 This is a hotfix release that fixes a bug in the new Alpine.js form/attrs released in 2023.6 for some CSS Frameworks.
