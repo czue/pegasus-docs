@@ -66,6 +66,6 @@ Retrying the deployment from the same commit seems to resolve this.
 ### Container-based deployment
 
 It is possible to use Render's docker-based support to deploy Pegasus apps, but it is not recommended
-because there is no "release" phase, which makes it difficult to set up things like database migraitons.
+because there is no "release" phase, which makes it difficult to set up things like database migrations.
 
 More details can be found in [this support thread](https://community.render.com/t/release-command-for-db-migrations/247/7).
