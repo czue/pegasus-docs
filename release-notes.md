@@ -7,6 +7,18 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 - More gracefully handle when a Stripe subscription is deleted (usually in test mode), by logging an
   error and clearing it from the associated user/team object.
+- Add the option to remove compiled static files at Pegasus build time.
+  If checked, your Pegasus build will not include any static files, and they will be added to the `.gitignore` file.
+  This is useful to check after you have set up static file builds as part of a CI/CD pipeline. 
+  [More here](https://docs.saaspegasus.com/front-end.html#long-term-best-practices).
+  ============== NOTE TO CORY: MAYBE UPDATE THESE DOCS. =====
+- Added try/catch around Docker hostname setting for debug toolbar, which failed when running outside Docker
+  on some OS's. (Thanks Geoff for the reporting/fixing)
+- Moved inline comments in `.env.example` that failed on some environments. (Thanks Geoff for reporting/fixing)
+- Added improved Docker support for ARM / Mac M2 architectures (new project build option)
+- Made order of example navigation and example homepage cards consistent.
+- Placed HTMX object lifecycle demo before the Vue one.
+- Better styling of terms link in signup forms (Tailwind only) 
 
 ## Version 2023.6.1
 
