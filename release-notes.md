@@ -19,6 +19,13 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - Made order of example navigation and example homepage cards consistent.
 - Placed HTMX object lifecycle demo before the Vue one.
 - Better styling of terms link in signup forms (Tailwind only) 
+- Moved `page_js` block to the bottom of the `<body>` in the base template.
+  This allows using other imported libraries (e.g. site-bootstrap.js) in inherited templates. (Thanks Finbar for suggesting)
+- Refactored how custom components are added to Tailwind to follow the official guidance on
+  [build-time imports](https://tailwindcss.com/docs/using-with-preprocessors#build-time-imports).
+  This fixes an issue where multiple style declarations of some classes were included, causing some CSS overrides
+  to not work out of the box. It also results in improved CSS compile times and reduced output file sizes.
+  (Thanks Tyler for reporting and suggesting the fix!)
 
 ## Version 2023.6.1
 
