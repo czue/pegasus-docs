@@ -17,10 +17,10 @@ This is a large maintenance release with many improvements and a few new feature
   If checked, your Pegasus build will not include any static files, and they will be added to the `.gitignore` file.
   This is useful to check after you have set up static file builds as part of a CI/CD pipeline. 
   [More here](https://docs.saaspegasus.com/front-end.html#long-term-best-practices).
+- **Added optional support for enabling Django's [admin docs](https://docs.djangoproject.com/en/4.2/ref/contrib/admin/admindocs/#module-django.contrib.admindocs)
+  via a new project setting.**
 - Added improved Docker support for ARM / Mac M2 architectures, via a new project build option.
   This should improve the performance using Docker for affected OS's.
-- Added optional support for enabling Django's [admin docs](https://docs.djangoproject.com/en/4.2/ref/contrib/admin/admindocs/#module-django.contrib.admindocs)
-  via a new project setting.
 
 ### Changed
 
