@@ -1,6 +1,10 @@
 # Internationalization
 
-## Demo
+Pegasus supports internationalization via built-in support for timezones and language translations.
+To enable timezone and multi-language support, you must select the "use internationalization" option
+in your project settings.
+
+## Translation Demo
 
 This two-minute demo highlights how translations work in Pegasus apps.
 
@@ -142,4 +146,14 @@ This allows localization to work for both authenticated and unauthenticated user
 
 More information on this approach is available the Django docs: [How Django discovers language preference][1]
 
-[1]: https://docs.djangoproject.com/en/4.1/topics/i18n/translation/#how-django-discovers-language-preference
+[1]: https://docs.djangoproject.com/en/4.2/topics/i18n/translation/#how-django-discovers-language-preference
+
+## Timezones
+
+Pegasus includes support for user's setting their own time zones via their profile (version 2023.7 and later).
+When a user sets a timezone, it will be automatically activated by the `UserTimezoneMiddleware` so that
+by default all dates and times will appear in their local time.
+
+For more information on working with timezones in Django, see [Django's timezone documentation][2].
+
+[2]: https://docs.djangoproject.com/en/4.2/topics/i18n/timezones/
