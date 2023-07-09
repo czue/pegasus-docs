@@ -13,13 +13,13 @@ This is a large maintenance release with many improvements and a few new feature
   - A new timezone setting on the User model/profile.
   - A middleware that sets and unsets the timezone based on the user's setting.
   - A built-in list of default timezones. 
-- Added the option to remove compiled static files at Pegasus build time.
+- **Added the option to remove compiled static files at Pegasus build time.**
   If checked, your Pegasus build will not include any static files, and they will be added to the `.gitignore` file.
   This is useful to check after you have set up static file builds as part of a CI/CD pipeline. 
   [More here](https://docs.saaspegasus.com/front-end.html#long-term-best-practices).
 - Added improved Docker support for ARM / Mac M2 architectures, via a new project build option.
   This should improve the performance using Docker for affected OS's.
-- Added optional support for enabiling Django's [admin docs](https://docs.djangoproject.com/en/4.2/ref/contrib/admin/admindocs/#module-django.contrib.admindocs)
+- Added optional support for enabling Django's [admin docs](https://docs.djangoproject.com/en/4.2/ref/contrib/admin/admindocs/#module-django.contrib.admindocs)
   via a new project setting.
 
 ### Changed
@@ -36,17 +36,17 @@ This is a large maintenance release with many improvements and a few new feature
 
 ### Fixed
 
-- More gracefully handle when a Stripe subscription is deleted (usually in test mode), by logging an
-  error and clearing it from the associated user/team object.
-- Added try/catch around Docker hostname setting for debug toolbar, which failed when running outside Docker
-  on some OS's. (Thanks Geoff for the reporting/fixing)
-- Moved inline comments in `.env.example` that failed on some environments. (Thanks Geoff for reporting/fixing)
 - **Refactored how custom components are added to Tailwind to follow the official guidance on
   [build-time imports](https://tailwindcss.com/docs/using-with-preprocessors#build-time-imports).**
   This fixes an issue where multiple style declarations of some classes were included, causing some CSS overrides
   to not work out of the box. It also results in improved CSS compile times and reduced output file sizes.
   Additionally, some tailwind styles were moved out of the main `site-tailwind.css` file and into other imported files.
   (Thanks Tyler for reporting and suggesting the fix!)
+- More gracefully handle when a Stripe subscription is deleted (usually in test mode), by logging an
+  error and clearing it from the associated user/team object.
+- Added try/catch around Docker hostname setting for debug toolbar, which failed when running outside Docker
+  on some OS's. (Thanks Geoff for the reporting/fixing)
+- Moved inline comments in `.env.example` that failed on some environments. (Thanks Geoff for reporting/fixing)
 - Stopped running `collectstatic` while building Docker containers on Google Cloud Run deployments,
   since the static files are managed outside the container for that platform. (Thanks Alexander for reporting)
 
