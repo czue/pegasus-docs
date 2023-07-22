@@ -96,7 +96,7 @@ of common next steps**
 
 ### Running Database Migrations
 
-Database migrations are applied via during deploy. This is configured in the `fly.toml` file.
+Database migrations are applied during deploy. This is configured in the `fly.toml` file.
 
 ### Settings and Secrets
 

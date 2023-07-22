@@ -46,7 +46,7 @@ should be up and running!
 Pegasus ships with a self-documenting `Makefile` that will run common commands for you,
 including starting your containers, performing database operations, and building your front end.
 
-You can run `make` to see list helper functions, and you can view the source
+You can run `make` to list helper functions, and you can view the source
 of the `Makefile` file in case you need to add to it or run any once-off commands.
 
 For example, you can run management commands in containers using the same method 
