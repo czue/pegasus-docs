@@ -63,3 +63,8 @@ Celery should work out-of-the box.
 
 If you have issues running celery, ensure that you have created a Redis database, and that the values for the
 `REDIS_URL` environment variables match the name you've chosen.
+
+If you need to run `celerybeat` (for scheduled/periodic tasks), you'll have to add a second worker to your
+`app-spec.yaml` file. You can copy and paste the `celery` configuration and then add `--beat` to the end of
+the `run_command`.
+Note that simply adding `--beat` or `-B` to the existing Celery worker does *not* work on app platform.
