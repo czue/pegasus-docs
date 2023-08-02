@@ -113,7 +113,7 @@ html_css_files = [
     'https://cdn.jsdelivr.net/npm/pushfeedback/dist/pushfeedback/pushfeedback.css',
 ]
 html_js_files = [
-    'https://cdn.jsdelivr.net/npm/pushfeedback/dist/pushfeedback/pushfeedback.esm.js',
+    ('https://cdn.jsdelivr.net/npm/pushfeedback/dist/pushfeedback/pushfeedback.esm.js', {'type': 'module'}),
 ]
 
 # -- Options for HTMLHelp output ---------------------------------------------
