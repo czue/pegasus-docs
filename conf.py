@@ -108,6 +108,13 @@ html_static_path = ['_static']
 #
 # html_sidebars = {}
 
+# pushfeedback config
+html_css_files = [
+    'https://cdn.jsdelivr.net/npm/pushfeedback/dist/pushfeedback/pushfeedback.css',
+]
+html_js_files = [
+    'https://cdn.jsdelivr.net/npm/pushfeedback/dist/pushfeedback/pushfeedback.esm.js',
+]
 
 # -- Options for HTMLHelp output ---------------------------------------------
 
