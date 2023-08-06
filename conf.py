@@ -44,10 +44,11 @@ extensions = [
     'myst_parser',
     'sphinxcontrib.gtagjs',
     'sphinx_reredirects',
+    'sphinx_pushfeedback',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+# templates_path = ['_templates']
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
@@ -107,7 +108,6 @@ html_static_path = ['_static']
 # 'searchbox.html']``.
 #
 # html_sidebars = {}
-
 
 # -- Options for HTMLHelp output ---------------------------------------------
 
@@ -198,3 +198,7 @@ redirects = {
     "api-keys": "apis.html",
     "experimental": "css/tailwind.html",
 }
+
+# pushfeedback configuration
+
+pushfeedback_project="hiz6sjmrnx"
