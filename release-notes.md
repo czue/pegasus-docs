@@ -3,6 +3,33 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.8
+
+### Added
+
+- Added a management command to send test emails: `./manage.py send_test_email cory@example.com`.
+  Useful when troubleshooting/changing how your server sends email.
+- Full dark mode support for TailwindCSS builds. 
+- The `get_next_unique_slug` helper function can now take filter arguments, so you can have unique fields dependent on other fields
+  (for example, if you want to have slugs which are unique per team). 
+- Added tests for `get_next_unique_slug` (including testing the new functionality).
+
+### Fixed
+
+- Removed empty JavaScript files in certain builds that were causing `npm type-check` to fail. (Thanks George for reporting!)
+- Only try to log mailing list errors to Sentry if building with Sentry enabled.
+- Fixed a bug in `get_next_unique_slug` that was failed if you passed in a custom `slug_field_name`. 
+  Also added a test that would have caught it. 
+
+### Changed
+
+- Use the project's slug in the `package.json` name instead of "pegasus".
+- Changed Twitter change social card format to `summary_large_image`
+- New chats are not created until the first message is sent to them (HTMX only)
+- Improved link styling of chats on tailwind builds
+- Changed "loading-dots" CSS class to "add-loading-dots", to prevent conflict with DaisyUI class with the same name.
+- Sort chats by last modification time, descending. 
+
 ## Version 2023.7
 
 This is a large maintenance release with many improvements and a few new features.
