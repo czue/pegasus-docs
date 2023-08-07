@@ -20,6 +20,8 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
   (for example, if you want to have slugs which are unique per team). 
 - Added tests for `get_next_unique_slug` (including testing the new functionality).
 - Added view tests for the signup process with various edge-cases around team names.Docker
+- Added a `Makefile` target, and documentation for rebuilding the API client with Docker.
+  [Documentation](https://docs.saaspegasus.com/apis.html#generating-the-api-client) (Big thanks to Finbar for helping on this)
 
 ### Fixed
 
