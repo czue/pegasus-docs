@@ -7,12 +7,19 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ### Added
 
+- **First class support for marketing email lists.** You can now select a platform (Mailchimp, ConvertKit, Email Octopus, or none),
+  and your build will be customized for that platform, including settings/environment variables, and automatically subscribing
+  new sign ups to your email list (if properly configured). See the updated [mailing list documentation](https://docs.saaspegasus.com/configuration.html#mailing-list)
+  for more details.
 - Added a management command to send test emails: `./manage.py send_test_email cory@example.com`.
   Useful when troubleshooting/changing how your server sends email.
-- Full dark mode support for TailwindCSS builds. 
+- **Added dark mode support for TailwindCSS builds.** Your app should automatically use dark mode if the user's
+  browser is configured for it. Components that weren't properly styled for dark mode now are.
+  If you spot any issues please report them!
 - The `get_next_unique_slug` helper function can now take filter arguments, so you can have unique fields dependent on other fields
   (for example, if you want to have slugs which are unique per team). 
 - Added tests for `get_next_unique_slug` (including testing the new functionality).
+- Added view tests for the signup process with various edge-cases around team names.Docker
 
 ### Fixed
 
@@ -20,19 +27,26 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - Only try to log mailing list errors to Sentry if building with Sentry enabled.
 - Fixed a bug in `get_next_unique_slug` that was failed if you passed in a custom `slug_field_name`. 
   Also added a test that would have caught it. 
+- Fixed a bug where unicode team names were creating teams with an empty slug, which was causing a crash on logging in.
+- Fixed a typo in the `Makefile` (thanks Arno for reporting!)
 - [Documentation] Fixed issue in the digital ocean setup docs that was accidentally resulting in the creation of two Postgres databases,
-  one of which was unused. (Thanks Thomas for reporting!)
+  one of which was unused. (Thanks Thomas for reporting!
+- Removed links to user profile and signout views from the app navigation if there is no signed in user.
 
 ### Changed
 
+- **Upgraded all JavaScript packages to their latest (as of late July) versions.**
 - Use the project's slug in the `package.json` name instead of "pegasus".
 - Changed Twitter change social card format to `summary_large_image`
-- New chats are not created until the first message is sent to them (HTMX only)
+- In the ChatGPT functionality, new chats are now not created until the first message is sent to them (HTMX only).
+  This prevents empty chats from being created.
 - Improved link styling of chats on tailwind builds
 - Changed "loading-dots" CSS class to "add-loading-dots", to prevent conflict with DaisyUI class with the same name.
-- Sort chats by last modification time, descending.
+- Users' chats are now sorted by last modification time, descending.
 - Profile picture validation now includes backend file-type checks, to avoid users uploading incorrect/malicious profile pictures.
   (Thanks Edward for reporting)
+- Stopped explicitly specifying a `platform: ` in `docker-compose.yml`, and instead always fall back to the OS's default platform.
+- Added `.jsx`, `.ts`, and `.tsx` as content roots in `tailwind.config.js`.
 
 ## Version 2023.7
 
