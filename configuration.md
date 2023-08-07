@@ -266,19 +266,49 @@ See the [celery docs](/celery) for set up and configuration of Celery.
 
 ## Mailing List
 
-Pegasus includes support for subscribing users to a [Mailchimp](https://mailchimp.com/) email list upon signup.
+Pegasus includes support for subscribing users to a marketing email list upon signup.
+Currently, three platforms are supported:
 
-If you would like to enable this functionality you must:
+1. [Mailchimp](https://mailchimp.com/)
+2. [ConvertKit](https://convertkit.com/)
+3. [Email Octopus](https://emailoctopus.com/)
 
-1. Install the `mailchimp3` Python package.
-2. Add the following variables to `settings.py`:
+Make sure you choose the platform you would like to use when building your Pegasus project.
+
+Then follow the instructions below for the platform you've chosen.
+After completing these steps, new sign-ups will automatically be added to your configured marketing list.
+Note that it is your responsibility to notify your users / get their consent as per your local privacy regulations.
+
+### Mailchimp
+
+To enable the Mailchimp integration, first create a mailing list,
+then fill in the following to values in your environment/settings.
 
 ```python
-MAILCHIMP_API_KEY = '<Mailchimp api key>'
-MAILCHIMP_LIST_ID = '<Mailchimp list ID>'
+MAILCHIMP_API_KEY = '<Api Key>'
+MAILCHIMP_LIST_ID = '<List ID>'
 ```
 
-Note that it is your responsibility to notify your users / get their consent as per your local privacy regulations.
+### ConvertKit
+
+To enable the ConvertKit integration, first create a form,
+then fill in the following values in your environment/settings.
+
+```python
+CONVERT_KIT_API_KEY = "<Api Key>"
+CONVERT_KIT_FORM_ID = "<Form Id>"
+```
+
+### Email Octopus
+
+To enable the Email Octopus integration, first create a mailing list,
+then fill in the following values in your environment/settings.
+
+```python
+EMAIL_OCTOPUS_API_KEY = "<Api Key>"
+EMAIL_OCTOPUS_LIST_ID = "<List ID>"
+
+```
 
 ## Logging
 
