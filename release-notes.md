@@ -20,6 +20,8 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - Only try to log mailing list errors to Sentry if building with Sentry enabled.
 - Fixed a bug in `get_next_unique_slug` that was failed if you passed in a custom `slug_field_name`. 
   Also added a test that would have caught it. 
+- [Documentation] Fixed issue in the digital ocean setup docs that was accidentally resulting in the creation of two Postgres databases,
+  one of which was unused. (Thanks Thomas for reporting!)
 
 ### Changed
 
@@ -28,7 +30,9 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - New chats are not created until the first message is sent to them (HTMX only)
 - Improved link styling of chats on tailwind builds
 - Changed "loading-dots" CSS class to "add-loading-dots", to prevent conflict with DaisyUI class with the same name.
-- Sort chats by last modification time, descending. 
+- Sort chats by last modification time, descending.
+- Profile picture validation now includes backend file-type checks, to avoid users uploading incorrect/malicious profile pictures.
+  (Thanks Edward for reporting)
 
 ## Version 2023.7
 
