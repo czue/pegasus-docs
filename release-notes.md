@@ -50,6 +50,8 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - Stopped explicitly specifying a `platform: ` in `docker-compose.yml`, and instead always fall back to the OS's default platform.
 - Added `.jsx`, `.ts`, and `.tsx` as content roots in `tailwind.config.js`.
 
+*Aug 7, 2023*
+
 ## Version 2023.7
 
 This is a large maintenance release with many improvements and a few new features.
@@ -96,6 +98,8 @@ This is a large maintenance release with many improvements and a few new feature
 - Moved inline comments in `.env.example` that failed on some environments. (Thanks Geoff for reporting/fixing)
 - Stopped running `collectstatic` while building Docker containers on Google Cloud Run deployments,
   since the static files are managed outside the container for that platform. (Thanks Alexander for reporting)
+
+*Jul 9, 2023*
 
 ## Version 2023.6.1
 
