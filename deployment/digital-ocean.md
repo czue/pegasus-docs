@@ -19,11 +19,10 @@ This can be done from inside App Platform, or by following [this link](https://c
 
 Once you've configured the prerequisites, deploying is just a few steps.
 
-First create your database clusters. Postgres is required and Redis is necessary to use Celery.
-In the commands below you'll need to replace `<your-project>` with the values from `deploy/app-spec.yaml`.
+If you are planning to use Celery or Redis, first create your Redis cluster.
+In the command below, replace `<your-project>` with the values from `deploy/app-spec.yaml`.
 
 ```
-doctl databases create <your-project>-db --engine pg --num-nodes 1 --version 12
 doctl databases create <your-project>-redis --engine redis --num-nodes 1 --version 7
 ```
 
