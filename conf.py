@@ -100,7 +100,7 @@ html_theme_options = {
 html_static_path = ['_static']
 
 html_js_files = [
-    ("https://unpkg.com/scriv-chat@0.0.2/dist/scriv-chat/scriv-chat.esm.js", {"type": "module"}),
+    ("https://unpkg.com/scriv-chat@0.0.3/dist/scriv-chat/scriv-chat.esm.js", {"type": "module"}),
 ]
 
 # Custom sidebar templates, must be a dictionary that maps document names
