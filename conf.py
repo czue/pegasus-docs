@@ -44,11 +44,11 @@ extensions = [
     'myst_parser',
     'sphinxcontrib.gtagjs',
     'sphinx_reredirects',
-    'sphinx_pushfeedback',
+    #'sphinx_pushfeedback',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
-# templates_path = ['_templates']
+templates_path = ['_templates']
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
@@ -98,6 +98,10 @@ html_theme_options = {
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+html_js_files = [
+    ("https://unpkg.com/scriv-chat@0.0.2/dist/scriv-chat/scriv-chat.esm.js", {"type": "module"}),
+]
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
