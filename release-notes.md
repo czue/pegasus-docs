@@ -50,7 +50,13 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - Stopped explicitly specifying a `platform: ` in `docker-compose.yml`, and instead always fall back to the OS's default platform.
 - Added `.jsx`, `.ts`, and `.tsx` as content roots in `tailwind.config.js`.
 
-*Aug 7, 2023*
+
+### Upgrading
+
+If you were previously using the mailchimp email functionality, you will need to edit your project
+and select "Mailchimp" under "Email Marketing Platform" to keep using it. 
+
+*Aug 8, 2023*
 
 ## Version 2023.7
 
