@@ -3,6 +3,55 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.8
+
+### Added
+
+- **First class support for marketing email lists.** You can now select a platform (Mailchimp, ConvertKit, Email Octopus, or none),
+  and your build will be customized for that platform, including settings/environment variables, and automatically subscribing
+  new sign ups to your email list (if properly configured). See the updated [mailing list documentation](https://docs.saaspegasus.com/configuration.html#mailing-list)
+  for more details.
+- Added a management command to send test emails: `./manage.py send_test_email cory@example.com`.
+  Useful when troubleshooting/changing how your server sends email.
+- **Added dark mode support for TailwindCSS builds.** Your app should automatically use dark mode if the user's
+  browser is configured for it. Components that weren't properly styled for dark mode now are.
+  If you spot any issues please report them!
+- The `get_next_unique_slug` helper function can now take filter arguments, so you can have unique fields dependent on other fields
+  (for example, if you want to have slugs which are unique per team). 
+- Added tests for `get_next_unique_slug` (including testing the new functionality).
+- Added view tests for the signup process with various edge-cases around team names.Docker
+- Added a `Makefile` target, and documentation for rebuilding the API client with Docker.
+  [Documentation](https://docs.saaspegasus.com/apis.html#generating-the-api-client) (Big thanks to Finbar for helping on this)
+
+### Fixed
+
+- Removed empty JavaScript files in certain builds that were causing `npm type-check` to fail. (Thanks George for reporting!)
+- Only try to log mailing list errors to Sentry if building with Sentry enabled.
+- Fixed a bug in `get_next_unique_slug` that was failed if you passed in a custom `slug_field_name`. 
+  Also added a test that would have caught it. 
+- Fixed a bug where unicode team names were creating teams with an empty slug, which was causing a crash on logging in.
+- Fixed a typo in the `Makefile` (thanks Arno for reporting!)
+- [Documentation] Fixed issue in the digital ocean setup docs that was accidentally resulting in the creation of two Postgres databases,
+  one of which was unused. (Thanks Thomas for reporting!
+- Removed links to user profile and signout views from the app navigation if there is no signed in user.
+
+### Changed
+
+- **Upgraded all JavaScript packages to their latest (as of late July) versions.**
+- Use the project's slug in the `package.json` name instead of "pegasus".
+- Changed Twitter change social card format to `summary_large_image`
+- In the ChatGPT functionality, new chats are now not created until the first message is sent to them (HTMX only).
+  This prevents empty chats from being created.
+- Improved link styling of chats on tailwind builds
+- Changed "loading-dots" CSS class to "add-loading-dots", to prevent conflict with DaisyUI class with the same name.
+- Users' chats are now sorted by last modification time, descending.
+- Profile picture validation now includes backend file-type checks, to avoid users uploading incorrect/malicious profile pictures.
+  (Thanks Edward for reporting)
+- Stopped explicitly specifying a `platform: ` in `docker-compose.yml`, and instead always fall back to the OS's default platform.
+- Added `.jsx`, `.ts`, and `.tsx` as content roots in `tailwind.config.js`.
+
+*Aug 7, 2023*
+
 ## Version 2023.7
 
 This is a large maintenance release with many improvements and a few new features.
@@ -49,6 +98,8 @@ This is a large maintenance release with many improvements and a few new feature
 - Moved inline comments in `.env.example` that failed on some environments. (Thanks Geoff for reporting/fixing)
 - Stopped running `collectstatic` while building Docker containers on Google Cloud Run deployments,
   since the static files are managed outside the container for that platform. (Thanks Alexander for reporting)
+
+*Jul 9, 2023*
 
 ## Version 2023.6.1
 

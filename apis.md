@@ -126,7 +126,9 @@ Anytime you change your APIs you should create a new API client to keep things i
 This can be done using the [OpenAPI Generator](https://openapi-generator.tech/) project.
 The [typescript-fetch](https://openapi-generator.tech/docs/generators/typescript-fetch) client is the one used by Pegasus.
 
-To generate your API client, first install the `openapi-generator-cli` (this library also requires `java`):
+#### Running natively (requires Java)
+
+To generate your API client natively, first install the `openapi-generator-cli` (this library also requires `java`):
 
 ```
 npm install @openapitools/openapi-generator-cli -g
@@ -141,7 +143,24 @@ openapi-generator-cli generate -i http://localhost:8000/api/schema/ -g typescrip
 The above assumes your Django server is running at http://localhost:8000, but you can replace that
 value with any URL or file system reference to your `schema.yml` file.
 
-After re-creating the client, you'll have to rebuild your front end:
+#### Running in docker
+
+You can also generate your API client with docker to avoid having to install Java.
+There are a few additional steps for doing this.
+
+1. Determine the public IP of your host machine on the local network. It will usually be something like `192.168.0.xxx`.
+   These instructions use the example of `192.168.0.104`.
+2. Add this IP address to `ALLOWED_HOSTS` in your `settings.py` file. Or set `ALLOWED_HOSTS = ["*"]`
+   1. You can confirm this is working by loading the IP in a browser (e.g. opening [http://192.168.0.104](http://192.168.0.104)).
+      If you did it correctly your app should load.
+3. Export this value as an environment variable, called `HOST_IP`. E.g. `export HOST_IP=192.168.0.104`.
+4. Run `make api-client`.
+
+You should see the files in `assets/javascript/api-client` get updated.
+
+#### Rebuilding your front end
+
+After re-creating the API client, you'll have to rebuild your front end:
 
 ```
 npm run dev
