@@ -150,6 +150,7 @@ There are a few additional steps for doing this.
 
 1. Determine the public IP of your host machine on the local network. It will usually be something like `192.168.0.xxx`.
    These instructions use the example of `192.168.0.104`.
+   1. One way to find this on most systems is to run `hostname -I | awk '{print $1}'` 
 2. Add this IP address to `ALLOWED_HOSTS` in your `settings.py` file. Or set `ALLOWED_HOSTS = ["*"]`
    1. You can confirm this is working by loading the IP in a browser (e.g. opening [http://192.168.0.104](http://192.168.0.104)).
       If you did it correctly your app should load.
