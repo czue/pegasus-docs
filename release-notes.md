@@ -5,6 +5,9 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ## Version 2023.8
 
+This release adds official support for three marketing email platforms (Mailchimp, ConvertKit, and Email Octopus),
+adds dark mode on Tailwind builds, and has the usual smaller updates and fixes.  
+
 ### Added
 
 - **First class support for marketing email lists.** You can now select a platform (Mailchimp, ConvertKit, Email Octopus, or none),
