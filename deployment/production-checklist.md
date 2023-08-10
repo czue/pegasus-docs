@@ -95,6 +95,13 @@ The platform-specific docs have some guidance on setting this up where possible.
 See [the configuration page](/configuration.md) for a larger list of options,
 including social login, sign up flow changes, analytics, logging, and so on.
 
+## Double-check your language settings
+
+Make sure your [internationalization settings](./internationalization.md) are correct, and you don't have
+any extra languages in `settings.LANGUAGES` that you don't currently support.
+This is especially important if you are using Wagtail, as links to pages in unsupported languages
+may error or return the wrong results.
+
 ## Consider switching to `psycopg2` source distribution
 
 For ease of development, Pegasus ships with the `psycopg2-binary` package which is used for connecting
