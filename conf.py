@@ -20,7 +20,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Pegasus'
-copyright = '2020, Cory Zue'
+copyright = '2023, Cory Zue'
 author = 'Cory Zue'
 
 # The short X.Y version
@@ -44,6 +44,7 @@ extensions = [
     'myst_parser',
     'sphinxcontrib.gtagjs',
     'sphinx_reredirects',
+    'sphinx_sitemap',
     #'sphinx_pushfeedback',
 ]
 
@@ -206,3 +207,10 @@ redirects = {
 # pushfeedback configuration
 
 pushfeedback_project="hiz6sjmrnx"
+
+
+# sitemap config
+
+html_baseurl = "https://docs.saaspegasus.com/"
+sitemap_locales = [None]
+sitemap_url_scheme = "{version}{link}"
