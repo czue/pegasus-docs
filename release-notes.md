@@ -3,6 +3,20 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.8.1
+
+This is a bugfix release that fixes deployment to render. 
+
+To get the fix you don't need to upgrade, just add these two lines to your `envVars` section in `render.yaml`
+to explicitly bump the node version used from 14 to 18.
+
+```yaml
+      - key: NODE_VERSION
+        value: 18.17.1
+```
+
+*Aug 21, 2023*
+
 ## Version 2023.8
 
 This release adds official support for three marketing email platforms (Mailchimp, ConvertKit, and Email Octopus),
