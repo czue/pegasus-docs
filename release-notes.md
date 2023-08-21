@@ -15,6 +15,8 @@ to explicitly bump the node version used from 14 to 18.
         value: 18.17.1
 ```
 
+Thanks Greg and Michiel for the bug report and suggested fix.
+
 *Aug 21, 2023*
 
 ## Version 2023.8
