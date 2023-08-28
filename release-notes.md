@@ -14,6 +14,16 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - Added `social_image` field to all content models (using `BaseContentPage`), so you can define a custom image to use for `og:meta` tags for any
   individual page.
 
+### Added
+
+- Added tests for `get_image_url` template tag.
+
+### Fixed
+
+- Fixed bug in `get_image_url` template tag that prevented it from properly resolving relative media URLs.
+  Also added tests for this case.
+
+
 ## Version 2023.8.1
 
 This is a bugfix release that fixes deployment to render. 
