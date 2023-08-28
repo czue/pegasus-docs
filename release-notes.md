@@ -3,6 +3,17 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.9
+
+### Wagtail Enhancements
+
+- Migrated `ContentPage.body` and `BlogPage.body` to use `StreamField` instead of `RichTextField`.
+  This provides much more flexibility in laying out your pages and working with many different section types. 
+- All content models now extend from `BaseContentPage` so that you can add fields that should be shared among all
+  your different types of content.
+- Added `social_image` field to all content models (using `BaseContentPage`), so you can define a custom image to use for `og:meta` tags for any
+  individual page.
+
 ## Version 2023.8.1
 
 This is a bugfix release that fixes deployment to render. 
