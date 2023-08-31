@@ -20,6 +20,7 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ### Changed
 
+- Overhauled the [Subscriptions documentation](./subscriptions.md) to make it clearer, and add the new pricing UI setting.
 - Upgraded `dj-stripe` to latest 2.8.1 version.
 - Improved display of subscription price line items when using metered billing.
 - Use Node 18 instead of 16 in all Docker-based production deployments.
@@ -31,6 +32,7 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - Show the correct currency in subscription details page if using Stripe's [multi-currency support](https://stripe.com/docs/payments/checkout/present-local-currencies?platform=multi-currency-prices).
   (Thanks Mario for reporting.)
 - Updated the `bootstrap_subscriptions` management command to be compatible with the latest version of `dj-stripe`.
+- Fixed a bug where the active products API would always crash if you had not defined `ACTIVE_PRODUCTS`
 
 ## Version 2023.8.2
 
