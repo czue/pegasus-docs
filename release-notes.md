@@ -32,6 +32,22 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
   (Thanks Mario for reporting.)
 - Updated the `bootstrap_subscriptions` management command to be compatible with the latest version of `dj-stripe`.
 
+## Version 2023.8.2
+
+This is another bugfix release that fixes docker-based deployments (Digital Ocean, Heroku Docker, and fly.io).
+To get the fix you don't need to upgrade, just change the node version in your `Dockerfile.web` from 16 to 18.
+The updated line should look like this:
+
+
+```
+RUN \
+  echo "deb https://deb.nodesource.com/node_18.x buster main" > /etc/apt/sources.list.d/nodesource.list && \
+```
+
+Thanks Matthias and Alexander for reporting this.
+
+*Aug 30, 2023*
+
 ## Version 2023.8.1
 
 This is a bugfix release that fixes deployment to render. 
