@@ -52,12 +52,12 @@ There were also several smaller improvements.
 - **Upgraded nearly all Python packages to their latest versions.**
   `django-allauth` was not upgraded, due to it having a large release just a few days ago.
 - **Upgraded all JavaScript packages to their latest versions.**
-- **Subscriptions: official support for multiple currencies (Stripe pricing-table only)** 
-- **Subscriptions: official support for free trials** 
+- **Subscriptions: official support for multiple currencies ([docs](https://docs.saaspegasus.com/subscriptions#supporting-multiple-currencies)) (Stripe pricing-table only)** 
+- **Subscriptions: official support for free trials ([docs](https://docs.saaspegasus.com/subscriptions#free-trials))** 
 - **Subscriptions: Overhauled the [Subscriptions documentation](./subscriptions.md) to make it clearer, and add the new pricing UI setting.**
 - Subscriptions: Moved the `checkout_success` endpoint to be a global `confirm` endpoint instead
   of a team-specific endpoint.
-- Improved display of subscription price line items when using metered billing.
+- Subscriptions: Improved display of subscription price line items when using metered billing.
 
 ### Fixed
 
