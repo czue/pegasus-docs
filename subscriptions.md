@@ -174,6 +174,29 @@ This basic example will mail your project admins when a Subscription is canceled
 
 More details on custom webhooks can be found in the [dj-stripe documentation](https://dj-stripe.readthedocs.io/en/stable/usage/webhooks.html).
 
+## Supporting multiple currencies
+
+If you use Stripe's embedded pricing table you get multi-currency support out of the box.
+Follow [the Stripe guide](https://stripe.com/docs/payments/checkout/present-local-currencies?platform=multi-currency-prices)
+to set your products and prices up for multiple currencies.
+
+If you use an in-app pricing table, Stripe will still present your prices to customers
+in local currencies, but the pricing table itself will display the prices in your default currency.
+
+## Free trials
+
+You can easily enable free trials using the option in Stripe's embedded pricing table.
+Your customers will be able to sign up with their credit cards for a trial and will have the same 
+experience in your application as someone who is paying for the plan.
+They'll be able to update their status from the customer portal, and once the trial period ends they will be billed.
+
+If you're using trials you must set up webhooks to be notified whether the customer subscribes or cancels
+at the end of their trial.
+
+It is also possible to use free trials without the embedded pricing table.
+To do so, you need to add a `trial_end` or `trial_period_days` value to the `subscription_data`
+in `create_stripe_checkout_session`, as described in [the Stripe documentation](https://stripe.com/docs/billing/subscriptions/trials).
+
 ## Feature-Gating
 
 Pegasus ships with a demo page with a few feature-gating examples, which
