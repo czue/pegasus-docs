@@ -59,7 +59,7 @@ simple blog attached to your site.
 Wagtail can be used to build any complicated site and UI you can imagine.
 One of the most powerful features in Wagtail is the [`StreamField` functionality](https://docs.wagtail.org/en/stable/topics/streamfield.html)
 which allows you to combine other Wagtail components into a "stream-like" UI.
-StreamFields are a great way to build pages more complicated than a blog.
+Your blogs and content pages will have a basic implementation using `StreamField` to get your started.  
 
 ### CodeRed Extensions
 
