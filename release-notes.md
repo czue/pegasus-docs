@@ -3,6 +3,91 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.9
+
+2023.9 has two main updates: Stripe embedded pricing table support, and a substantially improved Wagtail experience.
+
+### Stripe Embedded Pricing Table
+
+This release adds support for [Stripe's embedded pricing table](https://stripe.com/docs/payments/checkout/pricing-table),
+which is a far simpler alternative to creating a pricing page than doing it natively in your application.
+
+The pricing table was added as a new build configuration option.
+Once enabled, the previous subscription UI will be replaced by Stripe's UI, and all changes to the pricing table
+can be made directly within Stripe.
+
+The pricing table option opens up a number of new billing options, including multi-currency support
+and free trials, though it does not support per-unit billing very well.
+For complete details, see the [updated subscription documentation](./subscriptions.md).
+
+### Wagtail Enhancements
+
+The big Wagtail change is that most content pages now use Wagtail's `StreamField` instead of `RichTextField`.
+This allows you to stitch together arbitrary blocks of content in all your pages, instead of being
+forced into a single rich text model. It also enables re-use of individual structured components.
+You can [read more about Wagtail `StreamField` here](https://docs.wagtail.org/en/v5.1.1/topics/streamfield.html).
+
+There were also several smaller improvements.
+
+*If you're upgrading from a previous version, see the upgrading notes below.*
+
+### Complete release notes
+
+#### Added
+
+- **Stripe: Added embedded pricing table support, via a new build option.**
+- Wagtail: Added `social_image` field to all content models (using `BaseContentPage`), so you can define a custom image to use for `og:meta` tags for any
+  individual page.
+- Wagtail: Added a `CaptionBlock`, for captioning images or code, which you can use as a reference to add additional block types to your app.
+- Wagtail: Added a migration to port previous `RichTextField`s to `StreamField`s.
+- Added tests for `get_image_url` template tag.
+
+### Changed
+
+- **Wagtail: Migrated `ContentPage.body` and `BlogPage.body` to use `StreamField` instead of `RichTextField`.
+  This provides much more flexibility in laying out your pages and working with many different section types.** 
+- Wagtail: All content models now extend from `BaseContentPage` so that you can add fields that should be shared among all
+  your different types of content.
+- Wagtail: Updated the `bootstrap_content` management command to be compatible with the new structure.
+- **Upgraded nearly all Python packages to their latest versions.**
+  `django-allauth` was not upgraded, due to it having a large release just a few days ago.
+- **Upgraded all JavaScript packages to their latest versions.**
+- **Subscriptions: official support for multiple currencies ([docs](https://docs.saaspegasus.com/subscriptions#supporting-multiple-currencies)) (Stripe pricing-table only)** 
+- **Subscriptions: official support for free trials ([docs](https://docs.saaspegasus.com/subscriptions#free-trials))** 
+- **Subscriptions: Overhauled the [Subscriptions documentation](./subscriptions.md) to make it clearer, and add the new pricing UI setting.**
+- Subscriptions: Moved the `checkout_success` endpoint to be a global `confirm` endpoint instead
+  of a team-specific endpoint.
+- Subscriptions: Improved display of subscription price line items when using metered billing.
+
+### Fixed
+
+- Subscriptions: Fixed bug that caused trialing subscriptions to not be counted as active.
+- Subscriptions: Show the correct currency in subscription details page if using Stripe's [multi-currency support](https://stripe.com/docs/payments/checkout/present-local-currencies?platform=multi-currency-prices).
+  (Thanks Mario for reporting.)
+- Fixed bug in `get_image_url` template tag that prevented it from properly resolving relative media URLs.
+  Also added tests for this case.
+- Updated the `bootstrap_subscriptions` management command to be compatible with the latest version of `dj-stripe`.
+- Fixed a bug where the active products API would always crash if you had not defined `ACTIVE_PRODUCTS`
+
+### Removed
+
+- Removed no-longer-supported `DJSTRIPE_USE_NATIVE_JSONFIELD` setting.
+
+### Upgrade notes
+
+It is recommended to read through [the dj-stripe 2.8 release notes](https://github.com/dj-stripe/dj-stripe/releases/tag/2.8.0)
+to confirm you aren't affected by any backwards-incompatible changes.
+
+Customers switching to the new Stripe embedded pricing table will need to move any product
+information (including names, descriptions and feature lists) from `metadata.py` into their
+Stripe product and pricing page configuration.
+
+Customers upgrading from existing wagtail installations that have been customized may need to do additional
+work to update their content models to StreamFields. Look at the `0002_convert_stream_fields.py` migration
+and apply the same pattern to any other fields you want to migrate.
+
+*September 1, 2023*
+
 ## Version 2023.8.2
 
 This is another bugfix release that fixes docker-based deployments (Digital Ocean, Heroku Docker, and fly.io).

@@ -11,35 +11,104 @@ Subscriptions in Pegasus have three components which must all be setup in order 
 3. **Pegasus metadata**. This is configured in `apps/subscriptions/metadata.py` and used to augment
    the data from Stripe.
 
-The easiest way to setup all three is to follow the guide below.
+The easiest way to set up all three is to follow the guide below.
 
 ## Getting Started
 
-Complete the following steps in order to setup your first subscription workflow.
+Complete the following steps in order to set up your first subscription workflow.
 
-0. If you haven't already, [setup Pegasus and create an account](/getting-started). 
-1. Setup your billing plans in your Stripe test account. See 
-   [Stripe's documentation](https://stripe.com/docs/billing/subscriptions/set-up-subscription) for help on doing this.
-2. Update the `STRIPE_*` variables in `settings.py` or in your os environment variables to match
+### Choose your billing setup
+
+If you haven't already, [set up Pegasus and create an account](/getting-started).
+In your project settings you will see several options related to subscriptions.
+
+![Subscriptions Project configuration](/images/subscriptions/subscriptions-config.png)
+
+The first option is your *billing model*. Most projects should choose *standard*,
+which lets you create multiple plans with different monthly or annual prices.
+Choose *per unit* if you want to charge a variable cost based on the number of units used,
+for example, if you want to charge for every team-member.
+[Metered billing](https://stripe.com/docs/billing/subscriptions/usage-based), while not officially supported
+is largely compatible with the standard model.
+
+The second option is your *pricing UI*. If you're on a standard model or metered billing,
+it's recommended to use Stripe's [embedded pricing table](https://stripe.com/docs/payments/checkout/pricing-table).
+If you're using per-unit billing, it's recommended to choose "managed by your application".
+
+If all of this is intimidating, don't worry! You can always change these things later.
+If you're unsure what you want to use, it is recommended to choose "standard" and "embedded pricing table" to start,
+as that is the simplest setup and works well for most projects.
+
+### Set up your billing model in Stripe
+
+Before setting up your development environment for subscriptions, you'll need to create
+your billing model in Stripe. You should do this in a test account for development.
+You'll eventually be able to copy everything ot production once you're happy with the set up.
+
+[Stripe's documentation](https://stripe.com/docs/billing/subscriptions/build-subscriptions?ui=checkout#create-pricing-model)
+has guidance on doing this. At a minimum you should create at least one product with a "recurring" price.
+If you want to offer multiple pricing plans, create one product for each plan.
+If you want to offer both monthly and annual pricing, make sure every product you add includes
+both a "monthly" and a "yearly" price.
+
+If you are using the Stripe embedded pricing table, you may also want to add product
+descriptions and [features](https://stripe.com/docs/payments/checkout/pricing-table#product-features),
+as these will be used on your pricing page.
+
+If you are using the Stripe embedded pricing table, you should also set it up now,
+following the [Stripe pricing table documentation](https://stripe.com/docs/payments/checkout/pricing-table).
+
+
+### Set up your development environment
+
+Once you've created your billing model on Stripe, follow these instructions to set up your development environment.
+
+1. Update the `STRIPE_*` variables in `settings.py` or in your os environment variables to match
    the keys from Stripe. See [this page](https://stripe.com/docs/keys) to find your API keys.
-3. Run `./manage.py bootstrap_subscriptions`. If things are setup correctly,
-   you should see output that includes "Synchronized plan plan_[plan_id]" for each plan you created,
+2. Run `./manage.py bootstrap_subscriptions`. If things are set up correctly,
+   you should see output that includes information about each product / price that you created,
    and an output starting with `ACTIVE_PRODUCTS = ` containing the products you just created.
-   This will also automatically update your API keys in the Django admin, as
+   This step will also automatically update your API keys in the Django admin, as
    described in [dj-stripe's instructions](https://dj-stripe.dev/api_keys/#adding-new-api-keys).
-4. Paste the `ACTIVE_PRODUCTS` output from the previous step into `apps/subscriptions/metadata.py`
-   overriding what is there. Update any other details you want, for example,
-   the "description" and "features" fields.
-5. Optionally edit the `ACTIVE_PLAN_INTERVALS` variable in `apps/subscriptions/metadata.py`
-   if you don't plan to include both monthly and annual offerings.
+3. Next, if you are *not* using the Stripe embedded pricing table:
+   1. Paste the `ACTIVE_PRODUCTS` output from the previous step into `apps/subscriptions/metadata.py`
+      overriding what is there. Update any other details you want, for example,
+      the "description" and "features" fields.
+   2. Optionally edit the `ACTIVE_PLAN_INTERVALS` variable in `apps/subscriptions/metadata.py`
+      if you don't plan to include both monthly and annual offerings.
+4. Alternatively, if you *are* using the Stripe embedded pricing table:
+   1. Set the `STRIPE_PRICING_TABLE_ID` variable in your settings/environment to the pricing table ID you created in Stripe.
 
 Now login and click the "Subscription" tab in the navigation. 
-If you've set things up correctly you should see a page that looks like this:
+If you've set things up correctly you should see a page that looks like this
+(it will look slightly different if you are using the Stripe pricing table, or a different CSS framework):
 
 ![Subscription Example](images/subscription-example.png)
 
-If you want to change the contents of the page, just edit the details in `metadata.py`. Watch how the page 
-changes when you make changes.
+## Configuring the pricing table
+
+### Using the embedded Stripe pricing table
+
+If you are using the Stripe embedded pricing table, then all customization happens within the Stripe dashboard.
+
+After setting up your pricing table, you should update the confirmation page settings for every
+product to `https://<yoursite>/subscriptions/confirm/?session_id={CHECKOUT_SESSION_ID}`.
+In test mode you can use [http://localhost:8000/subscriptions/confirm/?session_id={CHECKOUT_SESSION_ID}](http://localhost:8000/subscriptions/confirm/?session_id={CHECKOUT_SESSION_ID}) 
+(leave `{CHECKOUT_SESSION_ID}` in like that, Stripe will use it to populate the checkout session variable).
+Make sure you check the option to apply this change to all prices if you're using monthly and annual pricing.
+This tells stripe to return to your application to properly process the subscription.
+**If you don't make this change, you will not see subscriptions updated unless you are also running webhooks.** 
+
+If you want to change the products, names, descriptions, images, and features, edit the products in Stripe with the desired changes.
+You can also change the color scheme and other options.
+
+### Using the in-app pricing table
+
+If you are using the in-app pricing table, your pricing table configuration is handled in `metadata.py`.
+You can modify `ACTIVE_PRODUCTS` and `ACTIVE_PLAN_INTERVALS` and see how the page changes.
+
+Whenever you make changes in Stripe, you will need to re-run `./manage.py bootstrap_subscriptoins`,
+and incorporate any necessary changes into the `ACTIVE_PRODUCTS` list.
 
 More background and details on this set up can be found in this 
 [Django Stripe Integration Guide](https://www.saaspegasus.com/guides/django-stripe-integrate/).
@@ -105,6 +174,29 @@ This basic example will mail your project admins when a Subscription is canceled
 
 More details on custom webhooks can be found in the [dj-stripe documentation](https://dj-stripe.readthedocs.io/en/stable/usage/webhooks.html).
 
+## Supporting multiple currencies
+
+If you use Stripe's embedded pricing table you get multi-currency support out of the box.
+Follow [the Stripe guide](https://stripe.com/docs/payments/checkout/present-local-currencies?platform=multi-currency-prices)
+to set your products and prices up for multiple currencies.
+
+If you use an in-app pricing table, Stripe will still present your prices to customers
+in local currencies, but the pricing table itself will display the prices in your default currency.
+
+## Free trials
+
+You can easily enable free trials using the option in Stripe's embedded pricing table.
+Your customers will be able to sign up with their credit cards for a trial and will have the same 
+experience in your application as someone who is paying for the plan.
+They'll be able to update their status from the customer portal, and once the trial period ends they will be billed.
+
+If you're using trials you must set up webhooks to be notified whether the customer subscribes or cancels
+at the end of their trial.
+
+It is also possible to use free trials without the embedded pricing table.
+To do so, you need to add a `trial_end` or `trial_period_days` value to the `subscription_data`
+in `create_stripe_checkout_session`, as described in [the Stripe documentation](https://stripe.com/docs/billing/subscriptions/trials).
+
 ## Feature-Gating
 
 Pegasus ships with a demo page with a few feature-gating examples, which
@@ -145,10 +237,9 @@ In this case the user will only be allowed to view the page if they have a pro o
 
 ## Per-Unit / Per-Seat Billing
 
-As of version 0.20, Pegasus supports per-unit / per-seat billing.
+Pegasus supports per-unit / per-seat billing.
 Choose this option when building your project to enable it.
-
-**Using per-seat billing requires using Stripe Checkout.**
+**It is not recommended to use the Stripe embedded pricing table if you are using per-unit billing.**
 
 For Team-based builds the default unit is Team members.
 For non-Team builds you will have to implement your own definition of what to use for billing quantities.
@@ -162,7 +253,7 @@ You can use any of:
 
 - Standard pricing (e.g. $10/user)
 - Package pricing (e.g. $50 / 5 new users)
-- Tiered pricing (graduated or volume) (e.g. $50 for up to 5 users, $5/user after that)
+- Tiered pricing (graduated or volume) (e.g. $50 for up to 5 users, $5/user after that) 
 
 ### Displaying prices on the subscriptions page
 
@@ -184,6 +275,24 @@ ProductMetadata(
 ```
 
 This will show "From $10 per user" or "From $100 per user" when the monthly or annual plan is selected, respectively.
+
+#### Per-seat pricing and the embedded pricing table.
+
+**Though it is possible to use the pricing table with per-seat billing, it is not recommended.**
+
+This is because Stripe does not allow you to pass per-seat quantities with the Pricing Table, so if you use the pricing table
+with per-seat pricing, your users will be able to choose the number of "seats" (quantity) when they check out.
+
+This is different from the expected behavior, which is that your app sets the quantity explicitly based on
+the number of team members (or your own business logic, for user-based builds).
+Since Pegasus is set up to automatically update the subscription quantity based on the "usage" in your application,
+this could result in your users buying a certain number of seats, and then unexpectedly having the price change
+to the amount they are actually using.
+
+You can disable Pegasus automatically updating the per-seat quantity, and then modify your application's
+business logic to be based off the "quantity" property of the user/team's subscription, though this is not
+an officially supported workflow.
+
 
 ### Keeping your Stripe data up to date
 
@@ -304,6 +413,14 @@ See the documentation on [absolute URLs](https://docs.saaspegasus.com/configurat
 
 If Stripe is returning to the correct site, *but over HTTP instead of HTTPS* (or vice versa) then you
 need to change the `USE_HTTPS_IN_ABSOLUTE_URLS` setting in `settings.py` or a production settings file.
+
+**Subscriptions are not being created in your app when using the embedded pricing table.**
+
+Make sure that you have updated the confirmation page for every product and every price
+to `https://<yoursite>/subscriptions/confirm/?session_id={CHECKOUT_SESSION_ID}` as described above.
+
+You can also turn on webhooks to fix this, though it's recommended to use the custom confirmation page
+to provide a better user experience.
 
 **Stripe webhooks are failing with a signature error.**
 
