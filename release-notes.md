@@ -3,6 +3,12 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Next release
+
+### Fixed
+
+- Fix absolute paths to Android-specific favicons to be relative. (Thanks Alexander for reporting!)
+
 ## Version 2023.9
 
 2023.9 has two main updates: Stripe embedded pricing table support, and a substantially improved Wagtail experience.
