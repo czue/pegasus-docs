@@ -8,6 +8,7 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 ### Fixed
 
 - Fix absolute paths to Android-specific favicons to be relative. (Thanks Alexander for reporting!)
+- Tailwind: Fix issue where mobile menu content sometimes did not appear in front of page content.
 
 ## Version 2023.9
 
