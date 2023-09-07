@@ -28,7 +28,7 @@ contributions are most welcome!
    docker
    teams
    subscriptions
-   ecommerce
+   payments
    forms
    apis
    internationalization
