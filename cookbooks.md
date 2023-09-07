@@ -116,7 +116,3 @@ Finally, remove the library dependencies:
 
 1. In `requirements/requirement.in` and `requirements/requirement.txt` remove `stripe` and `dj-stripe` lines.
 1. Run `pip-sync`
-
-## Using the Payments example
-
-To make the Payments example a part of your own application, see [this page](payments.md).
