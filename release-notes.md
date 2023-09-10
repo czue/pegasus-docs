@@ -5,6 +5,17 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ## Next release
 
+### Changed
+
+- Stripe subscription webhooks now explicitly only process checkout sessions that were created by the
+  subscriptions application. This is handled by adding (and checking) a "source" value on the checkout
+  session metadata.
+
+### Added
+
+- Added a `pg-link` helper class to style links (especially on Tailwind and Material builds).
+  Also applied this style to a few places.
+
 ### Fixed
 
 - Fix absolute paths to Android-specific favicons to be relative. (Thanks Alexander for reporting!)
