@@ -433,7 +433,7 @@ Smaller updates in this release are below.
   (this avoids potential crashes running `collectstatic` if it wasn't set in the environment).
 - Fixed a bug where custom form classes were not applied to input fields on Tailwind. (thanks Lars for reporting)
 - Always include `"allauth.socialaccount"` in `INSTALLED_APPS`,
-  otherwise deleting users fails ([details](https://django-allauth.readthedocs.io/en/latest/installation.html) - thanks Jonathan for reporting)
+  otherwise deleting users fails. (thanks Jonathan for reporting)
 
 #### Removed
 
