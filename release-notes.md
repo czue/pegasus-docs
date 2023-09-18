@@ -3,6 +3,18 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.9.1
+
+This is a hotfix release with a few small fixes and updates:
+
+- Updated the version of `celery[redis]` to `5.3.4` since `5.3.3` was inexplicably deleted from PyPI.
+- Fixed a crashing issue on the two-factor auth configuration pages caused by the recent `allauth-2fa` update.
+  (Thanks Matthew for reporting and suggesting the fix)
+- Added tests for a few logged-in views, including one that would have caught the two-factor issue above.
+- Properly show errors if you enter the wrong two-factor token when trying to remove two-factor auth from your account.
+
+*Sep 18, 2023*
+
 ## Version 2023.9
 
 2023.9 has two main updates: Stripe embedded pricing table support, and a substantially improved Wagtail experience.
