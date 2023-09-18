@@ -1,8 +1,6 @@
 # Cookbooks
 
-Step-by-step guide to some different you might want to do with Pegasus.
-
-Pegasus customers can request content be added to this page! Just get in touch via support.
+Step-by-step guides to some different things you might want to do with Pegasus.
 
 ## Use the Django Admin UI
 
