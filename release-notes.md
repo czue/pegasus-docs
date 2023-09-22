@@ -3,6 +3,16 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.9.2
+
+This is a hotfix release that bumps `django-environ` from `0.11.1` to `0.11.2` which
+fixes an issue with "$" in certain situations in environment variables. [details](https://github.com/joke2k/django-environ/issues/490)
+
+Thanks Geoff for reporting!
+
+*Sep 22, 2023*
+
+
 ## Version 2023.9.1
 
 This is a hotfix release with a few small fixes and updates:
