@@ -10,6 +10,7 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - Stripe subscription webhooks now explicitly only process checkout sessions that were created by the
   subscriptions application. This is handled by adding (and checking) a "source" value on the checkout
   session metadata.
+- Removed uppercase characters from `TestLoginRequiredView` test methods.
 
 ### Added
 
@@ -20,6 +21,7 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 - Fix absolute paths to Android-specific favicons to be relative. (Thanks Alexander for reporting!)
 - Tailwind: Fix issue where mobile menu content sometimes did not appear in front of page content.
+
 
 
 ## Version 2023.9.2
