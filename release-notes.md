@@ -21,6 +21,29 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - Fix absolute paths to Android-specific favicons to be relative. (Thanks Alexander for reporting!)
 - Tailwind: Fix issue where mobile menu content sometimes did not appear in front of page content.
 
+
+## Version 2023.9.2
+
+This is a hotfix release that bumps `django-environ` from `0.11.1` to `0.11.2` which
+fixes an issue with "$" in certain situations in environment variables. [details](https://github.com/joke2k/django-environ/issues/490)
+
+Thanks Geoff for reporting!
+
+*Sep 22, 2023*
+
+
+## Version 2023.9.1
+
+This is a hotfix release with a few small fixes and updates:
+
+- Updated the version of `celery[redis]` to `5.3.4` since `5.3.3` was inexplicably deleted from PyPI.
+- Fixed a crashing issue on the two-factor auth configuration pages caused by the recent `allauth-2fa` update.
+  (Thanks Matthew for reporting and suggesting the fix)
+- Added tests for a few logged-in views, including one that would have caught the two-factor issue above.
+- Properly show errors if you enter the wrong two-factor token when trying to remove two-factor auth from your account.
+
+*Sep 18, 2023*
+
 ## Version 2023.9
 
 2023.9 has two main updates: Stripe embedded pricing table support, and a substantially improved Wagtail experience.
@@ -451,7 +474,7 @@ Smaller updates in this release are below.
   (this avoids potential crashes running `collectstatic` if it wasn't set in the environment).
 - Fixed a bug where custom form classes were not applied to input fields on Tailwind. (thanks Lars for reporting)
 - Always include `"allauth.socialaccount"` in `INSTALLED_APPS`,
-  otherwise deleting users fails ([details](https://django-allauth.readthedocs.io/en/latest/installation.html) - thanks Jonathan for reporting)
+  otherwise deleting users fails. (thanks Jonathan for reporting)
 
 #### Removed
 

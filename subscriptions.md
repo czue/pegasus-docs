@@ -63,8 +63,8 @@ following the [Stripe pricing table documentation](https://stripe.com/docs/payme
 
 Once you've created your billing model on Stripe, follow these instructions to set up your development environment.
 
-1. Update the `STRIPE_*` variables in `settings.py` or in your os environment variables to match
-   the keys from Stripe. See [this page](https://stripe.com/docs/keys) to find your API keys.
+1. Update the `STRIPE_*` variables in your project's [`.env` file](https://docs.saaspegasus.com/configuration/#settings-and-environment-files)
+   to match the keys from Stripe. See [this page](https://stripe.com/docs/keys) to find your API keys.
 2. Run `./manage.py bootstrap_subscriptions`. If things are set up correctly,
    you should see output that includes information about each product / price that you created,
    and an output starting with `ACTIVE_PRODUCTS = ` containing the products you just created.

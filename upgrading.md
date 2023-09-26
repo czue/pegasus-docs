@@ -52,7 +52,7 @@ Next, make sure the branch is up-to-date with your current Pegasus version:
 
 ### 3. Merge into your main branch
 
-1. Checkout the main branch (`git checkout main`)
+1. Checkout the (latest/current) main branch (`git checkout main`)
 2. Merge the code (`git merge pegasus`)
 
 Alternatively you may wish to do this in a new branch and then submit a pull request to the main branch from there:
