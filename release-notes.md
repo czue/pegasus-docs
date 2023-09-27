@@ -7,22 +7,38 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ### Changed
 
+- Added more fine-grained control / helpers for doing feature gate checks.
+  See the updated [feature-gating documentation](https://docs.saaspegasus.com/subscriptions/#feature-gating)
+  for more information.
+- Reduced number of DB queries made when provisioning a subscription.
+- Made subscription provision an atomic action to reduce race conditions between Stripe Checkout callbacks and webhooks.
 - Stripe subscription webhooks now explicitly only process checkout sessions that were created by the
   subscriptions application. This is handled by adding (and checking) a "source" value on the checkout
   session metadata.
 - Removed uppercase characters from `TestLoginRequiredView` test methods.
+- Upgraded Chart.js to the latest version, and moved it to be installed from NPM instead of a CDN.
+- Changed the example charts to use the NPM-installed Chart.js.
+- Moved `get_stripe_module` to `apps.utils.billing` so it can be used by the e-commerce and subscriptions.
 
 ### Added
 
 - Added a `pg-link` helper class to style links (especially on Tailwind and Material builds).
   Also applied this style to a few places.
+- Added basic tests for some of the example views
 
 ### Fixed
 
 - Fix absolute paths to Android-specific favicons to be relative. (Thanks Alexander for reporting!)
 - Tailwind: Fix issue where mobile menu content sometimes did not appear in front of page content.
+- Require login on the object lifecycle home example view.
+- Fixed issues with calling dj-stripe's `get_subscriber_model` utility when teams were enabled,
+  by adding an `email` property to the `Team` object, and implementing `DJSTRIPE_SUBSCRIBER_MODEL_REQUEST_CALLBACK`.
+- Fix styling of date inputs on all CSS frameworks 
 
 
+### Removed
+
+- Removed the previous Payments example. Apps should refer to the new eCommerce app to use one-time payments.
 
 ## Version 2023.9.2
 
