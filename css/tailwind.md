@@ -44,6 +44,31 @@ To change themes, just add a `data-theme` attribute to your `<html>` declaration
 For a list of the available themes, and information about creating your on theme,
 see the [daisyUI theme documentation](https://daisyui.com/docs/themes/) and their online [theme generator](https://daisyui.com/theme-generator/).
 
+### Extending themes
+
+If you'd like to extend one of the built-in themes you can do that in your `tailwind.config.js` file.
+
+For example, add a section like this to set custom primary and secondary colors for light and dark mode.
+
+```javascript
+daisyui: {
+  themes: [
+    {
+      light: {
+        ...require("daisyui/src/theming/themes")["[data-theme=light]"],
+        primary: "#0c2340",
+        secondary: "#bd3039"
+      },
+      dark: {
+        ...require("daisyui/src/theming/themes")["[data-theme=dark]"],
+        primary: "#bd3039",
+        secondary: "#0c2340"
+      }
+    },
+  ],
+},
+```
+
 ## Other products / themes
 
 [Tailwind UI](https://tailwindui.com/) is a great product for building more complex pages, including marketing sites and app UIs.
