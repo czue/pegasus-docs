@@ -19,12 +19,17 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - Upgraded Chart.js to the latest version, and moved it to be installed from NPM instead of a CDN.
 - Changed the example charts to use the NPM-installed Chart.js.
 - Moved `get_stripe_module` to `apps.utils.billing` so it can be used by the e-commerce and subscriptions.
+- Upgraded `django-allauth` to latest version (0.57.0). Also add a migration to create default `SocialApp` models
+  for all enabled providers, otherwise the signup and login pages crash. 
 
 ### Added
 
+- Admin dashboard.
 - Added a `pg-link` helper class to style links (especially on Tailwind and Material builds).
   Also applied this style to a few places.
-- Added basic tests for some of the example views
+- Added basic tests for some of the example views.
+- Added an example of customizing existing DaisyUI themes to the [Tailwind docs](./css/tailwind.md).
+- Added `absolute_url` template tag for generating full URLs in e.g. email templates. Also added tests for it.
 
 ### Fixed
 
@@ -34,7 +39,7 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - Fixed issues with calling dj-stripe's `get_subscriber_model` utility when teams were enabled,
   by adding an `email` property to the `Team` object, and implementing `DJSTRIPE_SUBSCRIBER_MODEL_REQUEST_CALLBACK`.
 - Fix styling of date inputs on all CSS frameworks 
-
+- Fixed tab highlighting of the "impersonate a user" navigation on the Material theme.
 
 ### Removed
 
