@@ -14,6 +14,8 @@ The demo application uses the [HTMX websockets extension](https://htmx.org/exten
 the implementation. If you prefer not to use HTMX at all, you can change your websocket connection logic
 to use vanilla JavaScript instead, as shown in the [channels tutorial here](https://channels.readthedocs.io/en/latest/tutorial/part_2.html#add-the-room-view).
 
+A React-based websocket demo is on the roadmap.
+
 ## Websocket urls
 
 Websocket URLs are defined separately from your app's main `urls.py` file.
@@ -34,8 +36,54 @@ You can combine these functions like so to pass the URL of a websocket endpoint 
 room_ws_url = websocket_absolute_url(websocket_reverse("ws_group_chat", args=[room_id]))
 ```
 
-You can then use the websocket URL in a template like this (this example uses HTMX web sockets):
+You can then use the websocket URL in a template/JavaScript like this:
 
-```css
+```
+const chatSocket = new WebSocket({{ room_ws_url}});
+chatSocket.onmessage = function(e) {
+  // handle message 
+};
+```
 
+## Asynchronous web servers
+
+There are several ASGI servers supported by Django.
+By default, Pegasus uses the Daphne web server in development and the Uvicorn web server in production,
+for reasons described below.
+That said, you can customize your app to use whichever server you prefer.
+
+### Daphne
+
+In development, Pegasus uses the [Daphne](https://pypi.org/project/daphne/) web server for its tight integration with Django's `runserver` command,
+as [outlined in the Django docs](https://docs.djangoproject.com/en/4.2/howto/deployment/asgi/daphne/).
+
+Daphne is installed via `dev-requirements` and will be added to your `INSTALLED_APPS` whenever `settings.DEBUG` is `True`.
+
+### Uvicorn
+
+In production, Pegasus uses the [Uvicorn](https://www.uvicorn.org/) web server.
+Uvicorn has a seamless integration with `gunicorn`, making transitioning to it very easy.
+
+Uvicorn is installed via `prod-requirements`, and if you build with async features enabled, your `gunicorn` command
+will be updated to use it.
+
+## Troubleshooting
+
+**I'm getting an error: No module named 'daphne'**
+
+If you are getting this error *in production* it is likely because your `DEBUG` environment variable is not set.
+
+Due to the order in which settings are imported, you *must* define `DEBUG=False` in your *environment*,
+`.env` file, or main `settings.py` file.
+This is in addition to (or instead of) setting `DEBUG=False` in your `settings_production.py` file.
+
+If you are getting this error *in development*, be sure that Daphne is installed.
+You should have the a `channels[daphne]` entry in your `dev-requirements.in` file, and you should
+[build and install your requirements](https://docs.saaspegasus.com/customizations/#python-packages) as needed.
+
+To do this in a non-Docker environmnet, run:
+
+```
+pip-compile requirements/dev-requirements.in
+pip install -r requirements/dev-requirements.txt
 ```
