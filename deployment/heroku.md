@@ -39,6 +39,14 @@ or in the CLI using the following command (replacing the `project_slug` with you
 heroku config:set DJANGO_SETTINGS_MODULE={ project_slug }.settings_production
 ```
 
+### Disable DEBUG
+
+Similar to setting the Django Settings, you should disable DEBUG mode in your Heroku config:
+
+```
+heroku config:set DEBUG=False
+```
+
 ### Set up Databases
 
 To set up your Postgres database, first enable the addon in the UI or by running:

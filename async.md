@@ -45,6 +45,7 @@ chatSocket.onmessage = function(e) {
 };
 ```
 
+
 ## Asynchronous web servers
 
 There are several ASGI servers supported by Django.
@@ -87,3 +88,9 @@ To do this in a non-Docker environmnet, run:
 pip-compile requirements/dev-requirements.in
 pip install -r requirements/dev-requirements.txt
 ```
+
+**I'm having another issue deploying to production.**
+
+Since this is a new feature there may be some speed-bumps getting it into production on all platforms.
+While every deployment platform is expected to work, it is not possible to test every app/configuration.
+So, if you have any issues please reach out over email (cory@saaspegasus.com) or on Slack and I will do my best to help! 
