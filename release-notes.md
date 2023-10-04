@@ -103,6 +103,9 @@ and supporting work for the above.
 
 - **Removed the previous Payments example.** Apps should refer to the new E-Commerce app to use one-time payments.
   - Related: Removed all migrations from the example app, which now has no models.
+  - Related: Removed the previous Payments documentation.
+- Removed the "removing Stripe" cookbook from the documentation. Stripe is no longer included 
+  unless you build with the E-Commerce example or Subscriptions enabled.
 
 ### Upgrade Notes
 
