@@ -53,7 +53,7 @@ dashboard capabilities.
 
 Screenshot:
 
-![Admin Dashboard](/images/user-dasshboard.png)
+![Admin Dashboard](/images/user-dashboard.png)
 
 Below are the complete release notes including several other substantial changes
 and supporting work for the above.
