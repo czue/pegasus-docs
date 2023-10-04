@@ -9,6 +9,12 @@ as well as support for websockets via the [channels library](https://channels.re
 Pegasus includes an optional demo application to demonstrate the asynchronous and socket capabilities.
 The demo application is an extension of the demo application that you build while completing the
 [channels tutorial](https://channels.readthedocs.io/en/latest/tutorial/index.html).
+You can see a demo below.
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/J1hma14whz4" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
+
 
 The demo application uses the [HTMX websockets extension](https://htmx.org/extensions/web-sockets/) to simplify
 the implementation. If you prefer not to use HTMX at all, you can change your websocket connection logic
