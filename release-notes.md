@@ -3,6 +3,117 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## 2023.10
+
+This is a major release with three big updates: Async/Websocket support, an E-Commerce application,
+and an admin user dashboard.
+
+### Async / Websocket support
+
+Pegasus now supports asynchronous Django and Websockets.
+Included is an example group chat application that leverages these capabilities.
+Watch the video below for more details, or see the new [async / websocket documentation](./async.md):
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/J1hma14whz4" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
+
+### E-Commerce Application
+
+The previous Stripe Payments example has been converted into a full-blown E-Commerce store.
+You can manage your products in Stripe and sync them to your application with a few lines of configuration.
+Customers can purchase specific items and everything is linked to your Stripe dashboard.
+
+Watch the video for more details, or see the new [E-Commerce documentation](./payments.md)::
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/S4LlQtGD1jc" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
+
+### Admin Dashboard
+
+An admin-facing dashboard has been added.
+The dashboard lets you see User sign ups to your application over time, and is filterable by date range.
+It's a useful tool to see how your app is growing, and a good launching point for building out more
+dashboard capabilities.
+
+Screenshot:
+
+
+Below are the complete release notes including several other substantial changes
+and supporting work for the above.
+
+### Added
+
+- **Added asynchronous and websocket support via a new build option.** [Documentation](./async.md).
+  - **Related: Added the group chat example application if you enable asynchronous support.**
+  - Related: Added `websocket_reverse` and `websocket_absolute_url` helper functions and tests.
+  - Related: Added `.pg-message-sender` helper CSS class.
+  - Related: If building with async your app will use `asgi` instead of `wsgi`.
+- **Added the E-Commerce example application via a new build option.** [Documentation](./payments.md).
+- **Added the admin dashboard.**
+  - Related: Added an admin-only user signup API 
+- Added a `pg-link` helper class to style links (especially on Tailwind and Material builds).
+  Also applied this style to a few places.
+- Added basic tests for some of the example views.
+- Added an example of customizing existing DaisyUI themes to the [Tailwind docs](./css/tailwind.md).
+- Added `absolute_url` template tag for generating full URLs in e.g. email templates, and added tests for it.
+
+### Changed
+
+- **Added the `feature_gate_check` and `get_feature_gate_check` helper functions,
+  for more fine-grained control of feature gate checking.** 
+  See the updated [feature-gating documentation](https://docs.saaspegasus.com/subscriptions/#feature-gating) for more information.
+  - Related: Modified the `active_subscription_required` decorator to use this function.
+- Reduced number of DB queries made when provisioning a subscription.
+- Made subscription provisioning an atomic action to reduce race conditions between Stripe Checkout callbacks and webhooks.
+- Stripe subscription webhooks now explicitly only process checkout sessions that were created by the
+  subscriptions application. This was done to enable apps to handle both e-commerce and subscription payments,
+  and is handled by adding (and checking) a "source" value on the checkout
+  session metadata.
+- Created a `TestLoginRequiredViewBase` base test class, to test logged-in views, and updated existing tests to use it.
+- Removed uppercase characters from `TestLoginRequiredView` test methods.
+- Upgraded Chart.js to the latest version, and moved it to be installed from NPM instead of a CDN.
+- Changed the example charts to use the NPM-installed Chart.js.
+- Moved `get_stripe_module` to `apps.utils.billing` so it can be used by the e-commerce app and subscriptions.
+- **Upgraded `django-allauth` to latest version (0.57.0).**
+  - Related: Added a migration to create default `SocialApp` models for all enabled providers, otherwise the signup and login pages crash.
+  - Related: Blank out help-text on the sign up form's password input.
+  - Related: Added `allauth.account.middleware.AccountMiddleware` to `MIDDLEWARE`
+  - Related: Fixed links to allauth docs in the generated README file.
+- Upgraded Django to the latest 4.2.5 security release.
+- Set `DEBUG=False` when running `collectstatic` on production Docker builds.
+- Added some fields to the default `CustomUserSerializer`.
+- Added `created_at` field to chat message admin list display / list filter.
+- Removed some unused imports from subscription views.
+- Refactored chat message list into a standalone template.
+
+### Fixed
+
+- Fixed absolute paths to Android-specific favicons to be relative. (Thanks Alexander for reporting!)
+- Fixed issue where mobile menu content sometimes did not appear in front of page content on Tailwind builds.
+- The object lifecycle home example view now requires login.
+- Fixed issues with calling dj-stripe's `get_subscriber_model` utility when teams were enabled,
+  by adding an `email` property to the `Team` object, and implementing `DJSTRIPE_SUBSCRIBER_MODEL_REQUEST_CALLBACK`,
+  and added a test case that confirms this works moving forwards.
+- Fix styling of date inputs on all CSS frameworks. 
+- Fixed tab highlighting of the "impersonate a user" navigation on the Bootstrap Material theme.
+
+### Removed
+
+- **Removed the previous Payments example.** Apps should refer to the new E-Commerce app to use one-time payments.
+  - Related: Removed all migrations from the example app, which now has no models.
+  - Related: Removed the previous Payments documentation.
+- Removed the "removing Stripe" cookbook from the documentation. Stripe is no longer included 
+  unless you build with the E-Commerce example or Subscriptions enabled.
+
+### Upgrade Notes
+
+- To migrate an existing application to use asynchronous / websockets, you will have to set `DEBUG` in your
+  production *environment* (not `settings_production.py`). More information in the [async documentation](./async.md).
+
+*Oct 4, 2023*
+
 ## Version 2023.9.2
 
 This is a hotfix release that bumps `django-environ` from `0.11.1` to `0.11.2` which

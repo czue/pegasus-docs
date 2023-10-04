@@ -235,6 +235,28 @@ def subscription_gated_page(request, subscription_holder=None):
 
 In this case the user will only be allowed to view the page if they have a pro or enterprise plan.
 
+### Using the `get_feature_gate_check` helper function
+
+For more fine-grained control you can use the `get_feature_gate_check` helper function.
+This takes in two arguments, the `subscription_holder` (usually a User or Team), and optionally the same
+`limit_to_plans` list above, and returns a `FeatureGateCheckResult`, which includes whether the
+check passed (subscription holder has a subscription of the right type), and an optional message
+explaining the answer.
+
+Example usage:
+
+```python
+from apps.subscriptions.feature_gating import get_feature_gate_check
+
+
+def my_view(request):
+    check_result = get_feature_gate_check(request.team, ["professional"])
+    if check_result.passed:
+        do_actions_pro_only()
+    else:
+        logging.info(f"Pro actions skipped: {check_result.message}")
+```
+
 ## Per-Unit / Per-Seat Billing
 
 Pegasus supports per-unit / per-seat billing.

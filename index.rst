@@ -35,6 +35,7 @@ contributions are most welcome!
    wagtail
    flags
    celery
+   async
    deployment
    github-actions
    cookbooks
