@@ -319,7 +319,8 @@ an officially supported workflow.
 ### Keeping your Stripe data up to date
 
 When changes are made that impact a user's pricing, you will need to notify Stripe of the change.
-This can be done via a management command `./manage.py sync_subscriptions` or via a celery periodic task (TBD).
+This should happen automatically every 24 hours as long as you have enabled celery and celerybeat.
+You can also trigger it manually via a management command `./manage.py sync_subscriptions`.
 
 To ensure this command works properly, you must implement two pieces of business logic:
 
