@@ -32,7 +32,7 @@ Watch the video below for more details, or see the new [async / websocket docume
     <iframe src="https://www.youtube.com/embed/J1hma14whz4" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div>
 
-### E-Commerce Application
+### E-Commerce (One-Time Payment) Application
 
 The previous Stripe Payments example has been converted into a full-blown E-Commerce store.
 You can manage your products in Stripe and sync them to your application with a few lines of configuration.
