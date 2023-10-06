@@ -12,6 +12,9 @@ You need to install both [Docker](https://www.docker.com/get-started) and
 Windows users may also need to install a 3rd-party package to run `make` commands.
 The easiest way to do that is via [these instructions](https://stackoverflow.com/a/57042516/8207).
 
+Mac users have reported far better performance on Docker using [OrbStack](https://orbstack.dev/),
+which is a Docker Desktop alternative optimized for performance.
+
 ## Getting Started
 
 First set up your Pegasus project with Docker enabled and using Postgres as a database
