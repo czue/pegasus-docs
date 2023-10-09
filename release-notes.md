@@ -8,6 +8,7 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 This is a minor release addressing a few small issues raised in the `2023.10` release.
 
 - **Upgrade docker containers from `python:3.11-buster` to `python:3.11-bullseye`.
+- Upgrade django to the latest 4.2.6 security release.
   This change substantially improves performance on certain Mac builds.**
 - Reduce db queries on the e-commerce home page.
 - Don't show "buy" links on the e-commerce page if the products do not have a default price set.
