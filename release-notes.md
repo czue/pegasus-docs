@@ -3,6 +3,19 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## 2023.10.1
+
+This is a minor release addressing a few small issues raised in the `2023.10` release.
+
+- **Upgrade docker containers from `python:3.11-buster` to `python:3.11-bullseye`.
+  This change substantially improves performance on certain Mac builds.**
+- Reduce db queries on the e-commerce home page.
+- Don't show "buy" links on the e-commerce page if the products do not have a default price set.
+- Change default value of `ALLOWED_HOSTS` to `["*"]` and allow overriding it via an environment variable.
+- Clean up whitespace in `user_dashboard.html`.
+
+*Oct 9, 2023*
+
 ## 2023.10
 
 This is a major release with three big updates: Async/Websocket support, an E-Commerce application,
