@@ -76,6 +76,15 @@ will be updated to use it.
 
 ## Troubleshooting
 
+**The chat app loads but nothing happens when I send a message.**
+
+The most likely reason this would happen is if your site URLs are not set up properly,
+which would cause the websocket endpoints to not hit the right address.
+
+See the documentation on [absolute URLs](https://docs.saaspegasus.com/configuration.html#absolute-urls) to fix this,
+and in particular make sure your Django site object has the right domain.
+In development this should be set to `localhost:8000`.
+
 **I'm getting an error: No module named 'daphne'**
 
 If you are getting this error *in production* it is likely because your `DEBUG` environment variable is not set.
