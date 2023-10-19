@@ -6,14 +6,13 @@ See [our deployment page](/deployment/) for more details.
 
 ## Prerequisites
 
-You need to install both [Docker](https://www.docker.com/get-started) and 
-[Docker Compose](https://docs.docker.com/compose/install/) prior to setting up your environment.
+You need to install [Docker](https://www.docker.com/get-started) prior to setting up your environment.
+
+Mac users have reported better performance on Docker using [OrbStack](https://orbstack.dev/),
+which is a Docker Desktop alternative optimized for performance.
 
 Windows users may also need to install a 3rd-party package to run `make` commands.
 The easiest way to do that is via [these instructions](https://stackoverflow.com/a/57042516/8207).
-
-Mac users have reported far better performance on Docker using [OrbStack](https://orbstack.dev/),
-which is a Docker Desktop alternative optimized for performance.
 
 ## Getting Started
 
