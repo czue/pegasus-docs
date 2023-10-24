@@ -102,10 +102,6 @@ It should look like this:
 
 ![Stripe Confirmation Page](/images/subscriptions/stripe-confirmation-page.png)
 
-<figcaption>
-The setting that needs to be changed to add a custom confirmation URL.
-</figcaption>
-
 In the URL box, put the following address for (for development), leaving `{CHECKOUT_SESSION_ID}` exactly like it is written:
 
 ```
@@ -119,8 +115,9 @@ E.g.
 https://<yoursite>/subscriptions/confirm/?session_id={CHECKOUT_SESSION_ID}
 ```
 
-Make sure you check the option to apply this change to all prices if you're using monthly and annual pricing.
+*Make sure you check the option to apply this change to all prices* if you're using monthly and annual pricing.
 And then *repeat this process for every product in the pricing page*.
+
 **If you don't make this change, you will not see subscriptions updated unless you are also running webhooks.** 
 
 ### Using the in-app pricing table
@@ -128,7 +125,7 @@ And then *repeat this process for every product in the pricing page*.
 If you are using the in-app pricing table, your pricing table configuration is handled in `metadata.py`.
 You can modify `ACTIVE_PRODUCTS` and `ACTIVE_PLAN_INTERVALS` and see how the page changes.
 
-Whenever you make changes in Stripe, you will need to re-run `./manage.py bootstrap_subscriptoins`,
+Whenever you make changes in Stripe, you will need to re-run `./manage.py bootstrap_subscriptions`,
 and incorporate any necessary changes into the `ACTIVE_PRODUCTS` list.
 
 More background and details on this set up can be found in this 
