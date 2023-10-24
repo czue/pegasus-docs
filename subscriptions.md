@@ -90,17 +90,38 @@ If you've set things up correctly you should see a page that looks like this
 ### Using the embedded Stripe pricing table
 
 If you are using the Stripe embedded pricing table, then all customization happens within the Stripe dashboard.
-
-After setting up your pricing table, you should update the confirmation page settings for every
-product to `https://<yoursite>/subscriptions/confirm/?session_id={CHECKOUT_SESSION_ID}`.
-In test mode you can use [http://localhost:8000/subscriptions/confirm/?session_id={CHECKOUT_SESSION_ID}](http://localhost:8000/subscriptions/confirm/?session_id={CHECKOUT_SESSION_ID}) 
-(leave `{CHECKOUT_SESSION_ID}` in like that, Stripe will use it to populate the checkout session variable).
-Make sure you check the option to apply this change to all prices if you're using monthly and annual pricing.
-This tells stripe to return to your application to properly process the subscription.
-**If you don't make this change, you will not see subscriptions updated unless you are also running webhooks.** 
-
-If you want to change the products, names, descriptions, images, and features, edit the products in Stripe with the desired changes.
+You can change the products, names, descriptions, images, and features by editing the products in Stripe with the desired changes.
 You can also change the color scheme and other options.
+
+After setting up your pricing table, you should add a custom confirmation URL for each product.
+This tells Stripe to return to your application to properly process the subscription after it is purchased.
+
+To do this, edit your pricing table, and under "Payment settings" change the confirmation page setting to
+"Don't show confirmation page (Redirect customers to your website.)".
+It should look like this:
+
+![Stripe Confirmation Page](/images/subscriptions/stripe-confirmation-page.png)
+
+<figcaption>
+The setting that needs to be changed to add a custom confirmation URL.
+</figcaption>
+
+In the URL box, put the following address for (for development), leaving `{CHECKOUT_SESSION_ID}` exactly like it is written:
+
+```
+http://localhost:8000/subscriptions/confirm/?session_id={CHECKOUT_SESSION_ID}
+```
+
+In production, enable https, and replace `localhost:8000` with the url of our site.
+E.g.
+
+```
+https://<yoursite>/subscriptions/confirm/?session_id={CHECKOUT_SESSION_ID}
+```
+
+Make sure you check the option to apply this change to all prices if you're using monthly and annual pricing.
+And then *repeat this process for every product in the pricing page*.
+**If you don't make this change, you will not see subscriptions updated unless you are also running webhooks.** 
 
 ### Using the in-app pricing table
 
