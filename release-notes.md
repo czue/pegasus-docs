@@ -3,7 +3,29 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
-## 2023.10.1
+## Version 2023.11
+
+This is a hotfix release that fixes the Node.js docker installation according to
+[these nodesource changes](https://github.com/nodesource/distributions#new-update-%EF%B8%8F).
+
+You can also manually apply this change by replacing the current node installation steps with the following
+code in your `Dockerfile.dev` and `Dockerfile.web`.
+
+```
+# install node/npm
+RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | \
+    gpg --dearmor -o /usr/share/keyrings/nodesource.gpg
+
+RUN echo \
+  "deb [signed-by=/usr/share/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x nodistro main" | \
+  tee /etc/apt/sources.list.d/nodesource.list && \
+    apt-get update && \
+    apt-get install nodejs -yqq
+```
+
+*November 1, 2023*
+
+## Version 2023.10.1
 
 This is a minor release addressing a few small issues raised in the `2023.10` release.
 
@@ -17,7 +39,7 @@ This is a minor release addressing a few small issues raised in the `2023.10` re
 
 *Oct 9, 2023*
 
-## 2023.10
+## Version 2023.10
 
 This is a major release with three big updates: Async/Websocket support, an E-Commerce application,
 and an admin user dashboard.
