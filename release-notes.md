@@ -3,6 +3,23 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+
+## Next release
+
+- Fixed 500 when trying to accept an invitation that was already accepted.
+- Explicitly set default region on fly deployments.
+- Remove duplicate DB lookups on invitation acceptance page. 
+- Load `request.team` in `TeamsMiddleware` even if the user doesn't have access to the team if `team_slug` is passed to the view.
+  Since authorization is done in the view decorators like `login_and_team_required` this should be safe,
+  and makes it easier to create team views that don't require authentication.
+- Cleaned up template imports in a few places.
+  
+
+### Upgrade notes
+
+The `TeamsMiddleware` change may change the access rules of views that were relying on the absence of `request.team`,
+to control authorization, instead of using `login_and_team_required` or similar approaches.
+
 ## 2023.10.1
 
 This is a minor release addressing a few small issues raised in the `2023.10` release.
