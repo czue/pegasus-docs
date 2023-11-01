@@ -23,6 +23,8 @@ RUN echo \
     apt-get install nodejs -yqq
 ```
 
+Thanks to Finbar on Slack for reporting and suggesting the fix!
+
 *November 1, 2023*
 
 ## Version 2023.10.1
