@@ -96,10 +96,11 @@ See [Docker's documentation](https://docs.docker.com/engine/install/) for instru
 
     The Kamal configuration is in `deploy/config/deploy.yml`. You will need to update the following values:
 
+    * Docker image repo: `image: <my-repo>/app-name`
     * Your server IP address `<IP-ADDRESS>`
-    * Your app domain name: `Host(`wedding-plan.herokuapp.com`)`
-    * Docker registry username: `<DOCKER REGISTRY USERNAME>`
-    * LetsEncrypt email: `"<my-devops@example.com>"`
+    * Your app domain name: `Host(``hostname.example.com``)`
+    * Docker registry username: `username: <DOCKER REGISTRY USERNAME>`
+    * LetsEncrypt email: `certificatesResolvers.letsencrypt.acme.email: "<my-devops@example.com>"`
 
 6. Deploy the Docker containers
 
