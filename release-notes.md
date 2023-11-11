@@ -3,6 +3,24 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.11.1
+
+This is a hotfix release that fixes an issue with calling dj-stripe's `get_subscriber_model` utility when teams were
+enabled by adding an `email` property to the `Team` object.
+The `email` property was accidentally not added for certain build configurations.
+
+You can manually apply this change by adding the following property to the `Team` model, in `apps/teams/models.py`:
+
+```python
+@property
+def email(self):
+    return self.membership_set.filter(role=roles.ROLE_ADMIN).first().user.email
+```
+
+Thanks to Charley and Emilien for reporting!
+
+*Nov 10 2023*
+
 ## Version 2023.11
 
 This is a hotfix release that fixes the Node.js docker installation according to
