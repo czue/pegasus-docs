@@ -97,7 +97,7 @@ including social login, sign up flow changes, analytics, logging, and so on.
 
 ## Double-check your language settings
 
-Make sure your [internationalization settings](./internationalization.md) are correct, and you don't have
+Make sure your [internationalization settings](../internationalization.md) are correct, and you don't have
 any extra languages in `settings.LANGUAGES` that you don't currently support.
 This is especially important if you are using Wagtail, as links to pages in unsupported languages
 may error or return the wrong results.
