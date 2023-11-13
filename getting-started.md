@@ -47,7 +47,7 @@ You can read [more about upgrading here](/upgrading).
 If you've chosen to use Docker in development (the quickest and easiest way to get up and running),
 continue to the [Docker instructions](/docker).
 
-Then skip ahead to the [post-install steps](https://docs.saaspegasus.com/getting-started.html#post-installation-steps).
+Then skip ahead to the [post-install steps](getting-started.md#post-installation-steps).
 
 ## Get up and running with native Python
 
@@ -145,13 +145,13 @@ From there you should be able to access all built-in functionality and examples.
 
 ### Enable admin access
 
-Use [the `promote_user_to_superuser` management command](https://docs.saaspegasus.com/cookbooks.html#use-the-django-admin-ui)
+Use [the `promote_user_to_superuser` management command](cookbooks.md#use-the-django-admin-ui)
 to enable access to the Django Admin site.
 
 ### Confirm your site URL
 
 For Stripe callbacks, email links, and JavaScript API clients to work, you must make sure that you have
-[configured absolute URLs correctly](https://docs.saaspegasus.com/configuration.html#absolute-urls).
+[configured absolute URLs correctly](configuration.md#absolute-urls).
 
 ### Set up your Stripe Subscriptions
 

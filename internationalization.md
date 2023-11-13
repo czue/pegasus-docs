@@ -91,7 +91,7 @@ See the [Django docs](https://docs.djangoproject.com/en/4.0/topics/i18n/translat
 
 **In Wagtail:**
 
-See the [Wagtail docs](https://docs.saaspegasus.com/wagtail#internationalization).
+See the [Wagtail docs](wagtail.md#internationalization).
 
 ## Creating / updating translation files
 

@@ -63,7 +63,7 @@ following the [Stripe pricing table documentation](https://stripe.com/docs/payme
 
 Once you've created your billing model on Stripe, follow these instructions to set up your development environment.
 
-1. Update the `STRIPE_*` variables in your project's [`.env` file](https://docs.saaspegasus.com/configuration/#settings-and-environment-files)
+1. Update the `STRIPE_*` variables in your project's [`.env` file](configuration.md#settings-and-environment-files)
    to match the keys from Stripe. See [this page](https://stripe.com/docs/keys) to find your API keys.
 2. Run `./manage.py bootstrap_subscriptions`. If things are set up correctly,
    you should see output that includes information about each product / price that you created,
@@ -226,6 +226,7 @@ These include:
 1. Restricting access to an entire page based on the user/team's subscription.
 1. Showing subscription details like plan, payment details, and renewal date.
 
+(using-the-active-subscription-required-decorator)=
 ### Using the `active_subscription_required` decorator
 
 One common use-case is restricting access to a page based on the user's subscription.
@@ -450,7 +451,7 @@ You will have to do this for each of your products.
 There are two settings that determine how Stripe will call back to your site.
 
 If Stripe is returning to the *wrong site entirely* it is likely a problem with your Django `Site` configuration.
-See the documentation on [absolute URLs](https://docs.saaspegasus.com/configuration.html#absolute-urls) to fix this.
+See the documentation on [absolute URLs](configuration.md#absolute-urls) to fix this.
 
 If Stripe is returning to the correct site, *but over HTTP instead of HTTPS* (or vice versa) then you
 need to change the `USE_HTTPS_IN_ABSOLUTE_URLS` setting in `settings.py` or a production settings file.
