@@ -18,6 +18,7 @@ and update the relevant settings where necessary.
 
 *Note: The "unable to guess serializer" warnings are safe to ignore, and will be fixed in a future version of Pegasus.*
 
+(set-your-allowed-hosts)=
 ## Set your `ALLOWED_HOSTS`
 
 In your app's `settings_production.py` be sure to update the [`ALLOWED_HOSTS` setting](https://docs.djangoproject.com/en/4.1/ref/settings/#allowed-hosts)
@@ -34,11 +35,11 @@ Failure to do this opens up your site to more HTTP host header attacks.
 ## Update your Django Site
 
 In order for absolute URLs and JavaScript API clients to work, your Django site should match your application's domain.
-See the documentation on [absolute URLs](https://docs.saaspegasus.com/configuration.html#absolute-urls) to do this.
+See the documentation on [absolute URLs](../configuration.md#absolute-urls) to do this.
 
 ## Set up email
 
-If you haven't already, you'll want to set up your site to [send email](https://docs.saaspegasus.com/configuration.html#sending-email)
+If you haven't already, you'll want to set up your site to [send email](../configuration.md#sending-email)
 
 ## Make sure your secrets are set
 
@@ -71,7 +72,7 @@ Some functionality, like user profile pictures, requires saving user-uploaded fi
 In development these are saved to the file system, but in most production environments the file system
 is not usable for it. Instead, you need to set up an external storage to handle these.
 
-There is guidance on configuring media files in the [settings and configuration docs](https://docs.saaspegasus.com/configuration.html#storing-media-files).
+There is guidance on configuring media files in the [settings and configuration docs](../configuration.md#storing-media-files).
 
 The most common choice of external storage is [Amazon S3](https://aws.amazon.com/s3/),
 though many cloud providers have their own S3-compatible options, e.g. [Digital Ocean Spaces](https://www.digitalocean.com/products/spaces).
@@ -81,7 +82,7 @@ though many cloud providers have their own S3-compatible options, e.g. [Digital 
 The front-end files that ship with Pegasus are the developer-friendly versions.
 In production, these should be optimized.
 
-First you should add the compiled files to your `.gitignore` as described in the [front end docs](https://docs.saaspegasus.com/front-end.html#long-term-best-practices).
+First you should add the compiled files to your `.gitignore` as described in the [front end docs](../front-end.md#long-term-best-practices).
 Then, as part of your CI/CD deployment process, you should build the bundle files directly on your production server 
 (using `npm install && npm run build`).
 
