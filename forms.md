@@ -17,7 +17,7 @@ To use it, first include `form_tags` in any Django template file:
 Then, you can render a form using the `render_form_fields` template tag.
 Here is a basic example:
 
-```html
+```django
 <form method="post">
   {% csrf_token %}
   {{ form.non_field_errors }}
@@ -30,7 +30,7 @@ Here is a basic example:
 
 You can also render individual fields using `render_field`:
 
-```html
+```django
 <form method="POST" action="{% url 'account_change_password' %}" class="password_change">
   {% csrf_token %}
   {{ form.non_field_errors }}
@@ -67,7 +67,7 @@ class ExampleFormAlpine(forms.Form):
 
 Then in the HTML template you have to add an alpine model to the form:
 
-```html
+```django
 <form method="post" x-data="{ likeDjango: '{{ form.like_django.data|default:"yes" }}', styleValue: '{{ form.styled_options.data|default:"regular" }}' }">
   <!--  other fields here  -->
   {% render_field form.like_django %} <!--  this will bind to `likeDjango` above  -->
@@ -114,7 +114,7 @@ class ExampleFormAlpine(forms.Form):
 
 Django template:
 
-```html
+```django
 <form method="post" x-data="{ likeDjango: '{{ form.like_django.data|default:"yes" }}', styleValue: '{{ form.styled_options.data|default:"regular" }}' }">
   {% csrf_token %}
   {% render_field form.like_django %}

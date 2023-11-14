@@ -44,5 +44,5 @@ Once you've done this, login and click on the e-commerce tab in the navigation, 
 Like subscriptions, it's recommended to use webhooks to ensure you receive all updates from Stripe.
 For the e-commerce store, the only required webhook is `checkout.session.completed`.
 
-Follow [the subscriptions documentation](https://docs.saaspegasus.com/subscriptions/#webhooks) to set
+Follow [the subscriptions documentation](subscriptions.md#webhooks) to set
 up webhooks in development and production.
