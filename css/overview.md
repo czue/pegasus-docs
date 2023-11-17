@@ -5,7 +5,7 @@ There are four CSS themes available in Pegasus.
 
 There are two [Bootstrap 5](https://getbootstrap.com/) themes, one based on Creative Tim's [Material Kit](https://www.creative-tim.com/product/material-kit)
 and [Material Dashboard](https://www.creative-tim.com/product/material-dashboard) products,
-and one that is "unthemed". Additionally, you can use [Bulma](https://bulma.io/) and, experimentally, [Tailwind CSS](https://tailwindcss.com/).
+and one that is "unthemed". Additionally, you can use [Bulma](https://bulma.io/) and [Tailwind CSS](https://tailwindcss.com/).
 
 The look and feel of the site is slightly different for each framework, but the overall layout is the same.
 Below are screenshots of the app in each of the four themes:
