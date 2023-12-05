@@ -36,6 +36,42 @@ If you enable celery, it will use the `build_celery.sh` file, which runs the bas
 but not the "release" commands.
 You generally should not need to modify this file.
 
+#### (Optional) Running Migrations in the Release Phase
+
+If you want, you can optionally run the database migrations in the release phase using
+Render's [Deploy steps](https://render.com/docs/deploys#deploy-steps) functionality.
+
+This is not required, and notably **it is not supported on Render's free tier**,
+but may lead to a more consistent deployment process.
+
+To do this, first remove the following lines from `deploy/build.sh`:
+
+```bash
+echo "Running database migrations"
+python manage.py migrate
+```
+
+Then create the following file at `deploy/pre_deploy.sh`:
+
+```bash
+#!/usr/bin/env bash
+# exit on error
+set -o errexit
+
+export DJANGO_SETTINGS_MODULE={{cookiecutter.project_slug}}.settings_production
+
+echo "Running database migrations"
+python manage.py migrate
+```
+
+Finally, add the following line to your `render.yaml` file, after the `buildCommand`:
+
+```yaml
+    preDeployCommand: "./deploy/pre_deploy.sh"
+```
+
+After completing these steps, migrations will run in the pre-deploy phase.
+
 ### Settings and Secrets
 
 Render builds use the `settings_production.py` file.
