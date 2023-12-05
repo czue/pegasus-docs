@@ -3,8 +3,9 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
-## Next release
+## Next Release
 
+- Fix description of `dev-requirements.txt` to indicate it installs development, not production requirements. (Thanks Yngve for reporting!)
 - Fixed 500 when trying to accept an invitation that was already accepted.
 - Explicitly set default region on fly deployments.
 - Remove duplicate DB lookups on invitation acceptance page. 
