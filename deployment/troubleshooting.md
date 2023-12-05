@@ -11,7 +11,7 @@ Your site deploys but you get a "400 Bad Request" when opening it in a browser.
 **Solution:**
 
 This is usually caused by a misconfigured `ALLOWED_HOSTS` setting.
-See [the section on `ALLOWED_HOSTS`](https://docs.saaspegasus.com/deployment/production-checklist.html#set-your-allowed-hosts) to fix.
+See [the section on `ALLOWED_HOSTS`](set-your-allowed-hosts) to fix.
 
 ### App is online but all styles are broken
 
@@ -39,7 +39,7 @@ This is likely the problem if the employee React demo or the teams list UI don't
 **Solution:**
 
 This is usually caused by a misconfigured Django site.
-See the documentation on [absolute URLs](https://docs.saaspegasus.com/configuration.html#absolute-urls) to fix.
+See the documentation on [absolute URLs](../configuration.md#absolute-urls) to fix.
 
 ### Invitation / account emails have the wrong links
 
@@ -51,7 +51,7 @@ When you try to confirm an email address or accept a team invitation you are sen
 **Solution:**
 
 This is usually caused by a misconfigured Django site.
-See the documentation on [absolute URLs](https://docs.saaspegasus.com/configuration.html#absolute-urls) to fix.
+See the documentation on [absolute URLs](../configuration.md#absolute-urls) to fix.
 
 ### Stripe callbacks are going to the wrong place
 
@@ -62,4 +62,4 @@ After completing a payment in Stripe Checkout, you are redirected to the wrong p
 **Solution:**
 
 This is usually caused by a misconfigured Django site.
-See the documentation on [absolute URLs](https://docs.saaspegasus.com/configuration.html#absolute-urls) to fix.
+See the documentation on [absolute URLs](../configuration.md#absolute-urls) to fix.

@@ -61,16 +61,14 @@ One of the most powerful features in Wagtail is the [`StreamField` functionality
 which allows you to combine other Wagtail components into a "stream-like" UI.
 Your blogs and content pages will have a basic implementation using `StreamField` to get your started.  
 
-### CodeRed Extensions
+### Wagtail CRX (CodeRed Extensions)
 
-Some Pegasus customers recommend [CodeRed extensions](https://github.com/coderedcorp/coderedcms) as a great
+Some Pegasus customers recommend [Wagtail CRX](https://github.com/coderedcorp/coderedcms) as a great
 way to build more complicated websites with Wagtail.
-CodeRed ships with a large number of components that can be used in StreamFields to build rich, dynamic content.
+Wagtail CRX ships with a large number of components that can be used in StreamFields to build rich, dynamic content.
 
-One downside of using CodeRed is that they only support Bootstrap version 4.
-The easiest way to manage this with Pegasus is to use Bootstrap 4 in the wagtail/content area,
-and Bootstrap 5 (the version used by Pegasus) everywhere else.
-This works fine, but does introduce a more complicated CSS set up to maintain.
+The previous version of Wagtail CRX was called CodeRed, it only supported Bootstrap version 4.
+Wagtail CRX now supports Bootstrap 5 (the version used by Pegasus).
 
 ### Internationalization
 

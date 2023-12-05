@@ -143,5 +143,5 @@ The configuration for the tools can be found in the [`pyproject.toml`][toml] fil
 
 ### Upgrading
 
-See [this cookbook](https://docs.saaspegasus.com/cookbooks.html#migrating-to-auto-formatted-code)
+See [this cookbook](cookbooks.md#migrating-to-auto-formatted-code)
 for guidance on how to enable code formatting on an existing Pegasus project.

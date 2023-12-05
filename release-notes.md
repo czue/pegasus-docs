@@ -3,7 +3,6 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
-
 ## Next release
 
 - Fixed 500 when trying to accept an invitation that was already accepted.
@@ -20,7 +19,49 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 The `TeamsMiddleware` change may change the access rules of views that were relying on the absence of `request.team`,
 to control authorization, instead of using `login_and_team_required` or similar approaches.
 
-## 2023.10.1
+## Version 2023.11.1
+
+This is a hotfix release that fixes an issue with calling dj-stripe's `get_subscriber_model` utility when teams were
+enabled by adding an `email` property to the `Team` object.
+The `email` property was accidentally not added for certain build configurations.
+
+You can manually apply this change by adding the following property to the `Team` model, in `apps/teams/models.py`:
+
+```python
+@property
+def email(self):
+    return self.membership_set.filter(role=roles.ROLE_ADMIN).first().user.email
+```
+
+Thanks to Charley and Emilien for reporting!
+
+*Nov 10 2023*
+
+## Version 2023.11
+
+This is a hotfix release that fixes the Node.js docker installation according to
+[these nodesource changes](https://github.com/nodesource/distributions#new-update-%EF%B8%8F).
+
+You can also manually apply this change by replacing the current node installation steps with the following
+code in your `Dockerfile.dev` and `Dockerfile.web`.
+
+```
+# install node/npm
+RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | \
+    gpg --dearmor -o /usr/share/keyrings/nodesource.gpg
+
+RUN echo \
+  "deb [signed-by=/usr/share/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x nodistro main" | \
+  tee /etc/apt/sources.list.d/nodesource.list && \
+    apt-get update && \
+    apt-get install nodejs -yqq
+```
+
+Thanks to Finbar on Slack for reporting and suggesting the fix!
+
+*November 1, 2023*
+
+## Version 2023.10.1
 
 This is a minor release addressing a few small issues raised in the `2023.10` release.
 
@@ -34,7 +75,7 @@ This is a minor release addressing a few small issues raised in the `2023.10` re
 
 *Oct 9, 2023*
 
-## 2023.10
+## Version 2023.10
 
 This is a major release with three big updates: Async/Websocket support, an E-Commerce application,
 and an admin user dashboard.
@@ -43,7 +84,7 @@ and an admin user dashboard.
 
 Pegasus now supports asynchronous Django and Websockets.
 Included is an example group chat application that leverages these capabilities.
-Watch the video below for more details, or see the new [async / websocket documentation](./async.md):
+Watch the video below for more details, or see the new [async / websocket documentation](async.md):
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
     <iframe src="https://www.youtube.com/embed/J1hma14whz4" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
@@ -55,7 +96,7 @@ The previous Stripe Payments example has been converted into a full-blown E-Comm
 You can manage your products in Stripe and sync them to your application with a few lines of configuration.
 Customers can purchase specific items and everything is linked to your Stripe dashboard.
 
-Watch the video for more details, or see the new [E-Commerce documentation](./payments.md)::
+Watch the video for more details, or see the new [E-Commerce documentation](payments.md)::
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
     <iframe src="https://www.youtube.com/embed/S4LlQtGD1jc" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
@@ -77,25 +118,25 @@ and supporting work for the above.
 
 ### Added
 
-- **Added asynchronous and websocket support via a new build option.** [Documentation](./async.md).
+- **Added asynchronous and websocket support via a new build option.** [Documentation](async.md).
   - **Related: Added the group chat example application if you enable asynchronous support.**
   - Related: Added `websocket_reverse` and `websocket_absolute_url` helper functions and tests.
   - Related: Added `.pg-message-sender` helper CSS class.
   - Related: If building with async your app will use `asgi` instead of `wsgi`.
-- **Added the E-Commerce example application via a new build option.** [Documentation](./payments.md).
+- **Added the E-Commerce example application via a new build option.** [Documentation](payments.md).
 - **Added the admin dashboard.**
   - Related: Added an admin-only user signup API 
 - Added a `pg-link` helper class to style links (especially on Tailwind and Material builds).
   Also applied this style to a few places.
 - Added basic tests for some of the example views.
-- Added an example of customizing existing DaisyUI themes to the [Tailwind docs](./css/tailwind.md).
+- Added an example of customizing existing DaisyUI themes to the [Tailwind docs](css/tailwind.md).
 - Added `absolute_url` template tag for generating full URLs in e.g. email templates, and added tests for it.
 
 ### Changed
 
 - **Added the `feature_gate_check` and `get_feature_gate_check` helper functions,
   for more fine-grained control of feature gate checking.** 
-  See the updated [feature-gating documentation](https://docs.saaspegasus.com/subscriptions/#feature-gating) for more information.
+  See the updated [feature-gating documentation](subscriptions.md#feature-gating) for more information.
   - Related: Modified the `active_subscription_required` decorator to use this function.
 - Reduced number of DB queries made when provisioning a subscription.
 - Made subscription provisioning an atomic action to reduce race conditions between Stripe Checkout callbacks and webhooks.
@@ -142,7 +183,7 @@ and supporting work for the above.
 ### Upgrade Notes
 
 - To migrate an existing application to use asynchronous / websockets, you will have to set `DEBUG` in your
-  production *environment* (not `settings_production.py`). More information in the [async documentation](./async.md).
+  production *environment* (not `settings_production.py`). More information in the [async documentation](async.md).
 
 *Oct 4, 2023*
 
@@ -183,7 +224,7 @@ can be made directly within Stripe.
 
 The pricing table option opens up a number of new billing options, including multi-currency support
 and free trials, though it does not support per-unit billing very well.
-For complete details, see the [updated subscription documentation](./subscriptions.md).
+For complete details, see the [updated subscription documentation](subscriptions.md).
 
 ### Wagtail Enhancements
 
@@ -217,9 +258,9 @@ There were also several smaller improvements.
 - **Upgraded nearly all Python packages to their latest versions.**
   `django-allauth` was not upgraded, due to it having a large release just a few days ago.
 - **Upgraded all JavaScript packages to their latest versions.**
-- **Subscriptions: official support for multiple currencies ([docs](https://docs.saaspegasus.com/subscriptions#supporting-multiple-currencies)) (Stripe pricing-table only)** 
-- **Subscriptions: official support for free trials ([docs](https://docs.saaspegasus.com/subscriptions#free-trials))** 
-- **Subscriptions: Overhauled the [Subscriptions documentation](./subscriptions.md) to make it clearer, and add the new pricing UI setting.**
+- **Subscriptions: official support for multiple currencies ([docs](subscriptions.md#supporting-multiple-currencies)) (Stripe pricing-table only)** 
+- **Subscriptions: official support for free trials ([docs](subscriptions.md#free-trials))** 
+- **Subscriptions: Overhauled the [Subscriptions documentation](subscriptions.md) to make it clearer, and add the new pricing UI setting.**
 - Subscriptions: Moved the `checkout_success` endpoint to be a global `confirm` endpoint instead
   of a team-specific endpoint.
 - Subscriptions: Improved display of subscription price line items when using metered billing.
@@ -294,7 +335,7 @@ adds dark mode on Tailwind builds, and has the usual smaller updates and fixes.
 
 - **First class support for marketing email lists.** You can now select a platform (Mailchimp, ConvertKit, Email Octopus, or none),
   and your build will be customized for that platform, including settings/environment variables, and automatically subscribing
-  new sign ups to your email list (if properly configured). See the updated [mailing list documentation](https://docs.saaspegasus.com/configuration.html#mailing-list)
+  new sign ups to your email list (if properly configured). See the updated [mailing list documentation](configuration.md#mailing-list)
   for more details.
 - Added a management command to send test emails: `./manage.py send_test_email cory@example.com`.
   Useful when troubleshooting/changing how your server sends email.
@@ -306,7 +347,7 @@ adds dark mode on Tailwind builds, and has the usual smaller updates and fixes.
 - Added tests for `get_next_unique_slug` (including testing the new functionality).
 - Added view tests for the signup process with various edge-cases around team names.Docker
 - Added a `Makefile` target, and documentation for rebuilding the API client with Docker.
-  [Documentation](https://docs.saaspegasus.com/apis.html#generating-the-api-client) (Big thanks to Finbar for helping on this)
+  [Documentation](apis.md#generating-the-api-client) (Big thanks to Finbar for helping on this)
 
 ### Fixed
 
@@ -356,7 +397,7 @@ This is a large maintenance release with many improvements and a few new feature
 - **Added the option to remove compiled static files at Pegasus build time.**
   If checked, your Pegasus build will not include any static files, and they will be added to the `.gitignore` file.
   This is useful to check after you have set up static file builds as part of a CI/CD pipeline. 
-  [More here](https://docs.saaspegasus.com/front-end.html#long-term-best-practices).
+  [More here](front-end.md#long-term-best-practices).
 - **Added optional support for enabling Django's [admin docs](https://docs.djangoproject.com/en/4.2/ref/contrib/admin/admindocs/#module-django.contrib.admindocs)
   via a new project setting.**
 - Added improved Docker support for ARM / Mac M2 architectures, via a new project build option.
@@ -408,7 +449,7 @@ This is a minor release with some form updates and a bugfix for material Bootstr
   a field based on the value of another field, rendering field values in labels, and changing the style of
   a field based on its value.
   The example is available at [http://localhost:8000/pegasus/forms/alpine/](http://localhost:8000/pegasus/forms/alpine/).
-- Added [documentation on forms](./forms.md) in Pegasus.
+- Added [documentation on forms](forms.md) in Pegasus.
 - Added `.pg-bg-danger` and `.pg-bg-success` helper classes for setting success/danger background colors.
 
 ### Fixed
@@ -604,11 +645,11 @@ Smaller updates in this release are below.
 
 - Removed internal subscriptions API endpoints from the generated API documentation and API clients.
   If you'd like to keep these, you can remove the `exclude=True` line from the `extend_schema` declaration
-  in `subscriptions/views/api_views.py`, and then [rebuild the API client](https://docs.saaspegasus.com/apis.html#generating-the-api-client).
+  in `subscriptions/views/api_views.py`, and then [rebuild the API client](apis.md#generating-the-api-client).
 
 #### Documentation
 
-- Overhauled the documentation on working with [virtual environments](./using-virtualenvs.md) and made
+- Overhauled the documentation on working with [virtual environments](using-virtualenvs.md) and made
   `venv` the default recommendation over `virtualenv`.
 
 ### Upgrading / breaking changes
@@ -617,7 +658,7 @@ Smaller updates in this release are below.
   This is recommended, since V1 is being removed from Docker Desktop soon.
 - There are no known breaking changes related to the Python and Node upgrades, but it is recommended to upgrade
   your projects if you haven't already.
-  You may need to [rebuild your Python requirements](https://docs.saaspegasus.com/customizations.html#python-packages)
+  You may need to [rebuild your Python requirements](customizations.md#python-packages)
   on older versions to get backports packages.
 
 
@@ -732,22 +773,22 @@ These are the biggest changes:
 Pegasus will (optionally) now auto-format your Python code using [black](https://black.readthedocs.io).
 In addition to formatting, Pegasus now ships with [pre-commit hooks](https://pre-commit.com)---which you
 can install to ensure your code matches the expected format---and adds format checks to your Github actions CI.
-Much more detail can be found in the new [code formatting docs](https://docs.saaspegasus.com/code-structure.html#code-formatting).
+Much more detail can be found in the new [code formatting docs](code-structure.md#code-formatting).
 This option is enabled by default for new projects, and it's recommended that all existing Pegasus projects upgrade to this format,
 as it will make future merges/upgrades much easier.
-Guidance on upgrading [can be found here](https://docs.saaspegasus.com/cookbooks.html#migrating-to-auto-formatted-code).
+Guidance on upgrading [can be found here](cookbooks.md#migrating-to-auto-formatted-code).
 
 ### S3 production media support
 
 You can now use S3 to store your project's production media with just a few lines of configuration.
 To use S3, enable the "Use S3 for storing public media files" option in your project's configuration, and then
-follow the new [S3 media documentation](https://docs.saaspegasus.com/configuration.html#setting-up-s3-media-storage).
+follow the new [S3 media documentation](configuration.md#setting-up-s3-media-storage).
 
 ### Django debug toolbar
 
 Pegasus now (optionally) ships with the popular [django-debug-toolbar](https://github.com/jazzband/django-debug-toolbar) package.
 You can enable this option in your project configuration, and it will be enabled by default in development
-environments and turned off in production. More details in [the documentation](https://docs.saaspegasus.com/configuration.html#django-debug-toolbar).
+environments and turned off in production. More details in [the documentation](configuration.md#django-debug-toolbar).
 
 ### Alpine.js support
 
@@ -759,9 +800,9 @@ The subscriptions UI was updated to use Alpine, and more features will move to A
 
 ### Added
 
-- **Added pre-commit/black support, as described above and in the [code formatting docs](https://docs.saaspegasus.com/code-structure.html#code-formatting)**
-- **Added django-debug-toolbar, as described above and in [the `debug-toolbar` documentation](https://docs.saaspegasus.com/configuration.html#django-debug-doolbar)**
-- **Added S3 media support, as described above and in the [S3 media documentation](https://docs.saaspegasus.com/configuration.html#setting-up-s3-media-storage).**
+- **Added pre-commit/black support, as described above and in the [code formatting docs](code-structure.md#code-formatting)**
+- **Added django-debug-toolbar, as described above and in [the `debug-toolbar` documentation](configuration.md#django-debug-toolbar)**
+- **Added S3 media support, as described above and in the [S3 media documentation](configuration.md#setting-up-s3-media-storage).**
 - **Added Alpine.js as a top-level JavaScript dependency, included on all pages.**
 - **Added `dev-requirements.in` and `dev-requirements.txt`, for requirements that should only be installed in development
   (e.g. `pip-tools`, `debug-toolbar`, `black`, etc.** 
@@ -819,10 +860,10 @@ The subscriptions UI was updated to use Alpine, and more features will move to A
 
 ### Documentation
 
-- **Added write up about [the front end files](https://docs.saaspegasus.com/front-end.html#providing-site-wide-javascript).**
-- **Added write up about managing [test vs live Stripe products](https://docs.saaspegasus.com/subscriptions.html#stripe-in-production)**
-- **Improved the [internationalization/translation docs](./internationalization.md).**
-- **Added [a cookbook for how to enable auto-formatting on your existing project](https://docs.saaspegasus.com/cookbooks.html#migrating-to-auto-formatted-code).**
+- **Added write up about [the front end files](front-end.md#providing-site-wide-javascript).**
+- **Added write up about managing [test vs live Stripe products](subscriptions.md#stripe-in-production)**
+- **Improved the [internationalization/translation docs](internationalization.md).**
+- **Added [a cookbook for how to enable auto-formatting on your existing project](cookbooks.md#migrating-to-auto-formatted-code).**
 
 *March 3, 2023*
 
@@ -864,7 +905,7 @@ the ability to build without the Pegasus examples, and small changes and fixes.
 ### Upgrading
 
 If you don't want to upgrade Django to 4.1 this upgrade *should* be backwards compatible.
-Pin the Django version to 3.2.x in your requirements file and [rebuild requirements](https://docs.saaspegasus.com/customizations.html#python-packages).
+Pin the Django version to 3.2.x in your requirements file and [rebuild requirements](customizations.md#python-packages).
 
 *Feb 1, 2023*
 
@@ -883,7 +924,7 @@ Happy holidays!
 ### Changed
 
 - **Updated usage of `.env` files. Python environments now use `.env`, docker uses `.env.docker`, and the example
-  was renamed from `.env.dev.example` to `.env.example`. [Details here](./configuration.md).** See upgrade notes.
+  was renamed from `.env.dev.example` to `.env.example`. [Details here](configuration.md).** See upgrade notes.
 - **Invitations can now only be accepted from the email address that was invited.** See upgrade notes.
 - Blog posts in wagtail are now listed in descending order (by date)
 - Optimized the `Dockerfile.dev` so that requirements are installed prior to copying the complete source code of the project.
@@ -968,7 +1009,7 @@ There are a number of big updates in this release.
 ### Feature: Feature flag support
 
 Pegasus now supports using feature flags with waffle.
-For full details, see the new [feature flag documentation](./flags.md).
+For full details, see the new [feature flag documentation](flags.md).
 
 Included in the implementation:
 
@@ -996,12 +1037,12 @@ Supporting/related work:
 ### Feature: Render deployment option
 
 Pegasus now officially supports deploying to [Render](https://render.com/).
-See the new [Render deploy documentation](./deployment/render.md).
+See the new [Render deploy documentation](deployment/render.md).
 
 ### Feature: Fly.io deployment option
 
 Pegasus now officially supports deploying to [fly.io](https://fly.io/).
-See the new [Fly.io deploy documentation](./deployment/fly.md).
+See the new [Fly.io deploy documentation](deployment/fly.md).
 
 ### Feature + Cleanup: Subscription updates
 
@@ -1188,7 +1229,7 @@ Major related changes:
 - **Attach team models to the request in middleware instead of view decorator.**
   This means that `request.team` will be available on every request, so team navigation will be available
   even on pages like a user profile that are not team-specific.
-  For details see the updated [teams middleware docs](https://docs.saaspegasus.com/teams#middleware),
+  For details see the updated [teams middleware docs](teams.md#middleware),
   as well as the upgrade notes below. 
 - Added tests for the above middleware, and updated other tests to be compatible with it.
 - Added a context processor so that `team` is always available in the template context.
@@ -1261,7 +1302,7 @@ See the updated [Tailwind docs](/css/tailwind/) for more information and customi
 
 ### Other Additions
 
-- **Pegasus now ships with a default, customizable logging configuration.** [Documentation](https://docs.saaspegasus.com/configuration.html#logging).
+- **Pegasus now ships with a default, customizable logging configuration.** [Documentation](configuration.md#logging).
 - Added several new helper CSS classes, including `pg-content` (for content), `pg-columns-reversed` (for reversed columns),
  `pg-align-items-center` (a flexbox utility), and various `pg-text-` classes for coloring text. 
 
@@ -1401,7 +1442,7 @@ Complete release notes are below:
 - **Pegasus now supports Wagtail! [Documentation](/wagtail/).** There are a fair number of changes to support this work, most
   of which are only relevant if you enable wagtail support. The main ones includ a new `content` app, a large number of new Python package dependencies
   (all stemming from `wagtail`), and some updates to the site navigation.
-- **Pegasus now generates a sitemap for you.** [Documentation](/page-metadata.html#sitemaps).
+- **Pegasus now generates a sitemap for you.** [Documentation](page-metadata.md#sitemaps).
 - **Responsive HTML email templates were added for the default email confirmation and password reset emails.**
 - Add `get_protocol` helper function to return the string "http" or "https" depending on `settings.USE_HTTPS_IN_ABSOLUTE_URLS`
 
@@ -1441,7 +1482,7 @@ The release also many small fixes and improvements.
 
 - **Re-use the Stripe `Customer` object when a User has multiple subscriptions / payments (by saving it on the User model).
   This prevents users from having to re-enter their cards multiple times.**
-- **Added an `active_subscription_required` decorator for easier subscription feature-gating. [Docs](/subscriptions.html#using-the-active-subscription-required-decorator)**
+- **Added an `active_subscription_required` decorator for easier subscription feature-gating. [Docs](using-the-active-subscription-required-decorator)**
 - **Added a periodic task to sync subscriptions with Stripe every day when per-seat billing is enabled.**
 - Added a slug field to `ProductMetadata` to be able to uniquely refer to products in code.
 - Added `sync_subscription_model_with_stripe` helper function (logic was previously only in `sync_subscriptions` management command)
@@ -1542,7 +1583,7 @@ and some Docker development improvements.
 
 - Added [page metadata documentation](/page-metadata/) for working with project / page metadata (e.g. page titles).
 - Updated the [upgrading documentation](/upgrading/) to recommend a branch-based approach.
-- Updated the [Sentry documentation](configuration.html#sentry) with the new setup and testing instructions.
+- Updated the [Sentry documentation](configuration.md#sentry) with the new setup and testing instructions.
 
 *April 22, 2022*
 
@@ -1633,7 +1674,7 @@ This version unofficially supports Django 4.0, however still ships with 3.2.12.
 
 This is due to one issue with the `dj-stripe` dependency [generating migration files](https://github.com/dj-stripe/dj-stripe/pull/1607)
 that may cause migration problems across multiple Pegasus environments (e.g. dev and prod, or two developer machines).
-This is a very similar issue to the one described in the [0.14.2 release notes](#0-14-2).
+This is a very similar issue to the one described in the [0.14.2 release notes](v-0-14-2).
 
 If you wish to use Django 4.0, update the pinned version to 4.0.2 (or latest) in your `requirements.txt` file after downloading Pegasus,
 and all should work.
@@ -1721,7 +1762,7 @@ You can find a 6-minute overview of the feature in this video:
 </div>
 
 The implementation is customizable and can also be used by non-team builds with some additional configuration. 
-See [the updated Subscription documentation](https://docs.saaspegasus.com/subscriptions.html#per-unit-per-seat-billing)
+See [the updated Subscription documentation](subscriptions.md#per-unit--per-seat-billing)
 for an overview of this functionality, and bear in mind that it's a little complicated with several moving parts!
 
 There were many code changes to support this work-as well as future planned improvements to the subscriptions module.
@@ -1734,7 +1775,7 @@ Also please note the announcement of a few features that will be removed soon!
 
 ### Added
 
-- **Support for per-unit / per-seat billing. See [the docs on using this](https://docs.saaspegasus.com/subscriptions.html#per-unit-per-seat-billing)**
+- **Support for per-unit / per-seat billing. See [the docs on using this](subscriptions.md#per-unit--per-seat-billing)**
 - `SubscriptionSerializer` class for including Subscription objects in APIs
 - Management command and logic to sync subscriptions when team membership changes (useful for per-seat billing workflows)
 - APIs for creating Stripe checkout and portal sessions and returning the URL to be used by JavaScript front ends
@@ -1884,7 +1925,7 @@ Additionally, there are bug fixes and code-related improvements throughout the t
 Finally, there were minor updates to other functionality:
 
 - Bootstrap JavaScript is now built and used from the local install instead of using a pinned CDN. (Bootstrap builds only)
-- Extract Mailchimp mailing list logic to its own module and add [mailing list documentation](/configuration.html#mailing-list).
+- Extract Mailchimp mailing list logic to its own module and add [mailing list documentation](configuration.md#mailing-list).
 - Fix quirks in HTMX example when back-end validation fails.
 - Minor cleanup of HTMX example code.
 - Rename `payments` and `tasks` view modules to `payments_views` and `tasks_views`.
@@ -2110,6 +2151,7 @@ A very minor release:
 
 *June 17, 2021*
 
+(v-0-14-2)=
 ## Version 0.14.2
 
 This release upgrades `dj-stripe` to version `2.4.4` which should fix cross-environment migration issues.
@@ -2394,7 +2436,7 @@ This release is a grab-bag of fixes and upgrades based on recent feedback.
 ## Version 0.10.5
 
 This release adds native support for deploying to Digital Ocean app platform.
-See the [deployment guide](/deployment/#digital-ocean) for details.
+See the [deployment guide](deployment/digital-ocean.md) for details.
 
 Additional updates:
 
@@ -2407,7 +2449,7 @@ Additional updates:
 ## Version 0.10.4
 
 This release adds experimental native support for deploying to Google Cloud Run.
-More details can be found in the [deployment guide](/deployment/#google-cloud).
+More details can be found in the [deployment guide](deployment/google-cloud.md).
 
 Additional updates:
 

@@ -169,5 +169,5 @@ In this case you can fake a pure Pegasus branch by taking the following steps.
 
 After this process git will believe that the pure pegasus code is fully merged to `main`.
 You can then use the commit id you noted in step 4 as the starting point for your upgrade
-([step 1](https://docs.saaspegasus.com/upgrading.html#create-a-branch-for-the-upgrade)),
-and jump to [step 2 above](https://docs.saaspegasus.com/upgrading.html#upgrade-the-code-in-the-branch).
+([step 1](#1-create-a-branch-for-the-upgrade)),
+and jump to [step 2 above](#2-upgrade-the-code-in-the-branch).

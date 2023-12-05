@@ -81,7 +81,7 @@ will be updated to use it.
 The most likely reason this would happen is if your site URLs are not set up properly,
 which would cause the websocket endpoints to not hit the right address.
 
-See the documentation on [absolute URLs](https://docs.saaspegasus.com/configuration.html#absolute-urls) to fix this,
+See the documentation on [absolute URLs](configuration.md#absolute-urls) to fix this,
 and in particular make sure your Django site object has the right domain.
 In development this should be set to `localhost:8000`.
 
@@ -95,7 +95,7 @@ This is in addition to (or instead of) setting `DEBUG=False` in your `settings_p
 
 If you are getting this error *in development*, be sure that Daphne is installed.
 You should have the a `channels[daphne]` entry in your `dev-requirements.in` file, and you should
-[build and install your requirements](https://docs.saaspegasus.com/customizations/#python-packages) as needed.
+[build and install your requirements](customizations.md#python-packages) as needed.
 
 To do this in a non-Docker environmnet, run:
 
