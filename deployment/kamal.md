@@ -16,6 +16,12 @@ In the rest of the document, all the `kamal` commands are run from the `deploy` 
 
 ## Setup
 
+Before you start you will need a few things:
+
+1. A server running Linux with Docker installed and accessible via SSH.
+2. A Docker registry to store your images. You can use Docker Hub or any other registry.
+3. A domain name for your app. You will need to create a DNS record pointing to your server's IP address.
+
 ### Install Kamal
 
 If you haven't already, [install Ruby](https://www.ruby-lang.org/en/documentation/installation/) and then run:
@@ -94,6 +100,9 @@ with each other. This requires a Docker network to be created on the server:
 ```shell
 <remote>$ docker network create <your_app>-network
 ```
+   
+    If you are running services on separate servers, you can skip this step and update the Kamal deploy configuration
+    to remove the references to the docker network.
 
 **Create Media Volume**
 
@@ -103,7 +112,7 @@ This volume will be mounted to the Django media folder to allow the media to per
 <remote>$ docker volume create <your_app>-media
 ```
 
-If you use S3 or some other storage for media, you can skip this step but you must also update the Kamal
+If you use S3 or some other storage for media, you can skip this step and update the Kamal
 deploy configuration to remove the volume mount (the following lines in `deploy.yml`):
 
 ```
@@ -113,7 +122,9 @@ volumes:
 
 **Create the LetsEncrypt storage**
 
-This is needed if you want Traefik to automatically generate SSL certificates for you (recommended).
+This is needed if you want Traefik to automatically generate SSL certificates for you (recommended). If not, you can skip
+    this step and update the Kamal deploy configuration to remove the references to LetsEncrypt
+    (search for `letsencrypt` and `secure`).
 
 ```shell
 <remote>$ sudo mkdir -p /letsencrypt && sudo touch /letsencrypt/acme.json && sudo chmod 600 /letsencrypt/acme.json
