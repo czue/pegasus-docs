@@ -83,6 +83,8 @@ Note that you will have to rebuild styles when adding TailwindUI components, as 
 Every time you use a new Tailwind class you need to rebuild your front end as described in the "[Development](#development)" section above.
 
 After doing that, if they are still not showing up, be sure that you have hard-refreshed your browser (Ctrl-Shift-R) on most browers.
+You can also disable browser caching when devtools are open by following these instructions
+[for Chrome](https://stackoverflow.com/a/23944114/8207) or [for Firefox](https://stackoverflow.com/a/48027947/8207).
 
 If you are building your front end in Docker, be sure to also read the troubleshooting section of the [front end documentation](../front-end.md)
 for potential issues with cross-platform compatibility.
