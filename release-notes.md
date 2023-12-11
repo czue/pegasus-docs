@@ -3,28 +3,52 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
-## Next Release
+## Version 2023.12
 
-- Silence dj-stripe warning about Stripe keys being in settings.
-- Add a `customer` object to the `CustomUser` model when ecommerce is enabled, and re-use the same customers
-  when a user makes multiple purchases.
-- Only show social apps which have been createpord in the DB on login.
-- Remove migration to auto-create social apps.
-- Explicitly set `DEBUG=False` in render production environment.
-- Fix description of `dev-requirements.txt` to indicate it installs development, not production requirements. (Thanks Yngve for reporting!)
-- Fixed 500 when trying to accept an invitation that was already accepted.
-- Explicitly set default region on fly deployments.
-- Remove duplicate DB lookups on invitation acceptance page. 
-- Load `request.team` in `TeamsMiddleware` even if the user doesn't have access to the team if `team_slug` is passed to the view.
+The big update in this release is official support for deploying Pegasus apps onto any linux server.
+This allows you to deploy Pegasus apps onto any VPS, like Linodes, Digital Ocean Droplets, or Amazon EC2 / Lightsail instances.
+The deployment uses Docker containers, managed using [Kamal](https://kamal-deploy.org/).
+You can deploy your entire application onto a single server (the default), multiple servers, or mix-and-match
+between self-hosted and managed services (e.g. Amazon RDS) with an easily customizable configuration.
+
+For more details, see the new [Pegasus Kamal documentation](/deployment/kamal).
+
+Below are the complete release notes:
+
+### Added
+
+- **Support deployment to any linux server using the new Kamal deployment option. [Documentation](/deployment/kamal/).**
+
+### Changed
+
+- **Add a `customer` object to the `CustomUser` model when ecommerce is enabled, and re-use the same customers
+  when a user makes multiple purchases.**
+- **Load `request.team` in `TeamsMiddleware` even if the user doesn't have access to the team if `team_slug` is passed to the view.
   Since authorization is done in the view decorators like `login_and_team_required` this should be safe,
-  and makes it easier to create team views that don't require authentication.
+  and makes it easier to create team views that don't require authentication.**
+- Silence `dj-stripe` warning about Stripe keys being kept in settings. This is standard practice for Pegasus applications.
+- Only show social apps which have been created in the database on login.
+- Explicitly set `DEBUG=False` in the Render production environment.
+- Explicitly set default region on fly.io deployments.
+
+### Fixed
+
+- Fixed description of `dev-requirements.txt` to indicate it installs development, not production requirements. (Thanks Yngve for reporting!)
+- Fixed 500 error when trying to accept an invitation that was already accepted.
+- Removed duplicate DB lookups on invitation acceptance page. 
+
+### Removed
+
+- Removed migration to auto-create social apps in the database.
 - Cleaned up template imports in a few places.
-  
 
 ### Upgrade notes
 
 The `TeamsMiddleware` change may change the access rules of views that were relying on the absence of `request.team`,
 to control authorization, instead of using `login_and_team_required` or similar approaches.
+
+The removed migration file (`/web/migrations/0002_create_allauth_providers.py`) should not be removed if you have
+already run the migration on your environment. Keeping it in the repository won't do any harm.
 
 ## Version 2023.11.1
 
