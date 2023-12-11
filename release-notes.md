@@ -5,9 +5,10 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ## Next Release
 
+- Silence dj-stripe warning about Stripe keys being in settings.
 - Add a `customer` object to the `CustomUser` model when ecommerce is enabled, and re-use the same customers
   when a user makes multiple purchases.
-- Only show social apps which have been created in the DB on login.
+- Only show social apps which have been createpord in the DB on login.
 - Remove migration to auto-create social apps.
 - Explicitly set `DEBUG=False` in render production environment.
 - Fix description of `dev-requirements.txt` to indicate it installs development, not production requirements. (Thanks Yngve for reporting!)
