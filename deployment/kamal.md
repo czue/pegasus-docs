@@ -1,6 +1,6 @@
 ## Kamal Deploy
 
-Pegasus supports container-based deployment to any remove VM using [Kamal](https://kamal-deploy.org/).
+Pegasus supports container-based deployment to any Linux server using [Kamal](https://kamal-deploy.org/).
 
 Kamal is a deployment tool that uses Docker to deploy applications to servers. It is designed to be simple to use
 and to work with a single server or a cluster of servers.
@@ -9,7 +9,7 @@ Kamal will deploy the app as Docker containers, and will also deploy the databas
 required. It will also configure a load balancer ([Traefik](https://traefik.io/) to route traffic to the app
 as well as configure SSL certificates using LetsEncrypt.
 
-In the setup here we will run all the services on a single VM however Kamal is designed to work with multiple servers
+In the setup here we will run all the services on a single server however Kamal is designed to work with multiple servers,
 so you can easily move services to separate servers and update the Kamal configuration in `deploy/config/deploy.yml`.
 
 In the rest of the document, all the `kamal` commands are run from the `deploy` directory.
@@ -62,16 +62,16 @@ You can choose any username you like. In this example we will use `kamal`.
 We'll also add this user to the `docker` group so that Kamal can run docker commands.
 
 ```shell
-<remote vm>$ sudo adduser kamal --disabled-password
-<remote vm>$ sudo adduser kamal --add_extra_groups docker
+<remote>$ sudo adduser kamal --disabled-password
+<remote>$ sudo adduser kamal --add_extra_groups docker
 ```
 
 Now you can add your SSH key to the `kamal` user's `authorized_keys` file:
 
 ```shell
-<remote vm>$ sudo mkdir -p /home/kamal/.ssh
-<remote vm>$ sudo cp ~/.ssh/authorized_keys /home/kamal/.ssh/authorized_keys
-<remote vm>$ sudo chown -R kamal:kamal /home/kamal/.ssh
+<remote>$ sudo mkdir -p /home/kamal/.ssh
+<remote>$ sudo cp ~/.ssh/authorized_keys /home/kamal/.ssh/authorized_keys
+<remote>$ sudo chown -R kamal:kamal /home/kamal/.ssh
 ```
 
 Test the login works:
@@ -92,7 +92,7 @@ Since we are running the app on a single server we need to use Docker networking
 with each other. This requires a Docker network to be created on the server:
 
 ```shell
-<remote vm>$ docker network create <your_app>-network
+<remote>$ docker network create <your_app>-network
 ```
 
 **Create Media Volume**
@@ -100,7 +100,7 @@ with each other. This requires a Docker network to be created on the server:
 This volume will be mounted to the Django media folder to allow the media to persist between deploys.
 
 ```shell
-<remote vm>$ docker volume create <your_app>-media
+<remote>$ docker volume create <your_app>-media
 ```
 
 If you use S3 or some other storage for media, you can skip this step but you must also update the Kamal
@@ -116,7 +116,7 @@ volumes:
 This is needed if you want Traefik to automatically generate SSL certificates for you (recommended).
 
 ```shell
-<remote vm>$ sudo mkdir -p /letsencrypt && sudo touch /letsencrypt/acme.json && sudo chmod 600 /letsencrypt/acme.json
+<remote>$ sudo mkdir -p /letsencrypt && sudo touch /letsencrypt/acme.json && sudo chmod 600 /letsencrypt/acme.json
 ```
 
 ### Create the image repository on Docker Hub
