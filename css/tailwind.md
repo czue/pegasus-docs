@@ -13,7 +13,7 @@ Here's a quick overview of what it looks like:
 
 Because TailwindCSS only includes the styles found in your HTML / JavaScript files, you will need to actively rebuild
 your CSS files any time you add new styles/components to your templates.
-The easiest way to do this is by running:
+The easiest way to do this is by running (after installing Node packages):
 
 ```
 npm run dev-watch
@@ -24,6 +24,8 @@ Or in Docker:
 ```
 make npm-watch
 ```
+
+See the [front-end docs](/front-end) for more information about working with these files.
 
 ## Customization
 
