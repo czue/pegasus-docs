@@ -28,7 +28,8 @@ The front end build is configured in `.github/build_frontend.yml`.
 
 By default, it will:
  - Run on every push to the `main` branch and every pull request.
- - Run on Node version 18 and 19
- - Run `npm run build`
+ - Run on Node version 20 (other Node versions can be added by modifying the `node-version` list).
+ - Run `npm run build`, ensuring your front end builds properly.
+ - Run `npm run type-check`, ensuring all type checks pass.
 
 Any compilation errors in your JavaScript should show up as build failures.

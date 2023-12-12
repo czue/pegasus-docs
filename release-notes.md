@@ -3,6 +3,80 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.12
+
+The big update in this release is official support for deploying Pegasus apps onto any linux server.
+This allows you to deploy Pegasus apps onto any VPS, like Linodes, Digital Ocean Droplets, or Amazon EC2 / Lightsail instances.
+The deployment uses Docker containers, managed using [Kamal](https://kamal-deploy.org/).
+You can deploy your entire application onto a single server (the default), multiple servers, or mix-and-match
+between self-hosted and managed services (e.g. Amazon RDS) with an easily customizable configuration.
+
+For more details, see the new [Pegasus Kamal documentation](/deployment/kamal).
+
+Below are the complete release notes:
+
+### Added
+
+- **Added support for deploying to any linux server using the new Kamal deployment option. [Documentation](/deployment/kamal/).**
+- **Added first-class support for "login with Github."**
+- Added a basic `.dockerignore` file.
+- Added an optional argument to `make npm-install` for installing individual packages, and added a `make npm-uninstall` target
+  for uninstalling packages. (Thanks Gary for the suggestion/contribution!)
+
+### Changed
+
+- **Load `request.team` in `TeamsMiddleware` even if the user doesn't have access to the team if `team_slug` is passed to the view.
+  Since authorization is done in the view decorators like `login_and_team_required` this should be safe,
+  and makes it easier to create team views that don't require authentication.**
+  - Also updated tests to reflect this new behavior.
+- Only show social apps which have been created in the database on the sign up and login pages, and clean up/standardize how 
+  social app code/buttons are added.
+  - Also switch social logins to use POST and remove `SOCIALACCOUNT_LOGIN_ON_GET = True` from settings.
+- **Add a `customer` object to the `CustomUser` model when ecommerce is enabled, and re-use the same customers
+  when a user makes multiple purchases.**
+- Silence `dj-stripe` warning about Stripe keys being kept in settings. This is standard practice for Pegasus applications.
+- Mock out JavaScript translations and remove translation-based views when building without translations enabled.
+  This should slightly improve page-load times when not using translations.
+- Explicitly set `DEBUG=False` in the Render production environment.
+- Explicitly set default region on fly.io deployments.
+- Changed postgres connection strings from `postgres://` to `postgresql://`. Either one works in Django, but only the 
+  latter works with sqlalchemy, so using it allows the same connection string to be used with both tools.
+- **Upgraded everything to run Node 20 instead of Node 18.**
+- **Upgraded the base Docker images from bullseye (Debian 11) to bookworm (Debian 12).**
+- **Overhauled the production Docker setup to use a [multi-stage build)(https://docs.docker.com/build/guide/multi-stage/).
+  This should allow for faster build times (partial builds can run in parallel) as well as faster rebuild time,
+  as more steps are able to be cached more often.**
+- Profile picture media files are now deleted when the associated user is deleted.
+- Default the `PORT` variable used by django in production deployments to `8000` if not specified in the environment.
+- Changed django database engine from `django.db.backends.postgresql_psycopg2` to `django.db.backends.postgresql`
+  (these behave the same, but the latter is now recommended).
+  
+
+### Fixed
+
+- Fixed description of `dev-requirements.txt` to indicate it installs development, not production requirements. (Thanks Yngve for reporting!)
+- Fixed 500 error when trying to accept an invitation that was already accepted.
+- Removed duplicate DB lookups on invitation acceptance page.
+- Set avatar image filenames to be randomly generated. This fixes an issue where, under certain media configurations,
+  uploaded profile pictures with the same filename could "clobber" each other.
+- Fix test failures when manifest storage was configured, by overriding the `STORAGES` setting in affected tests.
+- Fixed 500 error when attempting to manage social app connections from the profile page, due to extending a deleted `allauth` template.
+- Attempt to add more `INTERNAL_IPS` to `settings.py` when using Docker in development, to get Django debug toolbar to show up.
+  (Thanks Artem for reporting/contributing!)
+
+### Removed
+
+- Removed migration to auto-create social apps in the database.
+- Cleaned up template imports in a few places.
+
+### Upgrade notes
+
+The `TeamsMiddleware` change may change the access rules of views that were relying on the absence of `request.team`,
+to control authorization, instead of using `login_and_team_required` or similar approaches.
+
+The removed migration file (`/web/migrations/0002_create_allauth_providers.py`) should not be removed if you have
+already run the migration on your environment. Keeping it in the repository won't do any harm.
+
 ## Version 2023.11.1
 
 This is a hotfix release that fixes an issue with calling dj-stripe's `get_subscriber_model` utility when teams were
