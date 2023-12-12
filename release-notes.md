@@ -77,6 +77,8 @@ to control authorization, instead of using `login_and_team_required` or similar 
 The removed migration file (`/web/migrations/0002_create_allauth_providers.py`) should not be removed if you have
 already run the migration on your environment. Keeping it in the repository won't do any harm.
 
+*December 12, 2023*
+
 ## Version 2023.11.1
 
 This is a hotfix release that fixes an issue with calling dj-stripe's `get_subscriber_model` utility when teams were
