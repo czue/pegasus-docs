@@ -12,7 +12,7 @@ as well as configure SSL certificates using LetsEncrypt.
 In the setup here we will run all the services on a single server however Kamal is designed to work with multiple servers,
 so you can easily move services to separate servers and update the Kamal configuration in `deploy/config/deploy.yml`.
 
-In the rest of the document, all the `kamal` commands are run from the `deploy` directory.
+*Note: Kamal support was added in a recent version of Pegasus. If you run into any issues, please get in touch!*
 
 ## Setup
 
