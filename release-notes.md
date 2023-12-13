@@ -63,6 +63,7 @@ Below are the complete release notes:
 - Fixed 500 error when attempting to manage social app connections from the profile page, due to extending a deleted `allauth` template.
 - Attempt to add more `INTERNAL_IPS` to `settings.py` when using Docker in development, to get Django debug toolbar to show up.
   (Thanks Artem for reporting/contributing!)
+- Fixed issue with missing `$PORT` reference caused fly.io deployments to sometimes fail.
 
 ### Removed
 
