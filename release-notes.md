@@ -43,7 +43,7 @@ Below are the complete release notes:
   latter works with sqlalchemy, so using it allows the same connection string to be used with both tools.
 - **Upgraded everything to run Node 20 instead of Node 18.**
 - **Upgraded the base Docker images from bullseye (Debian 11) to bookworm (Debian 12).**
-- **Overhauled the production Docker setup to use a [multi-stage build)(https://docs.docker.com/build/guide/multi-stage/).
+- **Overhauled the production Docker setup to use a [multi-stage build](https://docs.docker.com/build/guide/multi-stage/).
   This should allow for faster build times (partial builds can run in parallel) as well as faster rebuild time,
   as more steps are able to be cached more often.**
 - Profile picture media files are now deleted when the associated user is deleted.
