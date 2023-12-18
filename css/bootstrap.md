@@ -90,7 +90,7 @@ window.Modal = require('bootstrap/js/dist/modal');  // modals (used by teams)
 
 ```
 
-And then call it in a Django template like this:
+And then call it in a Django template like this (with no `bootrap.` prefix):
 
 ```javascript
 const onLoadModal = new Modal(document.getElementById('landing-page-modal'));
