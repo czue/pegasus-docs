@@ -21,7 +21,7 @@ To build docs run `make html`.
 You can use `sphinx-autobuild` to serve your docs locally and watch for changes:
 
 ```
-sphinx-autobuild . _build/html/
+sphinx-autobuild . _build/html/ --port 8001
 ```
 
 The docs should now be visible at [http://localhost:8000](http://localhost:8000).

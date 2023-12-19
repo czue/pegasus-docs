@@ -52,3 +52,46 @@ In particular, a few bugs have been fixed, and the unused pro files have been re
 Creative Tim offers pro versions of [Material Dashboard](https://www.creative-tim.com/product/material-dashboard-pro) and
 [Material Kit](https://www.creative-tim.com/product/material-kit-pro) which are helpful if you want to have access to more
 pages / components. These should integrate seamlessly with the Pegasus theme.
+
+
+## Working with JavaScript in Django templates
+
+If you want to call bootstrap JavaScript from a Django template file, you can make the bootstrap library
+(or subsets of it) available on the browser window.
+
+To make all of bootstrap available, you can modify `site-bootstrap.js`b to just be these lines:
+
+```javascript
+require('./styles/site-bootstrap.scss');
+window.bootstrap = require('bootstrap');
+```
+
+After [rebuilding the front end](/front-end.md) you can then call bootstrap in a Django template like this:
+
+```django
+{% block page_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const onLoadModal = new bootstrap.Modal(document.getElementById('onLoadModal'));
+    onLoadModal.show();
+  });
+</script>
+{% endblock %}
+```
+
+This example will open the modal with ID `onLoadModal` on page load.
+
+Alternatively, you can add individual bootstrap javascript modules via `site-bootstrap.js` like this:
+
+```javascript
+require('./styles/site-bootstrap.scss');
+// <other require statements here>
+window.Modal = require('bootstrap/js/dist/modal');  // modals (used by teams)
+
+```
+
+And then call it in a Django template like this (with no `bootrap.` prefix):
+
+```javascript
+const onLoadModal = new Modal(document.getElementById('landing-page-modal'));
+```
