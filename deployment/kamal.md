@@ -24,7 +24,8 @@ Before you start you will need a few things:
 
 ### Install Kamal
 
-If you haven't already, [install Ruby](https://www.ruby-lang.org/en/documentation/installation/) and then run:
+If you haven't already, install Ruby (it is recommended to use [`rbenv`](https://github.com/rbenv/rbenv))
+and then run:
 
 ```bash
 gem install kamal -v '> 1.0.0'
