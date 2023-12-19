@@ -14,13 +14,168 @@ so you can easily move services to separate servers and update the Kamal configu
 
 *Note: Kamal support was added in a recent version of Pegasus. If you run into any issues, please get in touch!*
 
-## Setup
+## Screencast
 
-Before you start you will need a few things:
+You can watch a screencast showing how to deploy to a Digital Ocean Droplet with Kamal here:
 
-1. A server running Linux with Docker installed and accessible via SSH.
-2. A Docker registry to store your images. You can use Docker Hub or any other registry.
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/qOc2hZm2uCA" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
+
+Or follow along with the documentation below.
+
+## Overview
+
+Deploying on Kamal will require a few pieces:
+
+1. A server running Linux (the latest Ubuntu LTS is recommended---version 22.04 as of this writing) and accessible via SSH.
+2. A Docker registry to store your images. You can use [Docker Hub](https://hub.docker.com) or any other registry.
 3. A domain name for your app. You will need to create a DNS record pointing to your server's IP address.
+4. A development environment where you install and configure Kamal.
+
+We'll walk through these in more detail in order below.
+
+## Provision and prepare your server
+
+The first step is to provision a server were you will host your application.
+Some popular choices include:
+
+1. Digital Ocean Droplets (you can sign up with [this link](https://m.do.co/c/432e3abb37f3) to get $100 credit
+and help support Pegasus).
+2. [Linode](https://www.linode.com/).
+3. [Hetzner](https://www.hetzner.com/).
+4. [AWS](https://aws.amazon.com/) (Lightsail or EC2).
+5. [Google Cloud](https://cloud.google.com/).
+6. [Microsoft Azure](https://azure.microsoft.com/en-us).
+
+It is recommended to choose the latest Ubuntu LTS---version 22.04 as of this writing---for your operating system.
+Other operating systems might work, but are not officially tested.
+
+We also recommend at least 2GB of RAM.
+
+Once you've chosen a hosting company and provisioned a server, follow the instructions provided to login (SSH)
+to the server. You will need to be able to log in remotely to complete the rest of the setup.
+
+### Install Docker
+
+Although Kamal can install Docker for you, it is recommended that you install Docker yourself
+so that Kamal does not need to use the root user account---which can expose your server to more attacks.
+
+You can test if Docker is installed by running `docker -v` on the command line. You should see output like
+the following if it is installed correctly.
+
+```
+Docker version 24.0.5, build 24.0.5-0ubuntu1~20.04.1
+```
+
+If you need to install it, you can find instructions in [Docker's documentation](https://docs.docker.com/engine/install/ubuntu/).
+You only need to install Docker Engine, not Docker Desktop.
+
+### Prepare a user account for Kamal
+
+Next, create a user for Kamal to use.
+You can choose any username you like. In this example we will use `kamal`.
+We'll also add this user to the `docker` group so that Kamal can run docker commands.
+
+First login to your server as a user with root access. Then run the following commands:
+
+```shell
+sudo adduser kamal --disabled-password
+sudo adduser kamal --add_extra_groups docker
+```
+
+Next, add your SSH key to the `kamal` user's `authorized_keys` file so you can login without a password.
+If you need to generate an SSH key you can [follow these steps](https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server):
+
+```shell
+sudo mkdir -p /home/kamal/.ssh
+sudo cp ~/.ssh/authorized_keys /home/kamal/.ssh/authorized_keys
+sudo chown -R kamal:kamal /home/kamal/.ssh
+```
+
+Next, test the login works. Exit out of your server and on your *local machine* run:
+
+```shell
+ssh kamal@<ip-address>
+```
+
+If you've set everything up properly the `kamal` user should be able to login with no password.
+
+Once you're logged in, as a final test, ensure the `kamal` user can run docker commands by running:
+
+```shell
+docker run hello-world
+```
+
+If the command above completes without error you are ready to go!
+
+### Prepare Docker for deployment
+
+Next, complete the following steps to get the Docker configuration ready for deployment.
+These can be run by the `kamal` user on your remote server.
+
+**Create the Docker Network**
+
+Since we are running the app on a single server we need to use Docker networking to allow the containers to communicate
+with each other. This requires a Docker network to be created on the server:
+
+Run the following on your server, replacing `<your_app>` with your app ID/slug:
+
+```shell
+docker network create <your_app>-network
+```
+   
+*Note: If you are running services on separate servers, you can skip this step and update the Kamal deploy configuration
+to remove the references to the docker network.*
+
+**Create Media Volume**
+
+This volume will be mounted to the Django media folder to allow media files (e.g. profile pictures)
+to persist between deploys.
+
+Run the following on your server, replacing `<your_app>` with your app ID/slug:
+
+```shell
+docker volume create <your_app>-media
+```
+
+*Note: If you use S3 or some other storage for media, you can skip this step and update the Kamal
+deploy configuration to remove the volume mount (the following lines in `deploy.yml`):*
+
+```
+volumes:
+  - "<your_app>-media:/code/media"
+```
+
+**Create the LetsEncrypt storage**
+
+This is needed if you want Traefik to automatically generate SSL certificates for you (recommended). If not, you can skip
+this step and update the Kamal deploy configuration to remove the references to LetsEncrypt
+(search for `letsencrypt` and `secure`).
+
+On your server:
+
+```shell
+sudo mkdir -p /letsencrypt && sudo touch /letsencrypt/acme.json && sudo chmod 600 /letsencrypt/acme.json
+```
+
+## Create the image repository on Docker Hub
+
+Before doing deployment, you need a place to store your Docker images, also known as a *Docker registry*.
+The most popular one is [Docker Hub](https://hub.docker.com/), so we'll use that one, though
+you can choose a different one if you want, as described in the [Kamal docs](https://kamal-deploy.org/docs/configuration).
+
+First create an account on [Docker Hub](https://hub.docker.com/) and note your username.
+
+Then create a new repository, choosing a unique name for your app, and marking it "private".
+
+Finally you will need to create an access token. Go to "Account Settings" --> "Security" and make a new access token,
+giving it the default permissions of Read, Write, Delete.
+**Save this token somewhere as you will need it in the next step and will only see it once.**
+
+## Set up your DNS
+
+todo todo
 
 ### Install Kamal
 
@@ -42,108 +197,6 @@ The `.env` file is not checked into source control. See `deploy/.env.kamal` for 
 cd deploy
 cp .env.kamal .env
 ```
-
-### Prepare your machine
-
-The machine you are going to deploy to needs to be accessible via SSH and have Docker installed.
-You also need to setup a user and a Docker network.
-
-#### Install Docker
-
-Although Kamal can install Docker for you, it is recommended that you install Docker yourself
-so that Kamal does not need to use the root user account.
-
-You can test if Docker is installed by running `docker -v` on the command line. You should see output like
-the following if it is installed correctly.
-
-```
-Docker version 24.0.5, build 24.0.5-0ubuntu1~20.04.1
-```
-
-If you need to install it, you can find instructions in [Docker's documentation](https://docs.docker.com/engine/install/).
-
-#### Prepare a user account for Kamal
-
-First create a user for Kamal to use.
-You can choose any username you like. In this example we will use `kamal`.
-We'll also add this user to the `docker` group so that Kamal can run docker commands.
-
-```shell
-<remote>$ sudo adduser kamal --disabled-password
-<remote>$ sudo adduser kamal --add_extra_groups docker
-```
-
-Now you can add your SSH key to the `kamal` user's `authorized_keys` file:
-
-```shell
-<remote>$ sudo mkdir -p /home/kamal/.ssh
-<remote>$ sudo cp ~/.ssh/authorized_keys /home/kamal/.ssh/authorized_keys
-<remote>$ sudo chown -R kamal:kamal /home/kamal/.ssh
-```
-
-Test the login works:
-
-```shell
-<local>$ ssh kamal@<ip-address>
-```
-
-If you've set everything up properly the user should be able to login.
-
-#### Prepare Docker for deployment
-
-Complete the following steps to get the Docker configuration ready for deployment. 
-
-**Create the Docker Network**
-
-Since we are running the app on a single server we need to use Docker networking to allow the containers to communicate
-with each other. This requires a Docker network to be created on the server:
-
-```shell
-<remote>$ docker network create <your_app>-network
-```
-   
-    If you are running services on separate servers, you can skip this step and update the Kamal deploy configuration
-    to remove the references to the docker network.
-
-**Create Media Volume**
-
-This volume will be mounted to the Django media folder to allow the media to persist between deploys.
-
-```shell
-<remote>$ docker volume create <your_app>-media
-```
-
-If you use S3 or some other storage for media, you can skip this step and update the Kamal
-deploy configuration to remove the volume mount (the following lines in `deploy.yml`):
-
-```
-volumes:
-  - "<your_app>-media:/code/media"
-```
-
-**Create the LetsEncrypt storage**
-
-This is needed if you want Traefik to automatically generate SSL certificates for you (recommended). If not, you can skip
-    this step and update the Kamal deploy configuration to remove the references to LetsEncrypt
-    (search for `letsencrypt` and `secure`).
-
-```shell
-<remote>$ sudo mkdir -p /letsencrypt && sudo touch /letsencrypt/acme.json && sudo chmod 600 /letsencrypt/acme.json
-```
-
-### Create the image repository on Docker Hub
-
-Before doing deployment, you need a place to store your Docker images, also known as a *Docker registry*.
-The most popular one is [Docker Hub](https://hub.docker.com/), so we'll use that one, though
-you can choose a different one if you want, as described in the [Kamal docs](https://kamal-deploy.org/docs/configuration).
-
-First create an account on [Docker Hub](https://hub.docker.com/) and note your username.
-
-Then create a new repository, choosing a unique name for your app, and marking it "private".
-
-Finally you will need to create an access token. Go to "Account Settings" --> "Security" and make a new access token,
-giving it the default permissions of Read, Write, Delete.
-**Save this token somewhere as you will need it in the next step and will only see it once.**
 
 ### Update the Kamal configuration files
 
