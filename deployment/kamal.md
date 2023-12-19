@@ -29,8 +29,8 @@ Or follow along with the documentation below.
 Deploying on Kamal will require a few pieces:
 
 1. A server running Linux (the latest Ubuntu LTS is recommended---version 22.04 as of this writing) and accessible via SSH.
-2. A Docker registry to store your images. You can use [Docker Hub](https://hub.docker.com) or any other registry.
 3. A domain name for your app. You will need to create a DNS record pointing to your server's IP address.
+2. A Docker registry to store your images. You can use [Docker Hub](https://hub.docker.com) or any other registry.
 4. A development environment where you install and configure Kamal.
 
 We'll walk through these in more detail in order below.
@@ -159,6 +159,13 @@ On your server:
 sudo mkdir -p /letsencrypt && sudo touch /letsencrypt/acme.json && sudo chmod 600 /letsencrypt/acme.json
 ```
 
+## Set up DNS
+
+To set up SSL you will need a DNS record pointing at your sever. Create a new "A" record using
+whatever tool you use to manage your DNS, and point it at the IP address of the server you created above.
+
+The most common domain to use is `www.<yourdomain>.com`.
+
 ## Create the image repository on Docker Hub
 
 Before doing deployment, you need a place to store your Docker images, also known as a *Docker registry*.
@@ -173,12 +180,9 @@ Finally you will need to create an access token. Go to "Account Settings" --> "S
 giving it the default permissions of Read, Write, Delete.
 **Save this token somewhere as you will need it in the next step and will only see it once.**
 
-## Set up your DNS
+## Install and configure Kamal
 
-todo todo
-
-### Install Kamal
-
+Finally, we can set everything up to deploy our production application with Kamal.
 If you haven't already, install Ruby (it is recommended to use [`rbenv`](https://github.com/rbenv/rbenv))
 and then run:
 
@@ -203,12 +207,11 @@ cp .env.kamal .env
 The Kamal configuration is in `deploy/config/deploy.yml`.
 You will need to update the following values:
 
-* Docker image repo: `image: <namespace>/<appname>` - this is the repository you created above.
-  The `namespace` will typically be your username.
+* Docker image repo: `image: <namespace>/<repository-name>` - this is the repository you created above.
+  If you're using Docker Hub, the `namespace` will typically be your username.
 * Your server IP address (or hostname) `<IP-ADDRESS>` (this value is listed once per service).
-* Your app domain name: `Host(``hostname.example.com``)`
+* Your app domain name: `Host(``hostname.example.com``)`. This is the DNS endpoint you set up above.
 * Docker registry username: `username: <DOCKER REGISTRY USERNAME>` - the username you chose above.
-* LetsEncrypt email: `certificatesResolvers.letsencrypt.acme.email: "<my-devops@example.com>"`
 
 Additionally, in your `deploy/.env` file you should add the following variables:
 
@@ -216,13 +219,17 @@ Additionally, in your `deploy/.env` file you should add the following variables:
 * Choose secure, unique, and ideally random values for `POSTGRES_PASSWORD` and `SECRET_KEY`.
 * Update the `DATABASE_URL` value (use the same password as `POSTGRES_PASSWORD`).
 
+You can review other settings in `deploy.yml`, but those should be all that you need to set yourself
+to do your first deployment.
+
 ### Deploy
 
-Finally, we can use Kamal to do the rest of the setup. Run the following on your *local* machine,
-from the `deploy` directory:
+Finally, we can use Kamal to do the rest of the setup. Run the following on your *local* machine.
+The `kamal setup` command must be run from the `deploy` directory:
 
 ```bash
-<local>$ kamal setup
+cd deploy/
+kamal setup
 ```
  
 This will perform all the tasks necessary to deploy your application
@@ -240,9 +247,28 @@ This will perform all the tasks necessary to deploy your application
 * Stop the old container running the previous version of the app.
 * Prune unused images and stopped containers to ensure servers don’t fill up. 
  
-#### Troubleshooting
+If everything is set up properly then in five or so minutes you should be able to visit your new application
+at the configured domain. You're done!
 
-If the setup fails you may need to set up the services individually:
+## Post-deployment steps
+
+Once you've gotten everything set up, head on over to the [production checklist](./production-checklist.md) and
+run through everything there.
+
+### Manage changes after initial deployment
+
+See the `deploy/README.md` file in your project repo for pointers on managing the production environment after
+the initial deployment.
+
+The key commands you will likely regularly run are `kamal env push` to update the project environment variables,
+and `kamal deploy` to push new releases of your application.
+
+## Troubleshooting
+
+### Something went wrong during setup
+
+If the `kamal setup` command fails it should print out the error it got. Once you've resolved it,
+you may need to set up the services individually instead of re-running it. You can do that with the commands below:
 
 ```shell
 # rebuild the PostgreSQL container
@@ -257,19 +283,24 @@ kamal traefik reboot
 # build the Traefik container (if it didn't succeed the first time)
 kamal traefik boot
 
-# push the .env file to the servers
+\# push the .env file to the servers
 kamal env push
 
 # deploy the app
 kamal deploy
 ```
 
-If deploy continues to fail, check the logs of your docker container.
+If deploy continues to fail, check the logs of your docker container, using:
 
-## Manage changes after initial deployment
+```shell
+kamal app logs
+```
 
-See the `deploy/README.md` file in your project repo for pointers on managing the production environment after
-the initial deployment.
+### Resolving `ERROR exec /bin/sh: exec format error` 
 
-The key commands you will likely regularly run are `kamal env push` to update the project environment variables,
-and `kamal deploy` to push new releases of your application.
+If you see this error on your server/logs it is likely that the architecture used to build your image is not the
+same as the one running on your server.
+
+Review the `builder` section of your `deploy.yml` file and in particular make sure `multiarch` is set to `true`.
+You can also explicitly build the image on the remote server, or set the target architecture using
+other `builder` options as described [in the kamal docs](https://kamal-deploy.org/docs/configuration#using-remote-builder-for-native-multi-arch).
