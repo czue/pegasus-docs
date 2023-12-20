@@ -9,6 +9,8 @@ This hotfix release changes the `multiarch` value in Kamal deploys to `true`, wh
 deploying from Mac / Windows machines to Linux servers (thanks Luis for reporting).
 There was also an overhaul of the [Kamal docs](/deployment/kamal.md).
 
+If you want the hotfix without upgrading, you can just set `multiarch: true` in the `builder` section of your `deploy.yml` file.
+
 *December 20, 2023*
 
 ## Version 2023.12
