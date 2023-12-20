@@ -3,6 +3,14 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2023.12.1
+
+This hotfix release changes the `multiarch` value in Kamal deploys to `true`, which fixes errors when
+deploying from Mac / Windows machines to Linux servers (thanks Luis for reporting).
+There was also an overhaul of the [Kamal docs](/deployment/kamal.md).
+
+*December 20, 2023*
+
 ## Version 2023.12
 
 The big update in this release is official support for deploying Pegasus apps onto any linux server.
