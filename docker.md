@@ -62,7 +62,7 @@ docker compose exec web python manage.py createsuperuser
 
 ### Containers 
 
-The Docker configuration is primarily in `docker compose.yml`.
+The Docker configuration is primarily in `docker-compose.yml`.
 
 There are four containers that start: a Postgres database, a Redis instance (for caching and use as a Celery broker),
 a web container running your Django process, and a Celery container for background jobs.
