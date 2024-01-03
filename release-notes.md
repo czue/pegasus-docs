@@ -7,13 +7,13 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 This is a minor/hotfix release with some small updates/fixes to the group chat UI and Kamal deployment:
 
-- Fixes an issue where there were missing templates if you installed with asynchronous support and without OpenAI.
+- Fixes an issue where there were missing templates if you installed with asynchronous support and without OpenAI. (Thanks Jose for reporting!)
 - Chat templates have now been moved to `web/chat` so it is clear they can be re-used across apps.
 - Added tests that would have caught the above issue.
 - Renamed `TestLoginRequiredView` to `TestProfileViews` to be more clear what it is doing.
 - Bumped Django to the latest 4.2.9 bugfix release.
-- Don't run Celery with gevent in Kamal deployments, since it is not necessary and not always installed.
-- Use `settings_production` in Kamal deployments by default, instead of requiring manually setting the enviornment variable.
+- Don't run Celery with gevent in Kamal deployments, since it is not necessary and not always installed. (Thanks Luis for reporting!)
+- Use `settings_production` in Kamal deployments by default, instead of requiring manually setting the environment variable. (Thanks Luis for reporting!)
 
 *January 3, 2024*
 
