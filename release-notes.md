@@ -10,6 +10,13 @@ since this wasn't working well for production environments.
 
 For now it is recommended to use S3 to host media files with Kamal, though this may change in the future.
 
+To get the hotfix without upgrading you can just remove these two lines from your `deploy.yml` file:
+
+```yaml
+volumes:
+  - "{your-app-slug}-media:/code/media"
+```
+
 *January 9, 2023*
 
 ## Version 2024.1
