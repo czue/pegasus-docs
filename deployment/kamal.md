@@ -128,10 +128,14 @@ docker network create <your_app>-network
 *Note: If you are running services on separate servers, you can skip this step and update the Kamal deploy configuration
 to remove the references to the docker network.*
 
+<!---
 **Create Media Volume**
 
-This volume will be mounted to the Django media folder to allow media files (e.g. profile pictures)
-to persist between deploys.
+*This step is currently only recommended if you want to use Django to serve media files, which is not recommended.
+To set up media it is recommended to follow the [media setup instructions here](../configuration.md#storing-media-files).* 
+
+You can serve media directly from Django by using a volume mounted to the web container.
+This provides a simple way to allow media files (e.g. profile pictures) to persist between deploys.
 
 Run the following on your server, replacing `<your_app>` with your app ID/slug:
 
@@ -146,6 +150,8 @@ deploy configuration to remove the volume mount (the following lines in `deploy.
 volumes:
   - "<your_app>-media:/code/media"
 ```
+
+-->
 
 **Create the LetsEncrypt storage**
 
@@ -254,6 +260,7 @@ at the configured domain. You're done!
 
 Once you've gotten everything set up, head on over to the [production checklist](./production-checklist.md) and
 run through everything there.
+In particular, you will have to set up media files using an external service like S3.
 
 ### Manage changes after initial deployment
 
