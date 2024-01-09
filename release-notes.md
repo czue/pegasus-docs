@@ -3,6 +3,15 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.1.1
+
+This is a minor/hotfix release that disables self-hosting media files with Kamal deployment,
+since this wasn't working well for production environments.
+
+For now it is recommended to use S3 to host media files with Kamal, though this may change in the future.
+
+*January 9, 2023*
+
 ## Version 2024.1
 
 This is a minor/hotfix release with some small updates/fixes to the group chat UI and Kamal deployment:
