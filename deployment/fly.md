@@ -112,11 +112,13 @@ If not, see the "Troubleshooting" section below.
 ### Deploying
 
 You are now ready to deploy your app.
+You can do this by running:
 
 ```shell
 $ fly deploy
 ```
 
+In a few minutes your app should be live!
 **After deploying, review the [production checklist](/deployment/production-checklist.md) for a list
 of common next steps**
 
