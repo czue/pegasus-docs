@@ -167,8 +167,16 @@ If you get an error like the following when running `fly deploy`
 ```
 
 it is likely that your Database is not set up properly.
-You should confirm it is connected and attached to your app.
-You can (re-)attach a database to an app by running:
+You can confirm if this is the case by running `fly secrets list` and making sure that you see a `DATABASE_URL` variable.
+If you do not see one, it is not properly connected/attach.
+
+If you need to create a new database, you can run:
+
+```
+fly postgres create --name {your-app-db}
+```
+
+And you can (re-)attach a database to an app by running:
 
 ```
 fly postgres attach {your-app-db} -a {your-app-name}
