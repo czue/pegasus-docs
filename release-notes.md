@@ -3,6 +3,16 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.1.2
+
+This is a minor/hotfix release that fixes a few issues related to fly.io deployments due to changes
+in the default values used by fly.
+It also updates the [fly documentation](/deployment/fly.md) to use the latest `flyctl` workflow for launching
+new applications.
+
+*January 9, 2023*
+
+
 ## Version 2024.1.1
 
 This is a minor/hotfix release that disables self-hosting media files with Kamal deployment,
