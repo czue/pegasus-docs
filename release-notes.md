@@ -10,7 +10,7 @@ in the default values used by fly.
 It also updates the [fly documentation](/deployment/fly.md) to use the latest `flyctl` workflow for launching
 new applications.
 
-*January 9, 2023*
+*January 15, 2023*
 
 
 ## Version 2024.1.1
