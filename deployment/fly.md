@@ -18,31 +18,56 @@ the region to suit your needs, but it should be consistent throughout the comman
 
 1. Create your app in Fly.io
 
-    ```shell
-    $ fly launch --dockerfile Dockerfile.web \
+```shell
+$ fly launch --dockerfile Dockerfile.web \
       --dockerignore-from-gitignore \
       --no-deploy \
       --name {app-name} \
       --region ord
-    
-    # Answer 'yes' to the first question:
+```
 
-    An existing fly.toml file was found for app {app-name}
-    ? Would you like to copy its configuration to the new app? Yes
-    
-    Creating app in /path/to/app/source
-    Using dockerfile Dockerfile.web
-    Selected App Name: {app-name}
-    
-    # Select the organization you want to deploy the app to:
+After running that, answer 'yes' to the first question:
 
-    ? Select organization: My Org (my_org)
-    
-    Created app {app-name} in organization my_org
-    Wrote config file fly.toml
-    Your app is ready. Deploy with `flyctl deploy`
-    ```
+```
+An existing fly.toml file was found for app {app-name}
+? Would you like to copy its configuration to the new app? Yes
+```
 
+Fly will output some details, then ask another question about customizing. Answer 'yes' to that as well:
+
+```
+Using dockerfile Dockerfile.web
+Creating app in /path/to/app/source
+
+We're about to launch your app on Fly.io. Here's what you're getting:
+
+Organization: Your Name              (fly launch defaults to the personal org)
+Name:         {app-name}             (specified on the command line)
+Region:       Chicago, Illinois (US) (specified on the command line)
+App Machines: shared-cpu-1x, 1GB RAM (most apps need about 1GB of RAM)
+Postgres:     <none>                 (not requested)
+Redis:        <none>                 (not requested)
+
+? Do you want to tweak these settings before proceeding? (y/N) Yes
+``` 
+
+A browser tab should open where you should add a Fly Postgres database called {app-name}-db,
+and an Upstash Redis server. You can leave the other defaults. It should look like this:
+
+![Fly DB config](/images/deployment/fly-db-config.png)
+
+Click "Confirm Settings" and then close the tab.
+Back on the command line, Fly will output some more things and should eventually end with a message like this:
+
+```
+✓ Configuration is valid
+Your app is ready! Deploy with `flyctl deploy`
+```
+
+If you see these two lines you are ready to deploy!
+If not, see the "Troubleshooting" section below.
+
+<!----
 2. Create the app database
 
     ```shell
@@ -83,6 +108,7 @@ the region to suit your needs, but it should be consistent throughout the comman
     $ fly secrets set REDIS_URL={url}
     ```
 
+--->
 ### Deploying
 
 You are now ready to deploy your app.
@@ -96,7 +122,7 @@ of common next steps**
 
 ### Running Database Migrations
 
-Database migrations are applied during deploy. This is configured in the `fly.toml` file.
+Database migrations are applied in the release command during deploy. This is configured in the `fly.toml` file.
 
 ### Settings and Secrets
 
@@ -129,3 +155,21 @@ For alternatives see [https://fly.io/docs/app-guides/multiple-processes/](https:
 
 [multiprocess]: https://fly.io/docs/reference/configuration/#the-processes-section
  
+### Troubleshooting
+
+**My release / migrate command is failing.**
+
+If you get an error like the following when running `fly deploy`
+
+```
+  django.db.utils.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+  	Is the server running on that host and accepting TCP/IP connections?
+```
+
+it is likely that your Database is not set up properly.
+You should confirm it is connected and attached to your app.
+You can (re-)attach a database to an app by running:
+
+```
+fly postgres attach {your-app-db} -a {your-app-name}
+```
