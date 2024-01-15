@@ -183,3 +183,17 @@ And you can (re-)attach a database to an app by running:
 ```
 fly postgres attach {your-app-db} -a {your-app-name}
 ```
+
+**My deploy keeps timing out.**
+
+If you keep getting an error like the following:
+
+```
+Error: timeout reached waiting for health checks to pass for machine 28749e0b443558
+```
+
+You can try re-deploying with a higher timeout. For example, try running:
+
+```
+flyctl deploy --wait-timeout 5m
+```
