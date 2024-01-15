@@ -10,6 +10,8 @@ in the default values used by fly.
 It also updates the [fly documentation](/deployment/fly.md) to use the latest `flyctl` workflow for launching
 new applications.
 
+*Thanks to Naveed for reporting this.*
+
 *January 15, 2023*
 
 
