@@ -71,7 +71,7 @@ To use [celery](./celery.md) you will also need to [install Redis](https://redis
 
 ### Setup a Python 3.11 virtual environment
 
-See [Using Virtual Environments](/using-virtualenvs/) for details on this process.
+See [the docs on Virtual Environments](/python/#using-native-system-python-with-virtual-environments) for details on this process.
 
 ### Enter the project directory
 
