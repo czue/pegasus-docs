@@ -21,7 +21,7 @@ contributions are most welcome!
    customizations
    configuration
    code-structure
-   using-virtualenvs
+   python
    front-end
    css
    page-metadata

@@ -34,27 +34,6 @@ To change the top nav edit the `./templates/web/components/top_nav.html` file.
 
 To change the sidebar nav edit the `./templates/web/components/app_nav.html` file.
 
-## Python Packages
-
-You'll inevitably want to add new Python packages to your project.
-
-Pegasus uses [pip tools](https://github.com/jazzband/pip-tools) to manage Python dependencies.
-This allows for more explicit dependency management than a standard `requirements.txt` file.
-
-Pip tools is included as a dependency in the `dev-requirements.txt` file so if you've followed the local setup
-steps it should already be installed.
-
-Then, to add/modify your requirements, edit `requirements/requirements.in` with the new package and run:
-
-```
-pip-compile requirements/requirements.in
-pip install -r requirements/requirements.txt
-``` 
-
-If you are using Docker in development, you'll also have to rebuild your containers.
-
-The easiest way to do everything is to run `make requirements` as [described here](docker.md#updating-python-packages).
-
 ## Styles
 
 **Customizing styles requires setting up the [front-end build pipeline](/front-end).**

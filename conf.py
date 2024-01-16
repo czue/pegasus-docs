@@ -206,6 +206,7 @@ gtagjs_ids = [
 redirects = {
     "api-keys": "apis.html",
     "experimental": "css/tailwind.html",
+    "using-virtualenvs": "python/",
 }
 
 # pushfeedback configuration
