@@ -4,7 +4,7 @@ The following are some recommendations for deploying production Pegasus applicat
 
 ## Run the Django deployment checklist
 
-Django provides a [deployment checklist](https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/) that
+Django provides a [deployment checklist](https://docs.djangoproject.com/en/stable/howto/deployment/checklist/) that
 helps ensure your site has some of the most important settings properly configured for production environments.
 It is executed by running `manage.py check --deploy` on your production server.
 

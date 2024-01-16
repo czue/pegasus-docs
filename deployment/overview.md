@@ -43,7 +43,7 @@ see the [kamal deployment documentation](./kamal.md).
 ## Other options
 
 If, for whatever reason, you don't want to use the built in Kamal option to deploy to a VPS,
-the Django documentation provides a good overview on [how to deploy Django to your own server](https://docs.djangoproject.com/en/3.2/howto/deployment/).
+the Django documentation provides a good overview on [how to deploy Django to your own server](https://docs.djangoproject.com/en/stable/howto/deployment/).
 
 Additionally, Pegasus's [Docker support](/docker/) can be used as a basis for other production environments
 that supports container---for example, Google Kubernetes Engine and Amazon ECS.
