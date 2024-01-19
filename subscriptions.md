@@ -160,6 +160,27 @@ Pegasus ships with webhook functionality ready to go, including default handling
 taken in Stripe's checkout and billing portals. That said, you are strongly encouraged
 to test locally using [Stripe's excellent guide](https://stripe.com/docs/webhooks/test).
 
+### Webhooks in development
+
+In development the easiest way to set up webhooks is to install the [Stripe CLI](https://stripe.com/docs/stripe-cli),
+and then run it with the following command:
+
+```
+stripe listen --forward-to localhost:8000/stripe/webhook/
+```
+
+If you'd prefer, you can also do this with Docker (no Stripe install required) by running:
+
+```
+docker run --network host --rm -it stripe/stripe-cli listen --forward-to  localhost:8000/stripe/webhook/  --api-key sk_test_<your_key>
+```
+
+**Make sure to set `DJSTRIPE_WEBHOOK_SECRET` in your `settings.py` or environment.**
+This value will be in the console output in the Stripe CLI.
+
+### Webhooks in production
+
+In production, you can choose which webhooks you want to send.
 The following minimum set of webhooks are connected by default:
 
 For the billing portal:
@@ -171,13 +192,10 @@ For Stripe Checkout:
 
 - `checkout.session.completed`
 
-A few pieces of setup that are required:
+You should enter https://yourserver.com/stripe/webhook/ for the webhook endpoint. **The trailing slash is required.**
 
-- For the webhook URL, it should be https://yourserver.com/stripe/webhook/. **The trailing slash is required.**
-  If using the Stripe CLI in development you can use `stripe listen --forward-to localhost:8000/stripe/webhook/`
-- Make sure to set `DJSTRIPE_WEBHOOK_SECRET` in your `settings.py` or environment.
-  This value can be found when configuring your webhook endpoint in the Stripe dashboard, 
-  or read from the console output in the Stripe CLI.
+**Additionally, make sure to set `DJSTRIPE_WEBHOOK_SECRET` in your `settings.py` or environment.**
+This value can be found in the Stripe dashboard where you configure your webhook.
 
 Once webhooks are properly setup, all the underlying Stripe data will be automatically synced from
 Stripe with no additional setup on your part.
