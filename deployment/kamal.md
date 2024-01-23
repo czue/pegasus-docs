@@ -189,12 +189,13 @@ giving it the default permissions of Read, Write, Delete.
 ## Install and configure Kamal
 
 Finally, we can set everything up to deploy our production application with Kamal.
-If you haven't already, install Ruby (it is recommended to use [`rbenv`](https://github.com/rbenv/rbenv))
-and then run:
 
-```bash
-gem install kamal -v '> 1.0.0'
-```
+You can follow [the Kamal installation instructions](https://kamal-deploy.org/docs/installation) of your choice.
+
+**Note: some Pegasus users have reported that the Docker install is more reliable on Macs.
+On Linux, the native Ruby and Docker both seem to work fine.**
+
+If you install Kamal natively, you may want to use [`rbenv`](https://github.com/rbenv/rbenv)) to manage your environment.
 
 ### Create `.env` file in the `deploy` directory
 
