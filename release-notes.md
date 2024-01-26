@@ -3,6 +3,12 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Next release
+
+- Update links to all Django documentation to link to the latest stable release, instead of a specific version.
+- Fix schema warning for the user signups dashboard API.
+- Update link to the guide to celery progress bars to the new post url.
+
 ## Version 2024.1.2
 
 This is a minor/hotfix release that fixes a few issues related to fly.io deployments due to changes
@@ -762,7 +768,7 @@ Smaller updates in this release are below.
 
 #### Documentation
 
-- Overhauled the documentation on working with [virtual environments](using-virtualenvs.md) and made
+- Overhauled the documentation on working with [virtual environments](python.md) and made
   `venv` the default recommendation over `virtualenv`.
 
 ### Upgrading / breaking changes
@@ -2358,7 +2364,7 @@ Details are below:
 - Remove broken landing page and pricing page examples, and point people to Tailwind UI instead 
 
 **Upgrade notes:**
-- Django added the new [Default primary key field type](https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field)
+- Django added the new [Default primary key field type](https://docs.djangoproject.com/en/stable/ref/settings/#default-auto-field)
   setting. If you wish to use the default in 3.2 you will have to add DB migrations for it. Otherwise you
   can change the value of `DEFAULT_AUTO_FIELD` to `'django.db.models.AutoField'` in your `settings.py` file.
 - Bootstrap users may need to run `npm update bootstrap` before building static assets to get all styling 
