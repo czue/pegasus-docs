@@ -145,19 +145,13 @@ value with any URL or file system reference to your `schema.yml` file.
 
 #### Running in docker
 
-You can also generate your API client with docker to avoid having to install Java.
-There are a few additional steps for doing this.
+You can also generate your API client with docker to avoid having to install Java by running:
 
-1. Determine the public IP of your host machine on the local network. It will usually be something like `192.168.0.xxx`.
-   These instructions use the example of `192.168.0.104`.
-   1. One way to find this on most systems is to run `hostname -I | awk '{print $1}'` 
-2. Add this IP address to `ALLOWED_HOSTS` in your `settings.py` file. Or set `ALLOWED_HOSTS = ["*"]`
-   1. You can confirm this is working by loading the IP in a browser (e.g. opening [http://192.168.0.104](http://192.168.0.104)).
-      If you did it correctly your app should load.
-3. Export this value as an environment variable, called `HOST_IP`. E.g. `export HOST_IP=192.168.0.104`.
-4. Run `make api-client`.
+```
+make api-client
+```
 
-You should see the files in `assets/javascript/api-client` get updated.
+while your server is running. You should see the files in `assets/javascript/api-client` get updated.
 
 #### Rebuilding your front end
 
