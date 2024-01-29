@@ -9,6 +9,9 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - Fix schema warning for the user signups dashboard API.
 - Update link to the guide to celery progress bars to the new post url.
 - Simplify the process for building the front end API client with Docker (thanks Finbar for the pointer!)
+- Add `staff_member_required` decorator to all superuser-only views, to ensure that the user is also active,
+  and staff. (Thanks Felipe for the suggestion!)
+
 
 ## Version 2024.1.2
 
