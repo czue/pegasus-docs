@@ -312,3 +312,21 @@ same as the one running on your server.
 Review the `builder` section of your `deploy.yml` file and in particular make sure `multiarch` is set to `true`.
 You can also explicitly build the image on the remote server, or set the target architecture using
 other `builder` options as described [in the kamal docs](https://kamal-deploy.org/docs/configuration#using-remote-builder-for-native-multi-arch).
+
+### Health checks are failing because of `ALLOWED_HOSTS`
+
+Kamal runs a "health check" during deploys to ensure your new application is ready to handle requests.
+This involves pinging your workers at http://localhost:8000 and waiting for them to respond with a "200 OK" status code.
+
+Since these requests are made via localhost, you must have `localhost` in your `ALLOWED_HOSTS`, in addition to your production
+endpoints, or Django will reject the requests. So your setting should look something like:
+
+```yaml
+ALLOWED_HOSTS = [
+  "example.com",  # use your app's domain here
+  "localhost",
+]
+```
+
+It is recommended to read [the security documentation](https://docs.djangoproject.com/en/5.0/topics/security/#host-headers-virtual-hosting)
+for this feature to understand the implications of it being included.
