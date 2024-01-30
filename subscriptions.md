@@ -43,7 +43,7 @@ as that is the simplest setup and works well for most projects.
 
 Before setting up your development environment for subscriptions, you'll need to create
 your billing model in Stripe. You should do this in a test account for development.
-You'll eventually be able to copy everything ot production once you're happy with the set up.
+You'll eventually be able to copy everything to production once you're happy with the set up.
 
 [Stripe's documentation](https://stripe.com/docs/billing/subscriptions/build-subscriptions?ui=checkout#create-pricing-model)
 has guidance on doing this. At a minimum you should create at least one product with a "recurring" price.
