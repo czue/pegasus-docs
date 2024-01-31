@@ -188,7 +188,7 @@ To set up webhooks in production:
 - In the `Endpoint URL` field, enter the following URL, replacing `yourserver.com` with your server's domain name. Note: **the trailing slash is required.**
   - `https://yourserver.com/stripe/webhook/`
 - Click on `Select Events to Listen To`.
-- Search for `checkout.session.completed`, `customer.subscription.updated`, and `customer.subscription.deleted`, then select them. These events are connected by default (see `apps/subscriptions/webhooks.py` for the source code).
+- Search for `checkout.session.completed`, `customer.subscription.updated`, and `customer.subscription.deleted`, and select them. These events are connected by default (see `apps/subscriptions/webhooks.py` for the source code). You can add other webhooks as well, but these are the minimum set required for subscriptions and the billing portal to work properly.
 - Write a description if needed and then click `Add endpoint`.
 - **Ensure to set `DJSTRIPE_WEBHOOK_SECRET` in your `settings.py` or as an environment variable.**
   This value can be found in the Stripe dashboard where you configure your webhook and may be referred to as the `Signing Secret`.
