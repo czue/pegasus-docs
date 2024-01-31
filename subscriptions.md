@@ -180,25 +180,22 @@ This value will be in the console output in the Stripe CLI.
 
 ### Webhooks in production
 
-In production, you can choose which webhooks you want to send.
-The following minimum set of webhooks are connected by default:
+To set up webhooks in production:
 
-For the billing portal:
+- Navigate to this page [Webhooks](https://dashboard.stripe.com/webhooks) (assuming you're logged into Stripe).
+- Toggle off test mode in the top right corner.
+- Click on `Add endpoint`.
+- In the `Endpoint URL` field, enter the following URL, replacing `yourserver.com` with your server's domain name. Note: **the trailing slash is required.**
+  - `https://yourserver.com/stripe/webhook/`
+- Click on `Select Events to Listen To`.
+- Search for `checkout.session.completed`, `customer.subscription.updated`, and `customer.subscription.deleted`, then select them. These events are connected by default (see `apps/subscriptions/webhooks.py` for the source code).
+- Write a description if needed and then click `Add endpoint`.
+- **Ensure to set `DJSTRIPE_WEBHOOK_SECRET` in your `settings.py` or as an environment variable.**
+  This value can be found in the Stripe dashboard where you configure your webhook and may be referred to as the `Signing Secret`.
 
-- `customer.subscription.deleted` 
-- `customer.subscription.updated`
+In production, you should not need to run `stripe listen --forward-to localhost:8000/stripe/webhook/` (or the Docker equivalent).
 
-For Stripe Checkout:
-
-- `checkout.session.completed`
-
-You should enter https://yourserver.com/stripe/webhook/ for the webhook endpoint. **The trailing slash is required.**
-
-**Additionally, make sure to set `DJSTRIPE_WEBHOOK_SECRET` in your `settings.py` or environment.**
-This value can be found in the Stripe dashboard where you configure your webhook.
-
-Once webhooks are properly setup, all the underlying Stripe data will be automatically synced from
-Stripe with no additional setup on your part.
+Once webhooks are properly set up, all underlying Stripe data will be automatically synced from Stripe with no additional setup required on your part.
 
 ### Custom Webhook Handling
 
