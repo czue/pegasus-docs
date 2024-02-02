@@ -34,3 +34,25 @@ If you want to use a different message broker, for example [RabbitMQ](https://ww
 you will need to modify the `CELERY_BROKER_URL` and `CELERY_RESULT_BACKEND` values in `settings.py`.
 
 More details can be found in the [Celery documentation](https://docs.celeryq.dev/en/stable/getting-started/backends-and-brokers/index.html).
+
+## Monitoring with Flower
+
+[Flower](https://flower.readthedocs.io/en/latest/) is an open-source web application for monitoring and managing Celery clusters.
+It provides real-time information about the status of Celery workers and tasks.
+
+If you'd like to use Flower in development, add the following to the `services` section of your `docker-compose.yml`:
+
+```yaml
+  flower:
+    image: mher/flower
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379
+    command: celery flower
+    ports:
+      - 5555:5555
+    depends_on:
+      - redis
+```
+
+In production you will likely want to run Flower behind a private VPN, or [set up authentication](https://flower.readthedocs.io/en/latest/auth.html)
+on your Flower instance, and use a [reverse proxy](https://flower.readthedocs.io/en/latest/reverse-proxy.html) to expose it.
