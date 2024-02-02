@@ -27,9 +27,7 @@ Setting up your development is similar to the [process for subscriptions](./subs
 
 1. If you haven't already, update the `STRIPE_*` variables in `settings.py` or in your os environment variables to match
    the keys from Stripe. See [this page](https://stripe.com/docs/keys) to find your API keys.
-2. Run `python manage.py djstripe_sync_models price` to sync your Stripe products and prices to your local database.
-   1. Note: if this command fails you may also need to add your Stripe API keys to the database via the Django admin
-      [as described here](https://dj-stripe.dev/api_keys/).
+2. Run `python manage.py boostrap_ecommerce` to sync your Stripe products and prices to your local database.
 3. Add the product IDs you want to include to the `ACTIVE_ECOMMERCE_PRODUCT_IDS` setting/environment variable.
    In your `.env` file, you can add a list of products by separating them with commas. E.g. 
 

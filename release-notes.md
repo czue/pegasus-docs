@@ -3,6 +3,35 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.2
+
+This release adds Django 5.0 support, upgrades all dependencies to their latest versions,
+and includes a handful of other changes.
+
+Details:
+
+- **Support Django 5.0.** Django 4.2 LTS should also work, but 5.0 will be the default version tested and used moving forwards.
+- **Upgraded all Python dependencies to their latest versions.**
+- **Upgraded all JavaScript dependencies to their latest versions.**
+- Simplified the process for building the front end API client with Docker (thanks Finbar for the pointer!).
+  [Api client docs](apis.md#generating-the-api-client) have been updated as well.
+- Update links to all Django documentation to link to the latest stable release, instead of a specific version.
+- Fixed a schema warning for the user signups dashboard API.
+- Update link to the guide to celery progress bars to the new blog post url.
+- Simplified the process of setting up your ecommerce config to a new management command: `./manage.py bootstrap_ecommerce`.
+  - Also refactored related code to be shared between ecommerce and subscriptions.
+- Added `subscription_is_active` helper function, to remove duplicate code that was running the same check.
+  Also updated [the documentation](payments.md#set-up-your-development-environment).
+- Fixed a bug where if you marked a subscription to be canceled at the period end and weren't running webhooks,
+  the subscription page would crash.
+- Added `staff_member_required` decorator to all superuser-only views, to ensure that the user is also active,
+  and staff. (Thanks Felipe for the suggestion!)
+- Removed `tailwindcss/forms` plugin, which conflicted with some default DaisyUI form elements and wasn't needed.
+  (thanks Artem and Alex for the suggestion!)
+- Added better styling for the socialaccount connections page. (thanks Finbar for the contribution!)
+
+*Feb 2, 2024*
+
 ## Version 2024.1.2
 
 This is a minor/hotfix release that fixes a few issues related to fly.io deployments due to changes
@@ -12,7 +41,7 @@ new applications.
 
 *Thanks to Naveed for reporting this.*
 
-*January 15, 2023*
+*January 15, 2024*
 
 
 ## Version 2024.1.1
@@ -29,7 +58,7 @@ volumes:
   - "{your-app-slug}-media:/code/media"
 ```
 
-*January 9, 2023*
+*January 9, 2024*
 
 ## Version 2024.1
 
@@ -762,7 +791,7 @@ Smaller updates in this release are below.
 
 #### Documentation
 
-- Overhauled the documentation on working with [virtual environments](using-virtualenvs.md) and made
+- Overhauled the documentation on working with [virtual environments](python.md) and made
   `venv` the default recommendation over `virtualenv`.
 
 ### Upgrading / breaking changes
@@ -2358,7 +2387,7 @@ Details are below:
 - Remove broken landing page and pricing page examples, and point people to Tailwind UI instead 
 
 **Upgrade notes:**
-- Django added the new [Default primary key field type](https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field)
+- Django added the new [Default primary key field type](https://docs.djangoproject.com/en/stable/ref/settings/#default-auto-field)
   setting. If you wish to use the default in 3.2 you will have to add DB migrations for it. Otherwise you
   can change the value of `DEFAULT_AUTO_FIELD` to `'django.db.models.AutoField'` in your `settings.py` file.
 - Bootstrap users may need to run `npm update bootstrap` before building static assets to get all styling 
