@@ -3,6 +3,16 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.2.1
+
+This release fixes the OpenAI demo to be compatible with the latest Python library:
+
+- Fix ChatGPT example to work with latest OpenAI API.
+- Fix Dall-E example to work with latest OpenAI API.
+- Update a Github action to latest version that was missed in the last release.
+
+*Feb 5, 2024*
+
 ## Version 2024.2
 
 This release adds Django 5.0 support, upgrades all dependencies to their latest versions,
@@ -13,6 +23,7 @@ Details:
 - **Support Django 5.0.** Django 4.2 LTS should also work, but 5.0 will be the default version tested and used moving forwards.
 - **Upgraded all Python dependencies to their latest versions.**
 - **Upgraded all JavaScript dependencies to their latest versions.**
+- Upgraded all Github actions to use latest versions.
 - Simplified the process for building the front end API client with Docker (thanks Finbar for the pointer!).
   [Api client docs](apis.md#generating-the-api-client) have been updated as well.
 - Update links to all Django documentation to link to the latest stable release, instead of a specific version.
@@ -29,6 +40,7 @@ Details:
 - Removed `tailwindcss/forms` plugin, which conflicted with some default DaisyUI form elements and wasn't needed.
   (thanks Artem and Alex for the suggestion!)
 - Added better styling for the socialaccount connections page. (thanks Finbar for the contribution!)
+
 
 *Feb 2, 2024*
 
