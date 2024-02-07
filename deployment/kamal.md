@@ -14,7 +14,7 @@ so you can easily move services to separate servers and update the Kamal configu
 
 *Note: Kamal support was added in a recent version of Pegasus. If you run into any issues, please get in touch!*
 
-## Screencast
+### Screencast
 
 You can watch a screencast showing how to deploy to a Digital Ocean Droplet with Kamal here:
 
@@ -24,7 +24,7 @@ You can watch a screencast showing how to deploy to a Digital Ocean Droplet with
 
 Or follow along with the documentation below.
 
-## Overview
+### Overview
 
 Deploying on Kamal will require a few pieces:
 
@@ -35,7 +35,7 @@ Deploying on Kamal will require a few pieces:
 
 We'll walk through these in more detail in order below.
 
-## Provision and prepare your server
+### Provision and prepare your server
 
 The first step is to provision a server were you will host your application.
 Some popular choices include:
@@ -56,7 +56,7 @@ We also recommend at least 2GB of RAM.
 Once you've chosen a hosting company and provisioned a server, follow the instructions provided to login (SSH)
 to the server. You will need to be able to log in remotely to complete the rest of the setup.
 
-### Install Docker
+#### Install Docker
 
 Although Kamal can install Docker for you, it is recommended that you install Docker yourself
 so that Kamal does not need to use the root user account---which can expose your server to more attacks.
@@ -71,7 +71,7 @@ Docker version 24.0.5, build 24.0.5-0ubuntu1~20.04.1
 If you need to install it, you can find instructions in [Docker's documentation](https://docs.docker.com/engine/install/ubuntu/).
 You only need to install Docker Engine, not Docker Desktop.
 
-### Prepare a user account for Kamal
+#### Prepare a user account for Kamal
 
 Next, create a user for Kamal to use.
 You can choose any username you like. In this example we will use `kamal`.
@@ -109,7 +109,7 @@ docker run hello-world
 
 If the command above completes without error you are ready to go!
 
-### Prepare Docker for deployment
+#### Prepare Docker for deployment
 
 Next, complete the following steps to get the Docker configuration ready for deployment.
 These can be run by the `kamal` user on your remote server.
@@ -165,14 +165,14 @@ On your server:
 sudo mkdir -p /letsencrypt && sudo touch /letsencrypt/acme.json && sudo chmod 600 /letsencrypt/acme.json
 ```
 
-## Set up DNS
+### Set up DNS
 
 To set up SSL you will need a DNS record pointing at your sever. Create a new "A" record using
 whatever tool you use to manage your DNS, and point it at the IP address of the server you created above.
 
 The most common domain to use is `www.<yourdomain>.com`.
 
-## Create the image repository on Docker Hub
+### Create the image repository on Docker Hub
 
 Before doing deployment, you need a place to store your Docker images, also known as a *Docker registry*.
 The most popular one is [Docker Hub](https://hub.docker.com/), so we'll use that one, though
@@ -186,7 +186,7 @@ Finally you will need to create an access token. Go to "Account Settings" --> "S
 giving it the default permissions of Read, Write, Delete.
 **Save this token somewhere as you will need it in the next step and will only see it once.**
 
-## Install and configure Kamal
+### Install and configure Kamal
 
 Finally, we can set everything up to deploy our production application with Kamal.
 
@@ -197,7 +197,7 @@ On Linux, the native Ruby and Docker both seem to work fine.**
 
 If you install Kamal natively, you may want to use [`rbenv`](https://github.com/rbenv/rbenv)) to manage your environment.
 
-### Create `.env` file in the `deploy` directory
+#### Create `.env` file in the `deploy` directory
 
 Kamal requires a `.env` file in this folder which will contain all the environment variables needed for deployment.
 The `.env` file is not checked into source control. See `deploy/.env.kamal` for the required variables.
@@ -209,7 +209,7 @@ cd deploy
 cp .env.kamal .env
 ```
 
-### Update the Kamal configuration files
+#### Update the Kamal configuration files
 
 The Kamal configuration is in `deploy/config/deploy.yml`.
 You will need to update the following values:
@@ -257,13 +257,13 @@ This will perform all the tasks necessary to deploy your application
 If everything is set up properly then in five or so minutes you should be able to visit your new application
 at the configured domain. You're done!
 
-## Post-deployment steps
+### Post-deployment steps
 
 Once you've gotten everything set up, head on over to the [production checklist](./production-checklist.md) and
 run through everything there.
 In particular, you will have to set up media files using an external service like S3.
 
-### Manage changes after initial deployment
+#### Manage changes after initial deployment
 
 See the `deploy/README.md` file in your project repo for pointers on managing the production environment after
 the initial deployment.
@@ -271,9 +271,29 @@ the initial deployment.
 The key commands you will likely regularly run are `kamal env push` to update the project environment variables,
 and `kamal deploy` to push new releases of your application.
 
-## Troubleshooting
+### Running one-off commands
 
-### Something went wrong during setup
+To run a one-off command on your server you will need to SSH into the web or celery container.
+
+The easiest way to do this is to first SSH into your server. Then run:
+
+```
+docker ps
+```
+
+Note the Container ID of the web container in the first column of the output.
+
+Then run:
+
+```
+docker exec -i -t <container_id> bash
+```
+
+You should now have a shell where you can run any Python/`manage.py` command.
+
+### Troubleshooting
+
+#### Something went wrong during setup
 
 If the `kamal setup` command fails it should print out the error it got. Once you've resolved it,
 you may need to set up the services individually instead of re-running it. You can do that with the commands below:
@@ -304,7 +324,7 @@ If deploy continues to fail, check the logs of your docker container, using:
 kamal app logs
 ```
 
-### Resolving `ERROR exec /bin/sh: exec format error` 
+#### Resolving `ERROR exec /bin/sh: exec format error` 
 
 If you see this error on your server/logs it is likely that the architecture used to build your image is not the
 same as the one running on your server.
@@ -313,7 +333,7 @@ Review the `builder` section of your `deploy.yml` file and in particular make su
 You can also explicitly build the image on the remote server, or set the target architecture using
 other `builder` options as described [in the kamal docs](https://kamal-deploy.org/docs/configuration#using-remote-builder-for-native-multi-arch).
 
-### Resolving `ERROR /bin/sh: 1: /start: not found`
+#### Resolving `ERROR /bin/sh: 1: /start: not found`
 
 If you see this error on your server/logs it is likely that your `/start` script has the wrong line endings.
 This can happen if you edit the `./deploy/docker_startup.sh` file in certain programs on the Windows operating system.
@@ -321,7 +341,7 @@ This can happen if you edit the `./deploy/docker_startup.sh` file in certain pro
 To fix this, change the line endings of the file from CRLF to LF using your preferred text editor (you can Google
 or ask ChatGPT how to do this for your specific environment).
 
-### Health checks are failing because of `ALLOWED_HOSTS`
+#### Health checks are failing because of `ALLOWED_HOSTS`
 
 Kamal runs a "health check" during deploys to ensure your new application is ready to handle requests.
 This involves pinging your workers at http://localhost:8000 and waiting for them to respond with a "200 OK" status code.
