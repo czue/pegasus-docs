@@ -313,6 +313,14 @@ Review the `builder` section of your `deploy.yml` file and in particular make su
 You can also explicitly build the image on the remote server, or set the target architecture using
 other `builder` options as described [in the kamal docs](https://kamal-deploy.org/docs/configuration#using-remote-builder-for-native-multi-arch).
 
+### Resolving `ERROR /bin/sh: 1: /start: not found`
+
+If you see this error on your server/logs it is likely that your `/start` script has the wrong line endings.
+This can happen if you edit the `./deploy/docker_startup.sh` file in certain programs on the Windows operating system.
+
+To fix this, change the line endings of the file from CRLF to LF using your preferred text editor (you can Google
+or ask ChatGPT how to do this for your specific environment).
+
 ### Health checks are failing because of `ALLOWED_HOSTS`
 
 Kamal runs a "health check" during deploys to ensure your new application is ready to handle requests.
