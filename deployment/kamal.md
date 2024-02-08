@@ -275,10 +275,20 @@ and `kamal deploy` to push new releases of your application.
 
 Kamal builds use the `settings_production.py` file.
 You can add settings here, and use environment variables to manage any secrets, following the pattern used
-throughout the file.
+throughout the file. 
+If you modify `settings_production.py` (or any other code) you will need to run:
 
-Environment variables can be managed in the `.env` file *in the deploy directory*.
-This is the same file that we have been using above.
+```
+kamal deploy
+```
+
+To push the changes to your servers.
+
+Secrets should be managed in environment variables.
+To add new environment variables you will need to update them in two places:
+
+1. The variable *name* needs to be added to the `env` section at the top of `deploy/config/deploy.yml`.
+2. The variable *value* needs to be added to `deploy/.env` (the same `.env` file we've been using above).
 
 Once you modify your `.env` file you will need to run:
 
@@ -286,35 +296,26 @@ Once you modify your `.env` file you will need to run:
 kamal env push
 ```
 
-To update the variables on the server.
-
-If you modify `settings_production.py` (or any other code) you will need to run:
-
-```
-kamal deploy
-```
-
-To update the file(s) on the server.
+To update the variables on the server. 
 
 ### Running one-off commands
 
-To run a one-off command on your server you will need to SSH into the web or celery container.
-
-The easiest way to do this is to first SSH into your server. Then run:
-
-```
-docker ps
-```
-
-Note the Container ID of the web container in the first column of the output.
-
-Then run:
+The easiest way to run one-off commands on your server is to use the `kamal app exec` command.
+For example:
 
 ```
-docker exec -i -t <container_id> bash
+kamal app exec 'python manage.py bootstrap_subscriptions'
+```
+
+If you want an interactive SSH-style shell you can run:
+
+```
+kamal app exec -i bash
 ```
 
 You should now have a shell where you can run any Python/`manage.py` command.
+
+For more information see [Kamal commands](https://kamal-deploy.org/docs/commands).
 
 ### Troubleshooting
 
