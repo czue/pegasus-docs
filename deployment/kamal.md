@@ -288,9 +288,11 @@ Secrets should be managed in environment variables.
 To add new environment variables you will need to update them in two places:
 
 1. The variable *name* needs to be added to the `env` section at the top of `deploy/config/deploy.yml`.
-2. The variable *value* needs to be added to `deploy/.env` (the same `.env` file we've been using above).
+2. The variable name *and value* needs to be added to `deploy/.env` (the same `.env` file we've been using above).
 
-Once you modify your `.env` file you will need to run:
+You can see examples of this for variables like `DATABASE_URL` in those two files.
+
+Once you modify your environment variable files you will need to run:
 
 ```
 kamal env push
