@@ -280,6 +280,22 @@ throughout the file.
 Environment variables can be managed in the `.env` file *in the deploy directory*.
 This is the same file that we have been using above.
 
+Once you modify your `.env` file you will need to run:
+
+```
+kamal env push
+```
+
+To update the variables on the server.
+
+If you modify `settings_production.py` (or any other code) you will need to run:
+
+```
+kamal deploy
+```
+
+To update the file(s) on the server.
+
 ### Running one-off commands
 
 To run a one-off command on your server you will need to SSH into the web or celery container.
