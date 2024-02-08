@@ -271,6 +271,15 @@ the initial deployment.
 The key commands you will likely regularly run are `kamal env push` to update the project environment variables,
 and `kamal deploy` to push new releases of your application.
 
+### Settings and Secrets
+
+Kamal builds use the `settings_production.py` file.
+You can add settings here, and use environment variables to manage any secrets, following the pattern used
+throughout the file.
+
+Environment variables can be managed in the `.env` file *in the deploy directory*.
+This is the same file that we have been using above.
+
 ### Running one-off commands
 
 To run a one-off command on your server you will need to SSH into the web or celery container.
