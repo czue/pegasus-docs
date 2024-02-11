@@ -43,8 +43,8 @@ To migrate a project from non-formatted to formatted code, you can go through th
 
 ## Delete Pegasus Examples
 
-On versions 2023.2 and later, you can remove the Pegasus examples by updating your build configuration
-and re-downloading (or [upgrading](upgrading.md)) your codebase.
+On versions 2023.2 and later, you can remove the Pegasus examples by unchecking the "Include Examples" checkbox
+on your project page and re-downloading (or [upgrading](upgrading.md)) your codebase.
 
 For earlier versions you can use the following instructions:
 
