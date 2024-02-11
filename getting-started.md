@@ -66,6 +66,7 @@ On Ubuntu it's recommended to [use the deadsnakes repo](https://www.debugpoint.c
 *Note: running on older Python versions may work, but 3.11 is what's tested and supported.*
 
 If you're using Postgres, you'll also want to make sure [you have it installed](https://www.postgresql.org/download/).
+Depending on how you install it, you may also need to create a user account that can create and manage databases.
 
 To use [celery](./celery.md) you will also need to [install Redis](https://redis.io/docs/getting-started/installation/).
 
@@ -105,11 +106,20 @@ export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
 If you installed with Postgres, edit the `DATABASES` value in `{{ project_name }}/settings.py` with
 the appropriate details.
 
-You will also need to create a database for your project if you haven't already:
+You will also need to create a database for your project if you haven't already.
+Assuming that your postgres admin user is named `postgres`, and you're using identity authentication you should run:
 
 ```bash
 sudo -u postgres createdb {{ project_name }}
 ```
+
+Or for standard authentication:
+
+```bash
+createdb -U postgres -h localhost -p 5432
+```
+
+Followed by the password for the postgres user.
 
 ### Create database migrations
 
