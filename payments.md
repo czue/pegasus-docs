@@ -27,7 +27,7 @@ Setting up your development is similar to the [process for subscriptions](./subs
 
 1. If you haven't already, update the `STRIPE_*` variables in `settings.py` or in your os environment variables to match
    the keys from Stripe. See [this page](https://stripe.com/docs/keys) to find your API keys.
-2. Run `python manage.py boostrap_ecommerce` to sync your Stripe products and prices to your local database.
+2. Run `python manage.py bootstrap_ecommerce` to sync your Stripe products and prices to your local database.
 3. Add the product IDs you want to include to the `ACTIVE_ECOMMERCE_PRODUCT_IDS` setting/environment variable.
    In your `.env` file, you can add a list of products by separating them with commas. E.g. 
 
