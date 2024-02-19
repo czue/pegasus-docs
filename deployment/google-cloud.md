@@ -140,19 +140,19 @@ gcloud storage buckets create gs://${GS_BUCKET_NAME} --location ${REGION}
 Once you have completed the above you should have everything you need in place to run your app.
 The final step before deploying is to save your configuration as a secret.
 
-Create a file with the secrets needed by your app:
+Update the `DATABASE_URL`, and `GS_BUCKET_NAME` values in `.env.production`.
+You can find these values with the echo command, e.g.:
 
 ```
-echo DATABASE_URL=\"${DATABASE_URL}\" > .env.secrets
-echo GS_BUCKET_NAME=\"${GS_BUCKET_NAME}\" >> .env.secrets
-echo SECRET_KEY=\"${SECRET_KEY}\" >> .env.secrets
+echo $DATABASE_URL
 ```
-You can use your already-created `deploy/.env.google` file for this, instead of creating it as per the guide's instructions.
 
-To do this, run:
+Then put the value in the `.env.production` file.
+
+Next, save these secrets in google cloud:
 
 ```
-gcloud secrets create application_settings --data-file .env.secrets
+gcloud secrets create application_settings --data-file .env.production
 ```
 
 And allow the service account to access it:
@@ -179,34 +179,26 @@ make gcp-build
 
 This, and all other `make` commands are defined in the `Makefile` in your project. You can see what they are doing there.
 
-
-
-
-Build docker file:
+Once you've built your container you can push it with:
 
 ```
-docker build -t gcr.io/$PROJECT_ID/<your_image_name> . -f Dockerfile.web
+make gcp-push
 ```
 
-Push docker file:
+And finally deploy it with:
+
 ```
-docker push gcr.io/$PROJECT_ID/<your_image_name>h
+make gcp-deploy
 ```
 
-Deploy docker file:
-```
-gcloud run deploy django-cloudrun \
-  --region $REGION \
-  --image gcr.io/${PROJECT_ID}/<app_id>-cloudrun
-  --set-cloudsql-instances ${PROJECT_ID}:${REGION}:myinstance \
-  --set-secrets APPLICATION_SETTINGS=application_settings:latest \
-  --service-account $SERVICE_ACCOUNT \
-  --allow-unauthenticated
-```
+This should deploy your application to a new container. It should output the URL for your app, which is now online!
+
+<!---
+### Database migrations
 
 You can run migrations like this.
 
-First create the job:
+First crmakefeate the job:
 
 ```
 gcloud run jobs create migrate \
@@ -224,34 +216,15 @@ Then set your default region:
 gcloud config set run/region $REGION
 ```
 
-
-
-gcloud builds submit --config cloudmigrate.yaml  --substitutions _REGION=$REGION
-```
-
-This will create your image, upload it to Google's container registry, run your database migrations,
-and collect your static files.
-
-You can then deploy it to Google Cloud Run by running the following command,
-replacing the variables as needed:
-
-```
-gcloud run deploy my-project --platform managed --region $REGION --image gcr.io/$PROJECT_ID/{project_slug}-cloudrun --add-cloudsql-instances ${PROJECT_ID}:${REGION}:your_instance  --allow-unauthenticated --set-env-vars=DJANGO_SETTINGS_MODULE={project_slug}.settings_google
-```
-
-Pegasus will also generate this command for you as the last line of `./scripts/google/cloud_run.sh`.
+-->
 
 ### Settings and Secrets
-
-To tell Google Cloud to use your production settings you will need to set the
-`DJANGO_SETTINGS_MODULE=[project_slug].settings_production`.
-If you use Pegasus's `cloudmigrate.yaml` file this will be handled automatically for you.
 
 You can use Google Secret Manager to add additional settings and secrets by adding them
 to `.env.production` and uploading it to Secret Manager using:
 
 ```
-gcloud secrets versions add {project_slug}_settings --data-file .env.production
+gcloud secrets versions add application_settings --data-file .env.production
 ``` 
 
 See `settings_production.py` for examples of using these secrets in your settings file.
