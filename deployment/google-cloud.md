@@ -135,6 +135,12 @@ gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:${SER
 gcloud storage buckets create gs://${GS_BUCKET_NAME} --location ${REGION}
 ```
 
+```
+gcloud storage buckets add-iam-policy-binding gs://${GS_BUCKET_NAME} \
+    --member serviceAccount:${SERVICE_ACCOUNT} \
+    --role roles/storage.admin
+```
+
 **Store configuration as a secret.**
 
 Once you have completed the above you should have everything you need in place to run your app.
