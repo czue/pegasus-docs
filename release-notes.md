@@ -3,6 +3,42 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.2.2
+
+### Overhauled Google Cloud Deployment
+
+The following changes apply to Google Cloud deployments only.
+
+- Updated the Google Cloud set up and documentation based on the latest Google guide.
+- Google Cloud now uses the same Dockerfile as other deployment options.
+- Added `Makefile` targets for Google Cloud options for building, pushing, and deploying.
+- Deleted legacy `cloudmigrate.yaml` and `cloud_run.sh` files.
+- Simplified `prod-requirements.in` file.
+- Fixed a bug where uvicorn was not correctly installed for async builds.
+- Fixed various settings to work with the latest Google Cloud guides and best practices and simplified
+  many of the other settings.
+- Updated the Django storages set up for the latest Django 4.2 / 5.0 settings.
+
+*Big thanks to Conrad, Rob, Troy, and Nathan for helping find and work through these changes.*
+
+### Other Fixes
+
+- Include djstripe webhook url endpoints if building with ecommerce and not subscriptions. (Thanks Emiliano for reporting!)
+- Fixed a bug where a Social App in the database for a provider that was not configured would cause a crash.
+- Fixed a bug where teams tests would fail if `ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE` was enabled. (thanks Saif for reporting and the fix!)
+- Fixed a bug where social button icons would not work with manifest file storage.
+
+### Other Changes
+
+- Slightly improve styling of page that shows when there are social authentication errors (thanks Finbar for the contribution!)
+- Make `USE_HTTPS_IN_ABSOLUTE_URLS` setting configurable via an environment variable.
+- (Render only) Make the casing of booleans in `render.yaml` consistent.
+- (Kamal only) Added more environment variable declarations to the default Kamal setup.
+- (fly.io only) Overhauled the `fly.toml` deployment file to be consistent with fly's latest format and removed unnecessary parts.
+- (Bulma only) updated the sign up form so that the password(s) come before the team name to be consistent with other CSS frameworks.
+- (Bulma only) allow changing the email address you sign up from when accepting a team invitation.
+
+
 ## Version 2024.2.1
 
 This release fixes the OpenAI demo to be compatible with the latest Python library:
