@@ -52,7 +52,8 @@ Redis:        <none>                 (not requested)
 ``` 
 
 A browser tab should open where you should add a Fly Postgres database called {app-name}-db,
-and an Upstash Redis server. You can leave the other defaults. It should look like this:
+and an Upstash Redis server. You can leave the other defaults or change the machine size as you see fit.
+It should look something like this:
 
 ![Fly DB config](/images/deployment/fly-db-config.png)
 
