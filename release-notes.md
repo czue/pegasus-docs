@@ -12,6 +12,7 @@ as well as an overhaul of the Google Cloud deployment support and many small upd
 
 You can now create and upgrade your projects directly on Github!
 This is a much smoother experience than the previous zip file model (which is still available).
+You can also connect an existing project to Github by following the [instructions here](upgrading.md#connecting-an-existing-project-to-github).
 
 For more details see the screencast below,
 and the updated [Getting Started](/getting-started.md) and [Upgrading](/upgrading.md) pages.
@@ -66,6 +67,12 @@ These are the major changes (affecting Google Cloud deployments only):
 - (fly.io only) Overhauled the `fly.toml` deployment file to be consistent with fly's latest format and removed unnecessary parts.
 - (Bulma only) updated the sign up form so that the password(s) come before the team name to be consistent with other CSS frameworks.
 - (Bulma only) allow changing the email address you sign up from when accepting a team invitation.
+
+### Documentation updates
+
+- Overhauled [Google Cloud setup docs](deployment/google-cloud.md).
+- Added Github instructions to [upgrading documentation](upgrading.md).
+- Added Github instructions to [getting started](getting-started.md).
 
 *Feb 21, 2024*
 
@@ -878,7 +885,7 @@ Smaller updates in this release are below.
   This is recommended, since V1 is being removed from Docker Desktop soon.
 - There are no known breaking changes related to the Python and Node upgrades, but it is recommended to upgrade
   your projects if you haven't already.
-  You may need to [rebuild your Python requirements](customizations.md#python-packages)
+  You may need to [rebuild your Python requirements](python.md#working-with-requirements)
   on older versions to get backports packages.
 
 
@@ -1125,7 +1132,7 @@ the ability to build without the Pegasus examples, and small changes and fixes.
 ### Upgrading
 
 If you don't want to upgrade Django to 4.1 this upgrade *should* be backwards compatible.
-Pin the Django version to 3.2.x in your requirements file and [rebuild requirements](customizations.md#python-packages).
+Pin the Django version to 3.2.x in your requirements file and [rebuild requirements](python.md#working-with-requirements).
 
 *Feb 1, 2023*
 
