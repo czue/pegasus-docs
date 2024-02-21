@@ -20,13 +20,29 @@ Then, [create a new project on saaspegasus.com](https://www.saaspegasus.com/proj
 following the prompts and filling in whatever configuration options you want to use for your new project.
 Make sure that the "license" field at the bottom is set.
 
-Once you're done, download your project's source code as a zip file.
-Unzip it to a folder where you want to do your development and you're ready to go!
+Once you're done, connect your project to Github or download your project's source code as a zip file.
 
+**Note: it's recommended to use the Github integration which will make future upgrades and changes to your project
+easier to manage.**
+ 
 ## Set up source control
 
 It is highly recommended to use git for source control.
-[Install git](https://git-scm.com/downloads) and then run the following commands:
+[Install git](https://git-scm.com/downloads) and then follow the instructions below:
+
+### If using the Github integration
+
+If you created your project on Github, you can use `git clone` to get the code.
+Get your git URL from the Github page and then run the following command, swapping in your user account and project id:
+
+```
+git clone https://github.com/user/project-id.git
+```
+
+### If using the Zip file download
+
+If you chose to use a zip file instead, unzip it to a folder where you want to do your development and then manually
+initialize your repository:
 
 ```
 git init
