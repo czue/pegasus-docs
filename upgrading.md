@@ -43,7 +43,7 @@ Enter the commit ID there, and you should now be able to update your project wit
 ## Manually, using branches
 
 If you don't want to, or can't, use the Github integration, you can manually upgrade your project with git branches.
-Note that this is a much longer and more complicated process than using the Github integration,
+Note that this is a longer and more complicated process than using the Github integration,
 which handles most of these steps for you.
 
 With this option you maintain a "pure" Pegasus branch in your repository with no other modifications.
