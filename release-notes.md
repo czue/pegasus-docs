@@ -5,13 +5,13 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ## Version 2024.2.2
 
-This is a big Pegasus release with a new model for creating and upgrading projects,
-as well as an overhaul of the Google Cloud deployment support and many small fixes from the community.
+This is a big Pegasus release with a new Github integration for creating and upgrading projects,
+as well as an overhaul of the Google Cloud deployment support and many small updates and fixes from the community.
 
 ### New Github distribution model
 
 You can now create and upgrade your projects directly on Github!
-This is a much smoother experience than the previous zip file model (which is stil available).
+This is a much smoother experience than the previous zip file model (which is still available).
 
 For more details see the screencast below,
 and the updated [Getting Started](/getting-started.md) and [Upgrading](/upgrading.md) pages.
@@ -34,12 +34,14 @@ were in the `.gitignore` file):
 The Google Cloud deployment support has been completely overhauled and brought in line with other deployment plastforms.
 These are the major changes (affecting Google Cloud deployments only):
 
-- Updated the Google Cloud set up and documentation based on the latest Google guide.
+- Updated the Google Cloud set up and [setup documentation](/deployment/google-cloud.md) based on the latest Google guide.
 - Google Cloud now uses the same Dockerfile as other deployment options.
+- Google Cloud now uses whitenoise for Static files, the same as other deployment options.
+  It still uses Google Cloud Storage for media files.
 - Added `Makefile` targets for Google Cloud options for building, pushing, and deploying.
 - Deleted legacy `cloudmigrate.yaml` and `cloud_run.sh` files.
-- Simplified `prod-requirements.in` file.
-- Fixed a bug where uvicorn was not correctly installed for async builds.
+- Simplified the `prod-requirements.in` file.
+- Fixed a bug where uvicorn was not correctly installed in production for async builds.
 - Fixed various settings to work with the latest Google Cloud guides and best practices and simplified
   many of the other settings.
 - Updated the Django storages set up for the latest Django 4.2 / 5.0 settings.
@@ -55,6 +57,8 @@ These are the major changes (affecting Google Cloud deployments only):
 
 ### Other Changes
 
+- Updated most `make` targets that run commands in Docker to not require the `web` container to be running.
+  They will now spin up and remove temporary containers instead. (Thanks Artem for the suggestion!)
 - Slightly improve styling of page that shows when there are social authentication errors (thanks Finbar for the contribution!)
 - Make `USE_HTTPS_IN_ABSOLUTE_URLS` setting configurable via an environment variable.
 - (Render only) Make the casing of booleans in `render.yaml` consistent.
@@ -63,6 +67,7 @@ These are the major changes (affecting Google Cloud deployments only):
 - (Bulma only) updated the sign up form so that the password(s) come before the team name to be consistent with other CSS frameworks.
 - (Bulma only) allow changing the email address you sign up from when accepting a team invitation.
 
+*Feb 21, 2024*
 
 ## Version 2024.2.1
 
