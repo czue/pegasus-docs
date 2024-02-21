@@ -62,3 +62,25 @@ Then click "Generate token".
 You will be taken to a page where your token is displayed.
 Copy this value and paste it into the "personal access token" field from your project download page on Pegasus.
 Note that you won't be able to view the token again!
+
+## Connecting an existing project to Github
+
+Projects that were created before February 2024, or that didn't use the Github integration can still be
+connected to Github via a one-time process.
+After completing this, you will be able to upgrade and change your Pegasus project using automatic pull requests.
+
+First, you'll have to connect your Github account using one of the methods described above.
+
+Next, you will need to find the commit id of the last Pegasus update you have made.
+If you have never updated your codebase, this will be the first commit in the repository, which you can
+find by running `git log --reverse`.
+
+If you have updated your codebase using one of the other methods below, this will be the last commit
+on the `pegasus` branch of your repository, which you can find by running `git checkout pegasus` followed by `git log`.
+
+Once you have the commit id ready, add your existing Github repository to your Pegasus project from the downloads page.
+After completing this step you will be prompted with a page that looks like this:
+
+![Set Commit](/images/set-commit.png)
+
+Enter the commit ID there, and you should now be able to update your project with pull requests.
