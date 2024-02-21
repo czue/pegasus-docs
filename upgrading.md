@@ -1,13 +1,50 @@
-# Upgrading
+# Upgrading and Changing your Project Settings
 
-Upgrading Pegasus is currently a manual process though there are plans to improve it in the future.
+There are several ways to update your Pegasus project.
+These methods can be used to upgrade your project to a new Pegasus version, or when changing
+anything in your project configuration.
 
-New projects are recommended to use the branch-based approach.
-Older projects can use the patch-based approach.
+## Using the Github integration (recommended)
 
-The upgrade process can also be used when changing any Pegasus configuration variables.
+The easiest way to upgrade your project is to use the built-in Github integration.
+If you created your project with Github, you should be able to make any changes you want to your project configuration
+and then create a pull request with the updated code from the "Download" page.
 
-## Using branches (recommended)
+If you did not create your project with the Github you can still use this method.
+First follow the instructions for connecting an existing project to Github below.
+After completing that step, you should be able to submit updates to your project via pull request, just like above.
+
+You can watch a demo of this set up here:
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/5PLO79rb--A" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
+
+### Connecting an existing project to Github
+
+Projects that were created before February 2024, or that didn't use the Github integration can still be
+connected to Github via a one-time process.
+After completing this, you will be able to upgrade and change your Pegasus project using automatic pull requests.
+
+First you will need to find the commit id of the last Pegasus update you have made.
+If you have never updated your codebase, this will be the first commit in the repository, which you can
+find by running `git log --reverse`.
+
+If you have updated your codebase using one of the other methods below, this will be the last commit
+on the `pegasus` branch of your repository, which you can find by running `git checkout pegasus` followed by `git log`.
+
+Once you have the commit id ready, add your existing Github repository to your Pegasus project from the downloads page.
+After completing this step you will be prompted with a page that looks like this:
+
+![Set Commit](/images/set-commit.png)
+
+Enter the commit ID there, and you should now be able to update your project with pull requests.
+
+## Manually, using branches
+
+If you don't want to, or can't, use the Github integration, you can manually upgrade your project with git branches.
+Note that this is a longer and more complicated process than using the Github integration,
+which handles most of these steps for you.
 
 With this option you maintain a "pure" Pegasus branch in your repository with no other modifications.
 Then, you merge this branch into your main app when you upgrade.
@@ -63,7 +100,7 @@ Alternatively you may wish to do this in a new branch and then submit a pull req
 In the merging step you should look at the modifications being made, and you may have to manually resolve conflicts that come up.
 You may also need to run `./manage.py makemigrations` to create any database migrations that were not included with Pegasus. 
 
-## Using patches (if you can't use branches)
+## Manually, using patches (if you can't use Github or branches)
 
 You can also follow a similar process to the above using Git patches.
 Patches do not require working in the same repository or having a previously created branch.

@@ -3,6 +3,79 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.2.2
+
+This is a big Pegasus release with a new Github integration for creating and upgrading projects,
+as well as an overhaul of the Google Cloud deployment support and many small updates and fixes from the community.
+
+### New Github distribution model
+
+You can now create and upgrade your projects directly on Github!
+This is a much smoother experience than the previous zip file model (which is still available).
+You can also connect an existing project to Github by following the [instructions here](upgrading.md#connecting-an-existing-project-to-github).
+
+For more details see the screencast below,
+and the updated [Getting Started](/getting-started.md) and [Upgrading](/upgrading.md) pages.
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/5PLO79rb--A" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
+
+A few code changes were needed to support this workflow (in particular, it's no longer possible to deliver files which
+were in the `.gitignore` file):
+
+- Pegasus no longer ships with a `.env` or `.env.docker` file and instead these must be created from `.env.example`.
+- `.env.example` will now use Docker-based URLs for your Postgres and Redis database if you build with Docker enabled.
+- Added `make setup-env` command to create your `.env.docker` file from `.env.example`.
+- Updated the `make init` create your `.env.docker` file if it doesn't already exist.
+- Updated the setup documentation to reflect the above changes.
+
+### Overhauled Google Cloud Deployment
+
+The Google Cloud deployment support has been completely overhauled and brought in line with other deployment plastforms.
+These are the major changes (affecting Google Cloud deployments only):
+
+- Updated the Google Cloud set up and [setup documentation](/deployment/google-cloud.md) based on the latest Google guide.
+- Google Cloud now uses the same Dockerfile as other deployment options.
+- Google Cloud now uses whitenoise for Static files, the same as other deployment options.
+  It still uses Google Cloud Storage for media files.
+- Added `Makefile` targets for Google Cloud options for building, pushing, and deploying.
+- Deleted legacy `cloudmigrate.yaml` and `cloud_run.sh` files.
+- Simplified the `prod-requirements.in` file.
+- Fixed a bug where uvicorn was not correctly installed in production for async builds.
+- Fixed various settings to work with the latest Google Cloud guides and best practices and simplified
+  many of the other settings.
+- Updated the Django storages set up for the latest Django 4.2 / 5.0 settings.
+
+*Big thanks to Conrad, Rob, Troy, and Nathan for helping find and work through these changes.*
+
+### Other Fixes
+
+- Include djstripe webhook url endpoints if building with ecommerce and not subscriptions. (Thanks Emiliano for reporting!)
+- Fixed a bug where a Social App in the database for a provider that was not configured would cause a crash.
+- Fixed a bug where teams tests would fail if `ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE` was enabled. (thanks Saif for reporting and the fix!)
+- Fixed a bug where social button icons would not work with manifest file storage.
+
+### Other Changes
+
+- Updated most `make` targets that run commands in Docker to not require the `web` container to be running.
+  They will now spin up and remove temporary containers instead. (Thanks Artem for the suggestion!)
+- Slightly improve styling of page that shows when there are social authentication errors (thanks Finbar for the contribution!)
+- Make `USE_HTTPS_IN_ABSOLUTE_URLS` setting configurable via an environment variable.
+- (Render only) Make the casing of booleans in `render.yaml` consistent.
+- (Kamal only) Added more environment variable declarations to the default Kamal setup.
+- (fly.io only) Overhauled the `fly.toml` deployment file to be consistent with fly's latest format and removed unnecessary parts.
+- (Bulma only) updated the sign up form so that the password(s) come before the team name to be consistent with other CSS frameworks.
+- (Bulma only) allow changing the email address you sign up from when accepting a team invitation.
+
+### Documentation updates
+
+- Overhauled [Google Cloud setup docs](deployment/google-cloud.md).
+- Added Github instructions to [upgrading documentation](upgrading.md).
+- Added Github instructions to [getting started](getting-started.md).
+
+*Feb 21, 2024*
+
 ## Version 2024.2.1
 
 This release fixes the OpenAI demo to be compatible with the latest Python library:
@@ -812,7 +885,7 @@ Smaller updates in this release are below.
   This is recommended, since V1 is being removed from Docker Desktop soon.
 - There are no known breaking changes related to the Python and Node upgrades, but it is recommended to upgrade
   your projects if you haven't already.
-  You may need to [rebuild your Python requirements](customizations.md#python-packages)
+  You may need to [rebuild your Python requirements](python.md#working-with-requirements)
   on older versions to get backports packages.
 
 
@@ -1059,7 +1132,7 @@ the ability to build without the Pegasus examples, and small changes and fixes.
 ### Upgrading
 
 If you don't want to upgrade Django to 4.1 this upgrade *should* be backwards compatible.
-Pin the Django version to 3.2.x in your requirements file and [rebuild requirements](customizations.md#python-packages).
+Pin the Django version to 3.2.x in your requirements file and [rebuild requirements](python.md#working-with-requirements).
 
 *Feb 1, 2023*
 
