@@ -117,10 +117,19 @@ brew reinstall openssl
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
 ```
 
+### Create your .env file
+
+If you installed with Github, you'll have to create your `.env` file for your environment variables and secrets.
+You can do this from the example, by running:
+
+```bash
+cp .env.example .env
+```
+
 ### Set up database (Postgres only)
 
-If you installed with Postgres, edit the `DATABASES` value in `{{ project_name }}/settings.py` with
-the appropriate details.
+If you installed with Postgres, edit the `DATABASE_URL` value in `.env` with
+the appropriate username and password for connecting to your DB.
 
 You will also need to create a database for your project if you haven't already.
 Assuming that your postgres admin user is named `postgres`, and you're using identity authentication you should run:
