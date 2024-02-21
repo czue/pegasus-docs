@@ -5,9 +5,34 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ## Version 2024.2.2
 
+This is a big Pegasus release with a new model for creating and upgrading projects,
+as well as an overhaul of the Google Cloud deployment support and many small fixes from the community.
+
+### New Github distribution model
+
+You can now create and upgrade your projects directly on Github!
+This is a much smoother experience than the previous zip file model (which is stil available).
+
+For more details see the screencast below,
+and the updated [Getting Started](/getting-started.md) and [Upgrading](/upgrading.md) pages.
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/5PLO79rb--A" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
+
+A few code changes were needed to support this workflow (in particular, it's no longer possible to deliver files which
+were in the `.gitignore` file):
+
+- Pegasus no longer ships with a `.env` or `.env.docker` file and instead these must be created from `.env.example`.
+- `.env.example` will now use Docker-based URLs for your Postgres and Redis database if you build with Docker enabled.
+- Added `make setup-env` command to create your `.env.docker` file from `.env.example`.
+- Updated the `make init` create your `.env.docker` file if it doesn't already exist.
+- Updated the setup documentation to reflect the above changes.
+
 ### Overhauled Google Cloud Deployment
 
-The following changes apply to Google Cloud deployments only.
+The Google Cloud deployment support has been completely overhauled and brought in line with other deployment plastforms.
+These are the major changes (affecting Google Cloud deployments only):
 
 - Updated the Google Cloud set up and documentation based on the latest Google guide.
 - Google Cloud now uses the same Dockerfile as other deployment options.
