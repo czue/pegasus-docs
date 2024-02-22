@@ -141,7 +141,7 @@ sudo -u postgres createdb {{ project_name }}
 Or for standard authentication:
 
 ```bash
-createdb -U postgres -h localhost -p 5432
+createdb -U postgres -h localhost -p 5432 {{ project_name }}
 ```
 
 Followed by the password for the postgres user.
