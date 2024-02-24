@@ -34,7 +34,7 @@ you're using HTTPS).
 
 Pegasus ships with two helper functions you can use to assist with working with URLs, so long as you follow Pegasus conventions.
 The `websocket_reverse` function will reverse a relative websocket URL, and the `websocket_absolute_url` function
-will turn a relative URL into an absolute webscoket URL based on your Site address and the `USE_HTTPS_IN_ABSOLUTE_URLS` setting.
+will turn a relative URL into an absolute websocket URL based on your Site address and the `USE_HTTPS_IN_ABSOLUTE_URLS` setting.
 
 You can combine these functions like so to pass the URL of a websocket endpoint to a template:
 
@@ -97,7 +97,7 @@ If you are getting this error *in development*, be sure that Daphne is installed
 You should have the a `channels[daphne]` entry in your `dev-requirements.in` file, and you should
 [build and install your requirements](customizations.md#python-packages) as needed.
 
-To do this in a non-Docker environmnet, run:
+To do this in a non-Docker environment, run:
 
 ```
 pip-compile requirements/dev-requirements.in
