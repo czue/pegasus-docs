@@ -3,6 +3,13 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.2.3
+
+This is a hotfix release that restores the `deploy/` folder that was accidentally not
+present on certain Google Cloud builds. *Thanks Yogesh for reporting!*
+
+*Feb 24, 2024*
+
 ## Version 2024.2.2
 
 This is a big Pegasus release with a new Github integration for creating and upgrading projects,
