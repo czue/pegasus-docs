@@ -18,7 +18,7 @@ There are two ways to connect your Github account.
 The Oauth-based "Connect Github" option is easier and more reliable,
 while personal access token option allows you to control exactly what repositories Pegasus can access.
 
-### Using "Connect Github"
+### Using "Connect Github" (Oauth)
 
 The easiest way to connect your account is by using the "Connect Github" button on the project download page.
 You will be prompted to accept permissions, and your account will be connected in a few seconds.
@@ -59,7 +59,7 @@ After creating the repository, [create a new fine-grained-token from this page](
 Set a token name and expiration date, and then use "Only select repositories" to choose the repositories you want to
 grant access to (the one you just created).
 
-Then under "Permissions" --> "Repository Permissions" you must grant read and write access to:
+Then under "Permissions" --> "Repository Permissions" you must grant **read and write** access to:
 
 - Contents
 - Pull Requests
@@ -91,3 +91,13 @@ After completing this step you will be prompted with a page that looks like this
 ![Set Commit](/images/set-commit.png)
 
 Enter the commit ID there, and you should now be able to update your project with pull requests.
+
+## Working with repositories owned by an organization
+
+Github organizations do not allow API-based repository access by default,
+so to connect a repository owned by an organization you will also have to grant programmatic access.
+
+Github provides detailed guidance on how to do this.
+
+For "Connect Github," follow the [oauth instructions](https://docs.github.com/en/organizations/managing-oauth-access-to-your-organizations-data),
+and for personal access tokens, follow the [personal access token instructions](https://docs.github.com/en/organizations/managing-programmatic-access-to-your-organization/setting-a-personal-access-token-policy-for-your-organization).
