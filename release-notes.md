@@ -3,6 +3,16 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.2.4
+
+This is another minor hotfix release. Details:
+
+- Fixed Google Cloud `Makefile` targets to use the built project's ID instead of the Pegasus development project's ID.
+  (Thanks Daan for reporting!)
+- Minor changes to `fly.toml` to fix errors on certain environments/versions. (Thanks Denis for reporting!)
+
+*Feb 26, 2024*
+
 ## Version 2024.2.3
 
 This is a hotfix release that restores the `deploy/` folder that was accidentally not
