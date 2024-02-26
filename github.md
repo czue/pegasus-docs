@@ -14,10 +14,17 @@ The following video shows how to create and update a project using the Github in
 
 ## Connecting your account
 
+There are two ways to connect your Github account.
+The Oauth-based "Connect Github" option is easier and more reliable,
+while personal access token option allows you to control exactly what repositories Pegasus can access.
+
 ### Using "Connect Github"
 
 The easiest way to connect your account is by using the "Connect Github" button on the project download page.
 You will be prompted to accept permissions, and your account will be connected in a few seconds.
+
+Note: While you will be prompted to grant access to "all private repository data,"
+Pegasus does not view or modify data in any repositories unless you connect them.
 
 ### Using Personal Access Tokens
 
