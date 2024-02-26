@@ -185,7 +185,13 @@ make gcp-build
 
 This, and all other `make` commands are defined in the `Makefile` in your project. You can see what they are doing there.
 
-Once you've built your container you can push it with:
+Once you've built your container, enable docker pushes with:
+
+```
+gcloud auth configure-docker
+```
+
+And then you can push it with:
 
 ```
 make gcp-push
