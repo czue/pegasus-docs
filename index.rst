@@ -18,6 +18,7 @@ contributions are most welcome!
    :maxdepth: 2
 
    getting-started
+   github
    customizations
    configuration
    code-structure

@@ -20,7 +20,7 @@ Then, [create a new project on saaspegasus.com](https://www.saaspegasus.com/proj
 following the prompts and filling in whatever configuration options you want to use for your new project.
 Make sure that the "license" field at the bottom is set.
 
-Once you're done, connect your project to Github or download your project's source code as a zip file.
+Once you're done, [connect your project to Github](github.md) or download your project's source code as a zip file.
 
 **Note: it's recommended to use the Github integration which will make future upgrades and changes to your project
 easier to manage.**

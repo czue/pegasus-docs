@@ -11,7 +11,7 @@ If you created your project with Github, you should be able to make any changes 
 and then create a pull request with the updated code from the "Download" page.
 
 If you did not create your project with the Github you can still use this method.
-First follow the instructions for connecting an existing project to Github below.
+First follow the instructions for [connecting an existing project to Github](github.md#connecting-an-existing-project-to-github).
 After completing that step, you should be able to submit updates to your project via pull request, just like above.
 
 You can watch a demo of this set up here:
@@ -20,25 +20,6 @@ You can watch a demo of this set up here:
     <iframe src="https://www.youtube.com/embed/5PLO79rb--A" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div>
 
-### Connecting an existing project to Github
-
-Projects that were created before February 2024, or that didn't use the Github integration can still be
-connected to Github via a one-time process.
-After completing this, you will be able to upgrade and change your Pegasus project using automatic pull requests.
-
-First you will need to find the commit id of the last Pegasus update you have made.
-If you have never updated your codebase, this will be the first commit in the repository, which you can
-find by running `git log --reverse`.
-
-If you have updated your codebase using one of the other methods below, this will be the last commit
-on the `pegasus` branch of your repository, which you can find by running `git checkout pegasus` followed by `git log`.
-
-Once you have the commit id ready, add your existing Github repository to your Pegasus project from the downloads page.
-After completing this step you will be prompted with a page that looks like this:
-
-![Set Commit](/images/set-commit.png)
-
-Enter the commit ID there, and you should now be able to update your project with pull requests.
 
 ## Manually, using branches
 
