@@ -98,6 +98,5 @@ Github organizations do not allow API-based repository access by default,
 so to connect a repository owned by an organization you will also have to grant programmatic access.
 
 Github provides detailed guidance on how to do this.
-
 For "Connect Github," follow the [oauth instructions](https://docs.github.com/en/organizations/managing-oauth-access-to-your-organizations-data),
 and for personal access tokens, follow the [personal access token instructions](https://docs.github.com/en/organizations/managing-programmatic-access-to-your-organization/setting-a-personal-access-token-policy-for-your-organization).
