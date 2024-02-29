@@ -39,6 +39,7 @@ then select "Generate new token (classic)" from the dropdown, or [visit this pag
 
 Choose a note and expiration date for your token and grant the following scopes:
 
+- user:email (Access user email addresses (read-only))
 - repo (Full control of private repositories)
 - workflow (Update GitHub Action workflows)
 
@@ -58,6 +59,10 @@ Pegasus cannot create the project for you with these tokens.
 After creating the repository, [create a new fine-grained-token from this page](https://github.com/settings/personal-access-tokens/new).
 Set a token name and expiration date, and then use "Only select repositories" to choose the repositories you want to
 grant access to (the one you just created).
+
+Under "Permissions" --> "Account Permissions" you must grant *read* access to:
+
+- Email addresses
 
 Then under "Permissions" --> "Repository Permissions" you must grant **read and write** access to:
 
