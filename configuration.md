@@ -271,7 +271,7 @@ Currently, three platforms are supported:
 
 1. [Mailchimp](https://mailchimp.com/)
 2. [ConvertKit](https://convertkit.com/)
-3. [Email Octopus](https://emailoctopus.com/)
+3. [Email Octopus](https://emailoctopus.com/?urli=Cd7hX)
 
 Make sure you choose the platform you would like to use when building your Pegasus project.
 
@@ -307,8 +307,10 @@ then fill in the following values in your environment/settings.
 ```python
 EMAIL_OCTOPUS_API_KEY = "<Api Key>"
 EMAIL_OCTOPUS_LIST_ID = "<List ID>"
-
 ```
+
+Note: If you use [this link](https://emailoctopus.com/?urli=Cd7hX) to sign up for email octopus,
+you'll get $15 off your first payment, and help support Pegasus.
 
 ## Logging
 
