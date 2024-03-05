@@ -39,7 +39,7 @@ A full list of available components can be found at the [daisyUI component libra
 DaisyUI offers a number of out-of-the-box themes you can use in your Pegasus app.
 To change themes, first make sure the theme is enabled in your `tailwind.config.js` with a `daisyui` section like this:
 
-````
+```
 module.exports = {
   //...
   daisyui: {
