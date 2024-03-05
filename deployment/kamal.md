@@ -182,7 +182,7 @@ First create an account on [Docker Hub](https://hub.docker.com/) and note your u
 
 Then create a new repository, choosing a unique name for your app, and marking it "private".
 
-Finally you will need to create an access token. Go to "Account Settings" --> "Security" and make a new access token,
+Finally you will need to create an access token. Go to "My Account" --> "Security" and make a new access token,
 giving it the default permissions of Read, Write, Delete.
 **Save this token somewhere as you will need it in the next step and will only see it once.**
 
