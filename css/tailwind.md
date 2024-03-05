@@ -37,7 +37,21 @@ A full list of available components can be found at the [daisyUI component libra
 ## Changing your theme
 
 DaisyUI offers a number of out-of-the-box themes you can use in your Pegasus app.
-To change themes, just add a `data-theme` attribute to your `<html>` declaration in `templates/web/base.html`.
+To change themes, first make sure the theme is enabled in your `tailwind.config.js` with a `daisyui` section like this:
+
+````
+module.exports = {
+  //...
+  daisyui: {
+    themes: ["light", "dark", "cupcake"],
+  },
+}
+```
+
+(The defaults are "light" and "dark".)
+
+After adding your theme, rebuild your front end, and then add a `data-theme` attribute to
+your `<html>` declaration in `templates/web/base.html`.
 
 ```html
 <html data-theme="cupcake"></html>
