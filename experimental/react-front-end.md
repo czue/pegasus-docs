@@ -20,6 +20,29 @@ The decoupled front end is *only available on TailwindCSS* and uses DaisyUI for 
 
 Here are some technical details:
 
+## Running the front end
+
+The front end lives in the `/frontend` folder of your project.
+To set it up for the first time, first go into the directory:
+
+```
+cd frontend
+```
+
+And install npm packages:
+
+```
+npm install
+```
+
+Then run the dev server:
+
+```
+npm run dev
+```
+
+Note: your Django backend must also be running for the front end to work.
+
 ## Authentication
 
 Authentication is handled via *protected routes* and *authentication context*.
