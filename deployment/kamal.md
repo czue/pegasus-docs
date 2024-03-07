@@ -159,7 +159,7 @@ This is needed if you want Traefik to automatically generate SSL certificates fo
 this step and update the Kamal deploy configuration to remove the references to LetsEncrypt
 (search for `letsencrypt` and `secure`).
 
-On your server:
+On your server run the following command *as root*. You may need to logout `kamal` and back in to `root`:
 
 ```shell
 sudo mkdir -p /letsencrypt && sudo touch /letsencrypt/acme.json && sudo chmod 600 /letsencrypt/acme.json
