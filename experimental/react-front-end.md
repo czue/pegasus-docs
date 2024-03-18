@@ -1,5 +1,5 @@
-Standalone React (Next.js) Front End
-====================================
+Standalone React Front End
+==========================
 
 SaaS Pegasus's default React integration is based on a hybrid-model for reasons
 [outlined here](https://www.saaspegasus.com/guides/modern-javascript-for-django-developers/client-server-architectures/#enter-the-hybrid-architecture).
@@ -8,15 +8,20 @@ However, there are valid reasons to run a completely separate React front---incl
 and isolating your front end and back end code.
 
 Pegasus experimentally ships with a decoupled front end *example application* that can be used as a starting point for building
-out a decoupled front end with React and Next.js.
+out a decoupled front end with React.
+It uses [Vite](https://vitejs.dev/) as a development server and build tool.
 
 The features it includes are:
 
-- A standalone Next.js application.
+- A standalone Vite / React application.
 - Authentication via JWT---including sign up, login and logout functionality.
 - A sample profile page which shows how to retrieve data from your back end and display it.
+- The employee lifecycle demo that ships with Pegasus.
 
-The decoupled front end is *only available on TailwindCSS* and uses DaisyUI for styling.
+The standalone front end is *only available on TailwindCSS* and uses DaisyUI for styling.
+
+**The standalone is not intended to be a replacement for Pegasus's UI, but a reference example you can use
+as a starting point to build standalone, React, single-page-applications with Pegasus.**
 
 Here are some technical details:
 
@@ -35,13 +40,20 @@ And install npm packages:
 npm install
 ```
 
+Create your `.env` file:
+
+```bash
+cp .env.example .env
+```
+
 Then run the dev server:
 
 ```
 npm run dev
 ```
 
-Note: your Django backend must also be running for the front end to work.
+Note: your Django backend must also be running for the front end to work,
+and you must also [build your Django front end](front-end.md) for styles to work.
 
 ## Authentication
 
@@ -49,33 +61,36 @@ Authentication is handled via *protected routes* and *authentication context*.
 You can see an example of how to set this up in the profile page.
 
 Any page in your application that requires login can be wrapped in the `ProtectedRoute` component.
-If your pages are underneath the `/dashboard/` route/folder this will happen automatically.
-Otherwise you can wrap things like this in your `layout.tsx` file.
+For example, like this:
 
 ```jsx
 <ProtectedRoute>
-  {children}
+  <p>Hello authenticated user!</p>
 </ProtectedRoute>
 ```
 
-If the user is not logged in they will be redirected to the login page.
+Alternatively, if you make a page a child of the `<Dashboard>` component this will be automatically configured for you.
+See `main.tsx` as an example of how this is set up.
+
+When using the `ProtectedRoute`, if the user is not logged in they will be redirected to the login page.
 If they are logged in, they will be able to access the route, and you can assume access
 to the user object and other APIs.
 
 If you want to access user data you can use the `AuthContext` context.
+This context is made available from the `AuthProvider` component, which is available on all pages.
 
-Here is an example:
+Here is an example of using the `AuthContext` from the Profile page:
 
 ```jsx
-'use client'
 import {useContext} from "react";
-import {AuthContext} from "@/auth/authcontext";
+import {AuthContext} from "../../auth/authcontext";
 
-export default function Page() {
+
+export default function Profile() {
   const { user } = useContext(AuthContext);
   return (
     <p>
-      Hello {user?.getDisplayName}
+      Hello {user?.getDisplayName}!
     </p>
   );
 }
@@ -84,8 +99,33 @@ export default function Page() {
 ## Backend API access
 
 The front end uses the [same api client](apis.md#api-clients) as the backend / hybrid model.
-The API client is installed as a local npm package. You can access it like the following:
+The API client is installed as a local npm package.
+If the APIs are not public, it should be initialized with an authentication token (which you can get from the `AuthContext`).
+Here is a basic example from the employee app demo:
 
 ```jsx
-todo example
+import {useContext} from "react";
+import {AuthContext} from "../../auth/authcontext.tsx";
+import {PegasusApi} from "api-client";
+
+export default function EmployeeApp() {
+  const {token} = useContext(AuthContext);
+  const client = new PegasusApi(getApiConfiguration(token));
+
+  return (
+    <EmployeeApplication client={client} />
+  );
+}
 ```
+
+## Routing
+
+Routing is handled by [React Router](https://reactrouter.com/en/main).
+
+The main routes for the project are configured in `main.tsx`, and you can also include child routes
+by following the pattern used by the employee demo.
+
+## Feedback
+
+If you have any feedback on this feature I would love to hear it!
+Feedback could include bug reports, feature requests, or any suggested architectural changes. 
