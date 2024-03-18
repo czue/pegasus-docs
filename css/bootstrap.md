@@ -53,6 +53,20 @@ Creative Tim offers pro versions of [Material Dashboard](https://www.creative-ti
 [Material Kit](https://www.creative-tim.com/product/material-kit-pro) which are helpful if you want to have access to more
 pages / components. These should integrate seamlessly with the Pegasus theme.
 
+### Enabling Material's JavaScript
+
+Pegasus doesn't ship with the Material theme JavaScript built in. If you would like to use their JavaScript functionality
+(required for many of their components) you can take the following steps:
+
+1. Download [the `material-kit.min.js` file from Creative Tim's Github repository](https://github.com/creativetimofficial/material-kit/blob/master/assets/js/material-kit.min.js).
+2. Copy it into your Django static directory. For example, to `<project_root>/static/js`
+3. Add it to the `<head>` section of your `base.html` template (or wherever you want to use it):
+
+```html
+<script src="{% static 'js/material-kit.min.js'%}"></script>
+```
+
+After completing these steps, the Material Kit JavaScript functionality should work.
 
 ## Working with JavaScript in Django templates
 
