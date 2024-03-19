@@ -69,9 +69,9 @@ a web container running your Django process, and a Celery container for backgrou
 
 ### Settings
 
-The docker environment sets environment variables using the included `.env.docker` file.
+The docker environment sets environment variables using the included `.env` file.
 
-The `.env.docker` file is automatically ignored by git, so you can put any additional secrets there.
+The `.env` file is automatically ignored by git, so you can put any additional secrets there.
 It generally should not be checked into source control.
 You can instead add variables to `.env.example` to show what should be included.
 
