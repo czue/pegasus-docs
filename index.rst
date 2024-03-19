@@ -40,6 +40,7 @@ contributions are most welcome!
    deployment
    github-actions
    cookbooks
+   experimental
    upgrading
    release-notes
 

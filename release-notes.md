@@ -3,6 +3,24 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+Employee demo app changes to support being deployed as part of a standalone React front end:
+
+- Pass image references into the app as props instead of relying on an externally defined constant (`STATIC_FILES`).
+- Move `BrowserRouter` declaration outside the `EmployeeApplication` component so the routes can be used in different routers.
+- Change all `Link` and `Route` declarations in `EmployeeApplication` to be relative paths instead of absolute.
+  This allows the application to be served from multiple URL endpoints without modification.
+- Pass `urlBase` to the nested components, so that they can route back to different paths (e.g. when employees are saved).
+- Switch the department choice field from a passed-in `EMPLOYEE_DEPARTMENT_CHOICES` data structure to the `DepartmentEnum` object that is built-in to the API client.
+- Change file extension for several components from `.js` to `.jsx`.
+- **Move api client to the top level directory, and install it as a linked package.**
+- Be more explicit in the webpack config about using babel-loader presets instead of relying on `babelrc`
+- Exclude frontend from the base type check config in `tsconfig.json`. Front end is checked independently.
+- Rename `api-client` make target to `build-api-client` to avoid conflicting with the filesystem folder.
+
+
+- **The API client is now built dynamically, just in time, when you build your project.**
+  This may result in slight differences in API client code, but the resulting code should be *more* correct.
+
 ## Version 2024.2.4
 
 This is another minor hotfix release. Details:

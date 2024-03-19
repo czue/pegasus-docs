@@ -148,7 +148,7 @@ value with any URL or file system reference to your `schema.yml` file.
 You can also generate your API client with docker to avoid having to install Java by running:
 
 ```
-make api-client
+make build-api-client
 ```
 
 while your server is running. You should see the files in `assets/javascript/api-client` get updated.
