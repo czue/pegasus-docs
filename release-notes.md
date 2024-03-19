@@ -21,6 +21,12 @@ Employee demo app changes to support being deployed as part of a standalone Reac
 - **The API client is now built dynamically, just in time, when you build your project.**
   This may result in slight differences in API client code, but the resulting code should be *more* correct.
 
+- Fixed hard-coded reference to the Pegasus dev project in Google Cloud media configuration in `settings_production.py`
+- Make ALLOWED_HOSTS configurable by environment variables in both dev and production.
+- **Removed `.env.docker`. Docker development environments are now managed by `.env` (same as native environments).**
+  Also updated the documentation on this.
+
+
 ## Version 2024.2.4
 
 This is another minor hotfix release. Details:
