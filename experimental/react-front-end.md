@@ -125,6 +125,19 @@ Routing is handled by [React Router](https://reactrouter.com/en/main).
 The main routes for the project are configured in `main.tsx`, and you can also include child routes
 by following the pattern used by the employee demo.
 
+## Limitations
+
+This is an experimental feature meant to provide a starting point for building a standalone React front end against your Pegasus app.
+It is *not* a complete, production-ready app, in the same way that standard Pegasus is.
+
+Here are some of the larger limitations:
+
+- Only a limited subset of Pegasus functionality is available in the front end.
+- The front end styles only support Tailwind CSS.
+- There is no guidance/support for production deployment of the front end.
+- You have to enable the Pegasus examples for it to work.
+- There might be bugs!
+
 ## Feedback
 
 If you have any feedback on this feature I would love to hear it!
