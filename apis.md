@@ -48,7 +48,9 @@ The API docs will look something like this:
 As part of the [front end](/front-end/), Pegasus ships with an API client that can be used to interact with your project's APIs.
 **This client is automatically generated from your APIs and should not be modified by hand.**
 
-You can find the source code of the API client(s) in the `assets/javascript/api-client` folder.
+You can find the source code of the API client(s) in the `api-client` folder in your project's root directory.
+
+*Note: In releases prior to 2024.3 the API client was in the `assets/javascript/api-client` directory.* 
 
 ### Using the API client
 
@@ -81,7 +83,7 @@ client.employeesList().then((result) => {
 ### Client method names
 
 The easiest way to find out the methods available in the API client is by looking at the source code
-in `assets/javascript/api-client/apis/<AppName>Api.ts`.
+in `api-client/apis/<AppName>Api.ts`.
 
 Method names are determined by the `operationId` value for the API in the auto-generated `schema.yaml` file.
 These identifiers are auto-generated, but can be overridden using DRF Spectacular's `extend_schema_view` and `extend_schema` helper functions.
@@ -137,7 +139,7 @@ npm install @openapitools/openapi-generator-cli -g
 Then run it as follows:
 
 ```
-openapi-generator-cli generate -i http://localhost:8000/api/schema/ -g typescript-fetch -o ./assets/javascript/api-client/
+openapi-generator-cli generate -i http://localhost:8000/api/schema/ -g typescript-fetch -o ./api-client/
 ```
 
 The above assumes your Django server is running at http://localhost:8000, but you can replace that
@@ -151,7 +153,7 @@ You can also generate your API client with docker to avoid having to install Jav
 make build-api-client
 ```
 
-while your server is running. You should see the files in `assets/javascript/api-client` get updated.
+while your server is running. You should see the files in `api-client` get updated.
 
 #### Rebuilding your front end
 
@@ -178,6 +180,7 @@ The integration code can be found in the `apps.authentication` app, which is lar
 If you enable this feature, it will also enable JWT Authentication for your application, using 
 [Simple JWT](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/).
 You can then use the provided tokens to authenticate users from your mobile app / SPA.
+The authentication set up is largely based on [this guide](https://testdriven.io/blog/django-rest-authjs/#authentication-app).
 
 A complete end-to-end example that uses the API authentication feature in a React SPA can be found
 in the experimental [standalone front end](experimental/react-front-end.md).
