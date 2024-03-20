@@ -25,7 +25,21 @@ Employee demo app changes to support being deployed as part of a standalone Reac
 - Make ALLOWED_HOSTS configurable by environment variables in both dev and production.
 - **Removed `.env.docker`. Docker development environments are now managed by `.env` (same as native environments).**
   Also updated the documentation on this.
-
+- Fixed a bug where the two-factor codes were 
+- Made certain account pages (password reset, two-factor auth, etc.) darker in dark mode. (Tailwind builds only)
+- Improved the contrast on help text in dark mode. (Tailwind builds only)
+- Added a search input to Team admin UI.
+- Removed a redundant check for empty subscription from `view_subscription.html` (thanks Rob for reporting!)
+- Fixed a bug that caused errors displaying prices in secondary currencies if they prices had decimals in them. 
+  (Thanks Matthew for reporting and the fix!)
+- Added a `signup_closed.html` template which improves the styling of the "signups closed" page if you turn off public signups.
+  (Thanks EJ for the suggestion!)
+- Added an `account_inactive.html` template which improves the styling of the "inactive account" page if an inactive user
+  tries to login. (Thanks Lauren for the suggestion!)
+- Fixed team signup test if you have disabled signups. (Thanks Saif for reporting and proposing the fix!)
+- Fixed a bug where links to the user dashboard were accidentally missing if you disabled user impersonation. (Thanks Simon for finding!)
+- Added a "Built with SaaS Pegasus" line to the default footer. You are of course very welcome to remove this.
+- Bump Django to latest 5.0.3 release.
 
 ## Version 2024.2.4
 
