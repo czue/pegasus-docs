@@ -164,6 +164,24 @@ npm run dev
 Note that introducing breaking changes to your APIs can also break your API client!
 If you're unsure if you introduced breaking changes it is worth testing any functionality that depends on the API client.
 
+## Authentication APIs
+
+*Added in version 2024.4.*
+
+If you enable the "Use Authentication APIs" checkbox in your project, Pegasus will generate a set of API
+endpoints for registering and logging in users.
+These endpoints can be used to integrate your backend with single page applications (SPAs) and mobile apps.
+
+Under the hood, Pegasus uses [dj-rest-auth](https://dj-rest-auth.readthedocs.io/en/latest/) for these endpoints.
+The integration code can be found in the `apps.authentication` app, which is largely a wrapper around `dj-rest-auth`.
+
+If you enable this feature, it will also enable JWT Authentication for your application, using 
+[Simple JWT](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/).
+You can then use the provided tokens to authenticate users from your mobile app / SPA.
+
+A complete end-to-end example that uses the API authentication feature in a React SPA can be found
+in the experimental [standalone front end](experimental/react-front-end.md).
+
 ## API Keys
 
 Pegasus supports the use of API Keys to access APIs, built on top of the 
