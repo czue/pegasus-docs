@@ -3,43 +3,100 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
-Employee demo app changes to support being deployed as part of a standalone React front end:
+## Version 2024.3
 
-- Pass image references into the app as props instead of relying on an externally defined constant (`STATIC_FILES`).
-- Move `BrowserRouter` declaration outside the `EmployeeApplication` component so the routes can be used in different routers.
-- Change all `Link` and `Route` declarations in `EmployeeApplication` to be relative paths instead of absolute.
-  This allows the application to be served from multiple URL endpoints without modification.
-- Pass `urlBase` to the nested components, so that they can route back to different paths (e.g. when employees are saved).
-- Switch the department choice field from a passed-in `EMPLOYEE_DEPARTMENT_CHOICES` data structure to the `DepartmentEnum` object that is built-in to the API client.
-- Change file extension for several components from `.js` to `.jsx`.
-- **Move api client to the top level directory, and install it as a linked package.**
+This is a big feature release!
+The main goal of the release is to make it easier to use Pegasus with separate front ends and mobile applications.
+Here are the highlights:
+
+### API Authentication and JWT support
+
+Pegasus now optionally includes API endpoints for registering, authenticating and verifying users (via JSON web tokens or JWT).
+This provides all the pieces needed to make your Pegasus application a backend to a standalone front end,
+for example a React or Next.js SPA, or a mobile application.
+
+You can read more about this feature in the [Authentication API documentation](apis.md#authentication-apis).
+
+### Standalone React (Vite) Front End (Experimental)
+
+In addition to the authentication API support, Pegasus now includes an optional standalone React demo application
+built with React, [Vite](https://vitejs.dev/) and [React Router](https://reactrouter.com/en/main).
+
+The demo application includes sign up and login workflows, helper components to manage authentication and
+protected routes, and a port of the employee demo application (using the same code as the Pegasus version).
+
+You can watch a demo below and learn more about it in [the React front end documentation](experimental/react-front-end.md).
+
+TODO DEMO
+
+### Teams Navigation Updates
+
+Application navigation now uses a new team selector component.
+This allows users to quickly see their team list and switch between teams directly from any page.
+Team management has also been moved under this component, and the previous team section of
+the navigation was removed.
+
+### Complete release notes
+
+#### Added
+
+- **API Authentication and JWT support.** See above.
+- **An Experimental Standalone React (Vite) Front End**. See above.
+
+#### Changed
+
+- **Team navigation overhaul**. See above.
+- **Made changes to the Employee demo app to support being shared with the standalone front end.**
+  - Move `BrowserRouter` declaration outside the `EmployeeApplication` component so the routes can be used in different routers.
+  - Change all `Link` and `Route` declarations in `EmployeeApplication` to be relative paths instead of absolute.
+  - Pass image references into the app as props instead of relying on an externally defined constant (`STATIC_FILES`).
+    This allows the application to be served from multiple URL endpoints without modification.
+  - Pass `urlBase` to the nested components, so that they can route back to different paths (e.g. when employees are saved).
+  - Switch the department choice field from a passed-in `EMPLOYEE_DEPARTMENT_CHOICES` data structure to the `DepartmentEnum`
+    object that is included with the API client.
+  - Change file extension for several components from `.js` to `.jsx`.
+- **Made changes to the JavaScript api client to support being shared with the standalone front end**
+  - **Moved the api-client from `assets/javascript/api-client` to an `api-client` folder in the root of the repository.** 
+  - **The api client is now installed as a linked local dependency in `package.json` instead of referenced as part of the code.**
+    This makes it easier to move the api client code or install it as a hosted npm package.
+    Also updated all references to the api-client to reflect this change.
+  - Renamed the `api-client` make target to `build-api-client` to avoid conflicting with the filesystem folder.
+  - **The API client is now built dynamically, just in time, when you create your project. Also updated the API client version to 7.4.0.**
+    This may result in slight differences in generated API client code, but the resulting code should be *more* correct and
+    there should not be any breaking changes to existing Pegasus functionality.
 - Be more explicit in the webpack config about using babel-loader presets instead of relying on `babelrc`
-- Exclude frontend from the base type check config in `tsconfig.json`. Front end is checked independently.
-- Rename `api-client` make target to `build-api-client` to avoid conflicting with the filesystem folder.
-
-
-- **The API client is now built dynamically, just in time, when you build your project.**
-  This may result in slight differences in API client code, but the resulting code should be *more* correct.
-
-- Fixed hard-coded reference to the Pegasus dev project in Google Cloud media configuration in `settings_production.py`
-- Make ALLOWED_HOSTS configurable by environment variables in both dev and production.
+- Exclude frontend from the base type check config in `tsconfig.json`. The front end is checked independently.
+- Auto-size the navigation column in `app_home.html` (Bootstrap builds only).
+- Make ALLOWED_HOSTS configurable by environment variables in both dev and production. (Thanks Shawn for suggesting)
 - **Removed `.env.docker`. Docker development environments are now managed by `.env` (same as native environments).**
   Also updated the documentation on this.
-- Fixed a bug where the two-factor codes were 
-- Made certain account pages (password reset, two-factor auth, etc.) darker in dark mode. (Tailwind builds only)
-- Improved the contrast on help text in dark mode. (Tailwind builds only)
 - Added a search input to Team admin UI.
-- Removed a redundant check for empty subscription from `view_subscription.html` (thanks Rob for reporting!)
-- Fixed a bug that caused errors displaying prices in secondary currencies if they prices had decimals in them. 
-  (Thanks Matthew for reporting and the fix!)
 - Added a `signup_closed.html` template which improves the styling of the "signups closed" page if you turn off public signups.
   (Thanks EJ for the suggestion!)
 - Added an `account_inactive.html` template which improves the styling of the "inactive account" page if an inactive user
   tries to login. (Thanks Lauren for the suggestion!)
+- Improved the contrast on help text in dark mode. (Tailwind builds only)
+- Changed the main icon on the landing page and dashboard from the old rocket to the current SaaS Pegasus rocket.
+- Added a "Built with SaaS Pegasus" line to the default generated footer.
+- Bump Django to latest 5.0.3 release.
+
+#### Fixed
+
+- Fixed hard-coded reference to the Pegasus dev project in Google Cloud media configuration in `settings_production.py`
+- Fixed a bug where the two-factor QR codes were very difficult to scan in dark mode. (Tailwind builds only)
+- Made certain account pages (password reset, two-factor auth, etc.) darker in dark mode. (Tailwind builds only)
+- Removed a redundant check for empty subscription from `view_subscription.html` (thanks Rob for reporting!)
+- Fixed a bug that caused errors displaying prices in secondary currencies if they prices had decimals in them. 
+  (Thanks Matthew for reporting and the fix!)
 - Fixed team signup test if you have disabled signups. (Thanks Saif for reporting and proposing the fix!)
 - Fixed a bug where links to the user dashboard were accidentally missing if you disabled user impersonation. (Thanks Simon for finding!)
-- Added a "Built with SaaS Pegasus" line to the default footer. You are of course very welcome to remove this.
-- Bump Django to latest 5.0.3 release.
+
+### Upgrade notes
+
+If you are using Docker in development you might need to move/copy your `.env.docker` file to `.env` 
+when you update your project.
+
+*Mar 22, 2024*
 
 ## Version 2024.2.4
 
