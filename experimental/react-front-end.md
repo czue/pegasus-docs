@@ -1,6 +1,8 @@
 Standalone React Front End
 ==========================
 
+*Added in version 2024.4.*
+
 SaaS Pegasus's default React integration is based on a hybrid-model for reasons
 [outlined here](https://www.saaspegasus.com/guides/modern-javascript-for-django-developers/client-server-architectures/#enter-the-hybrid-architecture).
 The hybrid model is still recommended for the overwhelming majority of Pegasus projects using React.
@@ -137,6 +139,13 @@ Here are some of the larger limitations:
 - There is no guidance/support for production deployment of the front end.
 - You have to enable the Pegasus examples for it to work.
 - There might be bugs!
+
+## Troubleshooting
+
+**I'm getting a "URI malformed" error when I load the app.**
+
+This is likely because your `frontend/.env` file does not exist, or your `VITE_APP_BASE_URL` is not
+properly set inside it. See `frontend/.env.example` for an example `.env` file suitable for development.
 
 ## Feedback
 
