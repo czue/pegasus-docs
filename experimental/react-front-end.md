@@ -18,7 +18,7 @@ The features it includes are:
 - A standalone Vite / React application.
 - Authentication via JWT---including sign up, login and logout functionality.
 - A sample profile page which shows how to retrieve data from your back end and display it.
-- The employee lifecycle demo that ships with Pegasus.
+- The employee lifecycle demo that ships with Pegasus (if enabled).
 
 The standalone front end is *only available on TailwindCSS* and uses DaisyUI for styling.
 
@@ -28,6 +28,8 @@ as a starting point to build standalone, React, single-page-applications with Pe
 Here are some technical details:
 
 ## Running the front end
+
+*If you are using Docker, your front end should start in a separate container after running `make init`.*
 
 The front end lives in the `/frontend` folder of your project.
 To set it up for the first time, first go into the directory:
@@ -56,6 +58,7 @@ npm run dev
 
 Note: your Django backend must also be running for the front end to work,
 and you must also [build your Django front end](front-end.md) for styles to work.
+
 
 ## Authentication
 
@@ -127,18 +130,16 @@ Routing is handled by [React Router](https://reactrouter.com/en/main).
 The main routes for the project are configured in `main.tsx`, and you can also include child routes
 by following the pattern used by the employee demo.
 
-## Limitations
+## Known Limitations
 
 This is an experimental feature meant to provide a starting point for building a standalone React front end against your Pegasus app.
 It is *not* a complete, production-ready app, in the same way that standard Pegasus is.
 
 Here are some of the larger limitations:
 
-- Only a limited subset of Pegasus functionality is available in the front end.
+- Only a very limited subset of Pegasus functionality is available in the front end.
 - The front end styles only support Tailwind CSS.
 - There is no guidance/support for production deployment of the front end.
-- You have to enable the Pegasus examples for it to work.
-- There might be bugs!
 
 ## Troubleshooting
 
