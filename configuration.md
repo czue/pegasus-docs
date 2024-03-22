@@ -10,23 +10,24 @@ that varies across environments is to use a `.env` file.
 
 Out-of-the-box, Pegasus will include multiple `.env` files for your settings:
 
-**`.env` is for a native Python environment.**
-It will be picked up by default if you run `./manage.py runserver`.
-It is typically not checked into source control (since it may include secrets like API keys),
-so is included in the `.gitignore`.
+**`.env` is for development in either a native or a Docker-based environnment.**
+It will be picked up by default if you run `./manage.py runserver` or `docker compose start`.
+If you need to swap between these environments you might need to modify a few variables in this file---in
+particular the database and redis URLs.
 
-**`.env.docker` is for a Docker-based environment.**
-It will override anything set in `.env` if you run with docker.
-It is also typically not checked into source control, so is ignored.
+The `.env` is typically not checked into source control (since it may include secrets like API keys),
+so is included in the `.gitignore`.
 
 **`.env.example` is an example file.**
 It is not used for anything, but can be checked into source control so that
-developers can use it as a starting point for their `.env` or `.env.docker` files.
+developers can use it as a starting point for their `.env` file.
 
-Newly downloaded projects will include a `.env` and `.env.docker` file, but projects
-pulled from git will typically only include a `.env.example` file.
+Projects downloaded as zip files will include a `.env` file, but projects
+created or pulled from Github will typically only include a `.env.example` file,
+so you will need to copy this file locally to run your development server.
 
-*Note: Pegasus versions prior to 2023.1 may not include all of these files.*
+*Note: Pegasus versions prior to 2024.3 also included a `.env.docker` file.
+This has been merged with the `.env` file.*
 
 ### Settings environment precedence
 

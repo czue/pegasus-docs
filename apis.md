@@ -48,7 +48,9 @@ The API docs will look something like this:
 As part of the [front end](/front-end/), Pegasus ships with an API client that can be used to interact with your project's APIs.
 **This client is automatically generated from your APIs and should not be modified by hand.**
 
-You can find the source code of the API client(s) in the `assets/javascript/api-client` folder.
+You can find the source code of the API client(s) in the `api-client` folder in your project's root directory.
+
+*Note: In releases prior to 2024.3 the API client was in the `assets/javascript/api-client` directory.* 
 
 ### Using the API client
 
@@ -81,7 +83,7 @@ client.employeesList().then((result) => {
 ### Client method names
 
 The easiest way to find out the methods available in the API client is by looking at the source code
-in `assets/javascript/api-client/apis/<AppName>Api.ts`.
+in `api-client/apis/<AppName>Api.ts`.
 
 Method names are determined by the `operationId` value for the API in the auto-generated `schema.yaml` file.
 These identifiers are auto-generated, but can be overridden using DRF Spectacular's `extend_schema_view` and `extend_schema` helper functions.
@@ -137,7 +139,7 @@ npm install @openapitools/openapi-generator-cli -g
 Then run it as follows:
 
 ```
-openapi-generator-cli generate -i http://localhost:8000/api/schema/ -g typescript-fetch -o ./assets/javascript/api-client/
+openapi-generator-cli generate -i http://localhost:8000/api/schema/ -g typescript-fetch -o ./api-client/
 ```
 
 The above assumes your Django server is running at http://localhost:8000, but you can replace that
@@ -148,10 +150,10 @@ value with any URL or file system reference to your `schema.yml` file.
 You can also generate your API client with docker to avoid having to install Java by running:
 
 ```
-make api-client
+make build-api-client
 ```
 
-while your server is running. You should see the files in `assets/javascript/api-client` get updated.
+while your server is running. You should see the files in `api-client` get updated.
 
 #### Rebuilding your front end
 
@@ -163,6 +165,25 @@ npm run dev
 
 Note that introducing breaking changes to your APIs can also break your API client!
 If you're unsure if you introduced breaking changes it is worth testing any functionality that depends on the API client.
+
+## Authentication APIs
+
+*Added in version 2024.4.*
+
+If you enable the "Use Authentication APIs" checkbox in your project, Pegasus will generate a set of API
+endpoints for registering and logging in users.
+These endpoints can be used to integrate your backend with single page applications (SPAs) and mobile apps.
+
+Under the hood, Pegasus uses [dj-rest-auth](https://dj-rest-auth.readthedocs.io/en/latest/) for these endpoints.
+The integration code can be found in the `apps.authentication` app, which is largely a wrapper around `dj-rest-auth`.
+
+If you enable this feature, it will also enable JWT Authentication for your application, using 
+[Simple JWT](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/).
+You can then use the provided tokens to authenticate users from your mobile app / SPA.
+The authentication set up is largely based on [this guide](https://testdriven.io/blog/django-rest-authjs/#authentication-app).
+
+A complete end-to-end example that uses the API authentication feature in a React SPA can be found
+in the experimental [standalone front end](experimental/react-front-end.md).
 
 ## API Keys
 
