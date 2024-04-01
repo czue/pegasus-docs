@@ -112,7 +112,8 @@ pre-commit run isort
 ```
 
 **Temporarily disable hooks**
-See https://pre-commit.com/#temporarily-disabling-hooks
+
+See [https://pre-commit.com/#temporarily-disabling-hooks](https://pre-commit.com/#temporarily-disabling-hooks)
 
 For more information on using and configuring pre-commit check out the 
 [pre-commit docs](https://pre-commit.com/#quick-start) 
