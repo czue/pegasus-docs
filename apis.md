@@ -168,7 +168,7 @@ If you're unsure if you introduced breaking changes it is worth testing any func
 
 ## Authentication APIs
 
-*Added in version 2024.4.*
+*Added in version 2024.3.*
 
 If you enable the "Use Authentication APIs" checkbox in your project, Pegasus will generate a set of API
 endpoints for registering and logging in users.
