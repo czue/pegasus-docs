@@ -317,7 +317,36 @@ kamal app exec -i bash
 
 You should now have a shell where you can run any Python/`manage.py` command.
 
+You can also get a database shell by running:
+
+```
+kamal app exec 'python manage.py dbshell'
+```
+
+Or
+
+```
+kamal accessory exec postgres -i 'psql -h localhost -p 5432 -U <youruser>' --reuse
+```
+
 For more information see [Kamal commands](https://kamal-deploy.org/docs/commands).
+
+### Configuration
+
+There are a few configuration options you might want to update from the defaults.
+
+**Speeding up builds.**
+
+For convenience, Pegasus ships with the "multiarchitecture" flag enabled.
+This allows you to build on one architecture (e.g. the ARM64 used on Macs) and deploy to another (e.g. the x86
+architecture used on most Linux servers).
+
+However, this can result in very long build/deploy times.
+To speed this up you can update your build configuration
+and either remove `multiarch: true` if you are building for the same architecture you are deploying to,
+or setting up a remote builder.
+
+The Kamal docs [have extensive guidance on optimizing your build setup](https://kamal-deploy.org/docs/configuration).
 
 ### Troubleshooting
 
