@@ -3,6 +3,52 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.4
+
+There are two major updates in this release, a new websocket-based streaming chat UI,
+and upgrading Bulma to version 1.0.
+
+
+### Streaming Chat UI
+
+The OpenAI Chat demo now streams responses in real time.
+This provides a much better user experience for chat applications, as the user doesn't
+stare at a "loading" screen for a long time waiting for the complete response.
+
+This feature is currently only supported on HTMX builds.
+It will be automatically enabled if you enable the "asynchronous" build option.
+If you do not enable async you will still be able to use the old UI.
+
+### Bulma upgrade to 1.0
+
+[Bulma 1.0](https://github.com/jgthms/bulma/releases/tag/1.0.0) was released in late March and Pegasus
+has been updated to support it.
+The UI will change slightly but there should not be any breaking or substantial changes as a result of this upgrade.
+See details below.
+
+### New
+
+- **OpenAI Chat demo now supports streaming responses.** This is only turned n for HTMX builds with asynchronous support enabled.
+
+### Updated
+
+- **Upgraded Bulma to 1.0.** Related changes (bulma builds only):
+  - Switched all variables from Sass variables to CSS variables.
+  - Updated syntax of all responsive CSS to use `@include mixins` instead of `+from`, `+until`, etc.
+  - Switched how bulma is initialized from `@import` to `@use`.
+  - Removed some unnecessary variable declarations from `site-bulma.scss`
+- **Upgraded other JavaScript packages to their latest versions.**
+- Upgraded Django to 5.0.4
+
+### Fixed
+
+- Fixed a bug where the standalone front end Dockerfile did not install the right dependencies.
+  In some cases, this caused the front end to not start properly.
+- Fixed a bug where viewing a non-existent team would cause a 500 error instead of a 404.
+- Removed some unused code in the OpenAI chat example if you were building with React.
+
+*April 5, 2024*
+
 ## Version 2024.3
 
 This is a big feature release!
