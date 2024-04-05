@@ -19,6 +19,9 @@ This feature is currently only supported on HTMX builds.
 It will be automatically enabled if you enable the "asynchronous" build option.
 If you do not enable async you will still be able to use the old UI.
 
+You can watch a demo of this and learn how it's built in this video:
+[Building a ChatGPT clone with Django, Channels, and HTMX](https://www.youtube.com/watch?v=8JSiiPW4S0A).
+
 ### Bulma upgrade to 1.0
 
 [Bulma 1.0](https://github.com/jgthms/bulma/releases/tag/1.0.0) was released in late March and Pegasus
