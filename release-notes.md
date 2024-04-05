@@ -32,6 +32,7 @@ See details below.
 ### New
 
 - **OpenAI Chat demo now supports streaming responses.** This is only turned n for HTMX builds with asynchronous support enabled.
+  Big thanks to Artem for the implementation support!
 
 ### Updated
 
