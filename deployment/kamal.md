@@ -1,4 +1,4 @@
-## Kamal Deploy
+## Kamal (Deploy to any VPS)
 
 Pegasus supports container-based deployment to any Linux server using [Kamal](https://kamal-deploy.org/).
 
@@ -189,13 +189,16 @@ giving it the default permissions of Read, Write, Delete.
 ### Install and configure Kamal
 
 Finally, we can set everything up to deploy our production application with Kamal.
+If you have a Ruby environment available, you can install Kamal globally with:
 
-You can follow [the Kamal installation instructions](https://kamal-deploy.org/docs/installation) of your choice.
+```
+gem install kamal
+```
 
-**Note: some Pegasus users have reported that the Docker install is more reliable on Macs.
-On Linux, the native Ruby and Docker both seem to work fine.**
+*Note: you may want to use [`rbenv`](https://github.com/rbenv/rbenv) to manage your environment.*
 
-If you install Kamal natively, you may want to use [`rbenv`](https://github.com/rbenv/rbenv)) to manage your environment.
+If you don't have Ruby running you can also use Docker to install Kamal, however this is a slightly more complicated.
+See [running Kamal with Docker](#running-kamal-with-docker) below for more details.
 
 #### Create `.env` file in the `deploy` directory
 
@@ -347,6 +350,62 @@ and either remove `multiarch: true` if you are building for the same architectur
 or setting up a remote builder.
 
 The Kamal docs [have extensive guidance on optimizing your build setup](https://kamal-deploy.org/docs/configuration).
+
+### Running Kamal with Docker
+
+Here are the steps to run Kamal with Docker instead of native Ruby.
+Note that these steps are slightly different from [the Kamal installation instructions](https://kamal-deploy.org/docs/installation).
+
+First, use one of the following commands to set up an alias for a Kamal shell:
+
+On MacOS: 
+
+```bash
+alias kamal-shell='docker run -it --rm -v "${PWD}:/workdir" -v "/run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock" -e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock" --entrypoint "/bin/sh" -v /var/run/docker.sock:/var/run/docker.sock ghcr.io/basecamp/kamal:latest'
+```
+
+On Linux:
+
+```bash
+alias kamal-shell='docker run -it --rm -v "${PWD}:/workdir" -v "${SSH_AUTH_SOCK}:/ssh-agent" -v /var/run/docker.sock:/var/run/docker.sock -e "SSH_AUTH_SOCK=/ssh-agent" --entrypoint "/bin/sh" ghcr.io/basecamp/kamal:latest'
+```
+
+After setting up this alias, enter the Kamal container by running the alias **in your project's *root* directory**:
+
+```
+kamal-shell
+```
+
+After doing that you should have a shell that looks like this:
+
+```html
+/workdir #
+```
+
+From there change to the `deploy` directory:
+
+```html
+/workdir # cd deploy
+/workdir/deploy # 
+```
+
+Now you can run kamal commands as normal:
+
+```html
+/workdir/deploy # kamal app details
+  INFO [e959d464] Running docker ps --filter label=service=yourapp --filter label=role=celery on 5.161.214.37
+  INFO [e959d464] Finished in 3.483 seconds with exit status 0 (successful).
+App Host: 5.161.214.37
+CONTAINER ID   IMAGE                                                                                  COMMAND                  CREATED      STATUS      PORTS     NAMES
+a4132d07e3d8   you/yourapp:8f0f9cbe651d0b6ccb939b06a46badb3c521b038_uncommitted_634818cb72f626e6   "celery -A yourapp…"   6 days ago   Up 6 days             yourapp-celery-8f0f9cbe651d0b6ccb939b06a46badb3c521b038_uncommitted_634818cb72f626e6
+
+  INFO [258c111d] Running docker ps --filter label=service=yourapp --filter label=role=web on 5.161.214.37
+  INFO [258c111d] Finished in 0.920 seconds with exit status 0 (successful).
+App Host: 5.161.214.37
+CONTAINER ID   IMAGE                                                                                  COMMAND               CREATED      STATUS                PORTS      NAMES
+fe8a5e4e81e1   you/yourapp:8f0f9cbe651d0b6ccb939b06a46badb3c521b038_uncommitted_634818cb72f626e6   "/bin/sh -c /start"   6 days ago   Up 6 days (healthy)   8000/tcp   yourapp-web-8f0f9cbe651d0b6ccb939b06a46badb3c521b038_uncommitted_634818cb72f626e6
+```
+
 
 ### Troubleshooting
 
