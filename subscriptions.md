@@ -387,14 +387,14 @@ was added or removed (step 1, above). That might look something like this, using
 @receiver(post_save, sender=Workspace)
 def update_billing_date_on_workspace_creation(sender, instance, created, **kwargs):
     if created:
-        instance.team.billing_details_last_changed = timezone.now()
-        instance.team.save()
+        instance.user.billing_details_last_changed = timezone.now()
+        instance.user.save()
 
 
 @receiver(post_delete, sender=Workspace)
 def update_billing_date_on_workspace_deletion(sender, instance, **kwargs):
-    instance.team.billing_details_last_changed = timezone.now()
-    instance.team.save()
+    instance.user.billing_details_last_changed = timezone.now()
+    instance.user.save()
 ```
 
 The other piece of code you would need to add is associating the `get_quantity` function on the user with the number of 
