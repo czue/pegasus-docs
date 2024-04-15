@@ -210,7 +210,7 @@ This should deploy your application to a new container. It should output the URL
 
 You can run migrations like this.
 
-First crmakefeate the job:
+First crate the job:
 
 ```
 gcloud run jobs create migrate \
