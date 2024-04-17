@@ -51,6 +51,8 @@ See details below.
 - Fixed a bug where viewing a non-existent team would cause a 500 error instead of a 404.
 - Removed some unused code in the OpenAI chat example if you were building with React.
 
+*Note: This release is accidentally labeled as 2024.2.4 in `pegasus_config.yml`*
+
 *April 5, 2024*
 
 ## Version 2024.3
@@ -148,6 +150,8 @@ the navigation was removed.
 
 If you are using Docker in development you might need to move/copy your `.env.docker` file to `.env` 
 when you update your project.
+
+*Note: This release is accidentally labeled as 2024.2.3 in `pegasus_config.yml`*
 
 *Mar 22, 2024*
 
