@@ -3,6 +3,22 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.4.2
+
+- Fixed a bug where deleted subscriptions with `canceled_at_period_end=True` could cause a crash when trying to view them.
+  This bug would typically only manifest in test mode or if you manually deleted subscriptions in Stripe.
+- Fixed a crash when looking up the currency for a deleted subscription.
+- Attach Stripe Customer to Uesr/Team in `provision_subscription` function instead of view, which makes it work
+  in webhook processing as well.
+- Use alpine to disable submit and clear input in the chat example (thanks Artem for the suggestion!)
+- Fix typo instructing you to "comment out" mailgun settings instead of "uncomment" them. (Thanks Adam for reporting!)
+
+### Documentation
+
+- Improved the [instructions for running Kamal with Docker](https://docs.saaspegasus.com/deployment/kamal/#running-kamal-with-docker).
+  Thanks EJ and Simon for the help with this!
+
+
 ## Version 2024.4.1
 
 This is a hotfix/security release that fixes an issue where the `deploy/.env` file was not properly
