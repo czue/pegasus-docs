@@ -18,6 +18,9 @@ If this is the case it is recommended to immediately upgrade and cycle any crede
 Sorry about the inconvenience!
 Thanks to Denis for reporting and to Erwin for pointing out the security implications.
 
+Note: if you'd like to patch this issue without upgrading, you can replace `.env` in your `.dockerignore` file with
+`**/.env`.
+
 *Apr 17, 2024*
 
 ## Version 2024.4
