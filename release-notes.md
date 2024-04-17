@@ -3,6 +3,23 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.4.1
+
+This is a hotfix/security release that fixes an issue where the `deploy/.env` file was not properly
+ignored by the `.dockerignore` when using Kamal deployment.
+This resulted in credentials being included in built Docker containers.
+
+You are affected if you:
+
+1. Deployed your application with Kamal.
+2. Made your built Docker image publicly available.
+
+If this is the case it is recommended to immediately upgrade and cycle any credentials that were listed in `deploy/.env`.
+Sorry about the inconvenience!
+Thanks to Denis for reporting and to Erwin for pointing out the security implications.
+
+*Apr 17, 2024*
+
 ## Version 2024.4
 
 There are two major updates in this release, a new websocket-based streaming chat UI,
@@ -50,8 +67,6 @@ See details below.
   In some cases, this caused the front end to not start properly.
 - Fixed a bug where viewing a non-existent team would cause a 500 error instead of a 404.
 - Removed some unused code in the OpenAI chat example if you were building with React.
-
-*Note: This release is accidentally labeled as 2024.2.4 in `pegasus_config.yml`*
 
 *April 5, 2024*
 
@@ -150,8 +165,6 @@ the navigation was removed.
 
 If you are using Docker in development you might need to move/copy your `.env.docker` file to `.env` 
 when you update your project.
-
-*Note: This release is accidentally labeled as 2024.2.3 in `pegasus_config.yml`*
 
 *Mar 22, 2024*
 
