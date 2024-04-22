@@ -146,7 +146,13 @@ gcloud storage buckets add-iam-policy-binding gs://${GS_BUCKET_NAME} \
 Once you have completed the above you should have everything you need in place to run your app.
 The final step before deploying is to save your configuration as a secret.
 
-Update the `DATABASE_URL`, and `GS_BUCKET_NAME` values in `.env.production`.
+First create the `.env.production` file from `.env.production.example`:
+
+```bash
+cp .env.production.example .env.production
+```
+
+Then update the `DATABASE_URL`, and `GS_BUCKET_NAME` values in `.env.production`.
 You can find these values with the echo command, e.g.:
 
 ```

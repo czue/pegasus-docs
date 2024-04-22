@@ -3,6 +3,69 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.4.2
+
+This is a maintenance release with a number of fixes and small changes.
+The most notable change is that the OpenAI chat example is now fully asynchronous.
+
+## Added
+
+- Added an example celerybeat configuration to the built-in examples.
+- Kamal deployments now support celerybeat for scheduled tasks out-of-the-box. (Thanks Peter for the suggestion!)
+
+## Changed
+
+- **The websocket OpenAI chat example is now fully asynchronous.** This should substantially improve the number
+  of concurrent sessions supported by the app.
+- Use alpine to disable submit and clear input in the OpenAI chat example (thanks Artem for the suggestion!)
+- Renamed "OpenAI Demos" tab to "AI Demos".
+- Renamed `get_chatgpt_response` task to `get_chat_response`.
+- Change the default admin ordering for Users to date joined, descending.
+- Google cloud builds only: `.env.production` is no longer included in Pegasus builds, since it was ignored by git. 
+  Instead `.env.production.example` is included. (Thanks Naveed for reporting!)
+- Attach Stripe Customer to User/Team in `provision_subscription` function instead of the view, which makes it work
+  in webhook processing as well.
+
+### Fixed
+
+- **Fixed a bug where non-admins of teams could not view their own team settings/members.**  (Thanks Bernard for reporting!)
+- Fixed a bug where deleted subscriptions with `canceled_at_period_end=True` could cause a crash when trying to view them.
+  This bug would typically only manifest in test mode or if you manually deleted subscriptions in Stripe.
+- Fixed a crash when looking up the currency for a deleted subscription.
+- Added a constraint to the `Membership` model to disallow users being "added" to a team more than once.
+  (Thanks Zac for reporting!)
+- Fix typo instructing you to "comment out" mailgun settings instead of "uncomment" them. (Thanks Adam for reporting!)
+- Google cloud builds only: added `--platform linux/amd64` to the `gcp-build` make target,
+  to address [build/deploy issues from Mac M2s](https://stackoverflow.com/a/68766137/8207). (Thanks Naveed for reporting!)
+
+
+### Documentation
+
+- Improved the [instructions for running Kamal with Docker](https://docs.saaspegasus.com/deployment/kamal/#running-kamal-with-docker).
+  Thanks EJ and Simon for the help with this!
+
+*April 22, 2024*
+
+## Version 2024.4.1
+
+This is a hotfix/security release that fixes an issue where the `deploy/.env` file was not properly
+ignored by the `.dockerignore` when using Kamal deployment.
+This resulted in credentials being included in built Docker containers.
+
+You are affected if you:
+
+1. Deployed your application with Kamal.
+2. Made your built Docker image publicly available.
+
+If this is the case it is recommended to immediately upgrade and cycle any credentials that were listed in `deploy/.env`.
+Sorry about the inconvenience!
+Thanks to Denis for reporting and to Erwin for pointing out the security implications.
+
+Note: if you'd like to patch this issue without upgrading, you can replace `.env` in your `.dockerignore` file with
+`**/.env`.
+
+*Apr 17, 2024*
+
 ## Version 2024.4
 
 There are two major updates in this release, a new websocket-based streaming chat UI,
