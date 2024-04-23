@@ -10,8 +10,9 @@ The most notable change is that the OpenAI chat example is now fully asynchronou
 
 ## Added
 
+- **Kamal deployments now support celerybeat for scheduled tasks out-of-the-box.** (Thanks Peter for the suggestion!)
 - Added an example celerybeat configuration to the built-in examples.
-- Kamal deployments now support celerybeat for scheduled tasks out-of-the-box. (Thanks Peter for the suggestion!)
+
 
 ## Changed
 
