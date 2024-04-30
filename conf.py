@@ -213,6 +213,8 @@ redirects = {
 pushfeedback_project="hiz6sjmrnx"
 
 
+html_favicon="./images/favicon.ico"
+
 # sitemap config
 
 html_baseurl = "https://docs.saaspegasus.com/"
