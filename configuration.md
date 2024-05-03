@@ -166,12 +166,12 @@ with a sensible set of defaults and templates.
 
 Pegasus optionally ships with a "Login with Google" and "Login with Twitter" options. 
 
-You'll separately need to follow the steps [listed here](https://django-allauth.readthedocs.io/en/latest/socialaccount/providers/index.html)
+You'll separately need to follow the steps [listed here](https://docs.allauth.org/en/latest/socialaccount/providers/index.html)
 to configure things on the Google/Twitter side and in the Django Admin.
 
 It's easy to add or change social login details (e.g. login with Facebook, Github, etc.) using allauth.
 
-For details on how to set this up for a particular provider [see this page](https://django-allauth.readthedocs.io/en/latest/socialaccount/providers/index.html).
+For details on how to set this up for a particular provider [see this page](https://docs.allauth.org/en/latest/socialaccount/providers/index.html).
 
 If you need help setting this up feel free to get in touch!
 
@@ -193,7 +193,7 @@ These templates can be further customized by editing the files in the `templates
 
 See [the allauth email documentation][allauth-email] for more information about customizing account emails.
 
-[allauth-email]: https://django-allauth.readthedocs.io/en/latest/common/index.html#sending-email
+[allauth-email]: https://docs.allauth.org/en/latest/common/email.html
 
 ### Disabling public sign ups
 
@@ -209,7 +209,7 @@ This will prevent all users from creating new accounts, though existing users ca
 ### Further configuration
 
 Allauth is highly configurable.
-It's recommended that you look into the various [configuration settings available within allauth](https://django-allauth.readthedocs.io/en/latest/account/configuration.html)
+It's recommended that you look into the various [configuration settings available within allauth](https://docs.allauth.org/en/latest/account/configuration.html)
 for any advanced customization.
 
 
