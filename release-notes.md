@@ -3,6 +3,53 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.5
+
+### Added
+
+- **All generated projects now include a `LICENSE.md` file.**
+  The goal of the license file is not to change how Pegasus can be used in any way, but rather to document those
+  terms in the codebase itself (previously they were only documented on the [terms page](https://www.saaspegasus.com/terms/). 
+  For more information you can see the new [license page](https://www.saaspegasus.com/license/).
+
+### Changed
+
+- Upgraded allauth to the latest version (0.62.1).
+- **Migrated two-factor authentication from the third-party `django-allauth-2fa` to the `django-allauth` built-in implementation.**
+  See upgrade notes below for migrating existing projects.
+- ((Added support for magic-code login, where a user can login to the site by requesting a code to their email address.**
+- **Bootstrap and Bulma builds: Move sidebar navigation into the mobile menu instead of having it take up the top of the
+  screen on mobile screens**, similar to how things already worked on Tailwind and Material. (Thanks Luc for the nudge!) 
+- Inline buttons are now spaced using the `gap` CSS property instead of the `pg-ml` class on individual buttons.
+- `Alpine.start()` is now called on `DOMContentLoaded` loaded event instead of using `window.load`.
+  This makes Alpine-powered UIs more responsive, especially when used on pages with lots of images.
+- Updated external JavaScript imports to use the `defer` keyword for slightly better performance.
+
+### Fixed
+
+- **SQLite build now properly parse `DATABASE_URL` if it is set. This fixes issues deploying to certain platforms
+  when building with SQLite.** (Thanks Manasvini for reporting!)
+- Updated allauth documentation links in the README to point to the new [allauth docs site](https://docs.allauth.org/).
+  (Thanks Shantu for reporting!) 
+
+### Removed
+
+- Removed deprecated "version" field from the dev `docker-compose.yml` file. (Thanks Moyi for reporting!)
+- Removed no-longer-used `pg-ml` css spacing class. 
+  
+### Upgrading
+
+If you are using two-factor authentication you must run:
+
+```
+python manage.py migrate_allauth_2fa
+```
+
+Which will bring across existing device set ups and recovery codes.
+**If you don't do this, you will remove two-factor-authentication configuraiton for all users who have set it up,
+compromising their security.**
+
+
 ## Version 2024.4.2
 
 This is a maintenance release with a number of fixes and small changes.
