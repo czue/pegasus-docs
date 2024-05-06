@@ -8,13 +8,13 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 This is a maintenance release with a number of fixes and small changes.
 The most notable change is that the OpenAI chat example is now fully asynchronous.
 
-## Added
+### Added
 
 - **Kamal deployments now support celerybeat for scheduled tasks out-of-the-box.** (Thanks Peter for the suggestion!)
 - Added an example celerybeat configuration to the built-in examples.
 
 
-## Changed
+### Changed
 
 - **The websocket OpenAI chat example is now fully asynchronous.** This should substantially improve the number
   of concurrent sessions supported by the app.
