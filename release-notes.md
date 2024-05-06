@@ -3278,4 +3278,5 @@ Documentation for subscriptions can be [found here](/subscriptions).
 
 ## Version 0.4 and earlier
 
-Release notes for earlier versions are tracked at [https://www.saaspegasus.com/releases/](https://www.saaspegasus.com/releases/).
+Release notes for earlier versions are no longer publicly available.
+
