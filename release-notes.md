@@ -11,19 +11,23 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
   The goal of the license file is not to change how Pegasus can be used in any way, but rather to document those
   terms in the codebase itself (previously they were only documented on the [terms page](https://www.saaspegasus.com/terms/). 
   For more information you can see the new [license page](https://www.saaspegasus.com/license/).
+- **Added support for "magic-code login", where a user can login to the site by requesting a code to their email address.**
+- **The AI image generation now supports Dall-E 3 and Stability AI.**
+
 
 ### Changed
 
 - Upgraded allauth to the latest version (0.62.1).
 - **Migrated two-factor authentication from the third-party `django-allauth-2fa` to the `django-allauth` built-in implementation.**
   See upgrade notes below for migrating existing projects.
-- ((Added support for magic-code login, where a user can login to the site by requesting a code to their email address.**
 - **Bootstrap and Bulma builds: Move sidebar navigation into the mobile menu instead of having it take up the top of the
   screen on mobile screens**, similar to how things already worked on Tailwind and Material. (Thanks Luc for the nudge!) 
 - Inline buttons are now spaced using the `gap` CSS property instead of the `pg-ml` class on individual buttons.
 - `Alpine.start()` is now called on `DOMContentLoaded` loaded event instead of using `window.load`.
   This makes Alpine-powered UIs more responsive, especially when used on pages with lots of images.
 - Updated external JavaScript imports to use the `defer` keyword for slightly better performance.
+- Added a Github logo to connected Github accounts on profile page.
+- The AI image demo and code has been moved to a first-class Pegasus application / tab.
 
 ### Fixed
 
