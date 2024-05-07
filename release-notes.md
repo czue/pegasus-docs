@@ -16,7 +16,6 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - Google cloud run builds now support Redis. For details, see the [updated documentation](./deployment/google-cloud.md).
   (Thanks Forrest for suggesting!)
 
-
 ### Changed
 
 - Upgraded allauth to the latest version (0.62.1).
@@ -27,12 +26,14 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - Inline buttons are now spaced using the `gap` CSS property instead of the `pg-ml` class on individual buttons.
 - `Alpine.start()` is now called on `DOMContentLoaded` loaded event instead of using `window.load`.
   This makes Alpine-powered UIs more responsive, especially when used on pages with lots of images.
-- Updated external JavaScript imports to use the `defer` keyword for slightly better performance.
+- **Updated external JavaScript imports to use [the `defer` keyword](https://www.w3schools.com/tags/att_script_defer.asp)
+  for slightly better page load performance.** (See upgrade note.)
 - Added a Github logo to connected Github accounts on profile page.
 - The AI image demo and code has been moved to a first-class Pegasus application / tab.
 - Update the docker container registry used by Google Cloud to reflect the latest version in Google.
   Also push more Google Cloud configuration variables out of the Makefile and into the environment variables.
   (Thanks Erwin for reporting!)
+- Added additional `.env` files to `.dockerignore` for Google Cloud builds.
 
 ### Fixed
 
@@ -44,7 +45,9 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 ### Removed
 
 - Removed deprecated "version" field from the dev `docker-compose.yml` file. (Thanks Moyi for reporting!)
-- Removed no-longer-used `pg-ml` css spacing class. 
+- Removed no-longer-used `pg-ml` css spacing class.
+- Removed redundant type="text/javascript" declarations from a few `<script>` tags.
+- Removed unused HTMX script import from employee app demo page. 
   
 ### Upgrading
 
@@ -55,9 +58,19 @@ python manage.py migrate_allauth_2fa
 ```
 
 Which will bring across existing device set ups and recovery codes.
-**If you don't do this, you will remove two-factor-authentication configuraiton for all users who have set it up,
+**If you don't do this, you will remove two-factor-authentication configuration for all users who have set it up,
 compromising their security.**
 
+<hr>
+
+The change of adding the `defer` keyword to `<script>` imports could have unintended consequences if you were
+relying on functions / functionality in your scripts being available on page load.
+This would most likely manifest as a browser JavaScript error of the form: 
+`Uncaught ReferenceError: htmx/SiteJS/etc. is not defined`.
+
+To resolve this, make sure all additional dependencies are also loaded with `defer` (for external scripts),
+only referenced after the `'DOMContentLoaded'` event (for inline scrxipts), or, alternatively,
+remove the `defer` keyword from the `<script>` tags in `base.html` or affected templates.
 
 ## Version 2024.4.2
 
