@@ -13,6 +13,8 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
   For more information you can see the new [license page](https://www.saaspegasus.com/license/).
 - **Added support for "magic-code login", where a user can login to the site by requesting a code to their email address.**
 - **The AI image generation now supports Dall-E 3 and Stability AI.**
+- Google cloud run builds now support Redis. For details, see the [updated documentation](./deployment/google-cloud.md).
+  (Thanks Forrest for suggesting!)
 
 
 ### Changed
@@ -28,6 +30,9 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - Updated external JavaScript imports to use the `defer` keyword for slightly better performance.
 - Added a Github logo to connected Github accounts on profile page.
 - The AI image demo and code has been moved to a first-class Pegasus application / tab.
+- Update the docker container registry used by Google Cloud to reflect the latest version in Google.
+  Also push more Google Cloud configuration variables out of the Makefile and into the environment variables.
+  (Thanks Erwin for reporting!)
 
 ### Fixed
 
