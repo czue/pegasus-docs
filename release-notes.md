@@ -27,6 +27,19 @@ and Celery workers and returns a non-200 response code if there are any identifi
 These endpoints can be connected to a monitoring tool like [StatusCake](https://www.statuscake.com/)
 or [Uptime Robot](https://uptimerobot.com/) so that you can be alerted whenever your site is having issues.
 
+### Allauth updates
+
+The [django-allauth](https://docs.allauth.org/en/latest/) library was updated to the latest version,
+which enabled several useful changes.
+
+The first is a "sign in by email code" option which can be used in addition to the standard
+username/password and social option.
+Users can request a code be sent to their registered email and can then use that to login.
+
+The second is using the recent [multi-factor authentication](https://docs.allauth.org/en/latest/mfa/index.html)
+support added to allauth in favor of the third-party `django-allauth-2fa` library.
+This reduces dependencies and puts all of authentication functionality on a standard path.
+
 The complete release notes are below:
 
 ### Added
@@ -1735,7 +1748,7 @@ This release adds two-factor authentication, and has a number of smaller improve
 
 - **Two-factor authentication.** Users can now set up two-factor authentication on their account (using Google Authenticator or similar),
   and will be required to enter a token to login. This is configured from the user's profile page.
-  More [documentation here](2fa.md).
+  More [documentation here](./configuration.md#two-factor-authentication).
 
 ### Changed
 
