@@ -60,7 +60,7 @@ This means that [Celery must be running](./celery.md) to get responses from the 
 
 ## Image Models
 
-Pegasus also includes an example app for generating images with multiple different models,
+Pegasus also includes an optional example app for generating images with multiple different models,
 including [Dall-E-2](https://openai.com/index/dall-e-2) and [Dall-E-3](https://openai.com/index/dall-e-3)
 and [Stability AI](https://stability.ai/) (Stable Diffusion 3).
 
