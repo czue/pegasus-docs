@@ -33,8 +33,8 @@ values in your `settings.py`. For example:
 ```python
 LLM_MODELS = {
     "gpt4": {"key": env("OPENAI_API_KEY", default="")},
-    "claude-3-opus": {"key": env("ANTHROPIC_API_KEY", default="")},
-    "Meta-Llama-3-8B-Instruct": {},
+    "claude-3-opus": {"key": env("ANTHROPIC_API_KEY", default="")},  # requires llm-claude-3
+    "Meta-Llama-3-8B-Instruct": {},  # requires llm-gpt4all
 }
 DEFAULT_LLM_MODEL = "gpt4"
 ```
