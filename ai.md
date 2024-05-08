@@ -5,7 +5,7 @@ This page summarizes the various options.
 
 ## LLMs and Chat
 
-Pegasus ships with a highly flexible and customizable Chat UI for interacting with LLMs.
+Pegasus comes with an optional Chat UI for interacting with LLMs.
 This section covers how it works and the various supported options.
 
 ### Choosing an LLM model
