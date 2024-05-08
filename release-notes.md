@@ -47,6 +47,7 @@ The complete release notes are below:
 - Upgraded allauth to the latest version (0.62.1).
 - **Migrated two-factor authentication from the third-party `django-allauth-2fa` to the `django-allauth` built-in implementation.**
   See upgrade notes below for migrating existing projects.
+- Refactored how many allauth views work to be compatible with their new template override system.
 - **Bootstrap and Bulma builds: Move sidebar navigation into the mobile menu instead of having it take up the top of the
   screen on mobile screens**, similar to how things already worked on Tailwind and Material. (Thanks Luc for the nudge!) 
 - Inline buttons are now spaced using the `gap` CSS property instead of the `pg-ml` class on individual buttons.
@@ -54,12 +55,14 @@ The complete release notes are below:
   This makes Alpine-powered UIs more responsive, especially when used on pages with lots of images.
 - **Updated external JavaScript imports to use [the `defer` keyword](https://www.w3schools.com/tags/att_script_defer.asp)
   for slightly better page load performance.** (See upgrade note.)
+  - Also updated inline JavaScript code in a handful of places to be compatible with deferred scripts.
 - Added a Github logo to connected Github accounts on profile page.
 - **The AI image demo and code has been moved to a first-class Pegasus application / tab.**
 - Update the docker container registry used by Google Cloud to reflect the latest version in Google.
   Also push more Google Cloud configuration variables out of the Makefile and into the environment variables.
   (Thanks Erwin for reporting!)
 - Added additional `.env` files to `.dockerignore` for Google Cloud builds.
+- Bumped django to the latest `5.0.6` release.
 
 ### Fixed
 
@@ -70,10 +73,14 @@ The complete release notes are below:
 
 ### Removed
 
+- Removed several no-longer-needed allauth template files.
 - Removed deprecated "version" field from the dev `docker-compose.yml` file. (Thanks Moyi for reporting!)
 - Removed no-longer-used `pg-ml` css spacing class.
 - Removed redundant type="text/javascript" declarations from a few `<script>` tags.
-- Removed unused HTMX script import from employee app demo page. 
+- Removed unused HTMX script import from employee app demo page.
+- Removed the no-longer-used `openai_example` app (functionality has been moved to `apps.chat` and `apps.ai_images`).
+- Removed the no-longer-needed `AccountAdapter` class. This class was previously used to add two-factor support
+  to login, which is now handled natively by allauth.
   
 ### Upgrading
 
