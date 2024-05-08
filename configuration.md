@@ -195,6 +195,17 @@ You can enable / disable it in `settings.py`.
 ACCOUNT_LOGIN_BY_CODE_ENABLED=True
 ```
 
+### Two-factor authentication
+
+Two-Factor authentication (2FA) is configured using the [allauth's mfa][1] support. 
+
+[1]: https://docs.allauth.org/en/latest/mfa/index.html
+
+When using Two-Factor Auth with Pegasus, a new section is added to the user profile
+for enabling & configuring the OTP (one-time password) devices for the user.
+
+If a user has a Two-Factor device configured then they will be prompted for a token after logging in.
+
 ### Customizing emails
 
 Pegasus ships with simple, responsive email templates for password reset and email address confirmation.
