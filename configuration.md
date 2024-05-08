@@ -253,12 +253,9 @@ directly in your `settings.py` or via an environment variable.
 After setting it up on production, you can test your Sentry integration by visiting `https://<yourdomain>/simulate_error`.
 This should trigger an exception which will be logged by Sentry.
 
-## OpenAI
+## OpenAI and LLMs
 
-To use the built-in OpenAI examples (version 2023.3.3 and later) you will need to set `OPENAI_API_KEY` in
-your settings or environment.
-See [this page](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key) for help
-finding your OpenAI API key.
+For help configuring LLMs and AIs, see the [AI docs](./ai.md).
 
 ## Celery
 
