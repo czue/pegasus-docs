@@ -39,6 +39,7 @@ The complete release notes are below:
   terms in the codebase itself (previously they were only documented on the [terms page](https://www.saaspegasus.com/terms/). 
   For more information you can see the new [license page](https://www.saaspegasus.com/license/).
 - **Added support for "magic-code login", where a user can login to the site by requesting a code to their email address.**
+  [Documentation.](./configuration.md#enabling-sign-in-by-email-code)
 - **Google cloud run builds now support Redis.** For details, see the [updated documentation](./deployment/google-cloud.md).
   (Thanks Forrest for suggesting!)
 
