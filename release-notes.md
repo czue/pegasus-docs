@@ -5,15 +5,41 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ## Version 2024.5
 
+This is a major release with several big updates.
+Here are a few highlights:
+
+### New AI models
+
+In addition to using OpenAI chat models, you can now build the Pegasus AI chat applicaiton
+with the [`llm` library](https://github.com/simonw/llm). This lets you run the chat application
+against any supported model---including the Anthropic family (Claude 3), and local models like Llama 3.
+
+Additionally, the image generation demo now supports Dall-E-3 and Stable Diffusion 3.
+For complete details, see the new [AI documentation](./ai.md).
+
+### Health Checks
+
+A new setting allows you to turn on health checks for your application, powered by
+[django-health-check](https://django-health-check.readthedocs.io/en/latest/).
+This will create an endpoint (at `/health` by default) that pings your database, Redis instance,
+and Celery workers and returns a non-200 response code if there are any identified issues.
+
+These endpoints can be connected to a monitoring tool like [StatusCake](https://www.statuscake.com/)
+or [Uptime Robot](https://uptimerobot.com/) so that you can be alerted whenever your site is having issues.
+
+The complete release notes are below:
+
 ### Added
 
+- **Added an optional health check endpoint at /health/.** (see above for details)
+- **Added an option to connect the chatbot to other LLMs**. (see above for details)
+- **The AI image generation now supports Dall-E 3 and Stability AI.**
 - **All generated projects now include a `LICENSE.md` file.**
   The goal of the license file is not to change how Pegasus can be used in any way, but rather to document those
   terms in the codebase itself (previously they were only documented on the [terms page](https://www.saaspegasus.com/terms/). 
   For more information you can see the new [license page](https://www.saaspegasus.com/license/).
 - **Added support for "magic-code login", where a user can login to the site by requesting a code to their email address.**
-- **The AI image generation now supports Dall-E 3 and Stability AI.**
-- Google cloud run builds now support Redis. For details, see the [updated documentation](./deployment/google-cloud.md).
+- **Google cloud run builds now support Redis.** For details, see the [updated documentation](./deployment/google-cloud.md).
   (Thanks Forrest for suggesting!)
 
 ### Changed
@@ -29,7 +55,7 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - **Updated external JavaScript imports to use [the `defer` keyword](https://www.w3schools.com/tags/att_script_defer.asp)
   for slightly better page load performance.** (See upgrade note.)
 - Added a Github logo to connected Github accounts on profile page.
-- The AI image demo and code has been moved to a first-class Pegasus application / tab.
+- **The AI image demo and code has been moved to a first-class Pegasus application / tab.**
 - Update the docker container registry used by Google Cloud to reflect the latest version in Google.
   Also push more Google Cloud configuration variables out of the Makefile and into the environment variables.
   (Thanks Erwin for reporting!)
