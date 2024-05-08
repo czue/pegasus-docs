@@ -22,6 +22,9 @@ We recommend choosing "OpenAI" unless you know you want to use a different model
 If you're using OpenAI, you need to set `OPENAI_API_KEY` in your environment or settings file (`.env` in development).
 You can also change the model used by setting `OPENAI_MODEL`, which defualts to `"gpt-3.5-turbo"`.
 
+See [this page](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key) for help
+finding your OpenAI API key.
+
 ### Configuring LLM
 
 If you built with generic LLM support, you can configure it by setting the `LLM_MODELS` and `DEFAULT_LLM_MODEL`
