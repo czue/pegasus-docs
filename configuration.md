@@ -186,6 +186,15 @@ ACCOUNT_EMAIL_VERIFICATION = 'optional'  # change to "mandatory" to require user
 
 *Note: The email verification step will be skipped if using a social login.*
 
+### Enabling sign in by email code
+
+Sign in by email code is controlled by the `ACCOUNT_LOGIN_BY_CODE_ENABLED` setting.
+You can enable / disable it in `settings.py`.
+
+```python
+ACCOUNT_LOGIN_BY_CODE_ENABLED=True
+```
+
 ### Customizing emails
 
 Pegasus ships with simple, responsive email templates for password reset and email address confirmation.
