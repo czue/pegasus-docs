@@ -50,7 +50,8 @@ The complete release notes are below:
   See upgrade notes below for migrating existing projects.
 - Refactored how many allauth views work to be compatible with their new template override system.
 - **Bootstrap and Bulma builds: Move sidebar navigation into the mobile menu instead of having it take up the top of the
-  screen on mobile screens**, similar to how things already worked on Tailwind and Material. (Thanks Luc for the nudge!) 
+  screen on mobile screens**, similar to how things already worked on Tailwind and Material. (Thanks Luc for the nudge!)
+  - This includes splitting out the menu items into their own sub-template files so they can be included in both menus.
 - Inline buttons are now spaced using the `gap` CSS property instead of the `pg-ml` class on individual buttons.
 - `Alpine.start()` is now called on `DOMContentLoaded` loaded event instead of using `window.load`.
   This makes Alpine-powered UIs more responsive, especially when used on pages with lots of images.
