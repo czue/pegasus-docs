@@ -32,6 +32,7 @@ contributions are most welcome!
    payments
    forms
    apis
+   ai
    internationalization
    wagtail
    flags
