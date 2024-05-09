@@ -35,10 +35,11 @@ which enabled several useful changes.
 The first is a "sign in by email code" option which can be used in addition to the standard
 username/password and social option.
 Users can request a code be sent to their registered email and can then use that to login.
+See [the magic code documentation](./configuration.md##enabling-sign-in-by-email-code) to enable/disable this.
 
 The second is using the recent [multi-factor authentication](https://docs.allauth.org/en/latest/mfa/index.html)
 support added to allauth in favor of the third-party `django-allauth-2fa` library.
-This reduces dependencies and puts all of authentication functionality on a standard path.
+This reduces dependencies and puts all of authentication functionality on a standard path moving forwards.
 
 The complete release notes are below:
 
@@ -55,6 +56,8 @@ The complete release notes are below:
   [Documentation.](./configuration.md#enabling-sign-in-by-email-code)
 - **Google cloud run builds now support Redis.** For details, see the [updated documentation](./deployment/google-cloud.md).
   (Thanks Forrest for suggesting!)
+- Added a `custom.mk` file where you can add additional `make` targets without worrying about future Pegasus upgrades. 
+  (Thanks John for proposing this!)
 
 ### Changed
 
