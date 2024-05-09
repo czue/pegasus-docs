@@ -35,7 +35,7 @@ which enabled several useful changes.
 The first is a "sign in by email code" option which can be used in addition to the standard
 username/password and social option.
 Users can request a code be sent to their registered email and can then use that to login.
-See [the magic code documentation](./configuration.md##enabling-sign-in-by-email-code) to enable/disable this.
+See [the magic code documentation](./configuration.md#enabling-sign-in-by-email-code) to enable/disable this.
 
 The second is using the recent [multi-factor authentication](https://docs.allauth.org/en/latest/mfa/index.html)
 support added to allauth in favor of the third-party `django-allauth-2fa` library.
@@ -50,7 +50,7 @@ The complete release notes are below:
 - **The AI image generation now supports Dall-E 3 and Stability AI.**
 - **All generated projects now include a `LICENSE.md` file.**
   The goal of the license file is not to change how Pegasus can be used in any way, but rather to document those
-  terms in the codebase itself (previously they were only documented on the [terms page](https://www.saaspegasus.com/terms/). 
+  terms in the codebase itself (previously they were only documented on the [terms page](https://www.saaspegasus.com/terms/)). 
   For more information you can see the new [license page](https://www.saaspegasus.com/license/).
 - **Added support for "magic-code login", where a user can login to the site by requesting a code to their email address.**
   [Documentation.](./configuration.md#enabling-sign-in-by-email-code)
@@ -102,6 +102,8 @@ The complete release notes are below:
   
 ### Upgrading
 
+**Two-factor authentication**
+
 If you are using two-factor authentication you must run:
 
 ```
@@ -112,7 +114,7 @@ Which will bring across existing device set ups and recovery codes.
 **If you don't do this, you will remove two-factor-authentication configuration for all users who have set it up,
 compromising their security.**
 
-<hr>
+**JavaScript defer changes**
 
 The change of adding the `defer` keyword to `<script>` imports could have unintended consequences if you were
 relying on functions / functionality in your scripts being available on page load.
@@ -120,8 +122,11 @@ This would most likely manifest as a browser JavaScript error of the form:
 `Uncaught ReferenceError: htmx/SiteJS/etc. is not defined`.
 
 To resolve this, make sure all additional dependencies are also loaded with `defer` (for external scripts),
-only referenced after the `'DOMContentLoaded'` event (for inline scrxipts), or, alternatively,
-remove the `defer` keyword from the `<script>` tags in `base.html` or affected templates.
+or only referenced after the `'DOMContentLoaded'` event (for inline scrxipts).
+Alternatively, you can remove the `defer` keyword from the `<script>` tags in `base.html` or affected templates
+to restore the previous behavior.
+
+*May 9, 2024*
 
 ## Version 2024.4.2
 
