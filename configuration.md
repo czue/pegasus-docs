@@ -186,6 +186,26 @@ ACCOUNT_EMAIL_VERIFICATION = 'optional'  # change to "mandatory" to require user
 
 *Note: The email verification step will be skipped if using a social login.*
 
+### Enabling sign in by email code
+
+Sign in by email code is controlled by the `ACCOUNT_LOGIN_BY_CODE_ENABLED` setting.
+You can enable / disable it in `settings.py`.
+
+```python
+ACCOUNT_LOGIN_BY_CODE_ENABLED=True
+```
+
+### Two-factor authentication
+
+Two-Factor authentication (2FA) is configured using the [allauth's mfa][1] support. 
+
+[1]: https://docs.allauth.org/en/latest/mfa/index.html
+
+When using Two-Factor Auth with Pegasus, a new section is added to the user profile
+for enabling & configuring the OTP (one-time password) devices for the user.
+
+If a user has a Two-Factor device configured then they will be prompted for a token after logging in.
+
 ### Customizing emails
 
 Pegasus ships with simple, responsive email templates for password reset and email address confirmation.
@@ -253,12 +273,9 @@ directly in your `settings.py` or via an environment variable.
 After setting it up on production, you can test your Sentry integration by visiting `https://<yourdomain>/simulate_error`.
 This should trigger an exception which will be logged by Sentry.
 
-## OpenAI
+## OpenAI and LLMs
 
-To use the built-in OpenAI examples (version 2023.3.3 and later) you will need to set `OPENAI_API_KEY` in
-your settings or environment.
-See [this page](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key) for help
-finding your OpenAI API key.
+For help configuring LLMs and AIs, see the [AI docs](./ai.md).
 
 ## Celery
 

@@ -3,18 +3,143 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.5
+
+This is a major release with several big updates.
+Here are a few highlights:
+
+### New AI models
+
+In addition to using OpenAI chat models, you can now build the Pegasus AI chat applicaiton
+with the [`llm` library](https://github.com/simonw/llm). This lets you run the chat application
+against any supported model---including the Anthropic family (Claude 3), and local models like Llama 3.
+
+Additionally, the image generation demo now supports Dall-E-3 and Stable Diffusion 3.
+For complete details, see the new [AI documentation](./ai.md).
+
+### Health Checks
+
+A new setting allows you to turn on health checks for your application, powered by
+[django-health-check](https://django-health-check.readthedocs.io/en/latest/).
+This will create an endpoint (at `/health` by default) that pings your database, Redis instance,
+and Celery workers and returns a non-200 response code if there are any identified issues.
+
+These endpoints can be connected to a monitoring tool like [StatusCake](https://www.statuscake.com/)
+or [Uptime Robot](https://uptimerobot.com/) so that you can be alerted whenever your site is having issues.
+
+### Allauth updates
+
+The [django-allauth](https://docs.allauth.org/en/latest/) library was updated to the latest version,
+which enabled several useful changes.
+
+The first is a "sign in by email code" option which can be used in addition to the standard
+username/password and social option.
+Users can request a code be sent to their registered email and can then use that to login.
+See [the magic code documentation](./configuration.md#enabling-sign-in-by-email-code) to enable/disable this.
+
+The second is using the recent [multi-factor authentication](https://docs.allauth.org/en/latest/mfa/index.html)
+support added to allauth in favor of the third-party `django-allauth-2fa` library.
+This reduces dependencies and puts all of authentication functionality on a standard path moving forwards.
+
+The complete release notes are below:
+
+### Added
+
+- **Added an optional health check endpoint at /health/.** (see above for details)
+- **Added an option to connect the chatbot to other LLMs**. (see above for details)
+- **The AI image generation now supports Dall-E 3 and Stability AI.**
+- **All generated projects now include a `LICENSE.md` file.**
+  The goal of the license file is not to change how Pegasus can be used in any way, but rather to document those
+  terms in the codebase itself (previously they were only documented on the [terms page](https://www.saaspegasus.com/terms/)). 
+  For more information you can see the new [license page](https://www.saaspegasus.com/license/).
+- **Added support for "magic-code login", where a user can login to the site by requesting a code to their email address.**
+  [Documentation.](./configuration.md#enabling-sign-in-by-email-code)
+- **Google cloud run builds now support Redis.** For details, see the [updated documentation](./deployment/google-cloud.md).
+  (Thanks Forrest for suggesting!)
+- Added a `custom.mk` file where you can add additional `make` targets without worrying about future Pegasus upgrades. 
+  (Thanks John for proposing this!)
+
+### Changed
+
+- Upgraded allauth to the latest version (0.62.1).
+- **Migrated two-factor authentication from the third-party `django-allauth-2fa` to the `django-allauth` built-in implementation.**
+  See upgrade notes below for migrating existing projects.
+- Refactored how many allauth views work to be compatible with their new template override system.
+- **Bootstrap and Bulma builds: Move sidebar navigation into the mobile menu instead of having it take up the top of the
+  screen on mobile screens**, similar to how things already worked on Tailwind and Material. (Thanks Luc for the nudge!)
+  - This includes splitting out the menu items into their own sub-template files so they can be included in both menus.
+- Inline buttons are now spaced using the `gap` CSS property instead of the `pg-ml` class on individual buttons.
+- `Alpine.start()` is now called on `DOMContentLoaded` loaded event instead of using `window.load`.
+  This makes Alpine-powered UIs more responsive, especially when used on pages with lots of images.
+- **Updated external JavaScript imports to use [the `defer` keyword](https://www.w3schools.com/tags/att_script_defer.asp)
+  for slightly better page load performance.** (See upgrade note.)
+  - Also updated inline JavaScript code in a handful of places to be compatible with deferred scripts.
+- Added a Github logo to connected Github accounts on profile page.
+- **The AI image demo and code has been moved to a first-class Pegasus application / tab.**
+- Update the docker container registry used by Google Cloud to reflect the latest version in Google.
+  Also push more Google Cloud configuration variables out of the Makefile and into the environment variables.
+  (Thanks Erwin for reporting!)
+- Added additional `.env` files to `.dockerignore` for Google Cloud builds.
+- Bumped django to the latest `5.0.6` release.
+
+### Fixed
+
+- **SQLite build now properly parse `DATABASE_URL` if it is set. This fixes issues deploying to certain platforms
+  when building with SQLite.** (Thanks Manasvini for reporting!)
+- Updated allauth documentation links in the README to point to the new [allauth docs site](https://docs.allauth.org/).
+  (Thanks Shantu for reporting!) 
+
+### Removed
+
+- Removed several no-longer-needed allauth template files.
+- Removed deprecated "version" field from the dev `docker-compose.yml` file. (Thanks Moyi for reporting!)
+- Removed no-longer-used `pg-ml` css spacing class.
+- Removed redundant type="text/javascript" declarations from a few `<script>` tags.
+- Removed unused HTMX script import from employee app demo page.
+- Removed the no-longer-used `openai_example` app (functionality has been moved to `apps.chat` and `apps.ai_images`).
+- Removed the no-longer-needed `AccountAdapter` class. This class was previously used to add two-factor support
+  to login, which is now handled natively by allauth.
+  
+### Upgrading
+
+**Two-factor authentication**
+
+If you are using two-factor authentication you must run:
+
+```
+python manage.py migrate_allauth_2fa
+```
+
+Which will bring across existing device set ups and recovery codes.
+**If you don't do this, you will remove two-factor-authentication configuration for all users who have set it up,
+compromising their security.**
+
+**JavaScript defer changes**
+
+The change of adding the `defer` keyword to `<script>` imports could have unintended consequences if you were
+relying on functions / functionality in your scripts being available on page load.
+This would most likely manifest as a browser JavaScript error of the form: 
+`Uncaught ReferenceError: htmx/SiteJS/etc. is not defined`.
+
+To resolve this, make sure all additional dependencies are also loaded with `defer` (for external scripts),
+or only referenced after the `'DOMContentLoaded'` event (for inline scrxipts).
+Alternatively, you can remove the `defer` keyword from the `<script>` tags in `base.html` or affected templates
+to restore the previous behavior.
+
+*May 9, 2024*
+
 ## Version 2024.4.2
 
 This is a maintenance release with a number of fixes and small changes.
 The most notable change is that the OpenAI chat example is now fully asynchronous.
 
-## Added
+### Added
 
 - **Kamal deployments now support celerybeat for scheduled tasks out-of-the-box.** (Thanks Peter for the suggestion!)
 - Added an example celerybeat configuration to the built-in examples.
 
 
-## Changed
+### Changed
 
 - **The websocket OpenAI chat example is now fully asynchronous.** This should substantially improve the number
   of concurrent sessions supported by the app.
@@ -1631,7 +1756,7 @@ This release adds two-factor authentication, and has a number of smaller improve
 
 - **Two-factor authentication.** Users can now set up two-factor authentication on their account (using Google Authenticator or similar),
   and will be required to enter a token to login. This is configured from the user's profile page.
-  More [documentation here](2fa.md).
+  More [documentation here](./configuration.md#two-factor-authentication).
 
 ### Changed
 

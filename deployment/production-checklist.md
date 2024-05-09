@@ -96,6 +96,16 @@ The platform-specific docs have some guidance on setting this up where possible.
 See [the configuration page](/configuration.md) for a larger list of options,
 including social login, sign up flow changes, analytics, logging, and so on.
 
+## Set up monitoring
+
+It's highly recommended to enable Sentry and connect it to your application so that you can
+see any errors that are encountered.
+
+It's also recommended to enable the health check endpoint and connect it to a monitoring tool
+like [StatusCake](https://www.statuscake.com/) or [Uptime Robot](https://uptimerobot.com/) so that
+you can be alerted whenever your site or services are having an outage.
+The URL you should connect is: yourdomain.com/health/.
+
 ## Double-check your language settings
 
 Make sure your [internationalization settings](../internationalization.md) are correct, and you don't have
