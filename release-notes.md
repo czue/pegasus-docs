@@ -3,6 +3,17 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Next Release
+
+- Remove `static/css` and `static/js` directories from the `dockerignore` file so that other project files
+  can be included. Also updated the production Docker build process so that any existing files are overwritten
+  by the built versions. (Thanks Raul for reporting!)
+- Made some performance improvements to the production Dockerfile build
+  (don't rebuilding front end if there are no changes in the dependent files).
+- Changed behavior when team role checks fail from raising a `TeamPermissionError` to returning a 403 response,
+  and updated affected tests. This also removes confusing stack traces from successful test runs.
+- Removed no longer used `TeamPermissionError` class.
+
 ## Version 2024.5.2
 
 This is a hotfix release that fixes a bug that prevented the team management page
