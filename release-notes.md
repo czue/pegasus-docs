@@ -8,8 +8,9 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 This is a hotfix release that fixes issues running the [experimental React frontend](./experimental/react-front-end.md)
 in Docker. Thanks Mohamed for reporting this!
 
-- Fix `api-client` path in the frontend docker container.
+- Fix `api-client` path in the frontend docker container and add to `optimizeDeps` in vite config.
 - Mount `node_modules` as an anonymous volume in the frontend docker container, so it is not overwritten.
+- Automatically create `./frontend/.env` when running `make init` if it doesn't exist. 
 
 *May 14, 2024*
 
