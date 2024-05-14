@@ -3,6 +3,16 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.5.1
+
+This is a hotfix release that fixes issues running the [experimental React frontend](./experimental/react-front-end.md)
+in Docker. Thanks Mohamed for reporting this!
+
+- Fix `api-client` path in the frontend docker container.
+- Mount `node_modules` as an anonymous volume in the frontend docker container, so it is not overwritten.
+
+*May 14, 2024*
+
 ## Version 2024.5
 
 This is a major release with several big updates.
