@@ -3,6 +3,17 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.5.2
+
+This is a hotfix release that fixes a bug that prevented the team management page
+from loading in certain browsers if you built with a React front end and with translations enabled.
+Thanks Finbar for reporting!
+
+- Added `defer` keyword to various bundle scripts so they are loaded after the JavaScript translation catalog.
+- Updated references to `SiteJS` to run on the `DOMContentLoaded` event to allow for usage of the `defer` tag.
+
+*May 16, 2024*
+
 ## Version 2024.5.1
 
 This is a hotfix release that fixes issues running the [experimental React frontend](./experimental/react-front-end.md)
