@@ -354,7 +354,7 @@ an officially supported workflow.
 
 When changes are made that impact a user's pricing, you will need to notify Stripe of the change.
 This should happen automatically every 24 hours as long as you have enabled celery and celerybeat.
-You can also trigger it manually via a management command `./manage.py sync_subscriptions`.
+You can also trigger it manually via a management command `./manage.py djstripe_sync_models subscription`.
 
 To ensure this command works properly, you must implement two pieces of business logic:
 
