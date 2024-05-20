@@ -46,8 +46,25 @@ to another model to try different options.
 For further reading, see the documentation of the [litellm Python API](https://docs.litellm.ai/docs/completion),
 and [litellm providers](https://docs.litellm.ai/docs/providers).
 
-For further reading, see the documentation of the [llm Python API](https://llm.datasette.io/en/stable/python-api.html),
-and [llm generally](https://llm.datasette.io/en/stable/index.html).
+### Running open source LLMs
+To run models like Mixtral or Llama3, you will need to run an [Ollama](https://ollama.com/) server in a separate process.
+
+1. [Download](https://ollama.com/download) and run Ollama or use the Docker [image](https://hub.docker.com/r/ollama/ollama)
+2. Download the model you want to run:
+   ```shell
+   ollama pull llama3
+   # or with docker
+   docker exec -it ollama ollama pull llama3
+   ```
+   See the [documentation](https://docs.litellm.ai/docs/providers/ollama) for the list of supported models.
+3. Update your django settings to point to the Ollama server. For example:
+   ```python
+   LLM_MODELS = {
+       "ollama_chat/llama3": {"api_base": "http://localhost:11434"},
+   }
+   DEFAULT_LLM_MODEL = "ollama_chat/llama3"
+   ```
+4. Restart your Django server.
 
 ### The Chat UI
 
