@@ -49,6 +49,9 @@ and Celery workers and returns a non-200 response code if there are any identifi
 These endpoints can be connected to a monitoring tool like [StatusCake](https://www.statuscake.com/)
 or [Uptime Robot](https://uptimerobot.com/) so that you can be alerted whenever your site is having issues.
 
+See the section on [monitoring](./deployment/production-checklist.md#set-up-monitoring) in the
+production checklist for more information.
+
 ### Allauth updates
 
 The [django-allauth](https://docs.allauth.org/en/latest/) library was updated to the latest version,
@@ -3426,4 +3429,3 @@ Documentation for subscriptions can be [found here](/subscriptions).
 ## Version 0.4 and earlier
 
 Release notes for earlier versions are no longer publicly available.
-
