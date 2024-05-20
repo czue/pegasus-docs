@@ -51,6 +51,7 @@ Ensure that you have configured the following variables (if you are using them):
 `STRIPE_LIVE_PUBLIC_KEY`, and `STRIPE_LIVE_SECRET_KEY` config vars (or whatever subset you are using).
 - If you set up email, ensure whatever keys/secrets you need are set.
 - If you're using Mailchimp, set `MAILCHIMP_API_KEY` and `MAILCHIMP_LIST_ID`.
+- If you're using Health Checks, set `HEALTH_CHECK_TOKENS`.
 
 Refer to your [chosen platform's documentation](/deployment.rst) for details on how to set environment variables in that platform.
 
@@ -104,7 +105,18 @@ see any errors that are encountered.
 It's also recommended to enable the health check endpoint and connect it to a monitoring tool
 like [StatusCake](https://www.statuscake.com/) or [Uptime Robot](https://uptimerobot.com/) so that
 you can be alerted whenever your site or services are having an outage.
-The URL you should connect is: yourdomain.com/health/.
+The URL you should connect is: `yourdomain.com/health/`.
+
+If you have the "Health Check Endpoint" option enabled for your project you should also ensure that
+you have set the `HEALTH_CHECK_TOKENS` environment variable to a secure value. This can be a comma-separated
+list of tokens that are required to access the health check endpoint:
+
+```
+yourdomain.com/health/?token=your_secret_token
+```
+
+You can then use this URL with the monitoring tool to ensure that only your monitoring tool can
+access the health check endpoint.
 
 ## Double-check your language settings
 
