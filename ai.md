@@ -12,15 +12,15 @@ This section covers how it works and the various supported options.
 
 You can choose between two options for your LLM chat: OpenAI and LLM (generic).
 The OpenAI option limits you to OpenAI models, but supports streaming and asynchronous API access.
-The generic "LLM" option uses the [llm library](https://github.com/simonw/llm) and can be used with many different
-models---including local ones. However, it does not yet support streaming responses.
+The generic "LLM" option uses the [litellm library](https://docs.litellm.ai/docs/) and can be used with many different
+models---including local ones.
 
 We recommend choosing "OpenAI" unless you know you want to use a different model.
 
 ### Configuring OpenAI
 
 If you're using OpenAI, you need to set `OPENAI_API_KEY` in your environment or settings file (`.env` in development).
-You can also change the model used by setting `OPENAI_MODEL`, which defualts to `"gpt-3.5-turbo"`.
+You can also change the model used by setting `OPENAI_MODEL`, which defaults to `"gpt-3.5-turbo"`.
 
 See [this page](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key) for help
 finding your OpenAI API key.
@@ -32,23 +32,39 @@ values in your `settings.py`. For example:
 
 ```python
 LLM_MODELS = {
-    "gpt4": {"key": env("OPENAI_API_KEY", default="")},
-    "claude-3-opus": {"key": env("ANTHROPIC_API_KEY", default="")},  # requires llm-claude-3
-    "Meta-Llama-3-8B-Instruct": {},  # requires llm-gpt4all
+    "gpt-3.5-turbo": {"api_key": env("OPENAI_API_KEY", default="")},
+    "gpt4": {"api_key": env("OPENAI_API_KEY", default="")},
+    "claude-3-opus-20240229": {"api_key": env("ANTHROPIC_API_KEY", default="")},
+    "ollama_chat/llama3": {"api_base": env("OLLAMA_API_BASE", default="http://localhost:11434")},  # requires a running ollama instance
 }
-DEFAULT_LLM_MODEL = "gpt4"
+DEFAULT_LLM_MODEL = env("DEFAULT_LLM_MODEL", default="gpt4")
 ```
 
 The chat UI will use whatever is set in `DEFAULT_LLM_MODEL` out-of-the-box, but you can quickly change it
 to another model to try different options.
 
-Any models that you add will need to be installed as [llm plugins](https://llm.datasette.io/en/stable/plugins/index.html).
-You can do this by putting them in your requirements files, [as outlined here](./python.md#adding-or-removing-a-package).
-For example, to use Claude 3 you need to add the [`llm-claude-3` plugin](https://github.com/simonw/llm-claude-3),
-and to use local models like Llama 3, you need [`llm-gpt4all`](https://github.com/simonw/llm-gpt4all).
+For further reading, see the documentation of the [litellm Python API](https://docs.litellm.ai/docs/completion),
+and [litellm providers](https://docs.litellm.ai/docs/providers).
 
-For further reading, see the documentation of the [llm Python API](https://llm.datasette.io/en/stable/python-api.html),
-and [llm generally](https://llm.datasette.io/en/stable/index.html).
+### Running open source LLMs
+To run models like Mixtral or Llama3, you will need to run an [Ollama](https://ollama.com/) server in a separate process.
+
+1. [Download](https://ollama.com/download) and run Ollama or use the Docker [image](https://hub.docker.com/r/ollama/ollama)
+2. Download the model you want to run:
+   ```shell
+   ollama pull llama3
+   # or with docker
+   docker exec -it ollama ollama pull llama3
+   ```
+   See the [documentation](https://docs.litellm.ai/docs/providers/ollama) for the list of supported models.
+3. Update your django settings to point to the Ollama server. For example:
+   ```python
+   LLM_MODELS = {
+       "ollama_chat/llama3": {"api_base": "http://localhost:11434"},
+   }
+   DEFAULT_LLM_MODEL = "ollama_chat/llama3"
+   ```
+4. Restart your Django server.
 
 ### The Chat UI
 
