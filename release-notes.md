@@ -3,6 +3,13 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.5.3
+
+This is a hotfix release that fixes a bug where the landing and dashboard page image was accidentally
+removed if you built without the examples enabled.
+
+*May 21, 2024*
+
 ## Version 2024.5.2
 
 This is a hotfix release that fixes a bug that prevented the team management page
