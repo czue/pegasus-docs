@@ -15,6 +15,13 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - Removed no longer used `TeamPermissionError` class.
 - Fixed a bug where team names longer than 50 characters could cause a crash during sign up.
 
+## Version 2024.5.3
+
+This is a hotfix release that fixes a bug where the landing and dashboard page image was accidentally
+removed if you built without the examples enabled.
+
+*May 21, 2024*
+
 ## Version 2024.5.2
 
 This is a hotfix release that fixes a bug that prevented the team management page

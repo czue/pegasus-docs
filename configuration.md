@@ -358,6 +358,12 @@ you to have persistent storage available for your site such as a Docker volume.
 
 ### Setting up S3 media storage
 
+*For a video walkthrough of this content (using kamal deployment), see below:*
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/2n-KhVeX3og" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
+
 This section assumes you have set up your SaaS Pegasus project with the **S3 media file storage** enabled.
 
 In order to use S3 for media storage you will need to create an S3 bucket and provide authentication

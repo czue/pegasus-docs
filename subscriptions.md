@@ -89,6 +89,14 @@ If you've set things up correctly you should see a page that looks like this
 
 ### Using the embedded Stripe pricing table
 
+The following 5-minute video walks through setting up an embedded pricing table in your project.
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/3jYI8n28UGo" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
+
+Here are the detailed instructions:
+
 If you are using the Stripe embedded pricing table, then all customization happens within the Stripe dashboard.
 You can change the products, names, descriptions, images, and features by editing the products in Stripe with the desired changes.
 You can also change the color scheme and other options.
