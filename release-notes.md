@@ -14,6 +14,7 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
   and updated affected tests. This also removes confusing stack traces from successful test runs.
 - Removed no longer used `TeamPermissionError` class.
 - Fixed a bug where team names longer than 50 characters could cause a crash during sign up.
+- Fixed a bug where 2fa QR codes had a dark background when dark mode was enabled.
 
 ## Version 2024.5.3
 
