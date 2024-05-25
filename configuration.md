@@ -106,8 +106,11 @@ The domain name of this `Site` will be used for your server address.
 If you need to change the URL after installation, you can go to the site admin at `admin/sites/site/` and
 modify the values accordingly, leaving off any http/https prefix.
 
-In development you'll typically want a domain name of `localhost:8000`, and in production this should
+In development, you'll typically want a domain name of `localhost:8000`, and in production this should
 be the domain where your users access your app.
+Note that this URL must match *exactly* what is in the browser address bar.
+So, for example, if you load your development site from `127.0.0.1:8000` instead of `localhost:8000` then
+that is what you should put in.
 
 **Example Development Configuration**
 
