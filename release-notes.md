@@ -15,6 +15,12 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - Removed no longer used `TeamPermissionError` class.
 - Fixed a bug where team names longer than 50 characters could cause a crash during sign up.
 - Fixed a bug where 2fa QR codes had a dark background when dark mode was enabled.
+- Make Team IDs optional on the create team page (HTMX builds).
+- Switch celerybeat to use the database instead of the filesystem for the scheduler, which makes it work more reliably
+  on docker-based systems like Kamal. (Thanks Peter and Artem for the suggestion!)
+- Add display and sort on the number of active members in the teams admin.
+- Fixed a bug where creating an API key crashed if your user's first + last name combined to more than 40 characters.
+  (Thanks Luc for reporting!)
 
 ## Version 2024.5.3
 
