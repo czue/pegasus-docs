@@ -28,6 +28,9 @@ Now you should be able to access the django admin at http://localhost:8000/admin
 
 As of February, 2023 all Pegasus projects have the option to auto-format your Python code.
 
+As of Jun, 2024, this formatting is done by `ruff`.
+This guide will be updated to use `ruff` soon, but for now is still written for `black`/`isort`.
+
 To migrate a project from non-formatted to formatted code, you can go through the following steps:
 
 1. First, do a full Pegasus upgrade to the version you want to update to, as described [here](./upgrading.md).
