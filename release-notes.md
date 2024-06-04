@@ -9,7 +9,16 @@ This is a feature release with a few bigger updates.
 
 ### AI model changes
 
-Use LiteLLM instead of LLM. Docs.
+The library used for non-OpenAI LLMs was changed from [`llm`](https://github.com/simonw/llm) to [`litellm`](https://docs.litellm.ai/docs/).
+Reasons for this change include:
+
+- It has far fewer additional dependencies.
+- It supports async APIs out of the box.
+- The `llm` library is optimized for the command line use-case, whereas `litellm` offers similar functionality as a native
+  Python library.
+  
+Litellm can still be used with all common AI models, including OpenAI, Anthropic/Claude, and Meta/Llama models
+(with ollama). For details on getting started with `litellm` see the updated [AI documentation](./ai.md).
 
 ### Spam prevention updates
 
