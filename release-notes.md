@@ -3,24 +3,96 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
-## Next Release
+## Version 2024.6
 
-- Remove `static/css` and `static/js` directories from the `dockerignore` file so that other project files
-  can be included. Also updated the production Docker build process so that any existing files are overwritten
-  by the built versions. (Thanks Raul for reporting!)
-- Made some performance improvements to the production Dockerfile build
-  (don't rebuilding front end if there are no changes in the dependent files).
-- Changed behavior when team role checks fail from raising a `TeamPermissionError` to returning a 403 response,
-  and updated affected tests. This also removes confusing stack traces from successful test runs.
-- Removed no longer used `TeamPermissionError` class.
+This is a feature release with a few bigger updates.
+
+### AI model changes
+
+Use LiteLLM instead of LLM. Docs.
+
+### Spam prevention updates
+
+Turnstile TODO docs
+
+### Ruff support + import removal
+
+TODO docs
+
+### Added
+
+- Added configurable captcha support on sign up pages, using [Cloudflare turnstile](https://www.cloudflare.com/products/turnstile/).
+  See updated documentation TODO
+- Added API views for two-factor authentication, and to change the logged-in user's password. (Thanks Finbar for suggesting!)
+- Add UI to tell users they need a verified email address prior to setting up two-factor auth.
+  - Also added a `has_verified_email` helper class to the `CustomUser` model.
+- Added tests for the delete team view for both team admins and members. (HTMX builds only)
+- Added test for team member removal permissions.
+
+### Fixed
+
 - Fixed a bug where team names longer than 50 characters could cause a crash during sign up.
-- Fixed a bug where 2fa QR codes had a dark background when dark mode was enabled.
-- Make Team IDs optional on the create team page (HTMX builds).
-- Switch celerybeat to use the database instead of the filesystem for the scheduler, which makes it work more reliably
-  on docker-based systems like Kamal. (Thanks Peter and Artem for the suggestion!)
+- Fixed a bug where multi-factor authentication QR codes had a dark background when dark mode was enabled (Tailwind builds only).
+  (Thanks Artem for reporting!)
+- Fixed a bug where it was possible to bypass two-factor-authentication when using the API authentication views. 
+  (Thanks Finbar for reporting and helping with the fix!)
 - Add display and sort on the number of active members in the teams admin.
+- Fixed a bug where deleting the user's only team while impersonating them resulted in a temporary crash.
+  (Thanks EJ for reporting!)
 - Fixed a bug where creating an API key crashed if your user's first + last name combined to more than 40 characters.
   (Thanks Luc for reporting!)
+
+
+### Changed
+
+- Non-OpenAI builds now use `litellm` instead of `llm`. TODO more.
+- **Changed the formatter/linter from `black` and `isort` to [ruff](https://github.com/astral-sh/ruff).**
+  - Also addressed a handful of minor linting errors that came up as a result of this change.
+  Codebase linting is now substantially faster.
+- Removed the `static/css` and `static/js` directories from the `dockerignore` file so that other project files
+  can be included. Also updated the production Docker build process so that any existing files are overwritten
+  by the built versions. (Thanks Raul for reporting!)
+- Made some performance improvements to the production Dockerfile build (don't rebuild the front end if there are
+  no changes in the dependent files).
+- The login API response has changed, to allow for two-factor auth prompts, and more machine-readable status fields.
+- **Upgraded all Python packages to the latest versions.**
+- **Upgraded all JavaScript packages to the latest versions.**
+- Removed the no-longer-used `use_json_field=True` argument from wagtail `StreamField`s.
+- The user dashboard no longer shows users with unconfirmed email addresses if you have set
+  `ACCOUNT_EMAIL_VERIFICATION = 'mandatory'`. This helps filter out likely bots from the report.
+- The user dashboard now includes sign ups from the current date, by default.
+- Better support trialing subscriptions with no payment methods.
+  The subscription UI will now show the date the trial ends and won't log errors about missing invoices. (Thanks Jarrett for reporting!)
+- Changed behavior when team role checks fail from raising a `TeamPermissionError` to returning a 403 response,
+  and updated affected tests. One side effect of this is that the stack traces are removed from successful test runs.
+- Secret keys should no longer change every time you build your Pegasus project.
+  They are also now clearly prefixed with `django-insecure-` to indicate that they should be changed in production. 
+- Updated the default OpenAI chat model to gpt-4o.
+- Upgraded the openapi client generator to version 7.5.0 and also pinned the version used by `make build-api-client`
+  to the same one.
+- **Celerybeat now uses the `django-celery-beat` library to store tasks in the database instead of on the filesystem.**
+  This improves support for celerybeat on Docker-based platforms. (Thanks Peter and Artem for the suggestion!)
+  - Also added a migration to save the default scheduled tasks in the database.
+- Make Team IDs optional on the create team page (HTMX builds only).
+- Add clearer error message when charts are broken due to api config issue. (Thanks Yngve for reporting!)
+- Added `assume_scheme="https"` to form `URLField`s to be compatible with Django 6 behavior.
+- Added `FORMS_URLFIELD_ASSUME_HTTPS = True` to be compatible with Django 6 behavior.
+- Set `ACCOUNT_EMAIL_UNKNOWN_ACCOUNTS = False` by default, so that "forgot password" emails do not get sent to unknown accounts.
+  This can help prevent spam bots.
+
+### Removed
+
+- Removed `black` and `isort` from dev-requirements, since they have been replaced by `ruff`.
+- Removed `llm` library and associated code, since it has been replaced by `litellm`.
+- Removed no longer used `TeamPermissionError` class.
+
+### Standalone front end
+
+The following changes affect the experimental [standalone front end](./experimental/react-front-end.md):
+
+- The standalone React front end now supports two-factor-authentication.
+- Improve the UI when you have login issues in the standalone React front end.
+
 
 ## Version 2024.5.3
 
