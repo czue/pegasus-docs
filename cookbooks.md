@@ -28,17 +28,14 @@ Now you should be able to access the django admin at http://localhost:8000/admin
 
 As of February, 2023 all Pegasus projects have the option to auto-format your Python code.
 
-As of Jun, 2024, this formatting is done by `ruff`.
-This guide will be updated to use `ruff` soon, but for now is still written for `black`/`isort`.
-
 To migrate a project from non-formatted to formatted code, you can go through the following steps:
 
 1. First, do a full Pegasus upgrade to the version you want to update to, as described [here](./upgrading.md).
    **Do *not* check the "autoformat" checkbox yet.**
 2. Next, run the formatting tools on your project's `main` branch: 
-   1. Install black and isort: `pip install black isort`
-   2. Run black: `black --extend-exclude migrations --line-length 120 .`
-   3. Run isort: `isort -l 120 --profile black .`
+   1. Install ruff: `pip install ruff`
+   2. Run ruff linting `ruff check --extend-exclude migrations --line-length 120 . --fix`
+   3. Run ruff formatting: `ruff format --line-length 120 .`
 3. Commit the result:
    1. `git add .`
    2. `git commit -m "apply formatting changes"`
