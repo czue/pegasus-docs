@@ -20,7 +20,7 @@ We recommend choosing "OpenAI" unless you know you want to use a different model
 ### Configuring OpenAI
 
 If you're using OpenAI, you need to set `OPENAI_API_KEY` in your environment or settings file (`.env` in development).
-You can also change the model used by setting `OPENAI_MODEL`, which defaults to `"gpt-3.5-turbo"`.
+You can also change the model used by setting `OPENAI_MODEL`, which defaults to `"gpt-4o"`.
 
 See [this page](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key) for help
 finding your OpenAI API key.
@@ -33,7 +33,7 @@ values in your `settings.py`. For example:
 ```python
 LLM_MODELS = {
     "gpt-3.5-turbo": {"api_key": env("OPENAI_API_KEY", default="")},
-    "gpt4": {"api_key": env("OPENAI_API_KEY", default="")},
+    "gpt-4o": {"api_key": env("OPENAI_API_KEY", default="")},
     "claude-3-opus-20240229": {"api_key": env("ANTHROPIC_API_KEY", default="")},
     "ollama_chat/llama3": {"api_base": env("OLLAMA_API_BASE", default="http://localhost:11434")},  # requires a running ollama instance
 }
