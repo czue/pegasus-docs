@@ -31,7 +31,7 @@ TODO docs
 ### Added
 
 - Added configurable captcha support on sign up pages, using [Cloudflare turnstile](https://www.cloudflare.com/products/turnstile/).
-  See updated documentation TODO
+  See [the turnstile documentation](./configuration.md#turnstile) for more information on setting this up.
 - Added API views for two-factor authentication, and to change the logged-in user's password. (Thanks Finbar for suggesting!)
 - Add UI to tell users they need a verified email address prior to setting up two-factor auth.
   - Also added a `has_verified_email` helper class to the `CustomUser` model.

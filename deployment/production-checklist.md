@@ -95,7 +95,7 @@ The platform-specific docs have some guidance on setting this up where possible.
 ## Update other configuration options
 
 See [the configuration page](/configuration.md) for a larger list of options,
-including social login, sign up flow changes, analytics, logging, and so on.
+including social login, sign up flow changes, analytics, logging, adding captchas, and so on.
 
 ## Set up monitoring
 
