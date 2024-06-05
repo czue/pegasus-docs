@@ -5,7 +5,7 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ## Version 2024.6
 
-This is a feature release with a few bigger updates.
+This is a feature release with a few big updates and a lot of smaller ones.
 
 ### AI model changes
 
@@ -17,7 +17,7 @@ to [`litellm`](https://docs.litellm.ai/docs/). Reasons for this change include:
 - The `llm` library is more targeted for the command line use-case, whereas `litellm` offers similar functionality
   as a native Python library with a cleaner API.
 
-Litellm can still be used with all common AI models, including OpenAI, Anthropic/Claude, and Meta/Llama models
+Litellm can still be used with all common AI models, including OpenAI, Anthropic/Claude, and local models
 (via ollama). For details on getting started with `litellm` see the updated [AI documentation](./ai.md).
 
 ### Formatting and linting now use Ruff
@@ -56,7 +56,7 @@ Below is the complete set of changes in this release.
 #### Added
 
 - **Added configurable captcha support on sign up pages, using [Cloudflare turnstile](https://www.cloudflare.com/products/turnstile/).**
-  See [the turnstile documentation](./configuration.md#turnstile) for more information on setting this up.
+  See [the turnstile documentation](./configuration.md#turnstile) for more information on setting this up. (Thanks Troy, Jacob, Robert and others for suggesting.)
 - Added API views for two-factor authentication, and to change the logged-in user's password. (Thanks Finbar for suggesting!)
 - Add UI to tell users they need a verified email address prior to setting up two-factor auth.
   - Also added a `has_verified_email` helper class to the `CustomUser` model.
@@ -89,7 +89,7 @@ Below is the complete set of changes in this release.
 
 - **Upgraded all Python packages to the latest versions.**
 - **Upgraded all JavaScript packages to the latest versions.**
-- **Non-OpenAI builds now use `litellm` instead of `llm`.** See above.
+- **Non-OpenAI builds now use `litellm` instead of `llm`.** See above. (Thanks Sarthak for the suggestion!)
 - **Changed the formatter/linter from `black` and `isort` to [ruff](https://github.com/astral-sh/ruff).** See above.
   - Also addressed a handful of minor linting errors that came up as a result of this change.
   - Codebase linting is now substantially faster.
