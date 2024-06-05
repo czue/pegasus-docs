@@ -284,6 +284,20 @@ For help configuring LLMs and AIs, see the [AI docs](./ai.md).
 
 See the [celery docs](/celery) for set up and configuration of Celery.
 
+## Turnstile
+
+To enable support for [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/),
+set `TURNSTILE_KEY` and `TURNSTILE_SECRET` in your settings or environment variables.
+
+This should automatically enable turnstile on your sign up pages.
+
+It is recommended to create two different Turnstile accounts on Cloudflare for development and production.
+In development you can specify "localhost" as your domain like this:
+
+![Turnstile Dev](/images/turnstile.png)
+
+In production, you should replace that with your site's production domain. 
+
 
 ## Mailing List
 

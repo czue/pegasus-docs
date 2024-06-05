@@ -83,7 +83,9 @@ The majority of the project's base template layouts are in the `templates/web` f
 ## Code formatting
 
 For projects that have enabled the `Autoformat code` option, the code will have been formatted
-using [black](https://black.readthedocs.io/en/stable/) and [isort](https://pycqa.github.io/isort/).
+using [ruff](https://github.com/astral-sh/ruff)—a drop-in replacement for
+[black](https://black.readthedocs.io/en/stable/) and [isort](https://pycqa.github.io/isort/) that runs
+much faster than those tools.
 
 The project will also include [pre-commit](https://pre-commit.com/) as a dependency in the requirements file
 as well as the `.pre-commit-config.yaml` file in the root directory. pre-commit is a tool for managing pre-commit
@@ -96,19 +98,18 @@ $ pre-commit install --install-hooks
 pre-commit installed at .git/hooks/pre-commit
 ```
 
-The default configuration that ships with Pegasus will run `isort` and `black` prior to every Git
+The default configuration that ships with Pegasus will run `ruff` and `ruff-format` prior to every Git
 commit. If there are fixes that are needed you will be notified in the shell output.
 
 ### pre-commit Usage
 
 **Manually running hooks**
+
 ```shell
 # run all hooks against currently staged files
 pre-commit run
 # run all the hooks against all the files. This is a useful invocation if you are using pre-commit in CI.
 pre-commit run --all-files
-# only run the isort hook against all staged files
-pre-commit run isort
 ```
 
 **Temporarily disable hooks**
@@ -120,27 +121,16 @@ For more information on using and configuring pre-commit check out the
 
 
 ### Tool configurations
-The configuration for the tools can be found in the [`pyproject.toml`][toml] file.
+
+The configuration for the tools can be found in the [`pyproject.toml`][toml] file, using the same syntax as `black`.
 
 [toml]: https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html#what-on-earth-is-a-pyproject-toml-file
 
-**isort**
+For the most part the default black/ruff formats have been preserved, with a few updates, for example,
+increasing the line length to 120.
 
-| Parameter    | Value   |
-|--------------|---------|
-| Filter Files | `true`  |
-| Profile      | `black` | 
-| Line Length  | `120`   |
-
-[iSort docs](https://pycqa.github.io/isort/docs/configuration/options)
-
-**black**
-
-| Parameter    | Value   |
-|--------------|---------|
-| Line Length  | `120`   |
-
-[Black docs](https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html)
+You can find more information about these values in the
+[ruff README](https://github.com/astral-sh/ruff?tab=readme-ov-file#configuration).
 
 ### Upgrading
 
