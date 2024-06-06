@@ -3,6 +3,16 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.6.1
+
+This is hotfix release that fixes an issue with tailwind builds where app styles were being
+purged during the Docker build process.
+This resulted in not all styles being properly rendered on Docker-based deployments.
+
+Thanks Steve for reporting this.
+
+*June 6, 2024*
+
 ## Version 2024.6
 
 This is a feature release with a few big updates and a lot of smaller ones.
