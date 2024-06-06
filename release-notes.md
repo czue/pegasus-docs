@@ -8,8 +8,8 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 This is hotfix release that addresses a few issues from yesterday's update:
 
 - Fix app styles accidentally being purged during the Docker build process. 
-  This caused styling on Docker-based deployments for tailwind builds.
-- Moved channels url import to after Django initialization. (Thanks Steve for reporting!)
+  This caused styling on Docker-based deployments for tailwind builds. (Thanks Steve for reporting!)
+- Moved channels url import to after Django initialization.
   This fixes an `AppRegistryNotReady` error when deploying asynchronous apps with the AI chat app enabled.
   (Thanks Roman for reporting!)
 - Don't create the periodic task to sync subscriptions unless per-unit billing is enabled.
