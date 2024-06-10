@@ -40,10 +40,9 @@ We'll walk through these in more detail in order below.
 The first step is to provision a server were you will host your application.
 Some popular choices include:
 
-1. Digital Ocean Droplets (you can sign up with [this link](https://m.do.co/c/432e3abb37f3) to get $100 credit
-and help support Pegasus).
-2. [Linode](https://www.linode.com/).
-3. [Hetzner](https://www.hetzner.com/).
+1. Hetzner (get €20 credit and support Pegasus with [this link](https://hetzner.cloud/?ref=49vhF1w3TIyB)).
+2. Digital Ocean Droplets (get $100 credit and support Pegasus with [this link](https://m.do.co/c/432e3abb37f3)).
+3. [Linode](https://www.linode.com/).
 4. [AWS](https://aws.amazon.com/) (Lightsail or EC2).
 5. [Google Cloud](https://cloud.google.com/).
 6. [Microsoft Azure](https://azure.microsoft.com/en-us).
