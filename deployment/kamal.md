@@ -473,3 +473,17 @@ ALLOWED_HOSTS = [
 
 It is recommended to read [the security documentation](https://docs.djangoproject.com/en/5.0/topics/security/#host-headers-virtual-hosting)
 for this feature to understand the implications of it being included.
+
+### Cookbooks
+
+#### Changing your site URL
+
+To change your site's URL, do the following:
+
+1. Set up a new DNS endpoint as outlined above.
+2. Change all ``Host(`example.com`)`` values in your traefik configuration in `deploy.yml` to the new domain.
+3. Update your `ALLOWED_HOSTS` setting / environment variable as needed.
+4. Run `kamal traefik reboot`.
+4. Run `kamal deploy`
+
+Your app should now be running on your new domain.
