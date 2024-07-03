@@ -146,7 +146,8 @@ for subscription management after subscription creation.
 
 To set up the portal, it's recommended you follow along with [Stripe's integration guide](https://stripe.com/docs/billing/subscriptions/integrating-customer-portal).
 
-To use the portal you will also need to set up webhooks as per below.
+**To use the portal you will also need to set up webhooks as per below.
+Updates made in the portal will not show up if webhooks are not running.**
 
 Pegasus ships with webhooks to handle some common actions taken in the billing portal, including:
 
