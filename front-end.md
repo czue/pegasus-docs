@@ -120,7 +120,7 @@ Pegasus has a few patterns for dealing with this.
 There are two "site-wide" JavaScript files used in Pegasus.
 
 The `site.js` file contains code that you want loaded *on every page*.
-It's bundle file (`site-bundle.js`) is included in your `base.html`.
+Its bundle file (`site-bundle.js`) is included in your `base.html`.
 This is a good place to put global code, library imports, etc. which should always be available.
 
 The `app.js` file contains code that you want loaded *on some pages---typically after login.
