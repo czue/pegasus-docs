@@ -20,6 +20,9 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - The `EMAIL_BACKEND` setting is now configurable via an environment variable.
   Also, added a commented-out example of how to set email settings for a production email provider (Mailgun).
 - Apt and pip packages are now cached across Docker builds, which should result in faster build times after the first build.
+- Improved the display format of "role" in the team invitation list. (thanks Andy for the suggestion!)
+- Change `user/` to `YOUR_GITHUB_USERNAME/` in the Digital Ocean `app-spec.yml` file to make it more obvious that
+  it should be edited. (Thanks Stephen for suggesting!)
 
 ### Fixed
 
@@ -29,7 +32,10 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - Fixed translations on the user profile form field names.
 - Removed `svg` as an option for profile picture uploads, to prevent the possibility of using it as an XSS attack vector.
   ([More info on this threat here](https://medium.com/@rdillon73/hacktrick-stored-xss-via-a-svg-image-3def20968d9)).
-
+- Disable debug toolbar in tests, which fixes test failures under certain conditions.
+- Bumped the Postgres version used by Digital Ocean deployments from 12 to 16.
+  Digital Ocean has deprecated support for version 12. (Thanks Stephen for reporting!)
+  
 ## Version 2024.6.1
 
 This is hotfix release that addresses a few issues from yesterday's update:
