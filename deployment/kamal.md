@@ -474,3 +474,25 @@ ALLOWED_HOSTS = [
 
 It is recommended to read [the security documentation](https://docs.djangoproject.com/en/5.0/topics/security/#host-headers-virtual-hosting)
 for this feature to understand the implications of it being included.
+
+
+### Deploy with GitHub Actions
+
+Your repository also includes a GitHub Actions workflow that can be used to deploy your app to Kamal
+(look for it in `.github/workflows/kamal_deploy.yml`). To configure the workflow you will set some secrets
+in your repository settings.
+
+In your repositories settings page, go to the "Secrets and variables -> Actions" section and add the following
+ secrets:
+
+- `DOCKER_REGISTRY_USERNAME`
+  - Your Docker Hub username.
+- `DOCKER_REGISTRY_KEY`
+  - The Docker Hub access token you created above.
+- `SSH_KEY`
+  - A private key you use to SSH into your server. This must be a passwordless key.
+- `SSH_KNOWN_HOSTS`
+  - The known hosts file for your server. You can generate this by running `ssh-keyscan <your-server-ip>`.
+
+With these secrets set, the GitHub Actions workflow will be able to deploy your app to Kamal. To test it
+go to the "Actions" tab in your repository, click on the "Kamal Deploy" workflow, and then click "Run workflow".
