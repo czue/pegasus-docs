@@ -10,6 +10,8 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - Added a test that will fail if your project is missing any database migrations.
   [More on this concept here](https://adamj.eu/tech/2024/06/23/django-test-pending-migrations/).
 - Added an example landing page to Tailwind builds, based off Scriv's landing page.
+- Added `TURNSTILE_KEY` and `TURNSTILE_SECRET` to Kamal's default secrets.
+
 
 ### Changed
 
