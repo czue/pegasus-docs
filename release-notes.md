@@ -3,6 +3,31 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.8
+
+### Added
+
+- Added a test that will fail if your project is missing any database migrations.
+  [More on this concept here](https://adamj.eu/tech/2024/06/23/django-test-pending-migrations/).
+- Added an example landing page to Tailwind builds, based off Scriv's landing page.
+
+### Changed
+
+- **The example landing pages are now used as the project's landing page instead of being listed in the examples**.
+- **Team invitation emails are now better styled, matching the same format as account emails.** (Thanks EJ for the suggestion!)
+- The `EMAIL_BACKEND` setting is now configurable via an environment variable.
+  Also, added a commented-out example of how to set email settings for a production email provider (Mailgun).
+- Apt and pip packages are now cached across Docker builds, which should result in faster build times after the first build.
+
+### Fixed
+
+- Fixed a bug where the formatting `make` targets were still calling `black` and `isort` instead of `ruff`.
+  `make black` is now `make ruff-format` and `make isort` is now `make ruff-lint`.
+- Fixed a bug where the sign up view tests would fail in your environment if `settings.TURNSTILE_SECRET` was set.
+- Fixed translations on the user profile form field names.
+- Removed `svg` as an option for profile picture uploads, to prevent the possibility of using it as an XSS attack vector.
+  ([More info on this threat here](https://medium.com/@rdillon73/hacktrick-stored-xss-via-a-svg-image-3def20968d9)).
+
 ## Version 2024.6.1
 
 This is hotfix release that addresses two issues from yesterday's update:
