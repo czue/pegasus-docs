@@ -23,6 +23,8 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - Improved the display format of "role" in the team invitation list. (thanks Andy for the suggestion!)
 - Change `user/` to `YOUR_GITHUB_USERNAME/` in the Digital Ocean `app-spec.yml` file to make it more obvious that
   it should be edited. (Thanks Stephen for suggesting!)
+- Changed the UI of social logins on the "sign in" page to match that of the "sign up" page on the Material Bootstrap theme.
+  This makes the implementation more extensible and more consistent with other CSS frameworks.
 
 ### Fixed
 
@@ -35,7 +37,9 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - Disable debug toolbar in tests, which fixes test failures under certain conditions.
 - Bumped the Postgres version used by Digital Ocean deployments from 12 to 16.
   Digital Ocean has deprecated support for version 12. (Thanks Stephen for reporting!)
-  
+- Simplified how the list of social login buttons is rendered, and make social login buttons work when
+  configuring social applications in settings (previously buttons only showed up if you configured apps in the database).
+
 ## Version 2024.6.1
 
 This is hotfix release that addresses a few issues from yesterday's update:
