@@ -5,17 +5,22 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ## Version 2024.8
 
+This is largely a maintenance release with many smaller updates and fixes.
+
 ### Added
 
+- **Added test cases for subscription decorators, feature gating, and views.**
+  These can be extended/adapted to test custom subscription logic.
+  Also added utility functions to create test products, subscriptions and mock requests.
 - Added a test that will fail if your project is missing any database migrations.
   [More on this concept here](https://adamj.eu/tech/2024/06/23/django-test-pending-migrations/).
-- Added an example landing page to Tailwind builds, based off Scriv's landing page.
+- **Added an example landing page to Tailwind builds, based largely on [Scriv's landing page](https://scriv.ai/).**
 - Added `TURNSTILE_KEY` and `TURNSTILE_SECRET` to Kamal's default secrets.
-
 
 ### Changed
 
 - **The example landing pages are now used as the project's landing page instead of being listed in the examples**.
+  (Bulma and Tailwind builds only.) 
 - **Team invitation emails are now better styled, matching the same format as account emails.** (Thanks EJ for the suggestion!)
 - The `EMAIL_BACKEND` setting is now configurable via an environment variable.
   Also, added a commented-out example of how to set email settings for a production email provider (Mailgun).
@@ -25,12 +30,14 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
   it should be edited. (Thanks Stephen for suggesting!)
 - Changed the UI of social logins on the "sign in" page to match that of the "sign up" page on the Material Bootstrap theme.
   This makes the implementation more extensible and more consistent with other CSS frameworks.
+- **Upgraded all Python packages to the latest versions.**
 
 ### Fixed
 
 - Fixed a bug where the formatting `make` targets were still calling `black` and `isort` instead of `ruff`.
   `make black` is now `make ruff-format` and `make isort` is now `make ruff-lint`.
 - Fixed a bug where the sign up view tests would fail in your environment if `settings.TURNSTILE_SECRET` was set.
+  (Thanks Finbar for reporting!)
 - Fixed translations on the user profile form field names.
 - Removed `svg` as an option for profile picture uploads, to prevent the possibility of using it as an XSS attack vector.
   ([More info on this threat here](https://medium.com/@rdillon73/hacktrick-stored-xss-via-a-svg-image-3def20968d9)).
@@ -39,6 +46,19 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
   Digital Ocean has deprecated support for version 12. (Thanks Stephen for reporting!)
 - Simplified how the list of social login buttons is rendered, and make social login buttons work when
   configuring social applications in settings (previously buttons only showed up if you configured apps in the database).
+  See upgrade note below.
+
+### Removed
+
+- Deleted the "sticky header" html and CSS code that was only used on the example landing pages.
+
+### Upgrade Notes
+
+If you had previously configured allauth social applications in the database *and* in your settings file,
+you may see a duplicate "Login with XXX" button on the sign up and login pages.
+To fix this, remove the social application from either your settings or the database.
+
+*August, 7, 2024*
 
 ## Version 2024.6.1
 
