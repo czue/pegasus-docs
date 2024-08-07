@@ -78,6 +78,21 @@ There is guidance on configuring media files in the [settings and configuration 
 The most common choice of external storage is [Amazon S3](https://aws.amazon.com/s3/),
 though many cloud providers have their own S3-compatible options, e.g. [Digital Ocean Spaces](https://www.digitalocean.com/products/spaces).
 
+## Check your static file setup
+
+By default, Pegasus uses [whitenoise](https://whitenoise.readthedocs.io/en/stable/index.html) for static files.
+**If you keep the default setup, you do not need to change anything.**
+Static files will be built and collected as part of the build process of your Docker container and should be available
+on your production site.
+
+If you decide to switch to serving files externally, for example, using Amazon S3,
+then you may need to modify your static file set up for some platforms.
+This is because production secrets necessary to save files to S3 may not be available during the Docker container build.
+
+If this is the case, you should modify your deployment set up so that `python manage.py collectstatic --noinput` is run
+at the same time as Django database migrations, so that the necessary secrets are available to the application.
+The exact way to do this will vary by deployment platform.
+
 ## Optimize your front end
 
 The front-end files that ship with Pegasus are the developer-friendly versions.
