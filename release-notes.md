@@ -30,6 +30,7 @@ This is largely a maintenance release with many smaller updates and fixes.
 - The `EMAIL_BACKEND` setting is now configurable via an environment variable.
   Also, added a commented-out example of how to set email settings for a production email provider (Mailgun).
 - Apt and pip packages are now cached across Docker builds, which should result in faster build times after the first build.
+  (Thanks Tobias for the suggestion!)
 - Improved the display format of "role" in the team invitation list. (thanks Andy for the suggestion!)
 - Change `user/` to `YOUR_GITHUB_USERNAME/` in the Digital Ocean `app-spec.yml` file to make it more obvious that
   it should be edited. (Thanks Stephen for suggesting!)
