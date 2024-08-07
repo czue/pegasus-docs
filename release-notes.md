@@ -16,6 +16,7 @@ This is largely a maintenance release with many smaller updates and fixes.
   [More on this concept here](https://adamj.eu/tech/2024/06/23/django-test-pending-migrations/).
 - **Added an example landing page to Tailwind builds, based largely on [Scriv's landing page](https://scriv.ai/).**
 - Added `TURNSTILE_KEY` and `TURNSTILE_SECRET` to Kamal's default secrets.
+- Added a section on configuring static files to the [production checklist](./deployment/production-checklist.md).
 
 ### Changed
 
