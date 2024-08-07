@@ -5,7 +5,7 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ## Version 2024.8
 
-This is largely a maintenance release with many smaller updates and fixes.
+This is a maintenance release with many small updates and fixes.
 
 ### Added
 
