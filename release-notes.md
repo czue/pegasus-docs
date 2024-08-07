@@ -20,6 +20,10 @@ This is largely a maintenance release with many smaller updates and fixes.
 
 ### Changed
 
+- **Code is now automatically formatted for all projects.**
+  The "Autoformat code" check box has been renamed to "Enable linting and formatting" and now only controls whether
+  `ruff` and the pre-commit hooks are included in the project download.
+  Projects that had already enabled auto-formatting are unaffected by this change. (See upgrade notes below.)
 - **The example landing pages are now used as the project's landing page instead of being listed in the examples**.
   (Bulma and Tailwind builds only.) 
 - **Team invitation emails are now better styled, matching the same format as account emails.** (Thanks EJ for the suggestion!)
@@ -55,7 +59,11 @@ This is largely a maintenance release with many smaller updates and fixes.
 
 ### Upgrade Notes
 
-If you had previously configured allauth social applications in the database *and* in your settings file,
+- If you had **not** been using auto-formatting until now, you should first follow the instructions for
+[migrating to auto-formatted code](./cookbooks.md#migrating-to-auto-formatted-code) prior to upgrading to this release.
+Otherwise you will likely get a lot of formatting-related merge conflicts when trying to upgrade.
+  - If you already enabled auto-formatting (most projects), you don't need to do anything.
+- If you had previously configured allauth social applications in the database *and* in your settings file,
 you may see a duplicate "Login with XXX" button on the sign up and login pages.
 To fix this, remove the social application from either your settings or the database.
 
