@@ -21,16 +21,6 @@ Note that the 'solo' pool is recommended for development but not for production.
 you should use a more robust pool implementation such as `prefork` (for CPU bound tasks) or `gevent` (for I/O bound
 tasks).
 
-### Running Celery on Windows
-
-Celery 4.x [no longer officially supports Windows](https://docs.celeryq.dev/en/4.0/whatsnew-4.0.html#removed-features). 
-To use Celery on Windows for development or test purposes, change the concurrency pool implementation to ``gevent`` instead.
-
-``` console
-pip install gevent
-celery -A {{ project_name }} worker -l info -P gevent
-```
-
 ## Setup and Configuration
 
 The above setup uses [Redis](https://redis.io/) as a message broker and result backend.
