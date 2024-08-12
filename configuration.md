@@ -106,8 +106,11 @@ The domain name of this `Site` will be used for your server address.
 If you need to change the URL after installation, you can go to the site admin at `admin/sites/site/` and
 modify the values accordingly, leaving off any http/https prefix.
 
-In development you'll typically want a domain name of `localhost:8000`, and in production this should
+In development, you'll typically want a domain name of `localhost:8000`, and in production this should
 be the domain where your users access your app.
+Note that this URL must match *exactly* what is in the browser address bar.
+So, for example, if you load your development site from `127.0.0.1:8000` instead of `localhost:8000` then
+that is what you should put in.
 
 **Example Development Configuration**
 
@@ -281,6 +284,20 @@ For help configuring LLMs and AIs, see the [AI docs](./ai.md).
 
 See the [celery docs](/celery) for set up and configuration of Celery.
 
+## Turnstile
+
+To enable support for [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/),
+set `TURNSTILE_KEY` and `TURNSTILE_SECRET` in your settings or environment variables.
+
+This should automatically enable turnstile on your sign up pages.
+
+It is recommended to create two different Turnstile accounts on Cloudflare for development and production.
+In development you can specify "localhost" as your domain like this:
+
+![Turnstile Dev](/images/turnstile.png)
+
+In production, you should replace that with your site's production domain. 
+
 
 ## Mailing List
 
@@ -357,6 +374,12 @@ you to have persistent storage available for your site such as a Docker volume.
 [default]: https://docs.djangoproject.com/en/4.1/topics/files/
 
 ### Setting up S3 media storage
+
+*For a video walkthrough of this content (using kamal deployment), see below:*
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/2n-KhVeX3og" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
 
 This section assumes you have set up your SaaS Pegasus project with the **S3 media file storage** enabled.
 

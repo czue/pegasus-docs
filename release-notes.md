@@ -3,6 +3,221 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.8
+
+This is largely a maintenance release with many smaller updates and fixes.
+
+### Added
+
+- **Added test cases for subscription decorators, feature gating, and views.**
+  These can be extended/adapted to test custom subscription logic.
+  Also added utility functions to create test products, subscriptions and mock requests.
+- Added a test that will fail if your project is missing any database migrations.
+  [More on this concept here](https://adamj.eu/tech/2024/06/23/django-test-pending-migrations/).
+- **Added an example landing page to Tailwind builds, based largely on [Scriv's landing page](https://scriv.ai/).**
+- Added `TURNSTILE_KEY` and `TURNSTILE_SECRET` to Kamal's default secrets.
+- Added a section on configuring static files to the [production checklist](./deployment/production-checklist.md).
+
+### Changed
+
+- **Code is now automatically formatted for all projects.**
+  The "Autoformat code" check box has been renamed to "Enable linting and formatting" and now only controls whether
+  `ruff` and the pre-commit hooks are included in the project download.
+  Projects that had already enabled auto-formatting are unaffected by this change. (See upgrade notes below.)
+- **The example landing pages are now used as the project's landing page instead of being listed in the examples**.
+  (Bulma and Tailwind builds only.) 
+- **Team invitation emails are now better styled, matching the same format as account emails.** (Thanks EJ for the suggestion!)
+- The `EMAIL_BACKEND` setting is now configurable via an environment variable.
+  Also, added a commented-out example of how to set email settings for a production email provider (Mailgun).
+- Apt and pip packages are now cached across Docker builds, which should result in faster build times after the first build.
+  (Thanks Tobias for the suggestion!)
+- Improved the display format of "role" in the team invitation list. (thanks Andy for the suggestion!)
+- Change `user/` to `YOUR_GITHUB_USERNAME/` in the Digital Ocean `app-spec.yml` file to make it more obvious that
+  it should be edited. (Thanks Stephen for suggesting!)
+- Changed the UI of social logins on the "sign in" page to match that of the "sign up" page on the Material Bootstrap theme.
+  This makes the implementation more extensible and more consistent with other CSS frameworks.
+- **Upgraded all Python packages to the latest versions.**
+
+### Fixed
+
+- Fixed a bug where the formatting `make` targets were still calling `black` and `isort` instead of `ruff`.
+  `make black` is now `make ruff-format` and `make isort` is now `make ruff-lint`.
+- Fixed a bug where the sign up view tests would fail in your environment if `settings.TURNSTILE_SECRET` was set.
+  (Thanks Finbar for reporting!)
+- Fixed translations on the user profile form field names.
+- Removed `svg` as an option for profile picture uploads, to prevent the possibility of using it as an XSS attack vector.
+  ([More info on this threat here](https://medium.com/@rdillon73/hacktrick-stored-xss-via-a-svg-image-3def20968d9)).
+- Disable debug toolbar in tests, which fixes test failures under certain conditions.
+- Bumped the Postgres version used by Digital Ocean deployments from 12 to 16.
+  Digital Ocean has deprecated support for version 12. (Thanks Stephen for reporting!)
+- Simplified how the list of social login buttons is rendered, and make social login buttons work when
+  configuring social applications in settings (previously buttons only showed up if you configured apps in the database).
+  See upgrade note below.
+
+### Removed
+
+- Deleted the "sticky header" html and CSS code that was only used on the example landing pages.
+
+### Upgrade Notes
+
+- If you had **not** been using auto-formatting until now, you should first follow the instructions for
+[migrating to auto-formatted code](./cookbooks.md#migrating-to-auto-formatted-code) prior to upgrading to this release.
+Otherwise you will likely get a lot of formatting-related merge conflicts when trying to upgrade.
+  - If you already enabled auto-formatting (most projects), you don't need to do anything.
+- If you had previously configured allauth social applications in the database *and* in your settings file,
+you may see a duplicate "Login with XXX" button on the sign up and login pages.
+To fix this, remove the social application from either your settings or the database.
+
+*August, 7, 2024*
+
+## Version 2024.6.1
+
+This is hotfix release that addresses a few issues from yesterday's update:
+
+- Fix app styles accidentally being purged during the Docker build process. 
+  This caused styling on Docker-based deployments for tailwind builds. (Thanks Steve for reporting!)
+- Moved channels url import to after Django initialization.
+  This fixes an `AppRegistryNotReady` error when deploying asynchronous apps with the AI chat app enabled.
+  (Thanks Roman for reporting!)
+- Don't create the periodic task to sync subscriptions unless per-unit billing is enabled.
+
+*June 6, 2024*
+
+## Version 2024.6
+
+This is a feature release with a few big updates and a lot of smaller ones.
+
+### AI model changes
+
+The library used for non-OpenAI LLMs has been changed from [`llm`](https://github.com/simonw/llm)
+to [`litellm`](https://docs.litellm.ai/docs/). Reasons for this change include:
+
+- It has far fewer additional dependencies.
+- It supports async APIs out of the box (for most models).
+- The `llm` library is more targeted for the command line use-case, whereas `litellm` offers similar functionality
+  as a native Python library with a cleaner API.
+
+Litellm can still be used with all common AI models, including OpenAI, Anthropic/Claude, and local models
+(via ollama). For details on getting started with `litellm` see the updated [AI documentation](./ai.md).
+
+### Formatting and linting now use Ruff
+
+Black and isort have been replaced with [ruff](https://github.com/astral-sh/ruff)---a Python linter/formatter
+that offers the same functionality as those tools but is much faster.
+
+Additionally, Pegasus will now remove unused imports from your files automatically, both
+when building your project and if you have set up `pre-commit`.
+
+This change should be a relatively seamless drop-in replacement, though you may see some new lint errors
+in your projects which you can choose to address.
+
+### Spam prevention updates
+
+There has been a dramatic increase in spam-bots over the last month.
+Many of these bots target seemingly-innocuous functionality like sign up and password reset forms.
+
+This version includes a few updates to help combat these bots.
+First, you can now easily add [Cloudflare turnstile](https://www.cloudflare.com/products/turnstile/) to your sign up forms,
+which will present the user with a captcha and should help reduce bot sign-ups.
+See [the turnstile documentation](./configuration.md#turnstile) for information on setting this up.
+
+Additionally, the `ACCOUNT_EMAIL_UNKNOWN_ACCOUNTS` setting has been set to `False` by default.
+This prevents "forgot password" and "magic link" emails from being sent out to unknown accounts.
+It should also help reduce unnecessary email sending.
+
+Finally, the [admin dashboard](#admin-dashboard) no longer shows users with unconfirmed email addresses if you have set
+`ACCOUNT_EMAIL_VERIFICATION = 'mandatory'`.
+This helps filter out likely bots from the report to provide clearer visibilty of people actually signing up for your app.
+
+### Complete changelog
+
+Below is the complete set of changes in this release.
+
+#### Added
+
+- **Added configurable captcha support on sign up pages, using [Cloudflare turnstile](https://www.cloudflare.com/products/turnstile/).**
+  See [the turnstile documentation](./configuration.md#turnstile) for more information on setting this up. (Thanks Troy, Jacob, Robert and others for suggesting.)
+- Added API views for two-factor authentication, and to change the logged-in user's password. (Thanks Finbar for suggesting!)
+- Add UI to tell users they need a verified email address prior to setting up two-factor auth.
+  - Also added a `has_verified_email` helper class to the `CustomUser` model.
+- Added tests for the delete team view for both team admins and members. (HTMX builds only)
+- Added test for team member removal permissions.
+- Add display and sort on the number of active members in the teams admin.
+
+#### Fixed
+
+- Fixed a bug where team names longer than 50 characters could cause a crash during sign up.
+- Fixed a bug where multi-factor authentication QR codes had a dark background when dark mode was enabled (Tailwind builds only).
+  (Thanks Artem for reporting!)
+- Fixed a bug where it was possible to bypass two-factor-authentication when using the API authentication views. 
+  (Thanks Finbar for reporting and helping with the fix!)
+- Fixed a bug where deleting the user's only team while impersonating them resulted in a temporary crash.
+  (Thanks EJ for reporting!)
+- Fixed a bug where creating an API key crashed if your user's first + last name combined to more than 40 characters.
+  (Thanks Luc for reporting!)
+- Improved the UI feedback when LLMs fail (e.g. if your API key is wrong or ollama is not running).
+- Removed the `static/css` and `static/js` directories from the `.dockerignore` file so that other project files
+  can be included in these directories.
+  Also updated the production Docker build process so that any existing files are overwritten
+  by the built versions. (Thanks Raul for reporting!)
+- Made some performance improvements to the production Dockerfile build (don't rebuild the front end if there are
+  no changes in the dependent files).
+- Better support trialing subscriptions with no payment methods.
+  The subscription UI will now show the date the trial ends and won't log errors about missing invoices. (Thanks Jarrett for reporting!)
+
+#### Changed
+
+- **Upgraded all Python packages to the latest versions.**
+- **Upgraded all JavaScript packages to the latest versions.**
+- **Non-OpenAI builds now use `litellm` instead of `llm`.** See above. (Thanks Sarthak for the suggestion!)
+- **Changed the formatter/linter from `black` and `isort` to [ruff](https://github.com/astral-sh/ruff).** See above.
+  - Also addressed a handful of minor linting errors that came up as a result of this change.
+  - Codebase linting is now substantially faster.
+  - Unused imports are now automatically removed when building your projects. 
+- **Celerybeat now uses the `django-celery-beat` library to store tasks in the database instead of on the filesystem.**
+  This improves support for celerybeat on Docker-based platforms. (Thanks Peter and Artem for the suggestion!)
+  - Also added a migration to save the default scheduled tasks in the database.
+- The login API response has changed, to allow for two-factor auth prompts, and more machine-readable status fields.
+- Removed the no-longer-used `use_json_field=True` argument from wagtail `StreamField`s.
+- The admin dashboard no longer shows users with unconfirmed email addresses if you have set `ACCOUNT_EMAIL_VERIFICATION = 'mandatory'`.
+- The admin dashboard now includes sign ups from the current date, by default.
+- Changed behavior when team role checks fail from raising a `TeamPermissionError` to returning a 403 response,
+  and updated affected tests. One side effect of this is that the stack traces are removed from successful test runs.
+- Secret keys should no longer change every time you build your Pegasus project.
+  They are also now clearly prefixed with `django-insecure-` to indicate that they should be changed in production. 
+- Updated the default OpenAI chat model to gpt-4o.
+- Upgraded the openapi client generator to version 7.5.0 and also pinned the version used by `make build-api-client`
+  to the same one.
+- Team IDs are now optional on the create team page (HTMX builds only).
+- Add clearer error message when charts are broken due to api config issue. (Thanks Yngve for reporting!)
+- Added `assume_scheme="https"` to form `URLField`s to be compatible with Django 6 behavior.
+- Added `FORMS_URLFIELD_ASSUME_HTTPS = True` to be compatible with Django 6 behavior.
+- Set `ACCOUNT_EMAIL_UNKNOWN_ACCOUNTS = False` by default, so that "forgot password" emails do not get sent to unknown accounts.
+  This can help prevent spam bots.
+
+#### Removed
+
+- Removed `black` and `isort` from dev-requirements, since they have been replaced by `ruff`.
+- Removed `llm` library and associated code, since it has been replaced by `litellm`.
+- Removed no longer used `TeamPermissionError` class.
+
+#### Standalone front end
+
+The following changes affect the experimental [standalone front end](./experimental/react-front-end.md):
+
+- **The standalone React front end now supports two-factor-authentication.**
+- Improve the UI when you have login issues in the standalone React front end.
+
+*June 5, 2024*
+
+
+## Version 2024.5.3
+
+This is a hotfix release that fixes a bug where the landing and dashboard page image was accidentally
+removed if you built without the examples enabled.
+
+*May 21, 2024*
+
 ## Version 2024.5.2
 
 This is a hotfix release that fixes a bug that prevented the team management page
@@ -48,6 +263,9 @@ and Celery workers and returns a non-200 response code if there are any identifi
 
 These endpoints can be connected to a monitoring tool like [StatusCake](https://www.statuscake.com/)
 or [Uptime Robot](https://uptimerobot.com/) so that you can be alerted whenever your site is having issues.
+
+See the section on [monitoring](./deployment/production-checklist.md#set-up-monitoring) in the
+production checklist for more information.
 
 ### Allauth updates
 
@@ -3426,4 +3644,3 @@ Documentation for subscriptions can be [found here](/subscriptions).
 ## Version 0.4 and earlier
 
 Release notes for earlier versions are no longer publicly available.
-

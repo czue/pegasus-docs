@@ -51,6 +51,7 @@ Ensure that you have configured the following variables (if you are using them):
 `STRIPE_LIVE_PUBLIC_KEY`, and `STRIPE_LIVE_SECRET_KEY` config vars (or whatever subset you are using).
 - If you set up email, ensure whatever keys/secrets you need are set.
 - If you're using Mailchimp, set `MAILCHIMP_API_KEY` and `MAILCHIMP_LIST_ID`.
+- If you're using Health Checks, set `HEALTH_CHECK_TOKENS`.
 
 Refer to your [chosen platform's documentation](/deployment.rst) for details on how to set environment variables in that platform.
 
@@ -77,6 +78,21 @@ There is guidance on configuring media files in the [settings and configuration 
 The most common choice of external storage is [Amazon S3](https://aws.amazon.com/s3/),
 though many cloud providers have their own S3-compatible options, e.g. [Digital Ocean Spaces](https://www.digitalocean.com/products/spaces).
 
+## Check your static file setup
+
+By default, Pegasus uses [whitenoise](https://whitenoise.readthedocs.io/en/stable/index.html) for static files.
+**If you keep the default setup, you do not need to change anything.**
+Static files will be built and collected as part of the build process of your Docker container and should be available
+on your production site.
+
+If you decide to switch to serving files externally, for example, using Amazon S3,
+then you may need to modify your static file set up for some platforms.
+This is because production secrets necessary to save files to S3 may not be available during the Docker container build.
+
+If this is the case, you should modify your deployment set up so that `python manage.py collectstatic --noinput` is run
+at the same time as Django database migrations, so that the necessary secrets are available to the application.
+The exact way to do this will vary by deployment platform.
+
 ## Optimize your front end
 
 The front-end files that ship with Pegasus are the developer-friendly versions.
@@ -94,7 +110,7 @@ The platform-specific docs have some guidance on setting this up where possible.
 ## Update other configuration options
 
 See [the configuration page](/configuration.md) for a larger list of options,
-including social login, sign up flow changes, analytics, logging, and so on.
+including social login, sign up flow changes, analytics, logging, adding captchas, and so on.
 
 ## Set up monitoring
 
@@ -104,7 +120,18 @@ see any errors that are encountered.
 It's also recommended to enable the health check endpoint and connect it to a monitoring tool
 like [StatusCake](https://www.statuscake.com/) or [Uptime Robot](https://uptimerobot.com/) so that
 you can be alerted whenever your site or services are having an outage.
-The URL you should connect is: yourdomain.com/health/.
+The URL you should connect is: `yourdomain.com/health/`.
+
+If you have the "Health Check Endpoint" option enabled for your project you should also ensure that
+you have set the `HEALTH_CHECK_TOKENS` environment variable to a secure value. This can be a comma-separated
+list of tokens that are required to access the health check endpoint:
+
+```
+yourdomain.com/health/?token=your_secret_token
+```
+
+You can then use this URL with the monitoring tool to ensure that only your monitoring tool can
+access the health check endpoint.
 
 ## Double-check your language settings
 

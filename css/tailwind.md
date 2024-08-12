@@ -87,6 +87,28 @@ daisyui: {
 
 ## Other products / themes
 
+### Flowbite
+
+[Flowbite](https://flowbite.com/) is a library with many great UI components---most of which are free and open source.
+
+Flowbite can easily be added to a Pegasus project by installing it via `npm` and adding it to your global `site.js` and
+`tailwind.config.js` files.
+
+You can use [this git patch file](https://gist.github.com/czue/73cec7ff562aff0943e55538fe9b4550#file-flowbite-patch)
+as a starting point and apply it to your project by running:
+
+```
+git apply flowbite.patch
+```
+
+This demonstrates basic installation and enabling the [datepicker plugin](https://flowbite.com/docs/plugins/datepicker/).
+
+After applying the patch you will need to run `npm install` and `npm run dev-watch` to enable it on all pages.
+
+If you build with the Pegasus examples, you should be able to see the datepicker at [http://localhost:8000/pegasus/forms/](http://localhost:8000/pegasus/forms/).
+
+### Tailwind UI
+
 [Tailwind UI](https://tailwindui.com/) is a great product for building more complex pages, including marketing sites and app UIs.
 It another great option for getting help with UI components and pages, and should integrate seamlessly with the current Pegasus templates.
 
