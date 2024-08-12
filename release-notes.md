@@ -3,6 +3,15 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.8.1
+
+### Fixed
+
+- Fixed a bug on some environments where `make build-api-client` would wrong relative to the wrong directory.
+  (Thanks Ben for finding and fixing!) 
+
+
+
 ## Version 2024.8
 
 This is a maintenance release with many small updates and fixes.
