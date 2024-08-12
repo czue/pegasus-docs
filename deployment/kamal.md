@@ -477,12 +477,12 @@ for this feature to understand the implications of it being included.
 
 ### Deploy with GitHub Actions
 
-Your repository also includes a GitHub Actions workflow that can be used to deploy your app to Kamal
-(look for it in `.github/workflows/kamal_deploy.yml`). To configure the workflow you will set some secrets
-in your repository settings.
+As of version 2024.8, your repository also includes a GitHub Actions workflow that can be used to deploy your app to Kamal
+(look for it in `.github/workflows/kamal_deploy.yml`). This is configured to use Docker Hub as the registry. If you are
+not using Docker Hub you will need to update the action. 
 
-In your repositories settings page, go to the "Secrets and variables -> Actions" section and add the following
- secrets:
+To configure the workflow you will set some secrets in your repository settings. In your repositories settings page,
+go to the "Secrets and variables -> Actions" section and add the following secrets to the "Repository Secrets" section:
 
 - `DOCKER_REGISTRY_USERNAME`
   - Your Docker Hub username.
