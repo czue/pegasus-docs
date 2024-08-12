@@ -14,8 +14,12 @@ The easiest way to get going is to [download and install Redis](https://redis.io
 (if you don't already have it) and then run:
 
 ```python
-celery -A {{ project_name }} worker -l info
+celery -A {{ project_name }} worker -l info --pool=solo
 ```
+
+Note that the 'solo' pool is recommended for development but not for production. When running in production,
+you should use a more robust pool implementation such as `prefork` (for CPU bound tasks) or `gevent` (for I/O bound
+tasks).
 
 ### Running Celery on Windows
 
