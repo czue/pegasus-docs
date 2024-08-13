@@ -487,3 +487,48 @@ To change your site's URL, do the following:
 4. Run `kamal deploy`
 
 Your app should now be running on your new domain.
+
+#### Deploying multiple apps to the same server
+
+One of the major benefits of the VPS-based approach is that you can easily host multiple apps on the same hardware,
+which is usually a substantial cost advantage over hosting each one on its own.
+This is possible to do with Kamal, though requires a bit of wrangling.
+
+The basic steps are as follows, based on [this blog post](https://maciej.litwiniuk.net/posts/2024-01-31-multiple-apps-on-one-server-using-kamal/)
+
+**Overview**
+
+At a high level, each app you deploy will have its own database, web container, and (optionally) Redis database and celery container.
+These will all run on the app's own private Docker network.
+The only thing that is shared across apps is the `Traefik` web server.
+
+**Creating the first app**
+
+When setting up your first app you can follow the above process as normal.
+
+**Creating additional apps**
+
+When adding apps to the server, you can use a modified version of the above instructions (and config files),
+but you can skip all of the Docker setup steps except for initializing the network.
+
+First create the network as above:
+
+```
+docker network create <your_app>-network
+```
+
+Then you must manually add Traefik to the network:
+
+```
+docker network connect <your_app>-network traefik
+```
+
+Additionally, when updating your configuration files you should **remove the `traefik:` section at the bottom of `deploy.yml`**,
+then run `kamal setup` as normal.
+
+Finally, after running `kamal setup` you will have to reboot traefik.
+The easiest way to do this is to go back to the *first app* and then in the deploy directory, run:
+
+```
+kamal traefik reboot
+```
