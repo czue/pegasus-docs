@@ -14,18 +14,27 @@ The easiest way to get going is to [download and install Redis](https://redis.io
 (if you don't already have it) and then run:
 
 ```python
-celery -A {{ project_name }} worker -l info
+celery -A {{ project_name }} worker -l info --pool=solo
 ```
 
-### Running Celery on Windows
+Note that the 'solo' pool is recommended for development but not for production. When running in production,
+you should use a more robust pool implementation such as `prefork` (for CPU bound tasks) or `gevent` (for I/O bound
+tasks).
 
-Celery 4.x [no longer officially supports Windows](https://docs.celeryq.dev/en/4.0/whatsnew-4.0.html#removed-features). 
-To use Celery on Windows for development or test purposes, change the concurrency pool implementation to ``gevent`` instead.
+### Running Celery with Gevent
+
+The `gevent` pool is useful when running tasks that are I/O bound which tends to be 90% of tasks. The same
+configuration can also be used to run Celery on Windows (if the `solo` pool is not suitable) since 
+Celery 4.x [no longer officially supports Windows](https://docs.celeryq.dev/en/4.0/whatsnew-4.0.html#removed-features).
+
+To use the `gevent` pool, change the concurrency pool implementation to ``gevent`` instead.
 
 ``` console
 pip install gevent
 celery -A {{ project_name }} worker -l info -P gevent
 ```
+
+For more information see the [Celery documentation](https://docs.celeryq.dev/en/stable/userguide/concurrency/gevent.html).
 
 ## Setup and Configuration
 
