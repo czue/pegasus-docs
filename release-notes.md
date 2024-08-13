@@ -5,12 +5,42 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ## Version 2024.8.1
 
+This is a maintenance release which upgrades HTMX to version 2.0 and fixes a handful of minor bugs.
+
+### Changed
+
+- **Upgraded HTMX to [version 2.0](https://htmx.org/posts/2024-06-17-htmx-2-0-0-is-released/).**
+  See upgrade note below.
+
 ### Fixed
 
 - Fixed a bug on some environments where `make build-api-client` would wrong relative to the wrong directory.
-  (Thanks Ben for finding and fixing!) 
+  (Thanks Ben for finding and fixing!)
+- Downgraded Postgres from 16 to 14 on Digital Ocean deployments, due to
+  [an issue with permissions on version 16](https://www.digitalocean.com/community/questions/how-can-i-create-a-postgres-16-user-that-has-permission-to-create-tables-on-an-app-platform-dev-database)
+  that was causing new Digital Ocean deployments to fail.
+  (Thanks Panagiotis for reporting!)
+- Switched the default celery pool to [solo](https://docs.celeryq.dev/en/stable/internals/reference/celery.concurrency.solo.html) in development,
+  to fix issues running on Windows. See [updated docs](./celery.md).
+- Updated in-app help hint to recommend running `./manage.py bootstrap_ecommerce` instead of `./manage.py djstripe_sync_models price`.
+  
+### Upgrading
 
+Htmx 2.0 requires loading new extensions.
+If you were loading HTMX extensions in your own templates, you will have to upgrade the location of those to the 2.0 versions.
 
+Before:   
+
+```
+<script src="https://unpkg.com/htmx.org/dist/ext/ws.js" defer></script>
+```
+
+After:
+```
+<script src="https://unpkg.com/htmx-ext-ws@2.0.0/ws.js" defer></script>
+```
+
+*August 13, 2024*
 
 ## Version 2024.8
 
