@@ -298,9 +298,10 @@ Once you modify your environment variable files you will need to run:
 
 ```
 kamal env push
+kamal app boot
 ```
 
-To update the variables on the server. 
+To update the variables on the server and restart the app.
 
 ### Running one-off commands
 
