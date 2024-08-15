@@ -407,9 +407,6 @@ setup.
 AWS_STORAGE_BUCKET_NAME
 : Name of the S3 bucket to use. Defaults to `{{project_name}}-media`.
 
-AWS_S3_CUSTOM_DOMAIN
-: Name of the AWS custom domain name. Defaults to `{{project_name}}-media`.
-
 ### Alternative storage backends
 
 Should you wish to use a different storage backed e.g. [Digital Ocean Spaces](https://www.digitalocean.com/products/spaces)
