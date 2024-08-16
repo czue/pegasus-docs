@@ -182,7 +182,7 @@ Additionally see the resources below.
 
 #### Social Setup Guides
 
-Pegasus users have recommended the following guides to set things up with specific providers:
+The Pegasus community has recommended the following guides to set things up with specific providers:
 
 - [Github](https://python.plainenglish.io/django-allauth-a-guide-to-enabling-social-logins-with-github-f820239fb73f)
 
