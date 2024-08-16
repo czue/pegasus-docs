@@ -167,16 +167,24 @@ with a sensible set of defaults and templates.
 
 ### Social logins
 
-Pegasus optionally ships with a "Login with Google" and "Login with Twitter" options. 
+Pegasus optionally ships with "Login with Google/Twitter/Github" options. 
 
-You'll separately need to follow the steps [listed here](https://docs.allauth.org/en/latest/socialaccount/providers/index.html)
-to configure things on the Google/Twitter side and in the Django Admin.
+You'll separately need to follow the steps listed on the 
+[provider-specific pages here](https://docs.allauth.org/en/latest/socialaccount/providers/index.html)
+to configure things on the other side.
+These steps can sometimes be a bit involved and vary by platform.
 
-It's easy to add or change social login details (e.g. login with Facebook, Github, etc.) using allauth.
-
-For details on how to set this up for a particular provider [see this page](https://docs.allauth.org/en/latest/socialaccount/providers/index.html).
+If you want to add a social login that's not supported out of the box (e.g. Facebook/Meta or Apple),
+you can follow the existing patterns and configure things based on the allauth docs.
 
 If you need help setting this up feel free to get in touch!
+Additionally see the resources below.
+
+#### Social Setup Guides
+
+Pegasus users have recommended the following guides to set things up with specific providers:
+
+- [Github](https://python.plainenglish.io/django-allauth-a-guide-to-enabling-social-logins-with-github-f820239fb73f)
 
 ### Requiring email confirmation
 
