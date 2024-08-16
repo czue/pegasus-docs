@@ -71,12 +71,12 @@ daisyui: {
   themes: [
     {
       light: {
-        ...require("daisyui/src/theming/themes")["[data-theme=light]"],
+        ...require("daisyui/src/theming/themes")["light"],
         primary: "#0c2340",
         secondary: "#bd3039"
       },
       dark: {
-        ...require("daisyui/src/theming/themes")["[data-theme=dark]"],
+        ...require("daisyui/src/theming/themes")["dark"],
         primary: "#bd3039",
         secondary: "#0c2340"
       }
