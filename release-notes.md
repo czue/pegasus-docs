@@ -3,6 +3,20 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+
+## Version 2024.9
+
+
+### Fixed
+
+- Updated Pegasus color CSS variables to use the DaisyUI variables, so that they change
+  when you change DaisyUI themes. (Thanks Peter for the suggestion!)
+- Removed `custom.mk` if your project was not generated with a `Makefile`. (Thanks Finbar for reporting!)
+
+### Documentation
+
+- Improved the documentation on [customizing the Material Bootstrap theme](./css/bootstrap.md#customizing-the-material-theme).
+
 ## Version 2024.8.1
 
 This is a maintenance release which upgrades HTMX to version 2.0 and fixes a handful of minor bugs.
