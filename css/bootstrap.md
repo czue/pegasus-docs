@@ -17,7 +17,7 @@ You can watch a 3-minute tour of the Material theme here:
     <iframe src="https://www.youtube.com/embed/WwcowKrwCl0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div>
 
-## Customizing the default theme
+## Customizing the theme
 
 Pegasus's file structure is based on [the Bootstrap documentation](https://getbootstrap.com/docs/5.0/customize/sass/#importing).
 Any of the variables used in Bootstrap can be changed by modifying the `assets/styles/site-bootstrap.scss` file.
@@ -44,7 +44,24 @@ on customizing your theme!
 
 ## Customizing the Material theme
 
-The Material theme can be customized according to the [Material Dashboard documentation](https://www.creative-tim.com/learning-lab/bootstrap/overview/material-dashboard).
+The customization process outlined above largely works for the Material theme as well.
+
+For example, you can change the primary color from the default magenta to a dark green by adding the 
+following lines towards the top of `assets/styles/site-bootstrap.scss`:
+
+```scss
+// Configuration
+@import "~bootstrap/scss/functions";
+
+// add these lines
+$primary: #2e7636;  // change primary color + gradients to green
+$primary-gradient: #2e7676;
+$primary-gradient-state: #2e7676;
+```
+
+You will also have to [build your front end](/front-end.md#building-in-development) to see the changes.
+
+Material has more customization options than the default theme, which can be found in the [Material Dashboard documentation](https://www.creative-tim.com/learning-lab/bootstrap/overview/material-dashboard).
 The theme files live in the `assets/material-dashboard` folder.
 You can see the modifications that have been made for Pegasus support [on Github here](https://github.com/creativetimofficial/material-dashboard/compare/master...czue:pegasus-tweaks).
 In particular, a few bugs have been fixed, and the unused pro files have been removed.
