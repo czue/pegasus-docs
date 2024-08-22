@@ -19,6 +19,11 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
   (Thanks Bandi for reporting!)
 - Better style inputs of type `time` and `datetime-local` in forms.
   (Thanks Peter for reporting and fixing!)
+- Fixed an issue with Heroku Docker deploys caused by the introduction of caching in verison 2024.8.
+  Heroku [does not support this](https://stackoverflow.com/a/78901250/8207), so it has been removed from Heroku Docker builds.
+  (Thanks Richard for reporting!)
+- Fixed a bug where the `team_nav_items.html` and `team_selector.html` templates could be accidentally included even
+  if you built without teams.
 
 ### Changed
 
