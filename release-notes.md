@@ -6,16 +6,34 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ## Version 2024.9
 
-
 ### Fixed
 
 - Updated Pegasus color CSS variables to use the DaisyUI variables, so that they change
   when you change DaisyUI themes. (Thanks Peter for the suggestion!)
 - Removed `custom.mk` if your project was not generated with a `Makefile`. (Thanks Finbar for reporting!)
+- Removed "Containers started" message from `make start` command that never exectuted. (Thanks Richard for reporting!)
+- Fixed an issue where the active tab wasn't properly highlighted in certain cases on Bulma builds.
+- Fixed an issue with sqlite builds where the default `DATABASE_URL` would cause the DB to switch to Postgres.
+  (Thanks Harry and Richard for reporting!)
+- Switched allauth from Twitter (which appears no longer supported) to Twitter Oauth2, which still works.
+  (Thanks Bandi for reporting!)
+- Better style inputs of type `time` and `datetime-local` in forms.
+  (Thanks Peter for reporting and fixing!)
+
+### Changed
+
+- Simplified bulma navbar to use bulma native classes instead of custom CSS. (See upgrade note below.)
+- Updated default github repo in `app-spec.yml` to use raw project slug instead of the hyphenated version.
+  (Digital Ocean deployments, only, thanks Richard for suggesting)
+- Added `DEFAULT_FROM_EMAIL` to main `settings.py` file and `.env` files 
 
 ### Documentation
 
 - Improved the documentation on [customizing the Material Bootstrap theme](./css/bootstrap.md#customizing-the-material-theme).
+
+### Upgrading
+
+- Bulma builds may need to add the `is-tab` class to `navbar-items` in the top nav to mimic the updated navbar styling.
 
 ## Version 2024.8.1
 
