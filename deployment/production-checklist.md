@@ -124,14 +124,17 @@ The URL you should connect is: `yourdomain.com/health/`.
 
 If you have the "Health Check Endpoint" option enabled for your project you should also ensure that
 you have set the `HEALTH_CHECK_TOKENS` environment variable to a secure value. This can be a comma-separated
-list of tokens that are required to access the health check endpoint:
+list of tokens that are required to access the health check endpoint. For example:
 
 ```
-yourdomain.com/health/?token=your_secret_token
+HEALTH_CHECK_TOKENS=secrettoken1,secrettoken2
 ```
 
-You can then use this URL with the monitoring tool to ensure that only your monitoring tool can
-access the health check endpoint.
+Then your health check endpoint will only be accessible at:
+`https://yourdomain.com/health/?token=secrettoken1` and `https://yourdomain.com/health/?token=secrettoken2`
+
+These URLs can then be connected to a monitoring tool to ensure that only your monitoring tool
+(or anyone who knows the token) can access the health check endpoint.
 
 ## Double-check your language settings
 
