@@ -533,3 +533,32 @@ The easiest way to do this is to go back to the *first app* and then in the depl
 ```
 kamal traefik reboot
 ```
+
+After setting this up once, it is recommended to add the following [Kamal hook](https://kamal-deploy.org/docs/hooks/hooks-overview/) to all projects.
+This hook will ensure that the network configuration change gets re-applied even if the Traefik container reboots.
+
+You will need to put this in `.kamal/hooks/post-deploy` on any *secondary* apps,
+as well as `.kamal/hooks/post-traefik-reboot` on your primary app (the one that also has your Traefik config).
+
+You should replace the `REMOTE_HOST` and `NETWORK_NAME` variables with the ones that match your project.
+
+```
+#!/usr/bin/env bash
+
+REMOTE_HOST="kamal@yourserver.com"
+NETWORK_NAME="<your_app>-network"
+
+# SSH into the remote host and execute Docker commands
+ssh $REMOTE_HOST << EOF
+    # Check if the Docker network already exists
+    if ! docker network inspect "$NETWORK_NAME" 2>/dev/null | grep traefik; then
+        # If it doesn't exist, create it
+        docker network connect "$NETWORK_NAME" traefik
+        echo "Connected traefik to docker network: $NETWORK_NAME"
+    else
+        echo "Traefik already connected to docker network $NETWORK_NAME ."
+    fi
+EOF
+
+echo "$KAMAL_PERFORMER deployed $KAMAL_VERSION to $KAMAL_DESTINATION in $KAMAL_RUNTIME seconds"
+```
