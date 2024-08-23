@@ -4,20 +4,20 @@ This page outlines the basics of customizing Pegasus to meet your application's 
 
 ## Personalize your landing page
 
-Pegasus ships with a stub landing page, however most projects will want to highly customize their landing page.
+Pegasus ships with a simple landing page that varies based on your selected CSS framework.
+Most projects will want to highly customize the landing page from what comes out of the box.
 Unless you are planning on building a marketing site on a different platform, this is likely one of the first 
 things you'll do.
 
-To modify the default landing page, simply edit the `./templates/web/landing_page.html` file
-and make any customizations you like.
+To modify the default landing page, you can edit the `./templates/web/landing_page.html` file
+(and any included sub-templates) and make the customizations you want.
 
-If you want to start from Pegasus's example landing page, then just copy the contents of
-`./templates/pegasus/examples/example_landing_page.html` into the landing page file.
+Another good option is to use a paid or open-source alternative for your marketing content.
+Some recommended places to get marketing templates include:
 
-Note that Pegasus's own landing page is only available in the Bulma CSS version.
-For Bootstrap builds we recommend starting from a landing page option
-or themes from the web, for example [here](https://themes.getbootstrap.com/)
-or [here](https://dev.to/bootstrap/bootstrap-5-templates-91p).
+- **Bootstrap**: [Official themes](https://themes.getbootstrap.com/), [other free recommendations](https://dev.to/bootstrap/bootstrap-5-templates-91p).
+- **Bootstrap (Material)**: [Material Kit Pro](https://www.creative-tim.com/product/material-kit-pro)
+- **Tailwind**: [Tailwind UI](https://tailwindui.com/), [Flowbite](https://flowbite.com/).
 
 ## Update the logged-in experience
 
