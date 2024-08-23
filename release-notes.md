@@ -25,6 +25,7 @@ and updates Django to version 5.1.
   if you built without teams.
 - Changed the (unused) `text-muted` css class to `pg-text-muted` in a handful of places on Tailwind builds.
   (Thanks Peter for reporting!)
+- Removed unused `AWS_S3_CUSTOM_DOMAIN` variable from `.env` files.
 
 ### Changed
 
@@ -39,7 +40,8 @@ and updates Django to version 5.1.
 - Updated default Github repo in `app-spec.yml` to use raw project slug instead of the hyphenated version.
   (Digital Ocean deployments, only, thanks Richard for suggesting)
 - Moved `SERVER_EMAIL` and `DEFAULT_FROM_EMAIL` from `settings_production.py` to main `settings.py` file, 
-  and made it possible to set them via the environment/`.env` file. 
+  and made it possible to set them via the environment/`.env` file.
+- Added many more common settings and secrets to the Kamal `deploy.yml` file.
 
 ### Documentation
 
