@@ -30,7 +30,8 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 - Simplified bulma navbar to use bulma native classes instead of custom CSS. (See upgrade note below.)
 - Updated default github repo in `app-spec.yml` to use raw project slug instead of the hyphenated version.
   (Digital Ocean deployments, only, thanks Richard for suggesting)
-- Added `DEFAULT_FROM_EMAIL` to main `settings.py` file and `.env` files 
+- Moved `SERVER_EMAIL` and `DEFAULT_FROM_EMAIL` from `settings_production.py` to main `settings.py` file, 
+  and made it possible to set them via the environment/`.env` file. 
 
 ### Documentation
 
@@ -438,7 +439,7 @@ This would most likely manifest as a browser JavaScript error of the form:
 `Uncaught ReferenceError: htmx/SiteJS/etc. is not defined`.
 
 To resolve this, make sure all additional dependencies are also loaded with `defer` (for external scripts),
-or only referenced after the `'DOMContentLoaded'` event (for inline scrxipts).
+or only referenced after the `'DOMContentLoaded'` event (for inline scripts).
 Alternatively, you can remove the `defer` keyword from the `<script>` tags in `base.html` or affected templates
 to restore the previous behavior.
 
