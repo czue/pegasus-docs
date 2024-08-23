@@ -23,6 +23,8 @@ and updates Django to version 5.1.
   (Thanks Richard for reporting!)
 - Fixed a bug where the `team_nav_items.html` and `team_selector.html` templates could be accidentally included even
   if you built without teams.
+- Changed the (unused) `text-muted` css class to `pg-text-muted` in a handful of places on Tailwind builds.
+  (Thanks Peter for reporting!)
 
 ### Changed
 
