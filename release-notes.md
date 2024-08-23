@@ -3,32 +3,38 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.8.2
 
-## Version 2024.9
+This is a maintenance release that includes a number of mostly small fixes and updates,
+and updates Django to version 5.1.
 
 ### Fixed
 
-- Updated Pegasus color CSS variables to use the DaisyUI variables, so that they change
-  when you change DaisyUI themes. (Thanks Peter for the suggestion!)
-- Removed `custom.mk` if your project was not generated with a `Makefile`. (Thanks Finbar for reporting!)
-- Removed "Containers started" message from `make start` command that never exectuted. (Thanks Richard for reporting!)
-- Fixed an issue where the active tab wasn't properly highlighted in certain cases on Bulma builds.
+- **Fixed a few styling issues on Bulma builds**:
+  - Disabled dark mode. The styling for Dark mode was not fully supported by Bulma and led to strange-looking layouts.
+  - Fixed an issue where the active tab wasn't properly highlighted in certain cases on Bulma builds.
 - Fixed an issue with sqlite builds where the default `DATABASE_URL` would cause the DB to switch to Postgres.
   (Thanks Harry and Richard for reporting!)
-- Switched allauth from Twitter (which appears no longer supported) to Twitter Oauth2, which still works.
+- Switched allauth from [Twitter](https://docs.allauth.org/en/latest/socialaccount/providers/twitter.html)
+  (which seems no longer supported) to [Twitter Oauth2](https://docs.allauth.org/en/latest/socialaccount/providers/twitter_oauth2.html), which still works.
   (Thanks Bandi for reporting!)
-- Better style inputs of type `time` and `datetime-local` in forms.
-  (Thanks Peter for reporting and fixing!)
-- Fixed an issue with Heroku Docker deploys caused by the introduction of caching in verison 2024.8.
-  Heroku [does not support this](https://stackoverflow.com/a/78901250/8207), so it has been removed from Heroku Docker builds.
+- Fixed an issue introduced in version 2024.8 which caused Heroku Docker deploys to fail.
+  Heroku [does not support caching](https://stackoverflow.com/a/78901250/8207), so it has been removed from Heroku Docker builds.
   (Thanks Richard for reporting!)
 - Fixed a bug where the `team_nav_items.html` and `team_selector.html` templates could be accidentally included even
   if you built without teams.
 
 ### Changed
 
-- Simplified bulma navbar to use bulma native classes instead of custom CSS. (See upgrade note below.)
-- Updated default github repo in `app-spec.yml` to use raw project slug instead of the hyphenated version.
+- **Upgraded Django to version 5.1.**
+- Upgraded all Python packages to their latest versions. 
+- Updated Pegasus color CSS variables to use the DaisyUI variables, so that they change
+  when you change DaisyUI themes. (Thanks Peter for the suggestion!)
+- Removed `custom.mk` if your project was not generated with a `Makefile`. (Thanks Finbar for reporting!)
+- Removed "Containers started" message from `make start` command that never executed. (Thanks Richard for reporting!)
+- Better style inputs of type `time` and `datetime-local` in forms on all CSS frameworks. (Thanks Peter for reporting and fixing!)
+- Simplified Bulma navbar to use bulma native classes instead of custom CSS. (See upgrade note below.)
+- Updated default Github repo in `app-spec.yml` to use raw project slug instead of the hyphenated version.
   (Digital Ocean deployments, only, thanks Richard for suggesting)
 - Moved `SERVER_EMAIL` and `DEFAULT_FROM_EMAIL` from `settings_production.py` to main `settings.py` file, 
   and made it possible to set them via the environment/`.env` file. 
@@ -36,10 +42,13 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 ### Documentation
 
 - Improved the documentation on [customizing the Material Bootstrap theme](./css/bootstrap.md#customizing-the-material-theme).
+- Added documentation for [deploying multiple apps to the same VPS with Kamal](./deployment/kamal.md#cookbooks).
 
 ### Upgrading
 
 - Bulma builds may need to add the `is-tab` class to `navbar-items` in the top nav to mimic the updated navbar styling.
+
+*August 23, 2024*
 
 ## Version 2024.8.1
 
