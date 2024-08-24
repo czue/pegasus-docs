@@ -489,6 +489,26 @@ To change your site's URL, do the following:
 
 Your app should now be running on your new domain.
 
+#### Getting a database backup
+
+Here is one way to get a database dump of your server:
+
+First you can run the following command to save a database dump to the *host* machine:
+
+```
+kamal accessory exec postgres 'pg_dump -h localhost -p 5432 -U <your_app_user> <your_app_db_name> > db_dump.sql' --reuse
+```
+
+This should create a file on the host at `/home/kamal/db_dump.sql`.
+
+If you want to copy this file locally, you can run:
+
+```
+scp kamal@yourapp.com:db_dump.sql ./
+```
+
+Note: you may want to zip or gzip this file first if you have a large database.
+
 #### Deploying multiple apps to the same server
 
 One of the major benefits of the VPS-based approach is that you can easily host multiple apps on the same hardware,
