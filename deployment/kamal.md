@@ -499,7 +499,7 @@ First you can run the following command to save a database dump to the *host* ma
 kamal accessory exec postgres 'pg_dump -h localhost -p 5432 -U <your_app_user> <your_app_db_name> > db_dump.sql' --reuse
 ```
 
-This should create a file on the host at `/home/kamal/db_dump.sql`.
+This should create a file on the *host* machine at `/home/kamal/db_dump.sql`.
 
 If you want to copy this file locally, you can run:
 
