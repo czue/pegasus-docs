@@ -3,6 +3,20 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.9
+
+### Added
+
+- Added `make manage` command to run arbitrary `manage.py` commands in a docker environment.
+  E.g. `make manage ARGS='createsuperuser'`.
+- Added the ability to pass arguments to `make test` in docker. E.g. `make tests ARGS='apps.teams --keepdb'`.
+  (Thanks David for the suggestion!)
+
+### Changed
+
+- Changed links on the tailwind signup page to use `pg-link` class instead of explict tailwind classes. 
+  (Thanks Peter for the suggestion!)
+
 ## Version 2024.8.2
 
 This is a maintenance release that includes a number of mostly small fixes and updates,
