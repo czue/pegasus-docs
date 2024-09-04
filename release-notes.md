@@ -16,6 +16,8 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 - Changed links on the tailwind signup page to use `pg-link` class instead of explict tailwind classes. 
   (Thanks Peter for the suggestion!)
+- Silenced extraneous djstripe warnings when running tests. (Thanks Chris for the suggestion!)
+
 
 ## Version 2024.8.2
 
