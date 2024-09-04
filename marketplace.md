@@ -13,7 +13,7 @@ Next, create new Pegasus project for your app from [the projects page](https://w
 **You should choose the same config choices as the marketplace app**,
 which you can find in the `pegasus-config.yaml` file in the repository root.
 
-You can also refer to [this screenshot](/images/marketplace/scriv-pegasus-config.png) for how the configuration
+You can also refer to [this screenshot](images/marketplace/scriv-pegasus-config.png) for how the configuration
 should look as of September, 2024.
 
 Next, connect your Pegasus project to your Github repository:
