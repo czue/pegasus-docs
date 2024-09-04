@@ -498,6 +498,38 @@ First, double check all of your API keys and secrets in your environment/setting
 - `STRIPE_LIVE_MODE` should match whether you're in live / test mode.
 - `DJSTRIPE_WEBHOOK_SECRET` should match the secret from the Stripe dashboard.
 
-If you have confirmed these are correct, also double check that you are on the *latest Stripe API version*.
-As of the time of this writing, that is 2022-08-01. Your API version can be found in the "Developers" section
-of the Stripe dashboard.
+
+**Getting "DataError: value too long for type character varying(9)" from webhooks**
+
+This is caused by an issue in `dj-stripe` where a database column is not large enough to support
+values that were added by Stripe in API version xxx.
+
+There are two recommended workarounds to this:
+
+1. Downgrade your Stripe API version. The most recent supported version is `2023-10-16`.
+   Your API version can be found in the "Developers" section of the Stripe dashboard.
+2. Manually add a database migration to your project to increase the size of the column (see below).
+
+To increase the size the column you can run:
+```
+python manage.py makemigrations web --empty`
+```
+
+Then copy the following into the generated file:
+
+```python
+class Migration(migrations.Migration):
+    dependencies = [
+        ("web", "0001"),
+        ("djstripe", "0012_2_8"),
+    ]
+
+    operations = [
+        migrations.RunSQL(
+            "ALTER TABLE djstripe_paymentintent ALTER COLUMN capture_method TYPE varchar(255);"
+        ),
+    ]
+```
+
+*You can [read more about this issue and workarounds here](https://github.com/dj-stripe/dj-stripe/issues/2038#issuecomment-2119244742).*
+
