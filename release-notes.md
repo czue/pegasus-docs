@@ -3,6 +3,110 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.9
+
+There are two big updates in this release:
+
+1. The Pegasus CLI, which allows you to instantly spin up new apps.
+2. E-Commerce/Payments improvements.
+
+### The Pegasus CLI
+
+The [Pegasus CLI](https://github.com/saaspegasus/pegasus-cli/) is a standalone command-line tool that allows you
+to instantly spin up new Django apps.
+You can specify as many data models as you want and it will generate a starting CRUD interface for each of them.
+
+Here's a quick demo:
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/wKS_bbD5RVs" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
+
+**At the moment the CLI only supports HTMX build of Pegasus.**
+A React-based implementation is planned for a future date.
+
+Huge thanks to Peter for his excellent [Pegasus example apps](https://github.com/pcherna/pegasus-example-apps-v2)
+project which served as a reference for implementing the CRUD application and pagination.
+
+### E-Commerce / Payments demo improvements
+
+This is a series of updates designed to make it easier to build a functional end-to-end application
+on top of the e-commerce demo.
+
+- Added a `ProductConfiguration` model to attach additional metadata to products.
+- E-Commerce product URLs and views now use the `ProductConfiguration` `slug` field instead of the Stripe Product IDs.
+- Added a `@product_required` decorator that can be used to restrict access to views based on whether the user has purchased a product.
+- Added a demo "access product" page that shows how to use the `@product_required` decorator.
+- Added `user_owns_product` and `get_valid_user_purchase` helper functions.
+- Improved the navigation and use of breadcrumbs in the demo UI.
+- **See upgrade notes for information about migrating previous data to the new set up.**
+
+### Other Changes
+
+#### Added
+
+- **Added `django-htmx` and `django-template-partials` as first-class dependencies to HTMX builds.**
+  These libraries are used by the CLI and will be used for more HTMX-based functionality moving forwards. 
+- Added `make manage` command to run arbitrary `manage.py` commands in a docker environment.
+  E.g. `make manage ARGS='createsuperuser'`.
+- Added the ability to pass arguments to `make test` in docker. E.g. `make tests ARGS='apps.teams --keepdb'`.
+  (Thanks David for the suggestion!)
+
+#### Changed
+
+- Changed links on the tailwind signup page to use `pg-link` class instead of explict tailwind classes.
+  (Thanks Peter for the suggestion!)
+- Silenced extraneous djstripe warnings when running tests. (Thanks Chris for the suggestion!)
+- Added `.vscode` and vs workspace files to the project `.gitignore`.
+- Switched from `assert` statements to `raise ValueError` in the e-commerce Stripe checkout confirmation view.
+- Moved some of the currency helper functions out of the `subscriptions` app into `utils.billing` so they can be
+  used in ecommerce workflows even if subscriptions are disabled.
+- Set `PYTHONUNBUFFERED` and `PYTHONDONTWRITEBYTECODE` in docker compose file for python containers.
+  (Thanks Richard for the suggestion!)
+- Upgraded Django to 5.1.1.
+
+#### Fixed
+
+- Fixed a typo in the help text for the `bootstrap_ecommerce` command.
+- Fixed a bug where `user_teams` context processor could cause a crash if auth middeware didn't run
+  (for example, on a 500 error page in production).
+
+### Upgrade Notes
+
+If you have existing `Purchase` data in your application you will need to migrate it to the new `ProductConfiguration` structure.
+
+This is a three-step process:
+
+First you will need to apply the database updates, but allow `Purchase.product_configuration` to be null.
+Instead of running `./manage.py migrate` you will have to run the following command:
+
+```bash
+./manage.py migrate ecommerce 0002
+```
+
+After running this, you can run the following command to migrate the existing data:
+
+```bash
+./manage.py migrate_ecommerce
+```
+
+The `migrate_ecommerce` management command will:
+
+1. Create `ProductConfiguration` objects for all products in `settings.ACTIVE_ECOMMERCE_PRODUCT_IDS`
+2. Create `ProductConfiguration` objects for all products referenced in existing `Purchase` models.
+3. Set `purchase.product_configuration` to the new `ProductConfiguration` object for each `Purchase`.
+
+Finally, you can make the `Purchase.product_configuration` field non-null, by running:
+
+```bash
+./manage.py migrate ecommerce 0003
+```
+
+**New projects, or projects without any existing purchase data can skip these steps and run `./manage.py migrate` directly.**
+However, you may still want to run `./manage.py migrate_ecommerce` to populate `ProductConfiguration` objects for your active products.
+
+*Sep 17, 2024*
+
 ## Version 2024.8.2
 
 This is a maintenance release that includes a number of mostly small fixes and updates,
@@ -30,7 +134,7 @@ and updates Django to version 5.1.
 ### Changed
 
 - **Upgraded Django to version 5.1.**
-- Upgraded all Python packages to their latest versions. 
+- Upgraded all Python packages to their latest versions.
 - Updated Pegasus color CSS variables to use the DaisyUI variables, so that they change
   when you change DaisyUI themes. (Thanks Peter for the suggestion!)
 - Removed `custom.mk` if your project was not generated with a `Makefile`. (Thanks Finbar for reporting!)
@@ -39,7 +143,7 @@ and updates Django to version 5.1.
 - Simplified Bulma navbar to use bulma native classes instead of custom CSS. (See upgrade note below.)
 - Updated default Github repo in `app-spec.yml` to use raw project slug instead of the hyphenated version.
   (Digital Ocean deployments, only, thanks Richard for suggesting)
-- Moved `SERVER_EMAIL` and `DEFAULT_FROM_EMAIL` from `settings_production.py` to main `settings.py` file, 
+- Moved `SERVER_EMAIL` and `DEFAULT_FROM_EMAIL` from `settings_production.py` to main `settings.py` file,
   and made it possible to set them via the environment/`.env` file.
 - Added many more common settings and secrets to the Kamal `deploy.yml` file.
 
@@ -74,13 +178,13 @@ This is a maintenance release which upgrades HTMX to version 2.0 and fixes a han
 - Switched the default celery pool to [solo](https://docs.celeryq.dev/en/stable/internals/reference/celery.concurrency.solo.html) in development,
   to fix issues running on Windows. See [updated docs](./celery.md).
 - Updated in-app help hint to recommend running `./manage.py bootstrap_ecommerce` instead of `./manage.py djstripe_sync_models price`.
-  
+
 ### Upgrading
 
 Htmx 2.0 requires loading new extensions.
 If you were loading HTMX extensions in your own templates, you will have to upgrade the location of those to the 2.0 versions.
 
-Before:   
+Before:
 
 ```
 <script src="https://unpkg.com/htmx.org/dist/ext/ws.js" defer></script>
@@ -115,7 +219,7 @@ This is a maintenance release with many small updates and fixes.
   `ruff` and the pre-commit hooks are included in the project download.
   Projects that had already enabled auto-formatting are unaffected by this change. (See upgrade notes below.)
 - **The example landing pages are now used as the project's landing page instead of being listed in the examples**.
-  (Bulma and Tailwind builds only.) 
+  (Bulma and Tailwind builds only.)
 - **Team invitation emails are now better styled, matching the same format as account emails.** (Thanks EJ for the suggestion!)
 - The `EMAIL_BACKEND` setting is now configurable via an environment variable.
   Also, added a commented-out example of how to set email settings for a production email provider (Mailgun).
@@ -164,7 +268,7 @@ To fix this, remove the social application from either your settings or the data
 
 This is hotfix release that addresses a few issues from yesterday's update:
 
-- Fix app styles accidentally being purged during the Docker build process. 
+- Fix app styles accidentally being purged during the Docker build process.
   This caused styling on Docker-based deployments for tailwind builds. (Thanks Steve for reporting!)
 - Moved channels url import to after Django initialization.
   This fixes an `AppRegistryNotReady` error when deploying asynchronous apps with the AI chat app enabled.
@@ -239,7 +343,7 @@ Below is the complete set of changes in this release.
 - Fixed a bug where team names longer than 50 characters could cause a crash during sign up.
 - Fixed a bug where multi-factor authentication QR codes had a dark background when dark mode was enabled (Tailwind builds only).
   (Thanks Artem for reporting!)
-- Fixed a bug where it was possible to bypass two-factor-authentication when using the API authentication views. 
+- Fixed a bug where it was possible to bypass two-factor-authentication when using the API authentication views.
   (Thanks Finbar for reporting and helping with the fix!)
 - Fixed a bug where deleting the user's only team while impersonating them resulted in a temporary crash.
   (Thanks EJ for reporting!)
@@ -263,7 +367,7 @@ Below is the complete set of changes in this release.
 - **Changed the formatter/linter from `black` and `isort` to [ruff](https://github.com/astral-sh/ruff).** See above.
   - Also addressed a handful of minor linting errors that came up as a result of this change.
   - Codebase linting is now substantially faster.
-  - Unused imports are now automatically removed when building your projects. 
+  - Unused imports are now automatically removed when building your projects.
 - **Celerybeat now uses the `django-celery-beat` library to store tasks in the database instead of on the filesystem.**
   This improves support for celerybeat on Docker-based platforms. (Thanks Peter and Artem for the suggestion!)
   - Also added a migration to save the default scheduled tasks in the database.
@@ -274,7 +378,7 @@ Below is the complete set of changes in this release.
 - Changed behavior when team role checks fail from raising a `TeamPermissionError` to returning a 403 response,
   and updated affected tests. One side effect of this is that the stack traces are removed from successful test runs.
 - Secret keys should no longer change every time you build your Pegasus project.
-  They are also now clearly prefixed with `django-insecure-` to indicate that they should be changed in production. 
+  They are also now clearly prefixed with `django-insecure-` to indicate that they should be changed in production.
 - Updated the default OpenAI chat model to gpt-4o.
 - Upgraded the openapi client generator to version 7.5.0 and also pinned the version used by `make build-api-client`
   to the same one.
@@ -326,7 +430,7 @@ in Docker. Thanks Mohamed for reporting this!
 
 - Fix `api-client` path in the frontend docker container and add to `optimizeDeps` in vite config.
 - Mount `node_modules` as an anonymous volume in the frontend docker container, so it is not overwritten.
-- Automatically create `./frontend/.env` when running `make init` if it doesn't exist. 
+- Automatically create `./frontend/.env` when running `make init` if it doesn't exist.
 
 *May 14, 2024*
 
@@ -380,13 +484,13 @@ The complete release notes are below:
 - **The AI image generation now supports Dall-E 3 and Stability AI.**
 - **All generated projects now include a `LICENSE.md` file.**
   The goal of the license file is not to change how Pegasus can be used in any way, but rather to document those
-  terms in the codebase itself (previously they were only documented on the [terms page](https://www.saaspegasus.com/terms/)). 
+  terms in the codebase itself (previously they were only documented on the [terms page](https://www.saaspegasus.com/terms/)).
   For more information you can see the new [license page](https://www.saaspegasus.com/license/).
 - **Added support for "magic-code login", where a user can login to the site by requesting a code to their email address.**
   [Documentation.](./configuration.md#enabling-sign-in-by-email-code)
 - **Google cloud run builds now support Redis.** For details, see the [updated documentation](./deployment/google-cloud.md).
   (Thanks Forrest for suggesting!)
-- Added a `custom.mk` file where you can add additional `make` targets without worrying about future Pegasus upgrades. 
+- Added a `custom.mk` file where you can add additional `make` targets without worrying about future Pegasus upgrades.
   (Thanks John for proposing this!)
 
 ### Changed
@@ -417,7 +521,7 @@ The complete release notes are below:
 - **SQLite build now properly parse `DATABASE_URL` if it is set. This fixes issues deploying to certain platforms
   when building with SQLite.** (Thanks Manasvini for reporting!)
 - Updated allauth documentation links in the README to point to the new [allauth docs site](https://docs.allauth.org/).
-  (Thanks Shantu for reporting!) 
+  (Thanks Shantu for reporting!)
 
 ### Removed
 
@@ -429,7 +533,7 @@ The complete release notes are below:
 - Removed the no-longer-used `openai_example` app (functionality has been moved to `apps.chat` and `apps.ai_images`).
 - Removed the no-longer-needed `AccountAdapter` class. This class was previously used to add two-factor support
   to login, which is now handled natively by allauth.
-  
+
 ### Upgrading
 
 **Two-factor authentication**
@@ -448,7 +552,7 @@ compromising their security.**
 
 The change of adding the `defer` keyword to `<script>` imports could have unintended consequences if you were
 relying on functions / functionality in your scripts being available on page load.
-This would most likely manifest as a browser JavaScript error of the form: 
+This would most likely manifest as a browser JavaScript error of the form:
 `Uncaught ReferenceError: htmx/SiteJS/etc. is not defined`.
 
 To resolve this, make sure all additional dependencies are also loaded with `defer` (for external scripts),
@@ -477,7 +581,7 @@ The most notable change is that the OpenAI chat example is now fully asynchronou
 - Renamed "OpenAI Demos" tab to "AI Demos".
 - Renamed `get_chatgpt_response` task to `get_chat_response`.
 - Change the default admin ordering for Users to date joined, descending.
-- Google cloud builds only: `.env.production` is no longer included in Pegasus builds, since it was ignored by git. 
+- Google cloud builds only: `.env.production` is no longer included in Pegasus builds, since it was ignored by git.
   Instead `.env.production.example` is included. (Thanks Naveed for reporting!)
 - Attach Stripe Customer to User/Team in `provision_subscription` function instead of the view, which makes it work
   in webhook processing as well.
@@ -628,7 +732,7 @@ the navigation was removed.
     object that is included with the API client.
   - Change file extension for several components from `.js` to `.jsx`.
 - **Made changes to the JavaScript api client to support being shared with the standalone front end**
-  - **Moved the api-client from `assets/javascript/api-client` to an `api-client` folder in the root of the repository.** 
+  - **Moved the api-client from `assets/javascript/api-client` to an `api-client` folder in the root of the repository.**
   - **The api client is now installed as a linked local dependency in `package.json` instead of referenced as part of the code.**
     This makes it easier to move the api client code or install it as a hosted npm package.
     Also updated all references to the api-client to reflect this change.
@@ -658,14 +762,14 @@ the navigation was removed.
 - Fixed a bug where the two-factor QR codes were very difficult to scan in dark mode. (Tailwind builds only)
 - Made certain account pages (password reset, two-factor auth, etc.) darker in dark mode. (Tailwind builds only)
 - Removed a redundant check for empty subscription from `view_subscription.html` (thanks Rob for reporting!)
-- Fixed a bug that caused errors displaying prices in secondary currencies if they prices had decimals in them. 
+- Fixed a bug that caused errors displaying prices in secondary currencies if they prices had decimals in them.
   (Thanks Matthew for reporting and the fix!)
 - Fixed team signup test if you have disabled signups. (Thanks Saif for reporting and proposing the fix!)
 - Fixed a bug where links to the user dashboard were accidentally missing if you disabled user impersonation. (Thanks Simon for finding!)
 
 ### Upgrade notes
 
-If you are using Docker in development you might need to move/copy your `.env.docker` file to `.env` 
+If you are using Docker in development you might need to move/copy your `.env.docker` file to `.env`
 when you update your project.
 
 *Mar 22, 2024*
@@ -879,7 +983,7 @@ Below are the complete release notes:
   Since authorization is done in the view decorators like `login_and_team_required` this should be safe,
   and makes it easier to create team views that don't require authentication.**
   - Also updated tests to reflect this new behavior.
-- Only show social apps which have been created in the database on the sign up and login pages, and clean up/standardize how 
+- Only show social apps which have been created in the database on the sign up and login pages, and clean up/standardize how
   social app code/buttons are added.
   - Also switch social logins to use POST and remove `SOCIALACCOUNT_LOGIN_ON_GET = True` from settings.
 - **Add a `customer` object to the `CustomUser` model when ecommerce is enabled, and re-use the same customers
@@ -889,7 +993,7 @@ Below are the complete release notes:
   This should slightly improve page-load times when not using translations.
 - Explicitly set `DEBUG=False` in the Render production environment.
 - Explicitly set default region on fly.io deployments.
-- Changed postgres connection strings from `postgres://` to `postgresql://`. Either one works in Django, but only the 
+- Changed postgres connection strings from `postgres://` to `postgresql://`. Either one works in Django, but only the
   latter works with sqlalchemy, so using it allows the same connection string to be used with both tools.
 - **Upgraded everything to run Node 20 instead of Node 18.**
 - **Upgraded the base Docker images from bullseye (Debian 11) to bookworm (Debian 12).**
@@ -900,7 +1004,7 @@ Below are the complete release notes:
 - Default the `PORT` variable used by django in production deployments to `8000` if not specified in the environment.
 - Changed django database engine from `django.db.backends.postgresql_psycopg2` to `django.db.backends.postgresql`
   (these behave the same, but the latter is now recommended).
-  
+
 
 ### Fixed
 
@@ -1036,7 +1140,7 @@ and supporting work for the above.
   - Related: If building with async your app will use `asgi` instead of `wsgi`.
 - **Added the E-Commerce example application via a new build option.** [Documentation](payments.md).
 - **Added the admin dashboard.**
-  - Related: Added an admin-only user signup API 
+  - Related: Added an admin-only user signup API
 - Added a `pg-link` helper class to style links (especially on Tailwind and Material builds).
   Also applied this style to a few places.
 - Added basic tests for some of the example views.
@@ -1046,7 +1150,7 @@ and supporting work for the above.
 ### Changed
 
 - **Added the `feature_gate_check` and `get_feature_gate_check` helper functions,
-  for more fine-grained control of feature gate checking.** 
+  for more fine-grained control of feature gate checking.**
   See the updated [feature-gating documentation](subscriptions.md#feature-gating) for more information.
   - Related: Modified the `active_subscription_required` decorator to use this function.
 - Reduced number of DB queries made when provisioning a subscription.
@@ -1080,7 +1184,7 @@ and supporting work for the above.
 - Fixed issues with calling dj-stripe's `get_subscriber_model` utility when teams were enabled,
   by adding an `email` property to the `Team` object, and implementing `DJSTRIPE_SUBSCRIBER_MODEL_REQUEST_CALLBACK`,
   and added a test case that confirms this works moving forwards.
-- Fix styling of date inputs on all CSS frameworks. 
+- Fix styling of date inputs on all CSS frameworks.
 - Fixed tab highlighting of the "impersonate a user" navigation on the Bootstrap Material theme.
 
 ### Removed
@@ -1088,7 +1192,7 @@ and supporting work for the above.
 - **Removed the previous Payments example.** Apps should refer to the new E-Commerce app to use one-time payments.
   - Related: Removed all migrations from the example app, which now has no models.
   - Related: Removed the previous Payments documentation.
-- Removed the "removing Stripe" cookbook from the documentation. Stripe is no longer included 
+- Removed the "removing Stripe" cookbook from the documentation. Stripe is no longer included
   unless you build with the E-Commerce example or Subscriptions enabled.
 
 ### Upgrade Notes
@@ -1162,15 +1266,15 @@ There were also several smaller improvements.
 ### Changed
 
 - **Wagtail: Migrated `ContentPage.body` and `BlogPage.body` to use `StreamField` instead of `RichTextField`.
-  This provides much more flexibility in laying out your pages and working with many different section types.** 
+  This provides much more flexibility in laying out your pages and working with many different section types.**
 - Wagtail: All content models now extend from `BaseContentPage` so that you can add fields that should be shared among all
   your different types of content.
 - Wagtail: Updated the `bootstrap_content` management command to be compatible with the new structure.
 - **Upgraded nearly all Python packages to their latest versions.**
   `django-allauth` was not upgraded, due to it having a large release just a few days ago.
 - **Upgraded all JavaScript packages to their latest versions.**
-- **Subscriptions: official support for multiple currencies ([docs](subscriptions.md#supporting-multiple-currencies)) (Stripe pricing-table only)** 
-- **Subscriptions: official support for free trials ([docs](subscriptions.md#free-trials))** 
+- **Subscriptions: official support for multiple currencies ([docs](subscriptions.md#supporting-multiple-currencies)) (Stripe pricing-table only)**
+- **Subscriptions: official support for free trials ([docs](subscriptions.md#free-trials))**
 - **Subscriptions: Overhauled the [Subscriptions documentation](subscriptions.md) to make it clearer, and add the new pricing UI setting.**
 - Subscriptions: Moved the `checkout_success` endpoint to be a global `confirm` endpoint instead
   of a team-specific endpoint.
@@ -1223,7 +1327,7 @@ Thanks Matthias and Alexander for reporting this.
 
 ## Version 2023.8.1
 
-This is a bugfix release that fixes deployment to render. 
+This is a bugfix release that fixes deployment to render.
 
 To get the fix you don't need to upgrade, just add these two lines to your `envVars` section in `render.yaml`
 to explicitly bump the node version used from 14 to 18.
@@ -1240,7 +1344,7 @@ Thanks Greg and Michiel for the bug report and suggested fix.
 ## Version 2023.8
 
 This release adds official support for three marketing email platforms (Mailchimp, ConvertKit, and Email Octopus),
-adds dark mode on Tailwind builds, and has the usual smaller updates and fixes.  
+adds dark mode on Tailwind builds, and has the usual smaller updates and fixes.
 
 ### Added
 
@@ -1254,7 +1358,7 @@ adds dark mode on Tailwind builds, and has the usual smaller updates and fixes.
   browser is configured for it. Components that weren't properly styled for dark mode now are.
   If you spot any issues please report them!
 - The `get_next_unique_slug` helper function can now take filter arguments, so you can have unique fields dependent on other fields
-  (for example, if you want to have slugs which are unique per team). 
+  (for example, if you want to have slugs which are unique per team).
 - Added tests for `get_next_unique_slug` (including testing the new functionality).
 - Added view tests for the signup process with various edge-cases around team names.Docker
 - Added a `Makefile` target, and documentation for rebuilding the API client with Docker.
@@ -1264,8 +1368,8 @@ adds dark mode on Tailwind builds, and has the usual smaller updates and fixes.
 
 - Removed empty JavaScript files in certain builds that were causing `npm type-check` to fail. (Thanks George for reporting!)
 - Only try to log mailing list errors to Sentry if building with Sentry enabled.
-- Fixed a bug in `get_next_unique_slug` that was failed if you passed in a custom `slug_field_name`. 
-  Also added a test that would have caught it. 
+- Fixed a bug in `get_next_unique_slug` that was failed if you passed in a custom `slug_field_name`.
+  Also added a test that would have caught it.
 - Fixed a bug where unicode team names were creating teams with an empty slug, which was causing a crash on logging in.
 - Fixed a typo in the `Makefile` (thanks Arno for reporting!)
 - [Documentation] Fixed issue in the digital ocean setup docs that was accidentally resulting in the creation of two Postgres databases,
@@ -1291,7 +1395,7 @@ adds dark mode on Tailwind builds, and has the usual smaller updates and fixes.
 ### Upgrading
 
 If you were previously using the mailchimp email functionality, you will need to edit your project
-and select "Mailchimp" under "Email Marketing Platform" to keep using it. 
+and select "Mailchimp" under "Email Marketing Platform" to keep using it.
 
 *Aug 8, 2023*
 
@@ -1304,10 +1408,10 @@ This is a large maintenance release with many improvements and a few new feature
 - **Expanded the built-in timezone support (if building with internationalization).** This includes:
   - A new timezone setting on the User model/profile.
   - A middleware that sets and unsets the timezone based on the user's setting.
-  - A built-in list of default timezones. 
+  - A built-in list of default timezones.
 - **Added the option to remove compiled static files at Pegasus build time.**
   If checked, your Pegasus build will not include any static files, and they will be added to the `.gitignore` file.
-  This is useful to check after you have set up static file builds as part of a CI/CD pipeline. 
+  This is useful to check after you have set up static file builds as part of a CI/CD pipeline.
   [More here](front-end.md#long-term-best-practices).
 - **Added optional support for enabling Django's [admin docs](https://docs.djangoproject.com/en/4.2/ref/contrib/admin/admindocs/#module-django.contrib.admindocs)
   via a new project setting.**
@@ -1319,7 +1423,7 @@ This is a large maintenance release with many improvements and a few new feature
 - **Removed all React dependencies and supporting code when building without React and without the built-in examples.**
 - Made order of example navigation and example homepage cards consistent.
 - Placed HTMX object lifecycle demo before the Vue one.
-- Better styling of terms link in signup forms (Tailwind builds only) 
+- Better styling of terms link in signup forms (Tailwind builds only)
 - Moved `page_js` block to the bottom of the `<body>` in the base template.
   This allows using other imported libraries (e.g. site-bootstrap.js) in inherited templates. (Thanks Finbar for suggesting)
 - Switched `UserLocaleMiddleware` to use the "new" style of Django middleware, using `__call__` instead of `process_request`
@@ -1479,10 +1583,10 @@ Details:
   Older version of Python (back to 3.8) are still expected to work, but are no longer actively tested.
 - Updated references in README and docs to use 3.11 everywhere.
 - Updated development Docker image to use 3.11.
-- Updated all deploy targets to default to 3.11. 
+- Updated all deploy targets to default to 3.11.
 - Updated `black` and `isort` configs to 3.11.
 - Updated Github Actions to run tests on 3.11 only. Older versions can still be added back manually.
-- **Upgraded most Python packages to latest compatible Python 3.11 versions.** 
+- **Upgraded most Python packages to latest compatible Python 3.11 versions.**
   Django was not upgraded to 4.2, because Wagtail has not released support for it yet.
   If you aren't using Wagtail, you can upgrade to 4.2 now with no known issues.
 
@@ -1495,14 +1599,14 @@ Details:
   Node 16 is still expected to work, but is not actively tested.
 - Updated references in README and docs to use 18 everywhere.
 - Updated development Docker image to use 18.
-- Updated all deploy targets to default to 18. 
+- Updated all deploy targets to default to 18.
 - Updated Github Actions to run tests on 18 and 19 only. Older versions can be manually added back.
 - **Upgraded all node packages to their latest versions.**
 
 ### Docker compose update
 
 This release switches Docker compose to use version 2. Version 1 will be removed from Docker in a few months.
-More details in the [Docker docs](https://docs.docker.com/compose/compose-v2/). 
+More details in the [Docker docs](https://docs.docker.com/compose/compose-v2/).
 
 Details:
 
@@ -1513,7 +1617,7 @@ Details:
 ### Requirements update
 
 This release updates the Python requirements files (again).
-Apologies for the iteration on this---trying to find the best long-term workflow and hopefully this is it. 
+Apologies for the iteration on this---trying to find the best long-term workflow and hopefully this is it.
 
 - The `requirements/dev-requirements.txt` (and `.in`) file no longer includes everything in `requirements/requirements.txt`.
   It now only has the requirements used *only* in development.
@@ -1528,7 +1632,7 @@ Smaller updates in this release are below.
 
 #### Added
 
-- **You can now automatically remove the teams example. Uncheck "include Teams example" in your project settings.** 
+- **You can now automatically remove the teams example. Uncheck "include Teams example" in your project settings.**
 - Added an "I agree to terms" checkbox on sign up for all CSS frameworks.
 - Added link to impersonate a user to the app navigation on tailwind builds.
 - Added a basic `robots.txt` file that disables crawling on the admin and wagtail admin sites. (Thanks Alex for suggesting)
@@ -1546,7 +1650,7 @@ Smaller updates in this release are below.
 - Fixed a bug where `black` and `isort` occasionally conflicted on import styles.
 - Changed a few single-quotes strings in commented code to use double-quotes to match black styling.
 - Added a missing trailing slash in a teams url.
-- Added a default empty string to `AWS_ACCESS_KEY_ID` in `settings.py`  
+- Added a default empty string to `AWS_ACCESS_KEY_ID` in `settings.py`
   (this avoids potential crashes running `collectstatic` if it wasn't set in the environment).
 - Fixed a bug where custom form classes were not applied to input fields on Tailwind. (thanks Lars for reporting)
 - Always include `"allauth.socialaccount"` in `INSTALLED_APPS`,
@@ -1716,11 +1820,11 @@ The subscriptions UI was updated to use Alpine, and more features will move to A
 - **Added S3 media support, as described above and in the [S3 media documentation](configuration.md#setting-up-s3-media-storage).**
 - **Added Alpine.js as a top-level JavaScript dependency, included on all pages.**
 - **Added `dev-requirements.in` and `dev-requirements.txt`, for requirements that should only be installed in development
-  (e.g. `pip-tools`, `debug-toolbar`, `black`, etc.** 
+  (e.g. `pip-tools`, `debug-toolbar`, `black`, etc.**
 - Added health checks to Docker postgres and redis, to ensure they are ready before other containers start. (thanks Moritz for suggesting!)
 - Added a `make npm-dev` command to build front end for development in Docker.
 - Added a wrapping `meta` block to `base.html` to make overriding the page-level metadata more flexible.
-  Wagtail blog post pages now use this to override the page title and description for social sharing. 
+  Wagtail blog post pages now use this to override the page title and description for social sharing.
 - Added `.direnv` and `.envrc` files to `.gitignore`
 - Added global `[x-cloak]` style to hide elements in Alpine.
 
@@ -1738,7 +1842,7 @@ The subscriptions UI was updated to use Alpine, and more features will move to A
 - Moved stripe `card_element.html` component to `pegasus/examples/payments/components/card_element.html`, and only
   include it if you build with examples.
 - Upgraded generated API client to version 6.4.0, and regenerated the API client.
-- Upgraded django to 4.1.7 and celery-progress to 0.2. 
+- Upgraded django to 4.1.7 and celery-progress to 0.2.
 - Added `SOCIALACCOUNT_LOGIN_ON_GET = True` to `settings.py`.
   This removes the extra confirmation page for social sign ups, improving the UX, though does
   open up a minor security risk [outlined here](https://github.com/pennersr/django-allauth/blob/master/ChangeLog.rst#security-notice-1).
@@ -1909,7 +2013,7 @@ This release is a minor/hotfix update with a few small changes.
 
 ### Fixed
 
-- Catch and fix Stripe errors when trying to view a cancelled subscription that has not been synchronized with Stripe 
+- Catch and fix Stripe errors when trying to view a cancelled subscription that has not been synchronized with Stripe
 
 *Nov 4 2022*
 
@@ -1986,11 +2090,11 @@ Related changes:
 
 Related changes:
 
-- Remove `customer` from the `CustomUser` model and add it to `SubscriptionModelBase` (which will go to the `Team` 
+- Remove `customer` from the `CustomUser` model and add it to `SubscriptionModelBase` (which will go to the `Team`
   on team-based builds)
 - Set the `DJSTRIPE_SUBSCRIBER_MODEL` to the Team object, if using teams.
 - Updated logic that gets/sets the customer to use the Team instead of the user.
-- No longer force using the logged-in User's email address at checkout (for team based builds),  
+- No longer force using the logged-in User's email address at checkout (for team based builds),
   so they can specify a different billing email.
 - No longer re-use credit cards / Customers when the same user signs up for subscriptions in multiple teams.
 
@@ -2011,7 +2115,7 @@ Related changes:
   This makes development environments more like production, though is largely invisible.
 - **All docker-based deployments now build front end assets as part of the deploy step**.
   Previously this was only done for Heroku-based deploys.
-- **All docker-based deployments are now based off the `buster` image.** 
+- **All docker-based deployments are now based off the `buster` image.**
 - Added `--noinput` to heroku migrations command.
 - Deployments that run Celery now run it with the `--beat` option by default, and a concurrency of 2.
 - Increased length of generated secret key in production environment files.
@@ -2043,7 +2147,7 @@ for team-based builds.
 
 If you do NOT have any live customers associated with your Users the migration process is standard,
 just run `./manage.py makemigrations` followed by `./manage.py migrate`.
-**Note: this will drop all User-->Customer relationships.** 
+**Note: this will drop all User-->Customer relationships.**
 
 If you DO have live customers associated with your Users, and you want to preserve this data,
 the migration process is more complicated:
@@ -2057,7 +2161,7 @@ First, add the following line *back* to the `CustomUser` model:
 Next, create and run migrations:
 
 ```bash
-./manage.py makemigrations 
+./manage.py makemigrations
 ./manage.py migrate
 ```
 
@@ -2069,7 +2173,7 @@ Next you need to move the `Customer` from the user to their team. You can do thi
 
 If the customer only had a single subscription, it will be correctly applied to the right team.
 If the customer had multiple subscriptions, the command will print out errors *which you must resolve manually*.
-You can either choose to drop this information, or associate the customer with a single Team. 
+You can either choose to drop this information, or associate the customer with a single Team.
 
 Once you are happy with how you've migrated the data you can remove the `customer` field from above
 from the user, and run `./manage.py makemigrations` followed by `./manage.py migrate` to drop it from the user table.
@@ -2127,13 +2231,13 @@ See the new [Internationalization docs](internationalization.md) for more inform
 
 Major related changes:
 
-- Added a language selector to the site footer for users who aren't logged in. 
+- Added a language selector to the site footer for users who aren't logged in.
 - Added a `language` field to the `CustomUser` model and profile page.
 - Added `UserLocaleMiddleware` to set the user's language whenever they are logged-in.
 - Update wagtail bootstrap code to generate localizable pages.
 - Added translations markup to a substantial subset of code across Django views, templates and JavaScript.
   More translation markup will be added incrementally with new releases.
-- Replaced `trans` templatetag with `translate` in a number of places. 
+- Replaced `trans` templatetag with `translate` in a number of places.
 
 ### Other Changes
 
@@ -2141,7 +2245,7 @@ Major related changes:
   This means that `request.team` will be available on every request, so team navigation will be available
   even on pages like a user profile that are not team-specific.
   For details see the updated [teams middleware docs](teams.md#middleware),
-  as well as the upgrade notes below. 
+  as well as the upgrade notes below.
 - Added tests for the above middleware, and updated other tests to be compatible with it.
 - Added a context processor so that `team` is always available in the template context.
   Also removed code setting `team` in context in `TeamObjectViewMixin`.
@@ -2175,7 +2279,7 @@ This is another hotfix release. Thanks Daniel and Jacob for reporting bugs!
 This is a hotfix release with a few fixes from the last build.
 Thanks to Jim and Logan for quickly reporting issues!
 
-### Fixes 
+### Fixes
 
 - Fix environment variable name used for database port in settings.py.
 - Removes accidentally added text from the landing page (Tailwind builds only).
@@ -2215,7 +2319,7 @@ See the updated [Tailwind docs](/css/tailwind/) for more information and customi
 
 - **Pegasus now ships with a default, customizable logging configuration.** [Documentation](configuration.md#logging).
 - Added several new helper CSS classes, including `pg-content` (for content), `pg-columns-reversed` (for reversed columns),
- `pg-align-items-center` (a flexbox utility), and various `pg-text-` classes for coloring text. 
+ `pg-align-items-center` (a flexbox utility), and various `pg-text-` classes for coloring text.
 
 ### Other Changes
 
@@ -2223,14 +2327,14 @@ See the updated [Tailwind docs](/css/tailwind/) for more information and customi
   The "Delete" button was removed from the team list UI.
 - **Deleting a team/user will now automatically cancel any subscription associated with that team/user.** (thanks Florian for reporting!)
 - **Updated many templates to use `pg-` Pegasus helper CSS classes instead of CSS-framework-specific ones.**
-  Affected places include: several places in the Pegasus examples, `app_home.html`, the user `profile_form.html` and 
+  Affected places include: several places in the Pegasus examples, `app_home.html`, the user `profile_form.html` and
   social account connections page, the React teams editing UI, subscription helper pages, default landing page,
   password reset pages, team invitation pages, user impersonation, wagtail / blog pages, 404 / 500 pages and more.
 - Replaced underscores with hyphens in example URLs.
 - Increased margins between buttons and forms/controls in a few templates.
 - Improved styling of the default email management page.
 - Upgraded several NPM packages to the latest versions including Bootstrap version to 5.2.
-- Overhauled [CSS docs](/css/). 
+- Overhauled [CSS docs](/css/).
 - Mark `help_text` as safe in form_tags (allows adding links and other HTML to your help text)
 - Add trailing slash to urls in `apps/web/urls.py`.
 - Updated default CI configuration to build all pull requests (was previously all pull requests to `main` only)
@@ -2266,7 +2370,7 @@ Due to the large number of updates, a few major changes have been grouped togeth
 ### Added TypeScript support
 
 The Pegasus front-end build pipeline now supports [TypeScript](https://www.typescriptlang.org/).
-You can continue to write code in normal JavaScript, or introduce TypeScript incrementally on new code, 
+You can continue to write code in normal JavaScript, or introduce TypeScript incrementally on new code,
 on a file-by-file basis. Future versions of Pegasus are likely to incrementally port more code to TypeScript,
 similar to how types have been incrementally introduced into the Python code.
 
@@ -2298,7 +2402,7 @@ Details related to this change:
 - Added new `drf-spectacular` Python dependency and removed the `coreapi` Python dependency.
 - Added `@extend_schema` markup to most APIs to improve and simplify the generated OpenAPI3 schemas
 - **Added new default endpoints for the OpenAPI3 schema.yml file, Swagger API docs, and Redoc API docs.**
-- **Added a new TypeScript API client that ships with the front end code.** 
+- **Added a new TypeScript API client that ships with the front end code.**
 - Updated all JS client code to use the new client, including the employee demos, React-based team management views, and chart demo.
 - Removed no-longer-used coreAPI helper functions from `assets/javascript/api.js`.
 - Removed no-longer-needed `assets/javascript/teams/api.js`.
@@ -2312,8 +2416,8 @@ Details related to this change:
 - `get_server_root` helper function to support the above.
 - Doc strings for helper functions in `apps/web/meta.py`
 - Type hints for various helper methods inside Django models.
-- Add `pip-tools` to dev Dockerfile so `requirements.txt` can be built in the container. (Thanks Brett for the suggestion!) 
-- Add `make pip-compile` target for rebuilding `requirements.txt` and `make requirements` file for rebuilding requirements.txt, 
+- Add `pip-tools` to dev Dockerfile so `requirements.txt` can be built in the container. (Thanks Brett for the suggestion!)
+- Add `make pip-compile` target for rebuilding `requirements.txt` and `make requirements` file for rebuilding requirements.txt,
   and rebuilding/restarting your Docker containers.
 - Team management URL is now included in team API urls. (React UI only)
 
@@ -2329,7 +2433,7 @@ Details related to this change:
 - Upgraded Django to the latest LTS security release (3.2.14).
 - Dev docker set up now starts celery with the beat flag enabled.
 - Increased the top margin between the navigation and content in content base template. (Bootstrap only, thanks Will for suggesting!)
-- Deleted some accidentally-included commented out code in the Vue employee demo. 
+- Deleted some accidentally-included commented out code in the Vue employee demo.
 
 *July 8, 2022*
 
@@ -2368,7 +2472,7 @@ Complete release notes are below:
 - Show top navigation menu even if user is logged in (but hide the sign up / sign in buttons) (Material Theme Only)
 - Increase top margin on 404 and 500 error pages (Bootstrap only)
 - Reduced whitespace in some html templates.
-- Changed reference of `djstripe_sync_plans_from_stripe` to `bootstrap_subscriptions` in subscription error message. 
+- Changed reference of `djstripe_sync_plans_from_stripe` to `bootstrap_subscriptions` in subscription error message.
 - Removed "[project name]" prefix from signup / password reset emails
 - Refactor: use `get_protocol` and f-strings in `absolute_url` helper function
 - Removed "More coming soon" text from the Pegasus examples homepage.
@@ -2397,7 +2501,7 @@ The release also many small fixes and improvements.
 - **Added a periodic task to sync subscriptions with Stripe every day when per-seat billing is enabled.**
 - Added a slug field to `ProductMetadata` to be able to uniquely refer to products in code.
 - Added `sync_subscription_model_with_stripe` helper function (logic was previously only in `sync_subscriptions` management command)
-- Stripe subscriptions are now created with a human-readable description with the team/user associated with the subscription. 
+- Stripe subscriptions are now created with a human-readable description with the team/user associated with the subscription.
 - Show expiration date on subscription details when auto-renewal has been turned off
 - Docker projects now include a `.env.dev.example` file to use as a reference for sharing across team members
   (the `.env.dev` file that ships with Pegasus was .gitignored)
@@ -2460,7 +2564,7 @@ and some Docker development improvements.
 
 - **Added "login with Twitter" as a first-class supported authentication option.**
 - **Users can now see and manage (connect and disconnect) social accounts (Google and Twitter) from their profile pages.**
-- Added new Docker makefile targets, including `make start-bg` to run docker containers in the background (previous default behavior), 
+- Added new Docker makefile targets, including `make start-bg` to run docker containers in the background (previous default behavior),
   and `make restart` to restart docker containers
 - Added view to simulate errors (by raising an Exception). This is helpful for testing Sentry integrations.
 - Added ability to override page titles in templates using the `{% page_title %}` block.
@@ -2537,7 +2641,7 @@ This is a hotfix release that fixes a crashing bug with Heroku deployments that 
 
 ## Version 0.22
 
-The main feature of this release is a new front-end theme for Pegasus based off of the 
+The main feature of this release is a new front-end theme for Pegasus based off of the
 [Material Kit](https://www.creative-tim.com/product/material-kit) and [Material Dashboard](https://www.creative-tim.com/product/material-dashboard)
 products from Creative Tim.
 
@@ -2572,7 +2676,7 @@ This release also adds support for Django 4.0. See note below for details.
 
 ### Fixed
 
-- Fixed widget class overrides from not being populated for some widgets. 
+- Fixed widget class overrides from not being populated for some widgets.
   This also fixes "select all" functionality in the Django admin for Bootstrap builds. (Thanks Will for reporting!)
 - Fixed connection strings for Redis on Heroku if you were not on the free tier, by adding `?ssl_cert_reqs=none` to Redis connection strings. (Thanks Reid for reporting!)
 - Fixed 500 error in payments example if the "Pay" button was clicked before the JavaScript on the page fully loads.
@@ -2603,7 +2707,7 @@ It mostly undoes a small handful of changes from the 0.21 release.
 
 - `HasUserAPIKey` permission class now populates `request.user` with the associated user, if a valid `UserAPIKey` is present.
 - API Views and Viewsets now continue to access users via `request.user` instead of the `get_user()` helper functions
-- `TeamSerializer` now accesses the user from the request instead of the explicit `["user"]` context. 
+- `TeamSerializer` now accesses the user from the request instead of the explicit `["user"]` context.
 
 ### Removed
 
@@ -2635,7 +2739,7 @@ There are also a number of smaller fixes and upgrades.
 
 ### Changed
 
-- Updated how some type hints are done to reduce potential for circular imports caused by typing 
+- Updated how some type hints are done to reduce potential for circular imports caused by typing
 - Updated headings of account pages to be more consistent with rest of site
 
 ### Fixed
@@ -2648,8 +2752,8 @@ There are also a number of smaller fixes and upgrades.
 
 ### Removed
 
-- Building for multiple CSS frameworks has been removed. 
-  To try different CSS frameworks you will need to edit your project and download each codebase separately. 
+- Building for multiple CSS frameworks has been removed.
+  To try different CSS frameworks you will need to edit your project and download each codebase separately.
 
 ### Deprecated
 
@@ -2672,7 +2776,7 @@ You can find a 6-minute overview of the feature in this video:
     <iframe src="https://www.youtube.com/embed/v_ayMEj924w" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div>
 
-The implementation is customizable and can also be used by non-team builds with some additional configuration. 
+The implementation is customizable and can also be used by non-team builds with some additional configuration.
 See [the updated Subscription documentation](subscriptions.md#per-unit--per-seat-billing)
 for an overview of this functionality, and bear in mind that it's a little complicated with several moving parts!
 
@@ -2760,7 +2864,7 @@ The following supporting changes were also made:
 
 - Added a comprehensive test suite supporting the above workflows.
 - Fixed a bug that prevented re-inviting the same email address to a team even if the previous invitation had already
-  been accepted. Duplicate pending invitations are still prevented. 
+  been accepted. Duplicate pending invitations are still prevented.
   This change also removed the DB constraint requiring team and email address to be unique.
 - Fixed bug where "resend invitation" and "cancel invitation" buttons were incorrectly showing up for non-admins.
 - Added helper `is_admin` method to team `Membership` objects.
@@ -2780,7 +2884,7 @@ A few updates were made to make deployments to Heroku containers faster and more
   This results in vastly improved build times for Heroku docker deployments.
 - Build the front end files as part of Heroku container deployments
 - Run database migrations by default on Heroku container deployments
-- Set various production-recommended settings in `settings_heroku.py`. 
+- Set various production-recommended settings in `settings_heroku.py`.
   For more details see the new [production checklist](/deployment/production-checklist) in the documentation.
 
 **Other minor updates**
@@ -2906,8 +3010,8 @@ The default ID for all Pegasus models was changed from `AutoField` to `BigAutoFi
 If you are upgrading a project using `AutoField` you should *not* merge any changes to initial migration
 files in the affected apps. Then you can either:
 
-1) To change your apps from `AutoField` to `BigAutoField`, run `./manage.py makemigrations` and `./manage.py migrate` 
-1) To keep using `AutoField`, change the setting back to `AutoField` in `apps.py` for all Pegasus apps. 
+1) To change your apps from `AutoField` to `BigAutoField`, run `./manage.py makemigrations` and `./manage.py migrate`
+1) To keep using `AutoField`, change the setting back to `AutoField` in `apps.py` for all Pegasus apps.
 
 *Aug 24, 2021*
 
@@ -2943,9 +3047,9 @@ Not doing so could lead to unexpected behavior and demo data loss!***
 **New: Improved Django form support:**
 
 - Added a Django forms implementation of the employee / object demo
-- Rename `bootstrap_form_fields` and `bulma_form_fields` templatetags to `form_fields` if not using 
-  multiple-css-framework support  
-- Add `render_form_fields` helper function to render an entire form. (Note: this currently only supports text-style, 
+- Rename `bootstrap_form_fields` and `bulma_form_fields` templatetags to `form_fields` if not using
+  multiple-css-framework support
+- Add `render_form_fields` helper function to render an entire form. (Note: this currently only supports text-style,
   checkbox, and select input types.)
 - Add `render_checkbox_input` to bootstrap form rendering tags
 - Added a basic non-model form example
@@ -2967,7 +3071,7 @@ Not doing so could lead to unexpected behavior and demo data loss!***
 - Changed some navigation and text around the employee app example
 - Remove inline style declarations from a few examples
 - Added some instructions about initializing your database to the README
-- Update migrations to be compatible with latest Django / Pegasus code 
+- Update migrations to be compatible with latest Django / Pegasus code
 
 **Upgrade notes:**
 
@@ -3010,7 +3114,7 @@ at build time.
 
 - Make http/https in absolute URLs (e.g. email invitations) configurable via the `USE_HTTPS_IN_ABSOLUTE_URLS` setting
 - Start adding type hints to the codebase, primarily in helper functions. More coming soon!
-- Added more tests for teams helper functions 
+- Added more tests for teams helper functions
 - Split out `subscription/views.py` into multiple files to make it clearer which views affect which functionality.
 - Break `upgrade_subscription.html` into multiple files to support elements and checkout-based flows.
 - Improve default string representation of user model
@@ -3056,7 +3160,7 @@ A very minor release:
 A very minor release:
 
 - Update Django to 3.2.4
-- Remove `DEFAULT_AUTO_FIELD` declaration from settings. 
+- Remove `DEFAULT_AUTO_FIELD` declaration from settings.
   This was causing issues with allauth migrations being generated, as a result of [this issue](https://github.com/pennersr/django-allauth/pull/2829).
   Until more libraries have worked around these migration issues, Pegasus will just ship with the default setting.
 
@@ -3076,19 +3180,19 @@ Local app migrations would then add a dependency to this migration, which would 
 This often manifested as an error along the lines of the following when setting up a second environment:
 
 ```
-django.db.migrations.exceptions.NodeNotFoundError: 
+django.db.migrations.exceptions.NodeNotFoundError:
   Migration .0003_auto_20210524_1532 dependencies reference nonexistent parent node ('djstripe', '0008_auto_20210521_2314')`
 ```
 
 To fix this there are a few steps:
 
-1. You should explicitly uninstall and reinstall `dj-stripe` instead of just installing requirements to ensure the 
+1. You should explicitly uninstall and reinstall `dj-stripe` instead of just installing requirements to ensure the
    generated migration file is removed. `pip uninstall dj-stripe && pip install dj-stripe==2.4.4`
 2. You should rebuild your own app's migrations to no longer depend on the generated `dj-stripe` migration,
    by deleting the bad files and re-running `makemigrations` on a fresh environment.
 3. You will need to "fake" migrations for any existing DBs, by manually deleting relevant rows from the `django_migrations`
    table and then running `./manage migrate <appname> --fake` for each affected app.
-   
+
 Please reach out for support on Slack if you run into any issues with this, and I'm happy to help!
 
 *May 26, 2021*
@@ -3135,7 +3239,7 @@ Details are below:
 - Upgrade all python packages to latest versions (including Django to 3.2 LTS)
 - Updated settings file to the version that ships with Django 3.2
 - Update formatting of requirements files to the latest version used by `pip-tools`
-- Upgrade all JS packages to latest versions 
+- Upgrade all JS packages to latest versions
 - Switch from deprecated node-sass to dart-sass
 
 **Other updates**
@@ -3153,13 +3257,13 @@ Details are below:
 - Add `@tailwind/forms` plug in for improved form styling
 - Split Pegasus Tailwind CSS classes into a new file to mirror Bootstrap/Bulma implementations
 - Fix collectstatic errors when building with tailwind and whitenoise (affected Heroku and Digital Ocean deployments)
-- Remove broken landing page and pricing page examples, and point people to Tailwind UI instead 
+- Remove broken landing page and pricing page examples, and point people to Tailwind UI instead
 
 **Upgrade notes:**
 - Django added the new [Default primary key field type](https://docs.djangoproject.com/en/stable/ref/settings/#default-auto-field)
   setting. If you wish to use the default in 3.2 you will have to add DB migrations for it. Otherwise you
   can change the value of `DEFAULT_AUTO_FIELD` to `'django.db.models.AutoField'` in your `settings.py` file.
-- Bootstrap users may need to run `npm update bootstrap` before building static assets to get all styling 
+- Bootstrap users may need to run `npm update bootstrap` before building static assets to get all styling
   of the examples working again.
 
 *April 28, 2021*
@@ -3204,7 +3308,7 @@ See the new [CSS documentation](/css/) for an overview of the new structure.
 Major changes:
 
 - Full support for Bootstrap CSS!
-- Restructure CSS files, creating framework-level subfolders, splitting `site-base` and `site-<framework>` files out, 
+- Restructure CSS files, creating framework-level subfolders, splitting `site-base` and `site-<framework>` files out,
   and making Sass imports implicit in the Bulma files.
 - Examples CSS overhaul, converting styles to `pg-` classes and adding the `pegasus/<framework>.sass` files to
   style examples and JavaScript.
@@ -3231,7 +3335,7 @@ Minor changes:
 
 ## Version 0.12.1
 
-This release continues the overhaul of the Pegasus CSS and templates to include experimental support for 
+This release continues the overhaul of the Pegasus CSS and templates to include experimental support for
 the Bootstrap CSS framework. Details on using Bootstrap [can be found here](/experimental).
 
 Changes affecting everyone:
@@ -3243,7 +3347,7 @@ Changes affecting everyone:
 - Split subscription details on the "view subscription" page into its own component templates.
 - Split hero section on the "upgrade subscription" page into its own component templates.
 - In `subscriptions.sass`, use css variables instead of sass variables for colors.
-- On subscription page, change "upgrade-features" selector from an ID to a class in HTML and CSS. 
+- On subscription page, change "upgrade-features" selector from an ID to a class in HTML and CSS.
 - Remove unused styles from `subscriptions.sass`
 - Clean up whitespace in a number of files
 
@@ -3277,9 +3381,9 @@ Instructions on upgrading can be found on the ["upgrading" page](/upgrading).
 
 **Additional related changes and fixes**
 
-- Remove `package-lock.json` from Pegasus for improved compatibility across NPM / OS versions. 
+- Remove `package-lock.json` from Pegasus for improved compatibility across NPM / OS versions.
   It is recommended to run `npm install` and then check in the resulting `package-lock.json` file to source control.
-  More details can be found in the [front end docs](/front-end). 
+  More details can be found in the [front end docs](/front-end).
 - Switch some styling from Sass variables to CSS variables (e.g. colors) for compatibility with multiple CSS frameworks
 - Add a `site-base.sass` file for base Pegasus styles that aren't dependent on any CSS framework.
 - Fix issue with `PlanSerializer` and `dj-stripe` version 2.4.1
@@ -3293,13 +3397,13 @@ Instructions on upgrading can be found on the ["upgrading" page](/upgrading).
 
 ## Version 0.11.3
 
-This release overhauls the Payments example to use the Stripe `PaymentIntent` API 
+This release overhauls the Payments example to use the Stripe `PaymentIntent` API
 and [support 3DS / SCA cards](https://stripe.com/docs/strong-customer-authentication).
 
 Minor changes:
 
 - Upgrade `dj-stripe` to `2.4.1`
-- Pull `DJSTRIPE_WEBHOOK_SECRET` setting from environment variable if available 
+- Pull `DJSTRIPE_WEBHOOK_SECRET` setting from environment variable if available
 
 If you are upgrading from a previous installation, you may need to change
 the following two values in `settings.py`:
@@ -3314,7 +3418,7 @@ DJSTRIPE_USE_NATIVE_JSONFIELD = True  # change to False if not a new installatio
 ## Version 0.11.2
 
 - Fixes to subscription workflow when using a trial period - automatically refresh page after
-  card is accepted and support 3D-Secure validation for credit cards when using a trial. 
+  card is accepted and support 3D-Secure validation for credit cards when using a trial.
 
 *December 9, 2020*
 
@@ -3337,7 +3441,7 @@ This release is a grab-bag of fixes and upgrades based on recent feedback.
 - Clean up payments UI a little
 - Remove accidentally included `team_admin.html` template when not building with teams
 - Remove accidentally included `Dockerfile.dev` template when not building with Docker
-- Remove unused CSS classes from examples 
+- Remove unused CSS classes from examples
 - Upgrade various NPM packages to latest versions
 - Upgrade `django-allauth` to `0.44.0`
 - Upgrade `django` to `3.1.4`
@@ -3400,14 +3504,14 @@ More details can be found in the new [deployment guide](/deployment/).
 
 ## Version 0.10.0
 
-This is largely a maintenance release with mostly minor updates and fixes, 
+This is largely a maintenance release with mostly minor updates and fixes,
 but there are enough library upgrades that it warrants a version bump.
 
 - Upgrade all Python packages including upgrading to Django 3.1.2
 - Upgrade all npm packages
 - Add a new API for products and metadata at `/subscriptions/api/active-products/`.
   Also includes adding some serialization classes and helper functions to subscriptions models.
-  *Subscriptions only.* 
+  *Subscriptions only.*
 - Fix a bug where clicking on "Dashboard" didn't always take you to the right team.
   Also set team ID in the request session so it can be accessed across requests, and
   add `get_default_team` helper function to pull the last/current team from a request.
@@ -3424,7 +3528,7 @@ but there are enough library upgrades that it warrants a version bump.
 
 This release is a large overhaul of the React example that ships with Pegasus, including:
 
-- Add url-routing support. Add/edit URLs now update and are linkable. 
+- Add url-routing support. Add/edit URLs now update and are linkable.
   This also enables back button support
 - Add validation feedback missing / bad data
 - Switch all components from using classes to [hooks](https://reactjs.org/docs/hooks-intro.html)
@@ -3461,7 +3565,7 @@ pip install --upgrade pegasus-installer>=0.0.2
 ## Version 0.8.2
 
 This release fixes an edge case in the invitation accepting logic that didn't work if
-a user left the page and came back later. 
+a user left the page and came back later.
 
 *Aug 24, 2020*
 
@@ -3499,7 +3603,7 @@ Details and other changes:
 - Removed built-in "Cancel" option and supporting code.
 - Upgraded `stripe` library to version `2.48.0`
 - Removed the `.customer` field from `CustomUser` object. Customers are now always accessed via their
-  associated subscriptions. 
+  associated subscriptions.
 - Removed a lot of no-longer-needed code from `SubscriptionModelMixin` related to accessing subscriptions
   from the `.customer` field. References to `.stripe_subscription` should be changed to simple `.subscription`
   on the `CustomUser` and `Team` objects.
@@ -3582,7 +3686,7 @@ little new / changed in terms of functionality.
 The philosophy guiding this change is "your starting code base should be as understandable as possible".
 
 Historically, Pegasus has attempted to separate "Pegasus-owned" files from "user-owned" files.
-The thinking behind this structure was that Pegasus upgrades and code merges would be as easy as possible since - 
+The thinking behind this structure was that Pegasus upgrades and code merges would be as easy as possible since -
 in theory - users would not need to modify anything in the "Pegasus-owned" space.
 
 In practice, the line between "Pegasus-owned" and "user-owned" was fuzzy, and customizing
@@ -3623,7 +3727,7 @@ Other changes and fixes include:
 
 - Fix accepting an invitation if you're already signed in
 - Remove subscription-related fields from team and user models if not using subscriptions
-- Only ship base migration files for users and teams, and have applications manage their own migrations 
+- Only ship base migration files for users and teams, and have applications manage their own migrations
 - Improved checks and error-handling around accepting invitations multiple times
 - Upgraded `bulma` CSS framework to `0.8.2`
 - Upgraded `node-sass` to `4.14.1`
@@ -3643,7 +3747,7 @@ to use the same DB schema has proven unwieldy. Thus, migrations are now expected
 For new users, the only change is that prior to running `./manage.py migrate` for the first time,
 you must first run `./manage.py makemigrations`.
 
-For existing users you can either keep your current migrations folder, or you can run 
+For existing users you can either keep your current migrations folder, or you can run
 `./manage.py makemigrations` and then `./manage.py migrate --fake`. If you have changed the user or team
 models, then you should keep your current folder.
 
@@ -3667,7 +3771,7 @@ models, then you should keep your current folder.
 Version 0.5.1 is a minor maintenance release with a few minor bug fixes and bits of cleanup:
 
 - Upgraded Django to 3.0.5
-- Fixed bug where certain input types were getting overridden in Django Forms (thanks Yaniv for reporting!) 
+- Fixed bug where certain input types were getting overridden in Django Forms (thanks Yaniv for reporting!)
 - Fixed bug with Object Lifecycle and Charts demos not working on Team installations (thanks Greg for reporting!)
 - Moved example chart JavaScript to the webpack pipeline and share Api access variables (thanks Greg for the suggestion!)
 - Switch `admin.py`  files to use the `@admin.register` decorator syntax
@@ -3692,7 +3796,7 @@ Documentation for subscriptions can be [found here](/subscriptions).
 
 ### Javascript build changes
 
-- Added `Pegasus.js` and made different modules available in front end code 
+- Added `Pegasus.js` and made different modules available in front end code
   (see subscriptions upgrade page example usage).
 
 ### Sass / CSS changes
@@ -3711,7 +3815,7 @@ Documentation for subscriptions can be [found here](/subscriptions).
 
 ### Small fixes and changes:
 
-- Moved app-specific templates from inside the apps to global templates directory as recommended by 
+- Moved app-specific templates from inside the apps to global templates directory as recommended by
   Two Scoops of Django
 - Remove redundant raw prefix on some `path` url declarations
 - Reduced some duplicate access to `team` object when already available via the `request` object.
@@ -3726,7 +3830,7 @@ Documentation for subscriptions can be [found here](/subscriptions).
 
 - Added release notes page (this one)
 - Added [subscriptions overview page](/subscriptions)
-- Updated "delete teams code" cookbook to reflect latest team changes 
+- Updated "delete teams code" cookbook to reflect latest team changes
   (all the backend work is now done for you on installation)
 
 *March 30, 2020*

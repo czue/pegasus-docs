@@ -100,7 +100,13 @@ Or to promote a user to superuser, run:
 docker compose exec web python manage.py promote_user_to_superuser me@example.com
 ```
 
-Commonly used commands can be added to the `Makefile` for convenience.
+You can also use the `make manage` command, passing in `ARGS` like so:
+
+```
+make manage ARGS='promote_user_to_superuser me@example.com'
+```
+
+You can add any commonly used commands you want to `custom.mk` for convenience.
 
 ## Updating Python packages
 
