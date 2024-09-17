@@ -7,13 +7,16 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 There are two big updates in this release:
 
-1. The Pegasus CLI, which allows you to spin up new apps super-quickly.
+1. The Pegasus CLI, which allows you to instantly spin up new apps.
 2. E-Commerce/Payments improvements.
 
 ### The Pegasus CLI
 
 The [Pegasus CLI](https://github.com/saaspegasus/pegasus-cli/) is a standalone command-line tool that allows you
-to instantly spin up new Django apps. Here's a quick demo:
+to instantly spin up new Django apps.
+You can specify as many data models as you want and it will generate a starting CRUD interface for each of them.
+
+Here's a quick demo:
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
     <iframe src="https://www.youtube.com/embed/wKS_bbD5RVs" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
@@ -21,6 +24,9 @@ to instantly spin up new Django apps. Here's a quick demo:
 
 **At the moment the CLI only supports HTMX build of Pegasus.**
 A React-based implementation is planned for a future date.
+
+Huge thanks to Peter for his excellent [Pegasus example apps](https://github.com/pcherna/pegasus-example-apps-v2)
+project which served as a reference for implementing the CRUD application and pagination.
 
 ### E-Commerce / Payments demo improvements
 
@@ -46,7 +52,7 @@ on top of the e-commerce demo.
 - Added the ability to pass arguments to `make test` in docker. E.g. `make tests ARGS='apps.teams --keepdb'`.
   (Thanks David for the suggestion!)
 
-### Changed
+#### Changed
 
 - Changed links on the tailwind signup page to use `pg-link` class instead of explict tailwind classes.
   (Thanks Peter for the suggestion!)
@@ -55,9 +61,11 @@ on top of the e-commerce demo.
 - Switched from `assert` statements to `raise ValueError` in the e-commerce Stripe checkout confirmation view.
 - Moved some of the currency helper functions out of the `subscriptions` app into `utils.billing` so they can be
   used in ecommerce workflows even if subscriptions are disabled.
+- Set `PYTHONUNBUFFERED` and `PYTHONDONTWRITEBYTECODE` in docker compose file for python containers.
+  (Thanks Richard for the suggestion!)
 - Upgraded Django to 5.1.1.
 
-### Fixed
+#### Fixed
 
 - Fixed a typo in the help text for the `bootstrap_ecommerce` command.
 - Fixed a bug where `user_teams` context processor could cause a crash if auth middeware didn't run
