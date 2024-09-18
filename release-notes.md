@@ -52,6 +52,8 @@ on top of the e-commerce demo.
 - Improved the navigation and use of breadcrumbs in the demo UI.
 - **See upgrade notes for information about migrating previous data to the new set up.**
 
+See also: the updated [Payments docs](./payments.md).
+
 ### Other Changes
 
 #### Added
