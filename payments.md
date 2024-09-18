@@ -28,14 +28,41 @@ Setting up your development is similar to the [process for subscriptions](./subs
 1. If you haven't already, update the `STRIPE_*` variables in `settings.py` or in your os environment variables to match
    the keys from Stripe. See [this page](https://stripe.com/docs/keys) to find your API keys.
 2. Run `python manage.py bootstrap_ecommerce` to sync your Stripe products and prices to your local database.
-3. Add the product IDs you want to include to the `ACTIVE_ECOMMERCE_PRODUCT_IDS` setting/environment variable.
-   In your `.env` file, you can add a list of products by separating them with commas. E.g. 
-
-```
-ACTIVE_ECOMMERCE_PRODUCT_IDS="prod_1,prod_2,prod_3"
-```
 
 Once you've done this, login and click on the e-commerce tab in the navigation, and you should see your store.
+
+## Data models
+
+### `ProductConfiguration`
+
+What shows up in your store is controlled by the `ProductConfiguration` data model.
+You can manage these objects from the Django admin (available at 
+[http://localhost:8000/admin/ecommerce/productconfiguration/](http://localhost:8000/admin/ecommerce/productconfiguration/) locally).
+For example, to remove a product from the store you can uncheck "is active".
+
+The `ProductConfiguration` model is also a good place to add additional information to your products.
+For example, you can add additional display data there, or add a `FileField` if you want purchases to grant access
+to a digital download.
+
+### `Purchase`
+
+The `Purchase` model is used to record user purchases.
+A `Purchase` is associated with a `User` and a `ProductConfiguration` and also has details of the Stripe checkout session,
+date of purchase, and product/price used at the time of purchase.
+
+## Feature gating
+
+The `@product_required` decorator can be used to restrict access to a view based on whether or not
+the logged-in user has purchased a particular product. This decorator expects a `product_slug` field
+in the URL / view with the slug of the `ProductConfiguration` object to be checked. 
+If the user owns the product, they will be granted access to the view.
+
+Additionally, if the user gets access, two additional field will be populated on the `request` object:
+
+- `request.product_config` will have the `ProductConfiguration` object.
+- `request.product_purchase` will have the `Purchase` object.
+
+If the user does *not* have access to the product, the decorator will redirect them back to the store homepage.
 
 ## Webhooks
 

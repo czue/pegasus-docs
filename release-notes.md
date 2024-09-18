@@ -3,6 +3,17 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.9.1
+
+This release fixes a few things in the 2024.9 release.
+
+- Updated the `bootstrap_ecommerce` management command to create `ProductConfiguration` objects for all active
+  Products in Stripe.
+- Fixed an issue on the ecommerce homepage where a closing `</div>` tag was misplaced if a product
+  didn't have a default price set.
+
+*Sep 18, 2024*
+
 ## Version 2024.9
 
 There are two big updates in this release:
@@ -40,6 +51,8 @@ on top of the e-commerce demo.
 - Added `user_owns_product` and `get_valid_user_purchase` helper functions.
 - Improved the navigation and use of breadcrumbs in the demo UI.
 - **See upgrade notes for information about migrating previous data to the new set up.**
+
+See also: the updated [Payments docs](./payments.md).
 
 ### Other Changes
 
