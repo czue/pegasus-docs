@@ -3,6 +3,15 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.9.2
+
+This release fixes a bug that prevented the CLI from running on Windows machines.
+Thanks Jonathan for reporting!
+
+If you don't want to upgrade you can just `pip install pegasus-cli==0.2.1` to apply the fix.
+
+*Sep 20, 2024*
+
 ## Version 2024.9.1
 
 This release fixes a few things in the 2024.9 release.
