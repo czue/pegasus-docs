@@ -3,6 +3,11 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.10
+
+- Add default region to Redis and Postgres configurations in `render.yaml` to make it easier to find/replace
+  them when changing your project's region. (Thanks Jacob for suggesting!)
+
 ## Version 2024.9.2
 
 This release fixes a bug that prevented the CLI from running on Windows machines.
