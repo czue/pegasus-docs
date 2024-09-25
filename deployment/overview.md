@@ -46,7 +46,11 @@ If, for whatever reason, you don't want to use the built in Kamal option to depl
 the Django documentation provides a good overview on [how to deploy Django to your own server](https://docs.djangoproject.com/en/stable/howto/deployment/).
 
 Pegasus user [Mitja Martini](https://mitjamartini.com/) has documented how he [deploys his SaaS Pegasus
-application to a VPS using Dokku](https://mitjamartini.com/blog/2024/09/22/deploying-django-on-dokku/) (a self-hosted PaaS platform).
+application to a VPS using Dokku](https://mitjamartini.com/blog/2024/09/22/deploying-django-on-dokku/) (an
+open-source, self-hosted PaaS platform).
+
+Pegasus user [Artem Gordinskiy](https://artem.cool/) has documented his experience 
+[migrating Pegasus apps from Kamal to Coolify](https://artem.cool/blog/coolify-django/) (another open-source, self-hosted PaaS).
 
 
 Pegasus's [Docker support](/docker/) can be used as a basis for other production environments
