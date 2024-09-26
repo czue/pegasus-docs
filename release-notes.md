@@ -3,10 +3,23 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
-## Version 2024.10
+## Version 2024.9.3
+
+This release is mainly [an update to the CLI](https://github.com/saaspegasus/pegasus-cli/releases/tag/v0.3):
+
+### CLI updates
+
+- **You can now generate apps that work seamlessly with Pegasus teams** (will use `BaseTeamModel` and add the team
+  slug and permissions checks to all urls and views).
+- The CLI now generates a default `admin.py` config for each data model.
+- User foreign keys now use `settings.AUTH_USER_MODEL` instead of being hardcoded to `apps.users.models.CustomUser`.
+
+### Other changes
 
 - Add default region to Redis and Postgres configurations in `render.yaml` to make it easier to find/replace
   them when changing your project's region. (Thanks Jacob for suggesting!)
+
+*Sep 26, 2024*
 
 ## Version 2024.9.2
 
