@@ -16,6 +16,7 @@ This release is mainly [an update to the CLI](https://github.com/saaspegasus/peg
 
 ### Other changes
 
+- Fixed an issue where HTMX links without href tags weren't showing a pointer cursor on some CSS frameworks.
 - Add default region to Redis and Postgres configurations in `render.yaml` to make it easier to find/replace
   them when changing your project's region. (Thanks Jacob for suggesting!)
 
