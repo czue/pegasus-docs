@@ -3,6 +3,20 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.10
+
+### Changed
+
+- **Subscriptions in a "past due" state are now treated as "active" for the purposes of feature gating
+  and accessing the billing portal.**
+  This is more consistent with [how Stripe treats subscriptions in this state](https://docs.stripe.com/api/subscriptions/object#subscription_object-status).
+  (Thanks Luc for suggesting!)
+
+### Fixed
+
+- Updated several `make` targets to remove the `--no-deps` flag, which would cause the commands to not run
+  if your database container was not already running. (Thanks Gary for reporting!)
+
 ## Version 2024.9.3
 
 This release is mainly [an update to the CLI](https://github.com/saaspegasus/pegasus-cli/releases/tag/v0.3):
