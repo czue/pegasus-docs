@@ -509,6 +509,44 @@ scp kamal@yourapp.com:db_dump.sql ./
 
 Note: you may want to zip or gzip this file first if you have a large database.
 
+#### Doing a database restore
+
+To restore a database you first put the backup file on the host:
+
+```
+scp ./db_dump.sql kamal@yourapp.com:
+```
+
+Then create the DB:
+
+```
+kamal accessory exec postgres 'createdb -h localhost -p 5432 -U <your_app_user> <your_app_db_name>' --reuse
+```
+
+After that you will need to login to the *host* machine:
+
+```
+ssh kamal@yourapp.com
+```
+
+And copy the database dump onto the DB machine.
+Run `docker ps` to get the container id of the DB machine. Then run: 
+
+```
+docker cp db_dump.sql <CONTAINER ID>:/tmp/db_dump.sql
+```
+
+Finally, login to the DB container:
+
+```
+docker exec -it <CONTAINER ID> /bin/bash
+```
+
+And restore the data:
+```
+psql -h localhost -p 5432 -U <your_app_user> <your_app_db_name> < /tmp/db_dump.sql
+```
+
 #### Deploying multiple apps to the same server
 
 One of the major benefits of the VPS-based approach is that you can easily host multiple apps on the same hardware,
