@@ -4,15 +4,14 @@ Pegasus supports container-based deployment to any Linux server using [Kamal](ht
 
 Kamal is a deployment tool that uses Docker to deploy applications to servers. It is designed to be simple to use
 and to work with a single server or a cluster of servers.
+It can also be used to deploy multiple apps to the same server.
 
 Kamal will deploy the app as Docker containers, and will also deploy the database and any other services that are
-required. It will also configure a load balancer ([Traefik](https://traefik.io/) to route traffic to the app
-as well as configure SSL certificates using LetsEncrypt.
+required. It will also configure a load balancer ([kamal-proxy](https://github.com/basecamp/kamal-proxy) to route
+traffic to the app as well as configure SSL certificates using LetsEncrypt.
 
 In the setup here we will run all the services on a single server however Kamal is designed to work with multiple servers,
-so you can easily move services to separate servers and update the Kamal configuration in `deploy/config/deploy.yml`.
-
-*Note: Kamal support was added in a recent version of Pegasus. If you run into any issues, please get in touch!*
+so you can easily move services to separate servers and update the Kamal configuration in `config/deploy.yml`.
 
 ### Screencast
 
@@ -28,7 +27,7 @@ Or follow along with the documentation below.
 
 Deploying on Kamal will require a few pieces:
 
-1. A server running Linux (the latest Ubuntu LTS is recommended---version 22.04 as of this writing) and accessible via SSH.
+1. A server running Linux (the latest Ubuntu LTS is recommended---version 24.04 as of this writing) and accessible via SSH.
 3. A domain name for your app. You will need to create a DNS record pointing to your server's IP address.
 2. A Docker registry to store your images. You can use [Docker Hub](https://hub.docker.com) or any other registry.
 4. A development environment where you install and configure Kamal.
@@ -47,66 +46,17 @@ Some popular choices include:
 5. [Google Cloud](https://cloud.google.com/).
 6. [Microsoft Azure](https://azure.microsoft.com/en-us).
 
-It is recommended to choose the latest Ubuntu LTS---version 22.04 as of this writing---for your operating system.
-Other operating systems might work, but are not officially tested.
+It is recommended to choose the latest Ubuntu LTS---version 24.04 as of this writing---for your operating system.
+Other operating systems might work, but are not tested or officially supported.
 
 We also recommend at least 2GB of RAM.
 
 Once you've chosen a hosting company and provisioned a server, follow the instructions provided to login (SSH)
 to the server. You will need to be able to log in remotely to complete the rest of the setup.
 
-#### Install Docker
-
-Although Kamal can install Docker for you, it is recommended that you install Docker yourself
-so that Kamal does not need to use the root user account---which can expose your server to more attacks.
-
-You can test if Docker is installed by running `docker -v` on the command line. You should see output like
-the following if it is installed correctly.
-
-```
-Docker version 24.0.5, build 24.0.5-0ubuntu1~20.04.1
-```
-
-If you need to install it, you can find instructions in [Docker's documentation](https://docs.docker.com/engine/install/ubuntu/).
-You only need to install Docker Engine, not Docker Desktop.
-
-#### Prepare a user account for Kamal
-
-Next, create a user for Kamal to use.
-You can choose any username you like. In this example we will use `kamal`.
-We'll also add this user to the `docker` group so that Kamal can run docker commands.
-
-First login to your server as a user with root access. Then run the following commands:
-
-```shell
-sudo adduser kamal --disabled-password
-sudo adduser kamal --add_extra_groups docker
-```
-
-Next, add your SSH key to the `kamal` user's `authorized_keys` file so you can login without a password.
-If you need to generate an SSH key you can [follow these steps](https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server):
-
-```shell
-sudo mkdir -p /home/kamal/.ssh
-sudo cp ~/.ssh/authorized_keys /home/kamal/.ssh/authorized_keys
-sudo chown -R kamal:kamal /home/kamal/.ssh
-```
-
-Next, test the login works. Exit out of your server and on your *local machine* run:
-
-```shell
-ssh kamal@<ip-address>
-```
-
-If you've set everything up properly the `kamal` user should be able to login with no password.
-
-Once you're logged in, as a final test, ensure the `kamal` user can run docker commands by running:
-
-```shell
-docker run hello-world
-```
-
-If the command above completes without error you are ready to go!
+The rest of these instructions will run kamal as the root user.
+If you prefer to run kamal as a different user---which can prevent certain kinds of attacks---see
+the note below.
 
 #### Prepare Docker for deployment
 
@@ -619,4 +569,68 @@ ssh $REMOTE_HOST << EOF
 EOF
 
 echo "$KAMAL_PERFORMER deployed $KAMAL_VERSION to $KAMAL_DESTINATION in $KAMAL_RUNTIME seconds"
+```
+
+#### Running Docker as a non-root user
+
+Follow these steps if you don't want to run kamal and Docker as the root user.
+
+##### Manually Install Docker
+
+If you don't run kamal as root you'll have to install Docker yourself.
+
+You can test if Docker is installed by running `docker -v` on the command line. You should see output like
+the following if it is installed correctly.
+
+```
+Docker version 24.0.5, build 24.0.5-0ubuntu1~20.04.1
+```
+
+If you need to install it, you can find instructions in [Docker's documentation](https://docs.docker.com/engine/install/ubuntu/).
+You only need to install Docker Engine, not Docker Desktop.
+
+##### Prepare a user account for Kamal
+
+Next, create a user for Kamal to use.
+You can choose any username you like. In this example we will use `kamal`.
+We'll also add this user to the `docker` group so that Kamal can run docker commands.
+
+First login to your server as a user with root access. Then run the following commands:
+
+```shell
+sudo adduser kamal --disabled-password
+sudo adduser kamal --add_extra_groups docker
+```
+
+Next, add your SSH key to the `kamal` user's `authorized_keys` file so you can login without a password.
+If you need to generate an SSH key you can [follow these steps](https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server):
+
+```shell
+sudo mkdir -p /home/kamal/.ssh
+sudo cp ~/.ssh/authorized_keys /home/kamal/.ssh/authorized_keys
+sudo chown -R kamal:kamal /home/kamal/.ssh
+```
+
+Next, test the login works. Exit out of your server and on your *local machine* run:
+
+```shell
+ssh kamal@<ip-address>
+```
+
+If you've set everything up properly the `kamal` user should be able to login with no password.
+
+Once you're logged in, as a final test, ensure the `kamal` user can run docker commands by running:
+
+```shell
+docker run hello-world
+```
+
+If the command above completes without error you are ready to go!
+
+Finally, update your `config/deploy.yml` file to specify a different user by adding
+an ssh section, as [described in the docs](https://kamal-deploy.org/docs/configuration/ssh/#the-ssh-user):
+
+```yaml
+ssh:
+  user: kamal
 ```
