@@ -238,11 +238,11 @@ kamal accessory reboot postgres
 # rebuild the Redis container
 kamal accessory reboot redis
 
-# rebuild the Traefik container
-kamal traefik reboot
+# rebuild the proxy container
+kamal proxy reboot
 
-# build the Traefik container (if it didn't succeed the first time)
-kamal traefik boot
+# build the proxy container (if it didn't succeed the first time)
+kamal proxy boot
 
 \# push the .env file to the servers
 kamal env push
@@ -299,10 +299,10 @@ for this feature to understand the implications of it being included.
 To change your site's URL, do the following:
 
 1. Set up a new DNS endpoint as outlined above.
-2. Change all ``Host(`example.com`)`` values in your traefik configuration in `deploy.yml` to the new domain.
+2. Change the `host` value in your proxy configuration in `deploy.yml` to the new domain.
 3. Update your `ALLOWED_HOSTS` setting / environment variable as needed.
-4. Run `kamal traefik reboot`.
-4. Run `kamal deploy`
+4. Run `kamal proxy reboot`.
+5. Run `kamal deploy`
 
 Your app should now be running on your new domain.
 
