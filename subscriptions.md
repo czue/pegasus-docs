@@ -508,9 +508,12 @@ There are two recommended workarounds to this:
 
 1. Downgrade your Stripe API version. The most recent supported version is `2023-10-16`.
    Your API version can be found in the "Developers" section of the Stripe dashboard.
-2. Manually add a database migration to your project to increase the size of the column (see below).
+2. Manually add a database migration to your project to increase the size of the column. 
+   If you build with Pegasus version 2024.10 or later, this migration will be automatically added to your project.
+   Otherwise, see below for instructions on adding it.
 
-To increase the size the column you can run:
+Run:
+
 ```
 python manage.py makemigrations web --empty`
 ```
@@ -532,4 +535,3 @@ class Migration(migrations.Migration):
 ```
 
 *You can [read more about this issue and workarounds here](https://github.com/dj-stripe/dj-stripe/issues/2038#issuecomment-2119244742).*
-
