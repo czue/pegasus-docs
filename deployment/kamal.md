@@ -15,10 +15,10 @@ so you can easily move services to separate servers and update the Kamal configu
 
 ### Screencast
 
-You can watch a screencast showing how to deploy to a Digital Ocean Droplet with Kamal here:
+You can watch a screencast showing how to deploy to a Hetzner server with Kamal here:
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
-    <iframe src="https://www.youtube.com/embed/qOc2hZm2uCA" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    <iframe src="https://www.youtube.com/embed/gtzCcZRESQ0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div>
 
 Or follow along with the documentation below.
