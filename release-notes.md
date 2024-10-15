@@ -22,11 +22,14 @@ In the upgrade to Kamal 2, the following changes were made:
 - The `.gitignore` and `.dockerignore` files were updated to reflect the new structure.
 - Added `apps.web.middleware.healthchecks.HealthCheckMiddleware` to workaround Kamal health checks and Django security
   features, [as outlined here](https://github.com/basecamp/kamal/issues/992#issuecomment-2381122195).
+- Removed unnecessary media directory set up from `Dockerfile.web`. It is recommended to use an external storage service
+  for media files and not the Docker container.
 
 In addition, there were a few changes that affect projects that aren't using Kamal:
 
 - `apps.web.locale_middleware` was moved to `apps.web.middleware.locale`
 - `docker_startup.sh` was moved from the `deploy` folder to the project root.
+
 
 The [Kamal documentation](./deployment/kamal.md) has been updated to reflect these changes.
 
@@ -41,7 +44,12 @@ The [Kamal documentation](./deployment/kamal.md) has been updated to reflect the
 - Fixed an issue where Stripe subscription webhooks weren't properly handled if you were using the embedded
   Stripe pricing table. (Thanks Andrew for reporting!)
 - Fixed an issue introduced in 2024.9 where Stripe ecommerce webhooks weren't always processed correctly.
+- Fixed a bug where several `make` targets mistakenly included a `--no-deps` flag which would fail if your
+  database container was not running. (Thanks Gary for reporting!)
+- Added a migration file to automatically work around [this dj-stripe issue](https://github.com/dj-stripe/dj-stripe/issues/2038)
+  so that it wasn't a manual process.
 
+*Oct 15, 2024*
 
 ## Version 2024.9.3
 
