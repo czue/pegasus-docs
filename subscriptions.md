@@ -520,7 +520,7 @@ Then copy the following into the generated file:
 ```python
 class Migration(migrations.Migration):
     dependencies = [
-        ("web", "0001"),
+        ("web", "0001_initial"),
         ("djstripe", "0012_2_8"),
     ]
 
