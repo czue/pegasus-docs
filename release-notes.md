@@ -5,20 +5,21 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ## Version 2024.10
 
-This release upgrades Kamal deployment to Kamal version 2 and drastically simplifies the deployment process.
+This release upgrades Kamal deployment to Kamal 2 and dramatically simplifies the Kamal deployment process.
 
 ### Kamal 2 deployment and related changes
 
 In the upgrade to Kamal 2, the following changes were made:
 
-- Kamal is now run from the root project directory.
-  - The config file was also moved from `deploy/config/deploy.yml` to `config/deploy.yml`
-- Secrets file has moved from `deploy/.env` to `.kamal/secrets`
-- Kamal can now be installed and run with Docker without any additional workarounds.
+- Updated Kamal to run from the root project directory instead of the `deploy` subdirectory.
+  - Also moved the config file was also moved from `deploy/config/deploy.yml` to `config/deploy.yml`
+- Moved environment secrets from `deploy/.env` to `.kamal/secrets` to match Kamal 2's recommendation.
+- Kamal can now be installed and run with Docker without any additional workarounds [as described here](https://kamal-deploy.org/docs/installation/)
   The custom docker set up instructions have been removed.
-- Kamal is now run as root by default, which drastically simplifies setup.
-- Kamal now creates and manages its own docker network, so you don't have to do any netowrk set up.
-- Traefik has been dropped in favor of `kamal-proxy` for the proxy server.
+- Kamal is now run as root by default, which dramatically simplifies the server setup process.
+  There is now no need to run any manual steps to set up your server.
+- Kamal now creates and manages its own docker network.
+- Traefik has been dropped in favor of `kamal-proxy` for the proxy server, as per the new Kamal defaults.
 - The `.gitignore` and `.dockerignore` files were updated to reflect the new structure.
 - Added `apps.web.middleware.healthchecks.HealthCheckMiddleware` to workaround Kamal health checks and Django security
   features, [as outlined here](https://github.com/basecamp/kamal/issues/992#issuecomment-2381122195).
@@ -30,7 +31,6 @@ In addition, there were a few changes that affect projects that aren't using Kam
 - `apps.web.locale_middleware` was moved to `apps.web.middleware.locale`
 - `docker_startup.sh` was moved from the `deploy` folder to the project root.
 
-
 The [Kamal documentation](./deployment/kamal.md) has been updated to reflect these changes.
 
 ### Other fixes
@@ -39,13 +39,11 @@ The [Kamal documentation](./deployment/kamal.md) has been updated to reflect the
   and accessing the billing portal.**
   This is more consistent with [how Stripe treats subscriptions in this state](https://docs.stripe.com/api/subscriptions/object#subscription_object-status).
   (Thanks Luc for suggesting!)
-- Updated several `make` targets to remove the `--no-deps` flag, which would cause the commands to not run
-  if your database container was not already running. (Thanks Gary for reporting!)
+- Fixed a bug where several `make` targets mistakenly included a `--no-deps` flag which would fail if your
+  database container was not running. (Thanks Gary for reporting!)
 - Fixed an issue where Stripe subscription webhooks weren't properly handled if you were using the embedded
   Stripe pricing table. (Thanks Andrew for reporting!)
 - Fixed an issue introduced in 2024.9 where Stripe ecommerce webhooks weren't always processed correctly.
-- Fixed a bug where several `make` targets mistakenly included a `--no-deps` flag which would fail if your
-  database container was not running. (Thanks Gary for reporting!)
 - Added a migration file to automatically work around [this dj-stripe issue](https://github.com/dj-stripe/dj-stripe/issues/2038)
   so that it wasn't a manual process.
 
