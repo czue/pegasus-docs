@@ -7,10 +7,10 @@ and to work with a single server or a cluster of servers.
 It can also be used to deploy multiple apps to the same server.
 
 Kamal will deploy the app as Docker containers, and will also deploy the database and any other services that are
-required. It will also configure a load balancer ([kamal-proxy](https://github.com/basecamp/kamal-proxy) to route
-traffic to the app as well as configure SSL certificates using LetsEncrypt.
+required. It will also configure a load balancer ([kamal-proxy](https://github.com/basecamp/kamal-proxy)) to route
+traffic to the app and configure SSL certificates using LetsEncrypt.
 
-In the setup here we will run all the services on a single server however Kamal is designed to work with multiple servers,
+By default, Pegasus will run all the services on a single server, but Kamal is designed to work with multiple servers,
 so you can easily move services to separate servers and update the Kamal configuration in `config/deploy.yml`.
 
 ### Screencast
@@ -58,62 +58,6 @@ The rest of these instructions will run kamal as the root user.
 If you prefer to run kamal as a different user---which can prevent certain kinds of attacks---see
 the note below.
 
-#### Prepare Docker for deployment
-
-Next, complete the following steps to get the Docker configuration ready for deployment.
-These can be run by the `kamal` user on your remote server.
-
-**Create the Docker Network**
-
-Since we are running the app on a single server we need to use Docker networking to allow the containers to communicate
-with each other. This requires a Docker network to be created on the server:
-
-Run the following on your server, replacing `<your_app>` with your app ID/slug:
-
-```shell
-docker network create <your_app>-network
-```
-   
-*Note: If you are running services on separate servers, you can skip this step and update the Kamal deploy configuration
-to remove the references to the docker network.*
-
-<!---
-**Create Media Volume**
-
-*This step is currently only recommended if you want to use Django to serve media files, which is not recommended.
-To set up media it is recommended to follow the [media setup instructions here](../configuration.md#storing-media-files).* 
-
-You can serve media directly from Django by using a volume mounted to the web container.
-This provides a simple way to allow media files (e.g. profile pictures) to persist between deploys.
-
-Run the following on your server, replacing `<your_app>` with your app ID/slug:
-
-```shell
-docker volume create <your_app>-media
-```
-
-*Note: If you use S3 or some other storage for media, you can skip this step and update the Kamal
-deploy configuration to remove the volume mount (the following lines in `deploy.yml`):*
-
-```
-volumes:
-  - "<your_app>-media:/code/media"
-```
-
--->
-
-**Create the LetsEncrypt storage**
-
-This is needed if you want Traefik to automatically generate SSL certificates for you (recommended). If not, you can skip
-this step and update the Kamal deploy configuration to remove the references to LetsEncrypt
-(search for `letsencrypt` and `secure`).
-
-On your server run the following command *as root*. You may need to logout `kamal` and back in to `root`:
-
-```shell
-sudo mkdir -p /letsencrypt && sudo touch /letsencrypt/acme.json && sudo chmod 600 /letsencrypt/acme.json
-```
-
 ### Set up DNS
 
 To set up SSL you will need a DNS record pointing at your sever. Create a new "A" record using
@@ -146,33 +90,30 @@ gem install kamal
 
 *Note: you may want to use [`rbenv`](https://github.com/rbenv/rbenv) to manage your environment.*
 
-If you don't have Ruby running you can also use Docker to install Kamal, however this is a slightly more complicated.
-See [running Kamal with Docker](#running-kamal-with-docker) below for more details.
+If you don't have Ruby running you can also use Docker to install Kamal, by creating an alias command
+as described [in the Kamal docs here](https://kamal-deploy.org/docs/installation/).
 
-#### Create `.env` file in the `deploy` directory
+#### Create `secrets` file in the `.kamal` directory
 
-Kamal requires a `.env` file in this folder which will contain all the environment variables needed for deployment.
-The `.env` file is not checked into source control. See `deploy/.env.kamal` for the required variables.
-
-*Note that this file is distinct from the `.env` file used for development/production variables for your app.*
+Kamal expects a `.kamal/secrets` file in this folder which will contain all the environment variables needed for deployment.
+The `secrets` file should not be checked into source control. See `.kamal/secrets.example` for the required variables.
 
 ```bash
-cd deploy
-cp .env.kamal .env
+cp .kamal/secrets.example .kamal/secrets
 ```
 
 #### Update the Kamal configuration files
 
-The Kamal configuration is in `deploy/config/deploy.yml`.
+The Kamal configuration is in `config/deploy.yml`.
 You will need to update the following values:
 
 * Docker image repo: `image: <namespace>/<repository-name>` - this is the repository you created above.
   If you're using Docker Hub, the `namespace` will typically be your username.
-* Your server IP address (or hostname) `<IP-ADDRESS>` (this value is listed once per service).
-* Your app domain name: `Host(``hostname.example.com``)`. This is the DNS endpoint you set up above.
 * Docker registry username: `username: <DOCKER REGISTRY USERNAME>` - the username you chose above.
+* Your server IP address (or hostname) `<IP-ADDRESS>` (this value is listed once per service).
+* Your app domain name at proxy --> host, if this is not correct.
 
-Additionally, in your `deploy/.env` file you should add the following variables:
+Additionally, in your `.kamal/secrets` file you should add the following variables:
 
 * Set `KAMAL_REGISTRY_PASSWORD` to the access token value you created above.
 * Choose secure, unique, and ideally random values for `POSTGRES_PASSWORD` and `SECRET_KEY`.
@@ -183,29 +124,28 @@ to do your first deployment.
 
 ### Deploy
 
-Finally, we can use Kamal to do the rest of the setup. Run the following on your *local* machine.
-The `kamal setup` command must be run from the `deploy` directory:
+Finally, we can use Kamal to do the rest of the setup. Run the following on your *local* machine,
+from the project root directory.
 
 ```bash
-cd deploy/
 kamal setup
 ```
  
 This will perform all the tasks necessary to deploy your application
 (duplicated below from the [Kamal docs](https://kamal-deploy.org/docs/installation)):
  
-* Connect to the servers over SSH
-* Log into the registry both locally and remotely
-* Build the image using `Dockerfile.web` in the root of the application.
-* Push the image to the registry.
-* Pull the image from the registry onto the servers.
-* Push the `.env` file onto the servers.
-* Ensure Traefik is running and accepting traffic on port 80.
-* Ensure your app responds with 200 OK to GET /up (you must have curl installed inside your app image!).
-* Start a new container with the version of the app that matches the current git version hash.
-* Stop the old container running the previous version of the app.
-* Prune unused images and stopped containers to ensure servers don’t fill up. 
- 
+- Connect to the servers over SSH (using root by default, authenticated by your SSH key).
+- Install Docker on any server that might be missing it (using get.docker.com): root access is needed via SSH for this.
+- Log into the registry both locally and remotely.
+- Build the image using the standard Dockerfile in the root of the application.
+- Push the image to the registry.
+- Pull the image from the registry onto the servers.
+- Ensure kamal-proxy is running and accepting traffic on ports 80 and 443.
+- Start a new container with the version of the app that matches the current Git version hash.
+- Tell kamal-proxy to route traffic to the new container once it is responding with 200 OK to GET /up.
+- Stop the old container running the previous version of the app.
+- Prune unused images and stopped containers to ensure servers don’t fill up.
+
 If everything is set up properly then in five or so minutes you should be able to visit your new application
 at the configured domain. You're done!
 
@@ -217,7 +157,7 @@ In particular, you will have to set up media files using an external service lik
 
 #### Manage changes after initial deployment
 
-See the `deploy/README.md` file in your project repo for pointers on managing the production environment after
+See the `config/README.md` file in your project repo for pointers on managing the production environment after
 the initial deployment.
 
 The key commands you will likely regularly run are `kamal env push` to update the project environment variables,
@@ -239,8 +179,8 @@ To push the changes to your servers.
 Secrets should be managed in environment variables.
 To add new environment variables you will need to update them in two places:
 
-1. The variable *name* needs to be added to the `env` section at the top of `deploy/config/deploy.yml`.
-2. The variable name *and value* needs to be added to `deploy/.env` (the same `.env` file we've been using above).
+1. The variable *name* needs to be added to the `env` section at the top of `config/deploy.yml`.
+2. The variable name *and value* needs to be added to `.kamal/secrets` (the same `secrets` file we've been using above).
 
 You can see examples of this for variables like `DATABASE_URL` in those two files.
 
@@ -283,79 +223,6 @@ kamal accessory exec postgres -i 'psql -h localhost -p 5432 -U <youruser>' --reu
 ```
 
 For more information see [Kamal commands](https://kamal-deploy.org/docs/commands).
-
-### Configuration
-
-There are a few configuration options you might want to update from the defaults.
-
-**Speeding up builds.**
-
-For convenience, Pegasus ships with the "multiarchitecture" flag enabled.
-This allows you to build on one architecture (e.g. the ARM64 used on Macs) and deploy to another (e.g. the x86
-architecture used on most Linux servers).
-
-However, this can result in very long build/deploy times.
-To speed this up you can update your build configuration
-and either remove `multiarch: true` if you are building for the same architecture you are deploying to,
-or setting up a remote builder.
-
-The Kamal docs [have extensive guidance on optimizing your build setup](https://kamal-deploy.org/docs/configuration).
-
-### Running Kamal with Docker
-
-Here are the steps to run Kamal with Docker instead of native Ruby.
-Note that these steps are slightly different from [the Kamal installation instructions](https://kamal-deploy.org/docs/installation).
-
-First, use one of the following commands to set up an alias for a Kamal shell:
-
-On MacOS: 
-
-```bash
-alias kamal-shell='docker run -it --rm -v "${PWD}:/workdir" -v "/run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock" -e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock" --entrypoint "/bin/sh" -v /var/run/docker.sock:/var/run/docker.sock ghcr.io/basecamp/kamal:latest'
-```
-
-On Linux:
-
-```bash
-alias kamal-shell='docker run -it --rm -v "${PWD}:/workdir" -v "${SSH_AUTH_SOCK}:/ssh-agent" -v /var/run/docker.sock:/var/run/docker.sock -e "SSH_AUTH_SOCK=/ssh-agent" --entrypoint "/bin/sh" ghcr.io/basecamp/kamal:latest'
-```
-
-After setting up this alias, enter the Kamal container by running the alias **in your project's *root* directory**:
-
-```
-kamal-shell
-```
-
-After doing that you should have a shell that looks like this:
-
-```html
-/workdir #
-```
-
-From there change to the `deploy` directory:
-
-```html
-/workdir # cd deploy
-/workdir/deploy # 
-```
-
-Now you can run kamal commands as normal:
-
-```html
-/workdir/deploy # kamal app details
-  INFO [e959d464] Running docker ps --filter label=service=yourapp --filter label=role=celery on 5.161.214.37
-  INFO [e959d464] Finished in 3.483 seconds with exit status 0 (successful).
-App Host: 5.161.214.37
-CONTAINER ID   IMAGE                                                                                  COMMAND                  CREATED      STATUS      PORTS     NAMES
-a4132d07e3d8   you/yourapp:8f0f9cbe651d0b6ccb939b06a46badb3c521b038_uncommitted_634818cb72f626e6   "celery -A yourapp…"   6 days ago   Up 6 days             yourapp-celery-8f0f9cbe651d0b6ccb939b06a46badb3c521b038_uncommitted_634818cb72f626e6
-
-  INFO [258c111d] Running docker ps --filter label=service=yourapp --filter label=role=web on 5.161.214.37
-  INFO [258c111d] Finished in 0.920 seconds with exit status 0 (successful).
-App Host: 5.161.214.37
-CONTAINER ID   IMAGE                                                                                  COMMAND               CREATED      STATUS                PORTS      NAMES
-fe8a5e4e81e1   you/yourapp:8f0f9cbe651d0b6ccb939b06a46badb3c521b038_uncommitted_634818cb72f626e6   "/bin/sh -c /start"   6 days ago   Up 6 days (healthy)   8000/tcp   yourapp-web-8f0f9cbe651d0b6ccb939b06a46badb3c521b038_uncommitted_634818cb72f626e6
-```
-
 
 ### Troubleshooting
 
@@ -501,75 +368,12 @@ psql -h localhost -p 5432 -U <your_app_user> <your_app_db_name> < /tmp/db_dump.s
 
 One of the major benefits of the VPS-based approach is that you can easily host multiple apps on the same hardware,
 which is usually a substantial cost advantage over hosting each one on its own.
-This is possible to do with Kamal, though requires a bit of wrangling.
 
-The basic steps are as follows, based on [this blog post](https://maciej.litwiniuk.net/posts/2024-01-31-multiple-apps-on-one-server-using-kamal/)
-
-**Overview**
-
-At a high level, each app you deploy will have its own database, web container, and (optionally) Redis database and celery container.
-These will all run on the app's own private Docker network.
-The only thing that is shared across apps is the `Traefik` web server.
-
-**Creating the first app**
-
-When setting up your first app you can follow the above process as normal.
-
-**Creating additional apps**
-
-When adding apps to the server, you can use a modified version of the above instructions (and config files),
-but you can skip all of the Docker setup steps except for initializing the network.
-
-First create the network as above:
-
-```
-docker network create <your_app>-network
-```
-
-Then you must manually add Traefik to the network:
-
-```
-docker network connect <your_app>-network traefik
-```
-
-Additionally, when updating your configuration files you should **remove the `traefik:` section at the bottom of `deploy.yml`**,
-then run `kamal setup` as normal.
-
-Finally, after running `kamal setup` you will have to reboot traefik.
-The easiest way to do this is to go back to the *first app* and then in the deploy directory, run:
-
-```
-kamal traefik reboot
-```
-
-After setting this up once, it is recommended to add the following [Kamal hook](https://kamal-deploy.org/docs/hooks/hooks-overview/) to all projects.
-This hook will ensure that the network configuration change gets re-applied even if the Traefik container reboots.
-
-You will need to put this in `.kamal/hooks/post-deploy` on any *secondary* apps,
-as well as `.kamal/hooks/post-traefik-reboot` on your primary app (the one that also has your Traefik config).
-
-You should replace the `REMOTE_HOST` and `NETWORK_NAME` variables with the ones that match your project.
-
-```
-#!/usr/bin/env bash
-
-REMOTE_HOST="kamal@yourserver.com"
-NETWORK_NAME="<your_app>-network"
-
-# SSH into the remote host and execute Docker commands
-ssh $REMOTE_HOST << EOF
-    # Check if the Docker network already exists
-    if ! docker network inspect "$NETWORK_NAME" 2>/dev/null | grep traefik; then
-        # If it doesn't exist, create it
-        docker network connect "$NETWORK_NAME" traefik
-        echo "Connected traefik to docker network: $NETWORK_NAME"
-    else
-        echo "Traefik already connected to docker network $NETWORK_NAME ."
-    fi
-EOF
-
-echo "$KAMAL_PERFORMER deployed $KAMAL_VERSION to $KAMAL_DESTINATION in $KAMAL_RUNTIME seconds"
-```
+This is now supported out of the box by Kamal and Pegasus.
+To deploy multiple applications to the same server, just set up Kamal individually for each application
+and run through the steps above.
+Once multiple sites are set up, `kamal-proxy` will automatically route traffic to the right app based
+on the site URL.
 
 #### Running Docker as a non-root user
 
