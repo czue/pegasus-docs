@@ -168,7 +168,7 @@ To upgrade a package, you can run the following command. In this example we are 
 pip-compile --upgrade-package django requirements/requirements.in
 
 # docker version
-docker compose run --rm --no-deps web uv pip compile --no-emit-package setuptools --no-strip-extras --upgrade-package django requirements/requirements.in -o requirements/requirements.txt
+make pip-complie ARGS="--upgrade-package django"
 ```
 
 To upgrade *all* packages, you can run:
@@ -178,7 +178,7 @@ To upgrade *all* packages, you can run:
 pip-compile --upgrade requirements/requirements.in
 
 # docker version
-docker compose run --rm --no-deps web uv pip compile --no-emit-package setuptools --no-strip-extras --upgrade requirements/requirements.in -o requirements/requirements.txt
+make pip-compile ARGS="--upgrade"
 ```
 
 From there you can install the new dependencies, as [described below](#installing-packages).
