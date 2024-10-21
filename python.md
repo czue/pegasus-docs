@@ -152,7 +152,7 @@ After finishing your edits, rebuild your `requirements.txt` file by running:
 pip-compile requirements/requirements.in
 
 # docker version
-docker compose exec web pip-compile requirements/requirements.in
+make pip-compile
 ``` 
 
 After running this you should see the package and its dependencies added to the `requirements.txt` file.
@@ -168,7 +168,7 @@ To upgrade a package, you can run the following command. In this example we are 
 pip-compile --upgrade-package django requirements/requirements.in
 
 # docker version
-docker compose exec web pip-compile --upgrade-package django requirements/requirements.in
+docker compose run --rm --no-deps web uv pip compile --no-emit-package setuptools --no-strip-extras --upgrade-package django requirements/requirements.in -o requirements/requirements.txt
 ```
 
 To upgrade *all* packages, you can run:
@@ -178,7 +178,7 @@ To upgrade *all* packages, you can run:
 pip-compile --upgrade requirements/requirements.in
 
 # docker version
-docker compose exec web pip-compile --upgrade requirements/requirements.in
+docker compose run --rm --no-deps web uv pip compile --no-emit-package setuptools --no-strip-extras --upgrade requirements/requirements.in -o requirements/requirements.txt
 ```
 
 From there you can install the new dependencies, as [described below](#installing-packages).
@@ -214,7 +214,7 @@ make requirements
 
 Behind the scenes this will:
 
-1. Rebuild all your `-requirements.txt` files from your `-requirements.in` files with `pip-compile`.
+1. Rebuild all your `-requirements.txt` files from your `-requirements.in` files with `uv`.
 2. Rebuild your containers (installing the new packages).
 3. Restart your containers.
  
