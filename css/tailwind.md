@@ -114,6 +114,52 @@ It another great option for getting help with UI components and pages, and shoul
 
 Note that you will have to rebuild styles when adding TailwindUI components, as described in the "Development" section above.
 
+### shadcn
+
+From shadcn's [installation guide](https://ui.shadcn.com/docs/installation/manual):
+
+```bash
+npm install tailwindcss-animate class-variance-authority clsx tailwind-merge
+```
+
+Install the icon library for your theme of choice. E.g. for New York:
+
+```bash
+npm install @radix-ui/react-icons
+```
+
+Updated `tsconfig.json` (still figuring out the exact right thing here).
+
+Updated several other files (see commits).
+
+```bash
+npx shadcn@latest init
+```
+
+Adding a component
+
+```
+npx shadcn@latest add tabs
+mv components/ui/* assets/javascript/components/ui/
+```
+
+Adding everything:
+
+```
+npx shadcn@latest add avatar button calendar card command dialog dropdown-menu input label popover select tabs
+```
+
+Process:
+
+Cloned shadcn repo.
+Copied the dashboard folder into pegasus.
+Set up webpack.
+Fixed imports.
+Had to add react import.
+Change Link to a
+
+
+
 ## Troubleshooting
 
 ### Styles aren't working after adding new components
