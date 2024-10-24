@@ -34,7 +34,7 @@ Components from daisyUI can be brought in as needed by your app.
 A full list of available components can be found at the [daisyUI component library](https://daisyui.com/components/). 
 
 
-## Changing your themes
+### Changing your themes
 
 Pegasus ships with the default DaisyUI light and dark themes which are used for regular and dark mode, respectively.
 But DaisyUI offers a number of [out-of-the-box themes](https://daisyui.com/docs/themes/) you can use in your Pegasus app.
@@ -92,6 +92,47 @@ daisyui: {
 
 ## Other products / themes
 
+### shadcn
+
+[shadcn/ui](https://ui.shadcn.com/) is a React component library for Tailwind.
+It includes many out-of-the-box components that you can install and use in your projects.
+
+As of version 2024.11 Pegasus ships with a demo dashboard using shadcn.
+To enable the dashboard you have to build with the Tailwind CSS framework and check the "Include Shadcn dashboard"
+checkbox in your project settings.
+
+Here's a screenshot:
+
+![Shadcn Demo Dashboard](/images/css/shadcn-demo.png)
+
+The dashboard is [a hybrid single-page React app](https://www.saaspegasus.com/guides/modern-javascript-for-django-developers/integrating-django-react/)
+served by Django.
+It uses the same colors as the DaisyUI theme, and will update when you change your theme,
+and has many interactive components.
+However it is *not* connected to any backend data---it is just a UI example.
+
+#### Working with shadcn
+
+The dashboard can be found in `assets/javascript/shadcn-dashboard`.
+Shadcn components are stored in the `assets/javascript/components/ui` folder.
+
+Components can be imported in other JavaScript files using the same import path syntax used by the dashboard:
+
+```javascript
+import { Button } from "@/components/ui/button"
+```
+
+You can use the [shadcn cli](https://ui.shadcn.com/docs/cli) to create components,
+however it currently creates them in the wrong folder (I tried hard to change this but haven't managed yet).
+So adding a component is a two step process:
+
+```
+npx shadcn@latest add badge
+mv components/ui/* assets/javascript/components/ui/
+```
+
+After that you should be able to import and use your component in your React code.
+
 ### Flowbite
 
 [Flowbite](https://flowbite.com/) is a library with many great UI components---most of which are free and open source.
@@ -118,52 +159,6 @@ If you build with the Pegasus examples, you should be able to see the datepicker
 It another great option for getting help with UI components and pages, and should integrate seamlessly with the current Pegasus templates.
 
 Note that you will have to rebuild styles when adding TailwindUI components, as described in the "Development" section above.
-
-### shadcn
-
-From shadcn's [installation guide](https://ui.shadcn.com/docs/installation/manual):
-
-```bash
-npm install tailwindcss-animate class-variance-authority clsx tailwind-merge
-```
-
-Install the icon library for your theme of choice. E.g. for New York:
-
-```bash
-npm install @radix-ui/react-icons
-```
-
-Updated `tsconfig.json` (still figuring out the exact right thing here).
-
-Updated several other files (see commits).
-
-```bash
-npx shadcn@latest init
-```
-
-Adding a component
-
-```
-npx shadcn@latest add tabs
-mv components/ui/* assets/javascript/components/ui/
-```
-
-Adding everything:
-
-```
-npx shadcn@latest add avatar button calendar card command dialog dropdown-menu input label popover select tabs
-```
-
-Process:
-
-Cloned shadcn repo.
-Copied the dashboard folder into pegasus.
-Set up webpack.
-Fixed imports.
-Had to add react import.
-Change Link to a
-
-
 
 ## Troubleshooting
 
