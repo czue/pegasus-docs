@@ -123,7 +123,7 @@ import { Button } from "@/components/ui/button"
 ```
 
 You can use the [shadcn cli](https://ui.shadcn.com/docs/cli) to create components,
-however it currently creates them in the wrong folder (I tried hard to change this but haven't managed yet).
+however it currently creates them in the wrong folder (this is surprisingly hard to change).
 So adding a component is a two step process:
 
 ```
