@@ -160,8 +160,7 @@ In particular, you will have to set up media files using an external service lik
 See the `config/README.md` file in your project repo for pointers on managing the production environment after
 the initial deployment.
 
-The key commands you will likely regularly run are `kamal env push` to update the project environment variables,
-and `kamal deploy` to push new releases of your application.
+The main command you will regularly run is `kamal deploy`, which will push new releases and configurations of your application.
 
 ### Settings and Secrets
 
@@ -187,11 +186,10 @@ You can see examples of this for variables like `DATABASE_URL` in those two file
 Once you modify your environment variable files you will need to run:
 
 ```
-kamal env push
-kamal app boot
+kamal deploy
 ```
 
-To update the variables on the server and restart the app.
+To update the variables on the server and redeploy the app.
 
 ### Running one-off commands
 
@@ -237,9 +235,6 @@ kamal proxy reboot
 
 # build the proxy container (if it didn't succeed the first time)
 kamal proxy boot
-
-\# push the .env file to the servers
-kamal env push
 
 # deploy the app
 kamal deploy
