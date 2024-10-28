@@ -213,12 +213,6 @@ You should now have a shell where you can run any Python/`manage.py` command.
 You can also get a database shell by running:
 
 ```
-kamal app exec 'python manage.py dbshell'
-```
-
-Or
-
-```
 kamal accessory exec postgres -i 'psql -h localhost -p 5432 -U <youruser>' --reuse
 ```
 
