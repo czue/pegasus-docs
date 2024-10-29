@@ -3,6 +3,52 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.10.1
+
+This is a feature release with an emphasis on improving the Tailwind CSS experience with Pegasus.
+Here are the highlights:
+
+### Dark mode improvements
+
+A dark mode selector was added to the navigation, allowing users to easily toggle between light, dark,
+and "system default" mode.
+The user's selection is preserved server-side in the session object, which also helps to prevent flickering across page loads.
+
+### Better Theme Support
+
+It's now easier than ever to change your project's theme.
+Each project now supports a default light and dark theme which will be used throughout the site.
+The default themes need only be changed in `tailwind.config.js`, and `settings.py` and everything else is taken care of.
+
+See the updated [tailwind theme documentation](./css/tailwind.md#changing-your-themes) for more details.
+
+### New shadcn integration and demo dashboard
+
+A new build setting allows you to build your project with [shadcn/ui](https://ui.shadcn.com/) installed.
+Shadcn is a great and versatile component library for React and Tailwind, but it is difficult to integrate it
+into a Django project without building a separate front end.
+Now Pegasus takes care of that integration for you, and provides a reference dashboard implementation of how to
+work with the library.
+
+The reference dashboard is a hybrid single-page React app served by Django.
+It uses the same colors as the DaisyUI theme, and will update when you change your theme,
+and has many interactive components.
+However, it is not connected to any backend data—it is just a UI example.
+
+Read more in the [shadcn docs here](./css/tailwind.md#shadcn).
+
+### New flowbite integration and demo component page
+
+Another new build setting allows you to build your project with [flowbite](https://flowbite.com/) installed.
+Flowbite is another great component library for Tailwind and does *not* use React---making
+it a great fit for htmx projects.
+If you enable this setting, flowbite will automatically be installed and you can drop
+flowbite components into any Django template.
+The reference page has an example of a few of these components.
+
+Read more in the [flowbite docs here](./css/tailwind.md#flowbite).
+
+
 ## Version 2024.10
 
 This release upgrades Kamal deployment to Kamal 2 and dramatically simplifies the Kamal deployment process.
