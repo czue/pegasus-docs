@@ -137,22 +137,15 @@ After that you should be able to import and use your component in your React cod
 ### Flowbite
 
 [Flowbite](https://flowbite.com/) is a library with many great UI components---most of which are free and open source.
+Also, unlike shadcn, it does *not* use React---making it a great fit for Django templates and htmx projects.
 
-Flowbite can easily be added to a Pegasus project by installing it via `npm` and adding it to your global `site.js` and
-`tailwind.config.js` files.
+As of version 2024.11 Pegasus ships with the option to enable flowbite, along with a page demonstrating
+some sample components.
+To enable Flowbite, choose Tailwind CSS and check the "Include Flowbite" checkbox in your project settings.
 
-You can use [this git patch file](https://gist.github.com/czue/73cec7ff562aff0943e55538fe9b4550#file-flowbite-patch)
-as a starting point and apply it to your project by running:
-
-```
-git apply flowbite.patch
-```
-
-This demonstrates basic installation and enabling the [datepicker plugin](https://flowbite.com/docs/plugins/datepicker/).
-
-After applying the patch you will need to run `npm install` and `npm run dev-watch` to enable it on all pages.
-
-If you build with the Pegasus examples, you should be able to see the datepicker at [http://localhost:8000/pegasus/forms/](http://localhost:8000/pegasus/forms/).
+If you enable this setting, flowbite will automatically be installed and you can drop
+flowbite components into any Django template.
+The reference page has an example of a few of these components.
 
 ### Tailwind UI
 
