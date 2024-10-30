@@ -3,10 +3,15 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
-## Version 2024.10.1
+## Version 2024.11
 
 This is a feature release with an emphasis on improving the Tailwind CSS experience with Pegasus.
-Here are the highlights:
+
+Watch the video below for a demo, or read on for the highlights.
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
+    <iframe src="https://www.youtube.com/embed/vPtxNWx21bw" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
 
 ### Dark mode improvements
 
@@ -48,6 +53,23 @@ The reference page has an example of a few of these components.
 
 Read more in the [flowbite docs here](./css/tailwind.md#flowbite).
 
+### Other updates
+
+- **Upgraded all Python packages to their latest versions.**
+- **[uv](https://docs.astral.sh/uv/) is now used to install Python packages in Docker files and Github actions.**
+  - Also updated `make pip-compile` target to use `uv`.
+  - This resulted in minor changes to all `requirements.txt` files.
+- **Team invitation pages now prompt a user to log in instead of sign up if the email is associated with a known account.**
+  (Thanks Daniel for suggesting!) 
+- Your configured Github username, if available, will be used in a few places instead of a default value.
+  (Thanks Richard for suggesting!)
+- Added `bg-base-100` to the `<body>` tag of the base template and removed it from other components where it was  
+  now redundant. This improves theming support when themes heavily modify the base color. (Tailwind builds only)
+- Added equals signs to  `ENV` declarations in production Docker files, for consistency. (Thanks Denis for suggesting!)
+- Slightly improved the styling of the e-commerce app and made it more consistent.
+- Overhauled the [Tailwind CSS documentation](./css/tailwind.md).
+
+*Nov 1, 2024*
 
 ## Version 2024.10
 
