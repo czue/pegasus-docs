@@ -99,7 +99,7 @@ daisyui: {
 It includes many out-of-the-box components that you can install and use in your projects.
 
 As of version 2024.11 Pegasus ships with a demo dashboard using shadcn.
-To enable the dashboard you have to build with the Tailwind CSS framework and check the "Include Shadcn dashboard"
+To enable the dashboard you have to build with the Tailwind CSS framework and check the "Use Shadcn"
 checkbox in your project settings.
 
 Here's a screenshot:
@@ -141,7 +141,7 @@ Also, unlike shadcn, it does *not* use React---making it a great fit for Django 
 
 As of version 2024.11 Pegasus ships with the option to enable flowbite, along with a page demonstrating
 some sample components.
-To enable Flowbite, choose Tailwind CSS and check the "Include Flowbite" checkbox in your project settings.
+To enable Flowbite, choose Tailwind CSS and check the "Use Flowbite" checkbox in your project settings.
 
 If you enable this setting, flowbite will automatically be installed and you can drop
 flowbite components into any Django template.
