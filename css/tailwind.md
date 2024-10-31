@@ -2,11 +2,12 @@
 
 As of version 2022.8 Pegasus officially supports [Tailwind CSS](https://tailwindcss.com/) (Version 3).
 
-## Demo
-Here's a quick overview of what it looks like:
+## Demo and Overview
+
+Here's a quick overview of using TailwindCSS in Pegasus
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; margin-bottom: 1em;">
-    <iframe src="https://www.youtube.com/embed/mNxVfmoDaOQ" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    <iframe src="https://www.youtube.com/embed/vPtxNWx21bw" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div>
 
 ## Development
@@ -34,28 +35,33 @@ Components from daisyUI can be brought in as needed by your app.
 A full list of available components can be found at the [daisyUI component library](https://daisyui.com/components/). 
 
 
-## Changing your theme
+### Changing your themes
 
-DaisyUI offers a number of out-of-the-box themes you can use in your Pegasus app.
-To change themes, first make sure the theme is enabled in your `tailwind.config.js` with a `daisyui` section like this:
+Pegasus ships with the default DaisyUI light and dark themes which are used for regular and dark mode, respectively.
+But DaisyUI offers a number of [out-of-the-box themes](https://daisyui.com/docs/themes/) you can use in your Pegasus app.
+To change themes, make sure the theme is enabled in your `tailwind.config.js`'s `daisyui` section,
+and specify the default dark mode theme if necessary:
 
-```
+```javascript
 module.exports = {
-  //...
+  // changes the themes to "cupcake" and "coffee"
   daisyui: {
-    themes: ["light", "dark", "cupcake"],
+    themes: ["cupcake", "coffee"],
   },
+  // sets the "coffee" theme as the one used for dark mode
+  darkMode: ["class", '[data-theme="coffee"]'],
 }
 ```
+After changing these values you will have to [rebuild your front end](../front-end.md#building-in-development).
 
-(The defaults are "light" and "dark".)
+Finally, you will also have to update the default themes in your `settings.py`:
 
-After adding your theme, rebuild your front end, and then add a `data-theme` attribute to
-your `<html>` declaration in `templates/web/base.html`.
-
-```html
-<html data-theme="cupcake"></html>
 ```
+LIGHT_THEME = "cupcake"
+DARK_THEME = "coffee"
+```
+
+After this, your app should be fully styled in the new themes!
 
 For a list of the available themes, and information about creating your on theme,
 see the [daisyUI theme documentation](https://daisyui.com/docs/themes/) and their online [theme generator](https://daisyui.com/theme-generator/).
@@ -87,25 +93,59 @@ daisyui: {
 
 ## Other products / themes
 
+### shadcn
+
+[shadcn/ui](https://ui.shadcn.com/) is a React component library for Tailwind.
+It includes many out-of-the-box components that you can install and use in your projects.
+
+As of version 2024.11 Pegasus ships with a demo dashboard using shadcn.
+To enable the dashboard you have to build with the Tailwind CSS framework and check the "Use Shadcn"
+checkbox in your project settings.
+
+Here's a screenshot:
+
+![Shadcn Demo Dashboard](/images/css/shadcn-demo.png)
+
+The dashboard is [a hybrid single-page React app](https://www.saaspegasus.com/guides/modern-javascript-for-django-developers/integrating-django-react/)
+served by Django.
+It uses the same colors as the DaisyUI theme, and will update when you change your theme,
+and has many interactive components.
+However it is *not* connected to any backend data---it is just a UI example.
+
+#### Working with shadcn
+
+The dashboard can be found in `assets/javascript/shadcn-dashboard`.
+Shadcn components are stored in the `assets/javascript/components/ui` folder.
+
+Components can be imported in other JavaScript files using the same import path syntax used by the dashboard:
+
+```javascript
+import { Button } from "@/components/ui/button"
+```
+
+You can use the [shadcn cli](https://ui.shadcn.com/docs/cli) to create components,
+however it currently creates them in the wrong folder (this is surprisingly hard to change).
+So adding a component is a two step process:
+
+```
+npx shadcn@latest add badge
+mv components/ui/* assets/javascript/components/ui/
+```
+
+After that you should be able to import and use your component in your React code.
+
 ### Flowbite
 
 [Flowbite](https://flowbite.com/) is a library with many great UI components---most of which are free and open source.
+Also, unlike shadcn, it does *not* use React---making it a great fit for Django templates and htmx projects.
 
-Flowbite can easily be added to a Pegasus project by installing it via `npm` and adding it to your global `site.js` and
-`tailwind.config.js` files.
+As of version 2024.11 Pegasus ships with the option to enable flowbite, along with a page demonstrating
+some sample components.
+To enable Flowbite, choose Tailwind CSS and check the "Use Flowbite" checkbox in your project settings.
 
-You can use [this git patch file](https://gist.github.com/czue/73cec7ff562aff0943e55538fe9b4550#file-flowbite-patch)
-as a starting point and apply it to your project by running:
-
-```
-git apply flowbite.patch
-```
-
-This demonstrates basic installation and enabling the [datepicker plugin](https://flowbite.com/docs/plugins/datepicker/).
-
-After applying the patch you will need to run `npm install` and `npm run dev-watch` to enable it on all pages.
-
-If you build with the Pegasus examples, you should be able to see the datepicker at [http://localhost:8000/pegasus/forms/](http://localhost:8000/pegasus/forms/).
+If you enable this setting, flowbite will automatically be installed and you can drop
+flowbite components into any Django template.
+The reference page has an example of a few of these components.
 
 ### Tailwind UI
 
