@@ -63,11 +63,19 @@ Read more in the [flowbite docs here](./css/tailwind.md#flowbite).
   (Thanks Daniel for suggesting!) 
 - Your configured Github username, if available, will be used in a few places instead of a default value.
   (Thanks Richard for suggesting!)
-- Added `bg-base-100` to the `<body>` tag of the base template and removed it from other components where it was  
+- Added `bg-base-100` to the `<body>` tag of the base template and removed it from other components where it was 
   now redundant. This improves theming support when themes heavily modify the base color. (Tailwind builds only)
 - Added equals signs to  `ENV` declarations in production Docker files, for consistency. (Thanks Denis for suggesting!)
-- Slightly improved the styling of the e-commerce app and made it more consistent.
+- Slightly improved the styling of the e-commerce app.
 - Overhauled the [Tailwind CSS documentation](./css/tailwind.md).
+
+**Updates to the CLI ([release notes](https://github.com/saaspegasus/pegasus-cli/releases))**
+
+- Fixed a bug on certain environments where the `pegasus` command conflicted with a local `pegasus` folder,
+  causing import errors running the CLI.
+- Apps created with `startapp` now use a `POST` for deletion instead of a `GET`.
+- Deletion now includes a modal confirmation (Tailwind and Bulma builds only).
+
 
 *Nov 1, 2024*
 
