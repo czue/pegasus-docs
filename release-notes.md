@@ -3,6 +3,21 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.11.1
+
+This is a minor hotfix release.
+
+### Fixed
+
+- Fixed an issue where the team selector was accidentally transparent in Tailwind builds.
+
+### Updated
+
+- Removed extra whitespace from `form_tags.py`. (Thanks Brennon for reporting!)
+- Updated `make help` to allow for commands defined in `custom.mk` with digits to also show up. (Thanks Arno for suggesting!)
+
+*Nov 4 2024*
+
 ## Version 2024.11
 
 This is a feature release with an emphasis on improving the Tailwind CSS experience with Pegasus.
