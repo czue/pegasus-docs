@@ -76,6 +76,22 @@ Read more in the [flowbite docs here](./css/tailwind.md#flowbite).
 - Apps created with `startapp` now use a `POST` for deletion instead of a `GET`.
 - Deletion now includes a modal confirmation (Tailwind and Bulma builds only).
 
+### Upgrading
+
+If you're using Docker the `make upgrade` command won't work out-of-the-box due to the change
+in how requirements files are managed. You will first have to rebuild your containers with:
+
+```
+make build
+```
+
+or
+
+```
+docker compose build
+```
+
+After that, you should be able to run `make upgrade` as normal.
 
 *Nov 1, 2024*
 
