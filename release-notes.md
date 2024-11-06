@@ -10,6 +10,7 @@ This is a minor hotfix release.
 ### Fixed
 
 - Fixed an issue where the team selector was accidentally transparent in Tailwind builds.
+- Removed shadcn template that was accidentally included even if shadcn was disabled.
 
 ### Updated
 
