@@ -105,3 +105,23 @@ so to connect a repository owned by an organization you will also have to grant 
 Github provides detailed guidance on how to do this.
 For "Connect Github," follow the [oauth instructions](https://docs.github.com/en/organizations/managing-oauth-access-to-your-organizations-data),
 and for personal access tokens, follow the [personal access token instructions](https://docs.github.com/en/organizations/managing-programmatic-access-to-your-organization/setting-a-personal-access-token-policy-for-your-organization).
+
+## Troubleshooting
+
+**I keep getting "Error pushing to GitHub. Please check your token scopes." when pushing my project.**
+
+While Pegasus does its best to catch errors that come from Github and show them to you,
+sometimes it will return this generic error.
+
+One common reason a valid token is unable to push code is related to email privacy settings.
+Specifically the "Blocking command line pushes that expose your personal email address" setting---which
+currently must be *disabled* in order to use the Github integration.
+
+To check and disable this setting:
+
+1. Go to your [Github email settings](https://github.com/settings/emails)
+2. Scroll down to where it says "Keep my email addresses private".
+3. If that option is checked, ensure that the "Block command line pushes that expose my email" option
+   below it is *not* checked.
+4. If that option is *not* checked, then it is a different problem. You are welcome to reach out
+   directly for support
