@@ -3,6 +3,23 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.11.2
+
+## Fixed
+
+- Removed `docker_startup.sh` if not using a docker-based deploy platform.
+- Fixed a bug where your migrations and tests would fail if your project name was > 50 characters
+  (thanks Bernard for reporting!).
+- Updated the `config/README` file which had outdated information that predated the migration to Kamal 2. 
+  (Thanks Arno for reporting!)
+- Improved comments in the kamal `secrets` file and `.env` files. (Thanks Arno for suggesting!)
+
+## Removed
+
+- The `.env` file is no longer included in zip downloads. This file was already removed from Github
+  builds so this just makes the two consistent. Projects should create `.env` file from the `.env.example` file.
+
+
 ## Version 2024.11.1
 
 This is a minor hotfix release.
