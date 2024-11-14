@@ -3,6 +3,43 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.11.2
+
+This release adds the ability to disable dark mode on Tailwind, upgrades front end libraries,
+bumps the API client version, and has a handful of other small changes and fixes.
+
+## Added
+
+- **Added a new build option to disable dark mode for Tailwind builds.** (Thanks Arno for suggesting!)
+- Added basic user-facing error messages to the standalone front end sign up and login workflows.
+
+## Changed
+
+- **Upgraded all JavaScript dependencies.**
+- **Updated the API client to use the latest version 7.9.0, and updated the standalone front end to work
+  with the latest changes.**
+- Moved active tab highlighting to the base view in the example object demo.
+- Made a few very minor edits to comments and whitespace in a few places.
+
+## Fixed
+
+- Fixed a bug where your migrations and tests would fail if your project name was > 50 characters
+  (thanks Bernard for reporting!).
+- Fixed a bug in the group chat demo where submitting an empty room name would take you to a 404 page.
+- The `docker_startup.sh` file is no longer included if you are not using a docker-based deploy platform.
+- Updated the `config/README` file which had outdated information that predated the migration to Kamal 2. 
+  (Thanks Arno for reporting!)
+- Improved comments in the kamal `secrets` file and `.env` files. (Thanks Arno for suggesting!)
+
+## Removed
+
+- The `.env` file is no longer included in zip downloads. This file was already removed from Github
+  builds so this just makes the two consistent. Projects should create `.env` file from the `.env.example` file.
+- Removed the `migrate_customers_to_teams` management command. This was added for an upgrade two years ago,
+  and is assumed to be no longer needed.
+
+*Nov 14 2024*
+
 ## Version 2024.11.1
 
 This is a minor hotfix release.
