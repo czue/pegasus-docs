@@ -37,7 +37,8 @@ A full list of available components can be found at the [daisyUI component libra
 
 ### Changing your themes
 
-Pegasus ships with the default DaisyUI light and dark themes which are used for regular and dark mode, respectively.
+If you enable dark mode, Pegasus will ship with the default DaisyUI light and dark themes which
+are used for regular and dark mode, respectively.
 But DaisyUI offers a number of [out-of-the-box themes](https://daisyui.com/docs/themes/) you can use in your Pegasus app.
 To change themes, make sure the theme is enabled in your `tailwind.config.js`'s `daisyui` section,
 and specify the default dark mode theme if necessary:
