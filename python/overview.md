@@ -43,6 +43,17 @@ If you don't see 3.11 as an option, you may need to install it first.
 Follow these steps if you want to manage your virtual environments outside your IDE.
 Using `venv` is recommended if you're not sure which option to use. 
 
+#### Using uv (recommended)
+
+It's recommended that new projects use uv to manage their Python environments.
+It is faster and simpler to use.
+
+To use uv...
+
+FILL THIS IN.
+
+**Note: uv is currently in beta testing but is planned to become the default set up for new projects soon.**
+
 #### Using venv
 
 The easiest way to set up a virtual environment manually is to use Python's built in
