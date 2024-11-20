@@ -6,5 +6,7 @@ including choosing a tool to manage your environment and working with the differ
 
 .. toctree::
 
-   python/overview
+   python/setup
+   python/packages
+   python/uv
 
