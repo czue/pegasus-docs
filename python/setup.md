@@ -48,7 +48,7 @@ or you can run:
 source .venv/bin/activate
 ```
 
-To use Python and other commands normally.
+in your project root to use Python and other commands normally.
 
 **Note: uv is currently in beta testing but is planned to become the default set up for new projects soon.**
 
