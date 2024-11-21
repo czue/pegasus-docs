@@ -51,7 +51,7 @@ From there you can install the new dependencies, as [described below](#installin
 
 To upgrade a package, you can run the following command. In this example we are upgrading `django`:
 
-```
+```bash
 # native version
 pip-compile --upgrade-package django requirements/requirements.in
 
