@@ -28,13 +28,27 @@ Follow one of the sections below depending on how you want to manage your virtua
 
 ### Using uv (recommended)
 
-It's recommended that new projects use uv to manage their Python environments.
+It's recommended that new projects use [uv](https://docs.astral.sh/uv/) to manage their Python environments.
 It is faster and simpler to use than other alternatives, and can even install
 and set up Python for you.
 
-To use uv...
+To use uv first [install it](https://docs.astral.sh/uv/getting-started/installation/).
 
-FILL THIS IN.
+Then in your project root directory run:
+
+```bash
+uv sync
+```
+
+After that you should be good to go!
+You should be able to use `uv run` to run any Python command on your project,
+or you can run:
+
+```bash
+source .venv/bin/activate
+```
+
+To use Python and other commands normally.
 
 **Note: uv is currently in beta testing but is planned to become the default set up for new projects soon.**
 
