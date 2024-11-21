@@ -3,6 +3,21 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.11.3
+
+
+- Added `venv` and `.venv` directories to the `.dockerignore` file and `make translations` target.
+- The `make requirements` command now restarts containers in the background, making it easier to combine
+  with other make targets.
+- Added a catch-all to the `Makefile` to prevent error messages when running `make npm-install <package_name>`
+  and similar commands.
+- Updated README commands to consistently use `python manage.py` instead of just `./manage.py`.
+- Pinned the version of `uv` used in CI and Dockerfiles.
+- Fixed the link to the multi-stage dockerfile docs in `Dockerfile.web`
+- Upgraded a number of Python packages.
+- Increased the default concurrency of celery in Kamal deploys.
+- Updated the `default_stages` of the `.pre-commit-config.yaml` file to the latest expected format (`pre-commit`).
+
 ## Version 2024.11.2
 
 This release adds the ability to disable dark mode on Tailwind, upgrades front end libraries,
