@@ -3,6 +3,18 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+### UV support!
+
+This release adds full support for [uv](https://docs.astral.sh/uv/) as a replacement package manager.
+You can use uv by selecting the new "use uv" option in the project configuration page.
+
+When you select uv the following changes will be made:
+
+- All requirements files are removed.
+- Main project requirements will be listed in your `pyproject.toml` file.
+- Pinned project requirements will be listed in a new `uv.lock` file.
+- Docker containers (in development and production) will use `uv` to set up and manage the Python environment.
+
 ## Version 2024.11.3
 
 
