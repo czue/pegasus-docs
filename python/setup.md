@@ -3,7 +3,8 @@ Environment Setup
 
 ## Choosing between Docker and native Python
 
-You can either run Python in a Docker container or natively on your development machine.
+You can either run Python in a Docker container or natively on your development machine,
+through various different options.
 
 Docker is easier to set up and provides a more consistent way to package your application,
 however it is slower, takes more resources, and is more complex to integrate with IDEs, debuggers,
@@ -12,27 +13,21 @@ and other development tools.
 Native Python can be more difficult to set up, especially on Windows, but once it is working it
 is typically easier to work with.
 
-If you're not sure which you want, it's recommended to start with Docker and switch to native Python
-if you are unhappy with the Docker experience.
+Docker and uv are the recommended options.
+You can pick either of these and then switch if you run into problems.
 
 ## Using Docker
 
 See the [Docker documentation](/docker.md) to set up your development environment with Docker.
 
-## Using Native / System Python (with Virtual Environments)
+## Using uv
 
-If you're not using Docker, it's strongly recommended that you set up your project in a virtual environment,
-which avoids dependency conflicts and makes it easier to run multiple Python apps on your machine. 
-
-Follow one of the sections below depending on how you want to manage your virtualenvs.
-
-### Using uv (recommended)
-
-It's recommended that new projects use [uv](https://docs.astral.sh/uv/) to manage their Python environments.
+It's recommended that new projects not using docker use [uv](https://docs.astral.sh/uv/) to manage their Python environments.
 It is faster and simpler to use than other alternatives, and can even install
 and set up Python for you.
 
-*Note: uv support is only available from Pegasus version 2024.12 onwards.*
+***Note: uv support is only available from Pegasus version 2024.12 onwards.
+To use uv you must select it under the "Python package manager" setting in your project configuration.***
 
 To set up Python with uv, first [install uv](https://docs.astral.sh/uv/getting-started/installation/):
 
@@ -84,10 +79,12 @@ source .venv/bin/activate
 
 in your project root to use Python and other commands normally.
 
-### Using another option
+## Using Native / System Python (with Virtual Environments)
 
-There are many other options for setting up your environment.
-Unlike `uv`, most of these require having Python installed on your machine,
+The following are other options---which are typically recommended for developers
+who are already familiar with Python and one of these choices.
+
+Unlike `docker` and `uv`, most of these require having Python installed on your machine,
 so if you haven't already, first install Python version 3.11+:
 
 - On Mac and windows you can [download Python 3.11 installers from here](https://www.python.org/downloads/).
