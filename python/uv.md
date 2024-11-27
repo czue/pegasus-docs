@@ -2,7 +2,7 @@ Working with Python Packages (uv)
 =================================
 
 Recent versions of Pegasus use [uv](https://docs.astral.sh/uv/) to manage Python packages.
-It provides all the functionality of pip-tools while being much faster and offering more flexibility
+It provides all the functionality of `pip-tools` while being much faster and offering more flexibility
 and features.
 
 ### Requirements Files
@@ -69,5 +69,10 @@ uv sync --upgrade
 make uv "lock --upgrade"
 ```
 
-Like with adding packages, you'll have to rebuild and restart Docker containers for the updated
-environment to work.
+Like with adding packages, if you're using Docker, you'll have to rebuild and restart Docker containers for the updated
+environment to work:
+
+```bash
+make build
+make restart
+```
