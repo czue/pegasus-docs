@@ -180,6 +180,44 @@ you can follow the existing patterns and configure things based on the allauth d
 If you need help setting this up feel free to get in touch!
 Additionally see the resources below.
 
+#### Google OAuth Specific instructions
+1. Register the application with google by folllowing just the "App registration" section
+[here](https://docs.allauth.org/en/latest/socialaccount/providers/google.html). Note that
+the trailing slash for the "Authorized redirect URLs" is required. For example, assuming you are developing locally,
+it should be set to exactly `http://localhost:8000/accounts/google/login/callback/`.
+2. Add the resulting client id and secret key to the `.env` file in the root of your project.
+```
+    GOOGLE_CLIENT_ID="actual client id from the google console"
+    GOOGLE_SECRET_ID="actual secret id from the google console"
+```
+3. In `<PROJECT_NAME>/settings.py`, edit `SOCIALACCOUNT_PROVIDERS` to add `APPS` to the `"google"` section:
+```
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "APPS": [
+            {
+                "client_id" : env("GOOGLE_CLIENT_ID", default=""),
+                "secret" : env("GOOGLE_SECRET_ID", default=""),
+                "key": "",
+                "settings": {
+                    # You can fine tune these settings per app:
+                    "scope": [
+                        "profile",
+                        "email",
+                    ],
+                    "auth_params": {
+                        "access_type": "online",
+                    },
+                },
+            },
+        ],
+
+        "SCOPE": [
+        # existing code...
+```
+
+*Note: in the future, this code might be auto generated as part of selecting "Login with Google" from the [create new project flow](https://www.saaspegasus.com/projects/create/).*
+
 #### Social Setup Guides
 
 The Pegasus community has recommended the following guides to set things up with specific providers:
