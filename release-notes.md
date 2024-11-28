@@ -3,6 +3,53 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.12
+
+### UV support!
+
+This release adds full support for [uv](https://docs.astral.sh/uv/) as a replacement package manager for your project.
+You can use uv by selecting the new "uv" as your "Python package manager" on your project settings page.
+
+When you select uv the following changes will be made:
+
+- All requirements files are removed.
+- Your project requirements will now be listed in your `pyproject.toml` file.
+- Your pinned project requirements will be listed in a new `uv.lock` file.
+- Docker containers (in development and production) will use `uv` to set up and manage the Python environment.
+- A `make uv` target will be aded to Docker builds to run `uv` commands in your container.
+
+The main benefits of using uv are:
+
+- Speed. It is just way, way faster to anything related to package management.
+- Easier to setup and install Python.
+- Lock files (pinned versions) are cross-platform.
+- More tooling.
+- Speed. (It's so fast we put it twice.)
+
+There will be a longer write up about uv released very soon, but in the meantime you can review the updated
+[python documentation](./python/setup.md) and new [uv documentation](./python/uv.md).
+
+The rest of the documentation has been mostly updated to accommodate uv,
+though it's possible there are some places that were missed.
+If you spot any issues in the docs, get in touch!
+
+### Other updates
+
+- Changed the default set up of social logins to use settings-based configuration instead of `SocialApps` in the database.
+  **See upgrade notes if you are using social login.**
+  Thanks Alex for the suggestion and for helping with the updated documentation!
+
+
+### Upgrading
+
+To migrate a project to `uv` see [this guide](./cookbooks.md#migrating-from-pip-tools-to-uv).
+
+If your application was already using social logins defined in the database, the new settings-based declaration will
+conflict and cause errors on social login.
+To fix this you can either delete the `APPS` section of the relevant service in `settings.SOCIALACCOUNT_PROVIDERS`,
+or you can move the credentials into your project enviornment (e.g. `.env`) and delete relevant the `SocialApp`
+from the Django admin.
+
 ## Version 2024.11.3
 
 This is a minor maintenance release with a few changes in preparation for adding `uv` support (coming soon!).
