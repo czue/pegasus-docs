@@ -184,7 +184,7 @@ Additionally see the resources below.
 1. Register the application with google by folllowing just the "App registration" section
 [here](https://docs.allauth.org/en/latest/socialaccount/providers/google.html). Note that
 the trailing slash for the "Authorized redirect URLs" is required. For example, assuming you are developing locally,
-it should be set to exactly `http://localhost:8888/accounts/google/login/callback/`.
+it should be set to exactly `http://localhost:8000/accounts/google/login/callback/`.
 2. Add the resulting client id and secret key to the `.env` file in the root of your project.
 ```
     GOOGLE_CLIENT_ID="actual client id from the google console"
