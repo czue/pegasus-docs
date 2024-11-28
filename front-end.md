@@ -186,7 +186,7 @@ const paymentIntent = SiteJS.app.Payments.createPaymentIntent();
 The structure for using something will always be:
 
 ```javascript
-SiteJs.<package-name>
+SiteJS.<package-name>
 ```
 
 Where `<package-name>` is the name of the file in the `module.exports` section of `webpack.config.js`.
