@@ -5,6 +5,9 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 
 ## Version 2024.12
 
+This release adds first-class support for using uv as a complete replacement for development and production workflows
+(see below), and has a handful of fixes/changes.
+
 ### UV support!
 
 This release adds full support for [uv](https://docs.astral.sh/uv/) as a replacement package manager for your project.
@@ -12,42 +15,53 @@ You can use uv by selecting the new "uv" as your "Python package manager" on you
 
 When you select uv the following changes will be made:
 
-- All requirements files are removed.
+- All requirements.in / requirements.txt files are removed.
 - Your project requirements will now be listed in your `pyproject.toml` file.
+  - Development and production dependencies will be listed under separate dependency-groups. 
 - Your pinned project requirements will be listed in a new `uv.lock` file.
 - Docker containers (in development and production) will use `uv` to set up and manage the Python environment.
-- A `make uv` target will be aded to Docker builds to run `uv` commands in your container.
+- A `make uv` target will be added to Docker builds to run `uv` commands in your container.
 
 The main benefits of using uv are:
 
 - Speed. It is just way, way faster to anything related to package management.
 - Easier to setup and install Python.
-- Lock files (pinned versions) are cross-platform.
+- Lock files (pinned versions) are consistent across any platform.
 - More tooling.
 - Speed. (It's so fast we put it twice.)
 
 There will be a longer write up about uv released very soon, but in the meantime you can review the updated
 [python documentation](./python/setup.md) and new [uv documentation](./python/uv.md).
 
-The rest of the documentation has been mostly updated to accommodate uv,
+The rest of the docs have been updated to accommodate uv, 
 though it's possible there are some places that were missed.
 If you spot any issues in the docs, get in touch!
 
+### Other fixes
+
+- **Upgraded the pegasus cli to fix an issue where the generated list views were not properly scoped to the
+  appropriate team / user.** If you used the CLI to generate any apps it's highly recommended that you check
+  that you are not exposing objects that should not be viewable.
+
 ### Other updates
 
-- Changed the default set up of social logins to use settings-based configuration instead of `SocialApps` in the database.
-  **See upgrade notes if you are using social login.**
+- **Changed the default set up of social logins to use settings-based configuration instead of `SocialApps` in the database.**
+  See the upgrade notes if you are using social logins to prevent issues.
   Thanks Alex for the suggestion and for helping with the updated documentation!
+- Updated the default flowbite setup to disable the forms plugin. This was causing styling conflicts
+  with the default DaisyUI styles on certain form elements, including checkboxes.
+- Re-formatted the default form input template for readability.
 
+*November 29, 2024*
 
 ### Upgrading
 
-To migrate a project to `uv` see [this guide](./cookbooks.md#migrating-from-pip-tools-to-uv).
+To migrate an existing project to `uv` see [this guide](./cookbooks.md#migrating-from-pip-tools-to-uv).
 
 If your application was already using social logins defined in the database, the new settings-based declaration will
 conflict and cause errors on social login.
 To fix this you can either delete the `APPS` section of the relevant service in `settings.SOCIALACCOUNT_PROVIDERS`,
-or you can move the credentials into your project enviornment (e.g. `.env`) and delete relevant the `SocialApp`
+or you can move the credentials into your project environment (e.g. `.env`) and delete relevant the `SocialApp`
 from the Django admin.
 
 ## Version 2024.11.3
