@@ -67,28 +67,13 @@ Then skip ahead to the [post-install steps](getting-started.md#post-installation
 
 ## Get up and running with native Python
 
-Follow these instructions to run your application in your system's Python.
 If you're using Docker you can skip this section.
 
-*A video walkthrough of most of these steps is [available here](https://www.youtube.com/watch?v=kUoKm81OFqk).*
+### Set up your Python environment
 
-### Install Prerequisites
+There are several ways of setting up your Python environment.
 
-If you haven't already, first install Python version 3.11.
-
-On Mac and windows you can [download Python 3.11 installers from here](https://www.python.org/downloads/).
-On Ubuntu it's recommended to [use the deadsnakes repo](https://www.debugpoint.com/install-python-3-11-ubuntu/).
-
-*Note: running on older Python versions may work, but 3.11 is what's tested and supported.*
-
-If you're using Postgres, you'll also want to make sure [you have it installed](https://www.postgresql.org/download/).
-Depending on how you install it, you may also need to create a user account that can create and manage databases.
-
-To use [celery](./celery.md) you will also need to [install Redis](https://redis.io/docs/getting-started/installation/).
-
-### Setup a Python 3.11 virtual environment
-
-See [the docs on Virtual Environments](/python/#using-native-system-python-with-virtual-environments) for details on this process.
+See [this page](./python/setup.md) for information on choosing an option and setting up your environment.
 
 ### Enter the project directory
 
@@ -99,6 +84,9 @@ cd {{ project_name }}
 You should see a lot of newly created files for your project including a `manage.py` file.
 
 ### Install package requirements
+
+If you used `uv` your packages should already be installed.
+If you chose a different option, install them now by running:
 
 ```shell
 pip install -r dev-requirements.txt
@@ -149,18 +137,27 @@ Followed by the password for the postgres user.
 ### Create database migrations
 
 ```bash
+# with uv
+uv run manage.py makemigrations
+# or with normal venv
 python ./manage.py makemigrations
 ```
 
 ### Run database migrations
 
 ```bash
+# with uv
+uv run manage.py migrate
+# or with normal venv
 python ./manage.py migrate
 ```
 
 ### Run server
 
 ```bash
+# with uv
+uv run manage.py runserver
+# or with normal venv
 python ./manage.py runserver
 ```
 

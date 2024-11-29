@@ -173,14 +173,32 @@ You'll separately need to follow the steps listed on the
 [provider-specific pages here](https://docs.allauth.org/en/latest/socialaccount/providers/index.html)
 to configure things on the other side.
 These steps can sometimes be a bit involved and vary by platform.
+But will generally entail two steps:
+
+1. Creating a new application / client on the service you want to use.
+2. Adding the credentials to your environment (`.env`) file.
+
+See the Google guide below for an example you can follow.
 
 If you want to add a social login that's not supported out of the box (e.g. Facebook/Meta or Apple),
 you can follow the existing patterns and configure things based on the allauth docs.
 
 If you need help setting this up feel free to get in touch!
-Additionally see the resources below.
+Additionally, see the resources below.
 
-#### Social Setup Guides
+#### Google OAuth Specific instructions
+
+1. Register the application with google by following just the "App registration" section
+[here](https://docs.allauth.org/en/latest/socialaccount/providers/google.html). Note that
+the trailing slash for the "Authorized redirect URLs" is required. For example, assuming you are developing locally,
+it should be set to exactly `http://localhost:8000/accounts/google/login/callback/`.
+2. Set the resulting client id and secret key in the `.env` file in the root of your project.
+```
+    GOOGLE_CLIENT_ID="actual client id from the google console"
+    GOOGLE_SECRET_ID="actual secret id from the google console"
+```
+
+#### Other Social Setup Guides
 
 The Pegasus community has recommended the following guides to set things up with specific providers:
 
