@@ -52,8 +52,6 @@ If you spot any issues in the docs, get in touch!
   with the default DaisyUI styles on certain form elements, including checkboxes.
 - Re-formatted the default form input template for readability.
 
-*November 29, 2024*
-
 ### Upgrading
 
 To migrate an existing project to `uv` see [this guide](./cookbooks.md#migrating-from-pip-tools-to-uv).
@@ -63,6 +61,8 @@ conflict and cause errors on social login.
 To fix this you can either delete the `APPS` section of the relevant service in `settings.SOCIALACCOUNT_PROVIDERS`,
 or you can move the credentials into your project environment (e.g. `.env`) and delete relevant the `SocialApp`
 from the Django admin.
+
+*November 29, 2024*
 
 ## Version 2024.11.3
 
