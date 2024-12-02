@@ -482,7 +482,7 @@ As of version 2024.8, your repository also includes a GitHub Actions workflow th
 Registry as the registry depending on your project configuration. If you are using a different registry you will need
 to update the action. 
 
-To configure the workflow you will set some secrets in your repository settings. In your repositories settings page,
+To configure the workflow you will need to set some secrets in your repository settings. In your repositories settings page,
 go to the "Secrets and variables -> Actions" section and add the following secrets to the "Repository Secrets" section:
 
 - `SSH_KEY`
