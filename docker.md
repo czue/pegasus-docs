@@ -134,6 +134,24 @@ docker compose run --service-ports web
 
 If you want to set up debugging with PyCharm, it's recommended to follow [this guide on the topic](https://testdriven.io/blog/django-debugging-pycharm/).
 
+## Troubleshooting
+
+### "No such file or directory" errors
+
+Some environments---especially on Windows---can have trouble finding the files on your local machine.
+This will often show up as an error like this when starting your app:
+
+```
+python: can't open file '/code/manage.py': [Errno 2] No such file or directory
+```
+
+These issues are usually related to your *disk setup*.
+For example, mounting your code on a remote filesystem or external drive to your machine.
+To fix, try running the code on the same drive where Docker Desktop is installed,
+or on your machine's default "C:" drive.
+
+You can also get around this issue by running your application natively, instead of with Docker.
+
 ## Other Resources
 
 - [Dockerizing Django with Postgres, Gunicorn, and Nginx](https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/)
