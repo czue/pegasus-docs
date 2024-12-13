@@ -142,9 +142,10 @@ More background and details on this set up can be found in this
 ## Customer Portal
 
 Pegasus uses the [Stripe Billing Customer Portal](https://stripe.com/docs/billing/subscriptions/customer-portal)
-for subscription management after subscription creation.
+for subscription management after subscription creation
+To set up the portal you must also enable it in the Stripe dashboard, as outlined in [Stripe's integration guide](https://docs.stripe.com/customer-management/integrate-customer-portal#configure).
 
-To set up the portal, it's recommended you follow along with [Stripe's integration guide](https://stripe.com/docs/billing/subscriptions/integrating-customer-portal).
+After that, most of the set up should be handled by Pegasus.
 
 **To use the portal you will also need to set up webhooks as per below.
 Updates made in the portal will not show up if webhooks are not running.**
@@ -158,7 +159,7 @@ Pegasus ships with webhooks to handle some common actions taken in the billing p
 In the Stripe dashboard, you will need to subscribe to a minimum of `customer.subscription.updated`
 and `customer.subscription.deleted` to ensure subscription changes through the portal make it to your app successfully.
 
-Payment method updates are coming in a future release.
+For more advanced use cases, read through [Stripe's integration guide](https://docs.stripe.com/customer-management/integrate-customer-portal).
 
 ## Webhooks
 
