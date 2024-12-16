@@ -29,7 +29,8 @@ and set up Python for you.
 ***Note: uv support is only available from Pegasus version 2024.12 onwards.
 To use uv you must select it under the "Python package manager" setting in your project configuration.***
 
-To set up Python with uv, first [install uv](https://docs.astral.sh/uv/getting-started/installation/):
+To set up Python with uv, first [install uv](https://docs.astral.sh/uv/getting-started/installation/).
+*Pegasus requires uv version 0.5 or higher.*
 
 On Linux / Mac:
 
