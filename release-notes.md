@@ -99,8 +99,11 @@ bumps the API client version, and has a handful of other small changes and fixes
 - **Upgraded all JavaScript dependencies.**
 - **Updated the API client to use the latest version 7.9.0, and updated the standalone front end to work
   with the latest changes.**
+- Updated template-partials installation to be manually loaded, to allow for easier integration with other
+  templating systems like django-cotton.
 - Moved active tab highlighting to the base view in the example object demo.
 - Made a few very minor edits to comments and whitespace in a few places.
+
 
 ## Fixed
 
