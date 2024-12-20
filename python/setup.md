@@ -20,6 +20,8 @@ You can pick either of these and then switch if you run into problems.
 
 See the [Docker documentation](/docker.md) to set up your development environment with Docker.
 
+Docker environments support using uv or pip-tools as a package manager. Uv is recommended.
+
 ## Using uv
 
 It's recommended that new projects not using docker use [uv](https://docs.astral.sh/uv/) to manage their Python environments.
