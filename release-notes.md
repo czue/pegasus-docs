@@ -3,6 +3,16 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.12.1
+
+This is a minor hotfix release for 2024.12
+
+- **Fixed a bug where the delete workflow was broken for apps created by the Pegasus CLI on non-Tailwind builds.** 
+  Thanks Robert for reporting!
+- Updated the README instructions for setting up pre-commit hooks when using uv.
+
+*Jan 13, 2025*
+
 ## Version 2024.12
 
 This release adds first-class support for using uv as a complete replacement for development and production workflows
