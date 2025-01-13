@@ -8,6 +8,7 @@ Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.
 This is a minor hotfix release for 2024.12
 
 - **Fixed a bug where the delete workflow was broken for apps created by the Pegasus CLI on non-Tailwind builds.** 
+  This happened becasue the "css_framework" cli option was accidentally missing from `pegasus-config.yml`.
   Thanks Robert for reporting!
 - Updated the README instructions for setting up pre-commit hooks when using uv.
 
