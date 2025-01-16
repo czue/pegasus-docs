@@ -20,6 +20,10 @@ You can pick either of these and then switch if you run into problems.
 
 See the [Docker documentation](/docker.md) to set up your development environment with Docker.
 
+Docker environments support using uv or pip-tools as a package manager. Uv is recommended.
+For help adding and removing Python packages after setup, see the documentation for 
+[uv](./uv.md) or [pip-tools](./packages.md).
+
 ## Using uv
 
 It's recommended that new projects not using docker use [uv](https://docs.astral.sh/uv/) to manage their Python environments.
@@ -29,7 +33,8 @@ and set up Python for you.
 ***Note: uv support is only available from Pegasus version 2024.12 onwards.
 To use uv you must select it under the "Python package manager" setting in your project configuration.***
 
-To set up Python with uv, first [install uv](https://docs.astral.sh/uv/getting-started/installation/):
+To set up Python with uv, first [install uv](https://docs.astral.sh/uv/getting-started/installation/).
+*Pegasus requires uv version 0.5 or higher.*
 
 On Linux / Mac:
 
