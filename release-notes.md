@@ -3,6 +3,64 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.1
+
+This release includes mostly backend infrastructure changes to some Pegasus features to pave the way for a (future) plugin ecosystem.
+This should make it easier to maintain Pegasus apps as well as possible (in the future) for other people to develop
+apps that can seamlessly integrate into Pegasus.
+
+### Separated the async group chat example from the async flag
+
+Previously when you enabled async / websockets, you also got the group chat example application.
+Now you can enable async features without this additional example app, and turn it on separately with a new configuration option.
+
+### Organizational changes to apps for more consistency
+
+The following changes don't have any new features or functionality, but they change small things about how the code is organized
+for affected apps (AI chat, AI images, and async group chat)
+
+- Moved app declarations for these apps to the end of `PROJECT_APPS` in `settings.py` 
+- Moved url declarations for these apps to the end of `urls.py`.
+- Moved settings and environment variables for these apps to be located together.
+- Settings for these apps are now prefixed with `AI_CHAT_` or `AI_IMAGES_`, respectively.
+  - This also means that shared settings like `OPENAI_API_KEY` are now declared multiple times and need to be updated
+    in multiple places.
+    NOTE: IS THERE A WAY AROUND THIS? WOULD BE NICE TO STILL USE A SINGLE OPENAI KEY AT LEAST IN .ENV.
+- Moved chat JavaScript setup to the end of `module.exports` in `webpack.config.js`.
+- Depending on your configuration, the order of navigation tabs in the UI may change.
+- Made minor tweaks to how channels urls are set up.
+- The declaration for these apps has moved to a new "plugins" section of `pegasus-config.yml`.
+
+
+### Other Changes
+
+- Dependencies are now sorted in `pyproject.toml` (uv builds) and `requirements.in` (pip-tools builds)
+- Added email address to admin search for team memberships and invitations. Thanks EJ for the suggestion!
+- Made the "timezone" field editable in the user admin. Thanks Peter for the suggestion!
+- Changed active tab variable for ai image app from "ai_images" to "ai-images" to match convention of other apps.
+
+
+### Upgrading
+
+Some settings around AI API keys have been renamed and will need to be updated in your `settings.py` and `.env` files.
+If you are using AI chat and AI images with OpenAI, the easiest way to use a shared API key is to add the following
+to your `.env` / environment variables:
+
+```
+OPENAI_API_KEY="sk-***"
+```
+
+And then modify your settings variables to read from that value:
+
+```python
+# add an OPENAI_API_KEY setting, in case it was referenced elsewhere in your code
+OPENAI_API_KEY = env("OPENAI_API_KEY", default="")
+# modify the image/chat settings to use the same openai key instead of reading from new environment variables
+AI_IMAGES_OPENAI_API_KEY = OPENAI_API_KEY
+AI_CHAT_OPENAI_API_KEY = OPENAI_API_KEY
+```
+
+
 ## Version 2024.12.1
 
 This is a minor hotfix release for 2024.12
