@@ -38,7 +38,8 @@ for affected apps (AI chat, AI images, and async group chat)
 - Added email address to admin search for team memberships and invitations. Thanks EJ for the suggestion!
 - Made the "timezone" field editable in the user admin. Thanks Peter for the suggestion!
 - Changed active tab variable for ai image app from "ai_images" to "ai-images" to match convention of other apps.
-
+- Removed no-longer-used `payments.js` and `stripe.sass` files.
+- Added a `.python-version` for uv builds (set to 3.12)
 
 ### Upgrading
 
