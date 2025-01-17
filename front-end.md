@@ -171,7 +171,6 @@ Pegasus uses [webpack libraries](https://webpack.js.org/guides/author-libraries/
 You can export code in any file. For example in `app.js`:
 
 ```
-export { Payments } from './payments';
 export { Modals } from './web/modals';
 ```
 
@@ -180,7 +179,6 @@ you will have all the exported code available via the `SiteJS` library. For exam
 
 ```javascript
 const modal = SiteJS.app.Modals.initializeModal();
-const paymentIntent = SiteJS.app.Payments.createPaymentIntent();
 ```
 
 The structure for using something will always be:
