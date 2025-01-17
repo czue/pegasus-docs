@@ -28,7 +28,7 @@ The front end build is configured in `.github/build_frontend.yml`.
 
 By default, it will:
  - Run on every push to the `main` branch and every pull request.
- - Run on Node version 20 (other Node versions can be added by modifying the `node-version` list).
+ - Run on Node version {{default_node_version}} (other Node versions can be added by modifying the `node-version` list).
  - Run `npm run build`, ensuring your front end builds properly.
  - Run `npm run type-check`, ensuring all type checks pass.
 
