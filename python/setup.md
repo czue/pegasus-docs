@@ -21,7 +21,7 @@ You can pick either of these and then switch if you run into problems.
 See the [Docker documentation](/docker.md) to set up your development environment with Docker.
 
 Docker environments support using uv or pip-tools as a package manager. Uv is recommended.
-For help adding and removing Python packages after setup, see the documentation for 
+For help adding and removing Python packages after setup, see the documentation for
 [uv](./uv.md) or [pip-tools](./packages.md).
 
 ## Using uv
@@ -73,7 +73,7 @@ $ uv run manage.py shell
 Python 3.12.6 (main, Sep  9 2024, 22:11:19) [Clang 18.1.8 ] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 (InteractiveConsole)
->>> 
+>>>
 ```
 
 You should be able to use `uv run` to run any Python command on your project, or you can run:
@@ -90,12 +90,12 @@ The following are other options---which are typically recommended for developers
 who are already familiar with Python and one of these choices.
 
 Unlike `docker` and `uv`, most of these require having Python installed on your machine,
-so if you haven't already, first install Python version 3.11+:
+so if you haven't already, first install Python version {{default_python_version}}+:
 
-- On Mac and windows you can [download Python 3.11 installers from here](https://www.python.org/downloads/).
-- On Ubuntu it's recommended to [use the deadsnakes repo](https://www.debugpoint.com/install-python-3-11-ubuntu/).
+- On Mac and windows you can [download Python {{default_python_version}} installers from here](https://www.python.org/downloads/).
+- On Ubuntu it's recommended to [use the deadsnakes repo](https://www.debugpoint.com/install-python-3-12-ubuntu/).
 
-*Note: running on older Python versions may work, but 3.11 is what's tested and supported.*
+*Note: running on older Python versions may work, but {{default_python_version}} is what's tested and supported.*
 
 After installing Python, set up your virtual environment through one of the following methods:
 
@@ -108,8 +108,8 @@ Check your specific IDE's docs for guidance on how to do this.
 - [Virtual environments in VS Code](https://code.visualstudio.com/docs/python/environments)
 - [Virtual environments in PyCharm](https://www.jetbrains.com/help/pycharm/creating-virtual-environment.html)
 
-**Be sure to choose Python 3.11 when setting up your virtual environment.**
-If you don't see 3.11 as an option, you may need to install it first.
+**Be sure to choose Python {{default_python_version}} when setting up your virtual environment.**
+If you don't see {{default_python_version}} as an option, you may need to install it first.
 
 #### Using venv
 
@@ -117,10 +117,10 @@ The easiest way to set up a virtual environment manually is to use Python's buil
 [`venv` tool](https://docs.python.org/3/library/venv.html#module-venv):
 
 ```bash
-python3.11 -m venv /path/to/environment
+python3.12 -m venv /path/to/environment
 ```
 
-In the command below, you should replace `python3.11` with the Python version you are using, and 
+In the command below, you should replace `python3` with the Python version you are using, and
 `/path/to/environment/` with the location on your system where you want to store the environment.
 This location can be somewhere in your project directory (`.venv` and `venv` are common choices)
 or anywhere else on your system.
@@ -133,7 +133,7 @@ source /path/to/environment/bin/activate
 ```
 
 **You will need to activate this environment every time you work on your project.**
- 
+
 #### Using virtualenv
 
 [virtualenv](https://virtualenv.pypa.io/en/stable/) is an alternate option to `venv`.
@@ -143,10 +143,10 @@ First make sure [it's installed](https://virtualenv.pypa.io/en/stable/installati
 and then run the following command:
 
 ```bash
-virtualenv -p python3.11 /path/to/environment
+virtualenv -p python3.12 /path/to/environment
 ```
 
-Like above, you should replace the `python3.11` variable with the version you want to use (3.9 or higher),
+Like above, you should replace the `python3.12` variable with the version you want to use,
 and the `/path/to/environment` with wherever you want to set up the environment.
 
 Like with `venv`, to activate the environment run:
@@ -159,16 +159,16 @@ And, like `venv`, **you will need to activate this environment every time you wo
 
 #### Using virtualenvwrapper
 
-[Virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) is an optional convenience 
+[Virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) is an optional convenience
 tool that helps manage virtual environments.
 You can use it with either `venv` or `virtualenv` above.
- 
+
 If you choose to use `virtualenvwrapper` you can use the following command to create your environment.
 This can be run from anywhere since `virtualenvwrapper` manages the location of your envs for you
 (usually in `/home/<user>/.virtualenvs/`).
 
 ```bash
-mkvirtualenv -p python3.11 {{ project_name }}
+mkvirtualenv -p python3.12 {{ project_name }}
 ```
 
 Then to activate the environment you use:
