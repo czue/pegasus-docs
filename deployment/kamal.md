@@ -111,7 +111,7 @@ You will need to update the following values:
   If you're using Docker Hub, the `namespace` will typically be your username.
 * Docker registry username: `username: <DOCKER REGISTRY USERNAME>` - the username you chose above.
 * Your server IP address (or hostname) `<IP-ADDRESS>` (this value is listed once per service).
-* Your app domain name at proxy --> host, if this is not correct.
+* Your app domain: `host: <your site url>` in the `proxy` section at the end, if this is not already set via your project configuration.
 
 Additionally, in your `.kamal/secrets` file you should add the following variables:
 
