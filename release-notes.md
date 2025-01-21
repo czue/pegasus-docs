@@ -35,6 +35,8 @@ for affected apps (AI chat, AI images, and async group chat)
 ### Other Changes
 
 - Dependencies are now sorted in `pyproject.toml` (uv builds) and `requirements.in` (pip-tools builds)
+- Added a first class option to build without celery.
+- Fix an issue that caused deployment errors to Render when using uv (Thanks Jacob for reporting and helping fix!)
 - Added email address to admin search for team memberships and invitations. Thanks EJ for the suggestion!
 - Made the "timezone" field editable in the user admin. Thanks Peter for the suggestion!
 - Changed active tab variable for ai image app from "ai_images" to "ai-images" to match convention of other apps.
