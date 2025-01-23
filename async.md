@@ -16,7 +16,7 @@ You can see a demo below.
 </div>
 
 
-The demo application uses the [HTMX websockets extension](https://htmx.org/extensions/web-sockets/) to simplify
+The demo application uses the [HTMX websockets extension](https://htmx.org/extensions/ws/) to simplify
 the implementation. If you prefer not to use HTMX at all, you can change your websocket connection logic
 to use vanilla JavaScript instead, as shown in the [channels tutorial here](https://channels.readthedocs.io/en/latest/tutorial/part_2.html#add-the-room-view).
 
