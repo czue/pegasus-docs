@@ -153,6 +153,27 @@ In this example, the type annotations were added to the function signature:
 
 ## Other notes
 
+### Database Migrations
+
+It can be quite common for there to be conflicting database migrations during an upgrade.
+This can happen when Pegasus modifies data models, you change your project settings in a way that updates models,
+or you customize Pegasus models in your own code.
+
+To resolve any issues with database migrations, follow the following steps:
+
+1. Always commit your migration files to source control.
+   This makes it easier to have a consistent state across environments and builds.
+2. Before doing an upgrade, make sure your project migrations are up-to-date (`manage.py makemigrations` should do nothing).
+3. After doing an upgrade, if Pegasus adds or changes any migration files, *discard those changes*.
+4. After merging the code and discarding any changes to migrations introduced by Pegasus, re-run `manage.py makemigrations` on
+   the upgraded code, and commit the result to source control.
+5. Run `manage.py migrate` to update the database.
+
+Basically, **you should always keep your migration history and throw away any changes Pegasus proposes to existing migration files.**
+Then re-run `makemigrations` on the merged code.
+
+### Python Packages
+
 After upgrading you may also need to reinstall requirements (`pip install -r requirements.txt`),
 npm packages (`npm install`), etc. depending on what has changed.
 
