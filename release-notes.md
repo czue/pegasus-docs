@@ -42,6 +42,14 @@ for affected apps (AI chat, AI images, and async group chat)
 - Changed active tab variable for ai image app from "ai_images" to "ai-images" to match convention of other apps.
 - Removed no-longer-used `payments.js` and `stripe.sass` files.
 - Added a `.python-version` for uv builds (set to 3.12)
+- Add `psycopg2-binary` to production requirements if using sqlite, since it still required for production deployments.
+  (Thanks Randall for reporting!)
+- Updated invitations to always store email addresses in lowercase to be consistent with account emails.
+  Also fixed comparisons between invitations and sign up emails to be case-insensitive. (Thanks EJ for reporting and the fix!)
+- Added a link from the user profile to manage email addresses if the user has more than one email registered.
+  (Thanks Simon for the suggestion!)
+- Make it so that `./manage.py` commands default to `uv run` if you build with uv enabled.
+- Ruff and pre-commit will now sort imports by default.
 
 ### Upgrading
 
