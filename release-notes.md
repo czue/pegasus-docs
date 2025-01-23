@@ -78,6 +78,8 @@ It is hoped that these changes will make maintenance, upgrades, and future exten
   (Thanks Randall for reporting!)
 - Updated invitations to always store email addresses in lowercase to be consistent with account emails.
   Also fixed comparisons between invitations and sign up emails to be case-insensitive. (Thanks EJ for reporting and the fix!)
+- Renamed `tailwind.config.js` to `tailwind.config.cjs` which prevents build failures on Node 22.
+- Stopped including `pip-tools` in `dev-requirements` when using `uv`.
 
 **Removed**
 
