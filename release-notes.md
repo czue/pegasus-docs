@@ -14,42 +14,74 @@ apps that can seamlessly integrate into Pegasus.
 Previously when you enabled async / websockets, you also got the group chat example application.
 Now you can enable async features without this additional example app, and turn it on separately with a new configuration option.
 
+### Added a flag to remove Celery (if possible)
+
+Added a configuration option that will remove celery and all dependencies + configuration
+***if no other parts of your application need it***.
+It will also be removed from production deployment configurations.
+
+Celery is still required (and will be automatically enabled) if you are using any of:
+
+1. The Pegasus examples
+2. Subscriptions with per-unit billing enabled
+3. Any AI chat features
+
+If you're not using these features and want to disable Celery you can do that from your project settings page.
+
 ### Organizational changes to apps for more consistency
 
 The following changes don't have any new features or functionality, but they change small things about how the code is organized
-for affected apps (AI chat, AI images, and async group chat)
+for affected apps (AI chat, AI images, and async group chat).
+It is hoped that these changes will make maintenance, upgrades, and future extensions to Pegasus easier.
 
 - Moved app declarations for these apps to the end of `PROJECT_APPS` in `settings.py` 
 - Moved url declarations for these apps to the end of `urls.py`.
 - Moved settings and environment variables for these apps to be located together.
 - Settings for these apps are now prefixed with `AI_CHAT_` or `AI_IMAGES_`, respectively.
-  - This also means that shared settings like `OPENAI_API_KEY` are now declared multiple times and need to be updated
-    in multiple places.
-    NOTE: IS THERE A WAY AROUND THIS? WOULD BE NICE TO STILL USE A SINGLE OPENAI KEY AT LEAST IN .ENV.
+  - **This also means that shared settings like `OPENAI_API_KEY` are now declared multiple times and need to be updated
+    in multiple places.** See the "upgrading" section below on how to get around this duplication.
 - Moved chat JavaScript setup to the end of `module.exports` in `webpack.config.js`.
 - Depending on your configuration, the order of navigation tabs in the UI may change.
 - Made minor tweaks to how channels urls are set up.
 - The declaration for these apps has moved to a new "plugins" section of `pegasus-config.yml`.
 
-
 ### Other Changes
 
+**Changed**
+
+- **Upgraded default Python to Python 3.12.**
+  - Bumped the Python version to 3.12 in CI, and dev/production Docker containers.
+  - Also added [a `.python-version` file](https://docs.astral.sh/uv/concepts/python-versions/#python-version-files) for uv builds (set to 3.12)
+- **Upgraded default Node to 22.**
+  - Bumped the Node version to 22 in CI, and dev/production Docker containers.
+- **Upgraded nearly all Python packages to their latest versions.**
+  - Added a pin to `dj-stripe<2.9` because 2.9 is not yet supported.
+- **Upgraded nearly all JavaScript packages to their latest versions.**
+  - Tailwind v4 was not upgraded as it was just released and is not yet supported. 
+- **Ruff and pre-commit will now sort imports by default.**
+  - This also updates import sorting in a number of files.
+- **Pre-commit now runs ruff with `--fix` enabled, which will automatically apply (but not stage) fixable errors.**
 - Dependencies are now sorted in `pyproject.toml` (uv builds) and `requirements.in` (pip-tools builds)
-- Added a first class option to build without celery.
-- Fix an issue that caused deployment errors to Render when using uv (Thanks Jacob for reporting and helping fix!)
 - Added email address to admin search for team memberships and invitations. Thanks EJ for the suggestion!
 - Made the "timezone" field editable in the user admin. Thanks Peter for the suggestion!
 - Changed active tab variable for ai image app from "ai_images" to "ai-images" to match convention of other apps.
-- Removed no-longer-used `payments.js` and `stripe.sass` files.
-- Added a `.python-version` for uv builds (set to 3.12)
+- Added a link from the user profile to manage email addresses if the user has more than one email registered.
+  (Thanks Simon for the suggestion!)
+- Make it so that `./manage.py` commands default to `uv run` if you build with uv enabled.
+- The `chat_tags` template tag library was moved to the `web` app and renamed to `markdown_tags`,
+  making it easier to use outside the chat application.
+
+**Fixed**
+
+- **Fixed an issue that caused Render deployments to fail when using uv.** (Thanks Jacob for reporting and helping fix!)
 - Add `psycopg2-binary` to production requirements if using sqlite, since it still required for production deployments.
   (Thanks Randall for reporting!)
 - Updated invitations to always store email addresses in lowercase to be consistent with account emails.
   Also fixed comparisons between invitations and sign up emails to be case-insensitive. (Thanks EJ for reporting and the fix!)
-- Added a link from the user profile to manage email addresses if the user has more than one email registered.
-  (Thanks Simon for the suggestion!)
-- Make it so that `./manage.py` commands default to `uv run` if you build with uv enabled.
-- Ruff and pre-commit will now sort imports by default.
+
+**Removed**
+
+- Removed no-longer-used `payments.js` and `stripe.sass` files.
 
 ### Upgrading
 
@@ -71,6 +103,7 @@ AI_IMAGES_OPENAI_API_KEY = OPENAI_API_KEY
 AI_CHAT_OPENAI_API_KEY = OPENAI_API_KEY
 ```
 
+*Jan 24, 2025*
 
 ## Version 2024.12.1
 
