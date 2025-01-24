@@ -9,8 +9,9 @@ It is required by several Pegasus features, including:
 2. Per-unit subscriptions (celery runs the background task to sync unit amounts with Stripe).
 3. AI Chat (it is used in all builds to set chat names, and, if async is not enabled, for the chats themselves).
 
-If you aren't using any of the above features, you can disable celery by unchecking the "use celery" option
-in your project settings. **If you *are* using any of the above features, this option will not do anything.**
+If you aren't using any of the above features, you can disable celery by unchecking the "use celery" 
+option---added in version 2025.1---in your project settings.
+**If you *are* using any of the above features, this option will not do anything.**
 
 ## Quick Start
 
