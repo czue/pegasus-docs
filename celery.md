@@ -3,15 +3,30 @@ Celery
 
 [Celery](https://docs.celeryq.dev/) is a distributed task queue used to run background tasks.
 
-It is optional, but is required for the "background task" example to work.
+It is required by several Pegasus features, including:
 
-**If you're using [Docker in development](/docker/) then Celery should automatically be configured and running.
-The following instructions are for running Celery outside of Docker, or in production.**
+1. The "background task" example.
+2. Per-unit subscriptions (celery runs the background task to sync unit amounts with Stripe).
+3. AI Chat (it is used in all builds to set chat names, and, if async is not enabled, for the chats themselves).
+
+If you aren't using any of the above features, you can disable celery by unchecking the "use celery" option
+in your project settings. **If you *are* using any of the above features, this option will not do anything.**
 
 ## Quick Start
 
-The easiest way to get going is to [download and install Redis](https://redis.io/download) 
+**If you're using [Docker in development](/docker/) then Celery should automatically be configured and running.
+The instructions in this section are for running Celery outside of Docker.**
+
+The easiest way to get going in development is to [download and install Redis](https://redis.io/download) 
 (if you don't already have it) and then run:
+
+*With uv:*
+
+```python
+uv run celery -A {{ project_name }} worker -l info --pool=solo
+```
+
+*With standard Python:*
 
 ```python
 celery -A {{ project_name }} worker -l info --pool=solo
@@ -63,5 +78,5 @@ If you'd like to use Flower in development, add the following to the `services` 
       - redis
 ```
 
-In production you will likely want to run Flower behind a private VPN, or [set up authentication](https://flower.readthedocs.io/en/latest/auth.html)
+In production, you will likely want to run Flower behind a private VPN, or [set up authentication](https://flower.readthedocs.io/en/latest/auth.html)
 on your Flower instance, and use a [reverse proxy](https://flower.readthedocs.io/en/latest/reverse-proxy.html) to expose it.
