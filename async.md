@@ -1,8 +1,20 @@
 Async and Websocket Support
 ===========================
 
-As of version 2023.10, Pegasus provides support [asynchronous support](https://docs.djangoproject.com/en/4.2/topics/async/),
+As of version 2023.10, Pegasus provides support [asynchronous support](https://docs.djangoproject.com/en/stable/topics/async/),
 as well as support for websockets via the [channels library](https://channels.readthedocs.io/).
+
+## Enabling Async Support
+
+You can enable Async support by checking the "Use Async / Websockets" option in your project settings.
+Enabling Async will:
+
+1. Change your default development server to [Daphne](https://docs.djangoproject.com/en/stable/howto/deployment/asgi/daphne/).
+2. Change your default production server to [Uvicorn](https://www.uvicorn.org/) (via gunciorn).
+3. Add and configure `channels` in your project for websocket support.
+
+In addition to the above configuration changes, enabling async will also use it for LLM chats if available.
+Finally, there is an optional group chat application you can separately add (details below).
 
 ## The Async / Websocket Demo Application
 
@@ -50,7 +62,6 @@ chatSocket.onmessage = function(e) {
   // handle message 
 };
 ```
-
 
 ## Asynchronous web servers
 
