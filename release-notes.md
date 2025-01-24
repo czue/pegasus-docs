@@ -87,6 +87,16 @@ It is hoped that these changes will make maintenance, upgrades, and future exten
 
 ### Upgrading
 
+**Python / Node updates**
+
+You may need to manually modify your dev/production environment to upgrade to Python 3.12 and Node 22.
+If you're using Docker, this should happen automatically by following the [upgrade process](./upgrading.md).
+
+Pegasus apps should still run on Python 3.11 / Node 20, but will no longer be extensively tested on those versions
+moving forwards.
+
+**Settings Changes**
+
 Some settings around AI API keys have been renamed and will need to be updated in your `settings.py` and `.env` files.
 If you are using AI chat and AI images with OpenAI, the easiest way to use a shared API key is to add the following
 to your `.env` / environment variables:
@@ -105,7 +115,7 @@ AI_IMAGES_OPENAI_API_KEY = OPENAI_API_KEY
 AI_CHAT_OPENAI_API_KEY = OPENAI_API_KEY
 ```
 
-*Jan 24, 2025*
+*Jan 25, 2025*
 
 ## Version 2024.12.1
 
