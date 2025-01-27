@@ -3,22 +3,24 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
-## Version 2024.1
+## Version 2025.1
 
 This release includes mostly backend infrastructure changes to some Pegasus features to pave the way for a (future) plugin ecosystem.
 This should make it easier to maintain Pegasus apps as well as possible (in the future) for other people to develop
 apps that can seamlessly integrate into Pegasus.
 
-### Separated the async group chat example from the async flag
+### New "async" build flag
 
 Previously when you enabled async / websockets, you also got the group chat example application.
 Now you can enable async features without this additional example app, and turn it on separately with a new configuration option.
+
+This lets you use async but not have to manually delete the example application.
 
 ### Added a flag to remove Celery (if possible)
 
 Added a configuration option that will remove celery and all dependencies + configuration
 ***if no other parts of your application need it***.
-It will also be removed from production deployment configurations.
+Celery will also be removed from production deployment configurations.
 
 Celery is still required (and will be automatically enabled) if you are using any of:
 
@@ -30,9 +32,11 @@ If you're not using these features and want to disable Celery you can do that fr
 
 ### Organizational changes to apps for more consistency
 
-The following changes don't have any new features or functionality, but they change small things about how the code is organized
+The following changes don't have any new features or functionality, but change small things about how the code is organized
 for affected apps (AI chat, AI images, and async group chat).
 It is hoped that these changes will make maintenance, upgrades, and future extensions to Pegasus easier.
+
+Changes affecting the AI Chat, AI Images, and Group Chat apps:
 
 - Moved app declarations for these apps to the end of `PROJECT_APPS` in `settings.py` 
 - Moved url declarations for these apps to the end of `urls.py`.
@@ -43,10 +47,12 @@ It is hoped that these changes will make maintenance, upgrades, and future exten
 - Moved chat JavaScript setup to the end of `module.exports` in `webpack.config.js`.
 - Depending on your configuration, the order of navigation tabs in the UI may change.
 - Made minor tweaks to how channels urls are set up.
-- Image logos used by the AI images app were moved to `/static/images/ai_images/`.
+- Image logos used by the AI chat and images apps were moved to `/static/images/ai_images/` and `/static/images/ai_images/`, respectively. 
 - The declaration for these apps has moved to a new "plugins" section of `pegasus-config.yml`.
 
 ### Other Changes
+
+Other changes included in this release are below.
 
 **Changed**
 
@@ -59,8 +65,8 @@ It is hoped that these changes will make maintenance, upgrades, and future exten
   - Added a pin to `dj-stripe<2.9` because 2.9 is not yet supported.
 - **Upgraded nearly all JavaScript packages to their latest versions.**
   - Tailwind v4 was not upgraded as it was just released and is not yet supported. 
-- **Ruff and pre-commit will now sort imports by default.**
-  - This also updates import sorting in a number of files.
+- **Ruff and pre-commit will now sort imports by default.** (See upgrade notes below)
+  - **This also updates import sorting in a number of files.**
 - **Pre-commit now runs ruff with `--fix` enabled, which will automatically apply (but not stage) fixable errors.**
 - Dependencies are now sorted in `pyproject.toml` (uv builds) and `requirements.in` (pip-tools builds)
 - Added email address to admin search for team memberships and invitations. Thanks EJ for the suggestion!
@@ -80,11 +86,11 @@ It is hoped that these changes will make maintenance, upgrades, and future exten
 - Updated invitations to always store email addresses in lowercase to be consistent with account emails.
   Also fixed comparisons between invitations and sign up emails to be case-insensitive. (Thanks EJ for reporting and the fix!)
 - Renamed `tailwind.config.js` to `tailwind.config.cjs` which prevents build failures on Node 22.
-- Stopped including `pip-tools` in `dev-requirements` when using `uv`.
 
 **Removed**
 
 - Removed no-longer-used `payments.js` and `stripe.sass` files.
+- Stopped including `pip-tools` in `dev-requirements` when using `uv`, as it is no longer needed.
 
 ### Upgrading
 
@@ -116,7 +122,19 @@ AI_IMAGES_OPENAI_API_KEY = OPENAI_API_KEY
 AI_CHAT_OPENAI_API_KEY = OPENAI_API_KEY
 ```
 
-*Jan 25, 2025*
+**Import Sorting Changes**
+
+If you have auto-formatting enabled you will likely get CI errors after upgrading due to the stricter import sorting.
+
+You can fix these by running a manual ruff check locally and then committing the result:
+
+```
+ruff check --fix
+# or with uv
+uv run ruff check --fix
+```
+
+*Jan 27, 2025*
 
 ## Version 2024.12.1
 
