@@ -281,6 +281,84 @@ ALLOWED_HOSTS = [
 It is recommended to read [the security documentation](https://docs.djangoproject.com/en/5.0/topics/security/#host-headers-virtual-hosting)
 for this feature to understand the implications of it being included.
 
+
+### Deploy with GitHub Actions
+
+As of version 2024.8, your repository also includes a GitHub Actions workflow that can be used to deploy your app to Kamal
+(look for it in `.github/workflows/kamal_deploy.yml`). This is configured to use Docker Hub or AWS Elastic Container
+Registry as the registry depending on your project configuration. If you are using a different registry you will need
+to update the action. 
+
+To configure the workflow you will need to set some secrets in your repository settings. In your repositories settings page,
+go to the "Secrets and variables -> Actions" section and add the following secrets to the "Repository Secrets" section:
+
+- `SSH_KEY`
+  - A private key you use to SSH into your server. This must be a passwordless key.
+- `SSH_KNOWN_HOSTS`
+  - The known hosts file for your server. You can generate this by running `ssh-keyscan <your-server-ip>`.
+
+#### Dockerhub
+
+If you are using Dockerhub, you must also set the following secrets:
+
+- `DOCKER_REGISTRY_USERNAME`
+  - Your Docker Hub username.
+- `DOCKER_REGISTRY_KEY`
+  - The Docker Hub access token you created above.
+
+With these secrets set, the GitHub Actions workflow will be able to deploy your app to Kamal. To test it
+go to the "Actions" tab in your repository, click on the "Kamal Deploy" workflow, and then click "Run workflow".
+
+#### AWS
+
+Using AWS ECR requires a few extra steps:
+
+##### Update the GitHub Actions workflow
+
+Set the following environment variables in `env` section of the GitHub Actions workflow:
+
+* AWS_ACCOUNT_ID
+* AWS_REGION
+
+##### Create an IAM role
+
+Create a new IAM role following the instructions in the [GitHub documentation][1]. The role should be
+called `github_deploy`, if you call it something else you will need to update the Github actions workflow.
+
+[1]: https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
+
+Once you have created the role you will need to give it permissions to push to your ECR repository. You can use the
+following policy to do this (replacing `<AWS_ECR_REPO_ARN>` with the ARN of your ECR repository):
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:CompleteLayerUpload",
+                "ecr:InitiateLayerUpload",
+                "ecr:PutImage",
+                "ecr:UploadLayerPart"
+            ],
+            "Resource": "<AWS_ECR_REPO_ARN>",
+            "Effect": "Allow",
+            "Sid": "PushToECR"
+        },
+        {
+            "Action": "ecr:GetAuthorizationToken",
+            "Resource": "*",
+            "Effect": "Allow",
+            "Sid": "GetECRToken"
+        }
+    ]
+}
+```
+
+You're now ready to deploy your app to Kamal using GitHub Actions. To test it go to the "Actions" tab in your
+repository, click on the "Kamal Deploy" workflow, and then click "Run workflow".
+
 ### Cookbooks
 
 #### Changing your site URL
