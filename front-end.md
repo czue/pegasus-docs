@@ -1,4 +1,4 @@
-The Front End 
+The Front End
 ======================
 
 ## Architecture
@@ -7,7 +7,7 @@ Pegasus's front-end architecture is a hybrid model, with a standalone front-end 
 that is compiled and served inside Django templates.
 
 The front end uses [Babel](https://babeljs.io/) and [Webpack](https://webpack.js.org/) to
-compile the front-end code into bundle files that can be referenced using Django's 
+compile the front-end code into bundle files that can be referenced using Django's
 static file system, as represented in the diagram below.
 
 ![Build Pipeline](images/js-pipeline-with-django.png)
@@ -25,7 +25,7 @@ series.**
 The source front-end files live in the `assets` directory, while the compiled files
 get created in the `static` directory.
 
-Generally you should only ever edit the front-end files in `assets` directly, 
+Generally you should only ever edit the front-end files in `assets` directly,
 and compile them using the instructions below.
 
 ## Prerequisites to building the front end
@@ -36,7 +36,7 @@ To compile the front-end JavaScript and CSS files it's expected that you have in
 - [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
 Pegasus is developed and tested on the latest LTS releases, which (at the time of this writing)
-are Node version 20 and npm 10.
+are Node version {{default_node_version}} and npm 10.
 Later versions will likely work, but aren't regularly-tested.
 Also it's recommended to use [`nvm`](https://github.com/nvm-sh/nvm) to manage different node/npm environments more easily.
 `nvm` is essentially `virtualenv` for Node.js/npm.
@@ -153,7 +153,7 @@ But feel free to do something differently!
 ### Making an existing package available
 
 To make a library available on every page, you can follow these steps.
-Note: there are many ways to do this, but this is the way it's currently handled in Pegasus. 
+Note: there are many ways to do this, but this is the way it's currently handled in Pegasus.
 
 1. Install the library via `npm install <library>`.
 2. Create a javascript file for the library in `assets/javascript`.

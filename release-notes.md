@@ -3,6 +3,121 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+## Version 2024.1
+
+This release includes mostly backend infrastructure changes to some Pegasus features to pave the way for a (future) plugin ecosystem.
+This should make it easier to maintain Pegasus apps as well as possible (in the future) for other people to develop
+apps that can seamlessly integrate into Pegasus.
+
+### Separated the async group chat example from the async flag
+
+Previously when you enabled async / websockets, you also got the group chat example application.
+Now you can enable async features without this additional example app, and turn it on separately with a new configuration option.
+
+### Added a flag to remove Celery (if possible)
+
+Added a configuration option that will remove celery and all dependencies + configuration
+***if no other parts of your application need it***.
+It will also be removed from production deployment configurations.
+
+Celery is still required (and will be automatically enabled) if you are using any of:
+
+1. The Pegasus examples
+2. Subscriptions with per-unit billing enabled
+3. Any AI chat features
+
+If you're not using these features and want to disable Celery you can do that from your project settings page.
+
+### Organizational changes to apps for more consistency
+
+The following changes don't have any new features or functionality, but they change small things about how the code is organized
+for affected apps (AI chat, AI images, and async group chat).
+It is hoped that these changes will make maintenance, upgrades, and future extensions to Pegasus easier.
+
+- Moved app declarations for these apps to the end of `PROJECT_APPS` in `settings.py` 
+- Moved url declarations for these apps to the end of `urls.py`.
+- Moved settings and environment variables for these apps to be located together.
+- Settings for these apps are now prefixed with `AI_CHAT_` or `AI_IMAGES_`, respectively.
+  - **This also means that shared settings like `OPENAI_API_KEY` are now declared multiple times and need to be updated
+    in multiple places.** See the "upgrading" section below on how to get around this duplication.
+- Moved chat JavaScript setup to the end of `module.exports` in `webpack.config.js`.
+- Depending on your configuration, the order of navigation tabs in the UI may change.
+- Made minor tweaks to how channels urls are set up.
+- Image logos used by the AI images app were moved to `/static/images/ai_images/`.
+- The declaration for these apps has moved to a new "plugins" section of `pegasus-config.yml`.
+
+### Other Changes
+
+**Changed**
+
+- **Upgraded default Python to Python 3.12.**
+  - Bumped the Python version to 3.12 in CI, and dev/production Docker containers.
+  - Also added [a `.python-version` file](https://docs.astral.sh/uv/concepts/python-versions/#python-version-files) for uv builds (set to 3.12)
+- **Upgraded default Node to 22.**
+  - Bumped the Node version to 22 in CI, and dev/production Docker containers.
+- **Upgraded nearly all Python packages to their latest versions.**
+  - Added a pin to `dj-stripe<2.9` because 2.9 is not yet supported.
+- **Upgraded nearly all JavaScript packages to their latest versions.**
+  - Tailwind v4 was not upgraded as it was just released and is not yet supported. 
+- **Ruff and pre-commit will now sort imports by default.**
+  - This also updates import sorting in a number of files.
+- **Pre-commit now runs ruff with `--fix` enabled, which will automatically apply (but not stage) fixable errors.**
+- Dependencies are now sorted in `pyproject.toml` (uv builds) and `requirements.in` (pip-tools builds)
+- Added email address to admin search for team memberships and invitations. Thanks EJ for the suggestion!
+- Made the "timezone" field editable in the user admin. Thanks Peter for the suggestion!
+- Changed active tab variable for ai image app from "ai_images" to "ai-images" to match convention of other apps.
+- Added a link from the user profile to manage email addresses if the user has more than one email registered.
+  (Thanks Simon for the suggestion!)
+- Make it so that `./manage.py` commands default to `uv run` if you build with uv enabled.
+- The `chat_tags` template tag library was moved to the `web` app and renamed to `markdown_tags`,
+  making it easier to use outside the chat application.
+
+**Fixed**
+
+- **Fixed an issue that caused Render deployments to fail when using uv.** (Thanks Jacob for reporting and helping fix!)
+- Add `psycopg2-binary` to production requirements if using sqlite, since it still required for production deployments.
+  (Thanks Randall for reporting!)
+- Updated invitations to always store email addresses in lowercase to be consistent with account emails.
+  Also fixed comparisons between invitations and sign up emails to be case-insensitive. (Thanks EJ for reporting and the fix!)
+- Renamed `tailwind.config.js` to `tailwind.config.cjs` which prevents build failures on Node 22.
+- Stopped including `pip-tools` in `dev-requirements` when using `uv`.
+
+**Removed**
+
+- Removed no-longer-used `payments.js` and `stripe.sass` files.
+
+### Upgrading
+
+**Python / Node updates**
+
+You may need to manually modify your dev/production environment to upgrade to Python 3.12 and Node 22.
+If you're using Docker, this should happen automatically by following the [upgrade process](./upgrading.md).
+
+Pegasus apps should still run on Python 3.11 / Node 20, but will no longer be extensively tested on those versions
+moving forwards.
+
+**Settings Changes**
+
+Some settings around AI API keys have been renamed and will need to be updated in your `settings.py` and `.env` files.
+If you are using AI chat and AI images with OpenAI, the easiest way to use a shared API key is to add the following
+to your `.env` / environment variables:
+
+```
+OPENAI_API_KEY="sk-***"
+```
+
+And then modify your settings variables to read from that value:
+
+```python
+# add an OPENAI_API_KEY setting, in case it was referenced elsewhere in your code
+OPENAI_API_KEY = env("OPENAI_API_KEY", default="")
+# modify the image/chat settings to use the same openai key instead of reading from new environment variables
+AI_IMAGES_OPENAI_API_KEY = OPENAI_API_KEY
+AI_CHAT_OPENAI_API_KEY = OPENAI_API_KEY
+```
+
+*Jan 25, 2025*
+
 ## Version 2024.12.1
 
 This is a minor hotfix release for 2024.12
@@ -63,8 +178,6 @@ If you spot any issues in the docs, get in touch!
   with the default DaisyUI styles on certain form elements, including checkboxes.
 - Re-formatted the default form input template for readability.
 
-*November 29, 2024*
-
 ### Upgrading
 
 To migrate an existing project to `uv` see [this guide](./cookbooks.md#migrating-from-pip-tools-to-uv).
@@ -74,6 +187,8 @@ conflict and cause errors on social login.
 To fix this you can either delete the `APPS` section of the relevant service in `settings.SOCIALACCOUNT_PROVIDERS`,
 or you can move the credentials into your project environment (e.g. `.env`) and delete relevant the `SocialApp`
 from the Django admin.
+
+*November 29, 2024*
 
 ## Version 2024.11.3
 

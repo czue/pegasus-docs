@@ -52,6 +52,16 @@ extensions = [
 
 myst_heading_anchors = 7
 
+# allows using variables in markdown files
+myst_enable_extensions = [
+    "substitution",
+]
+myst_substitutions = {
+    "default_node_version": "22",
+    "default_python_version": "3.12",
+}
+
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
