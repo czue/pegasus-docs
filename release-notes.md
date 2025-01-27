@@ -43,6 +43,7 @@ It is hoped that these changes will make maintenance, upgrades, and future exten
 - Moved chat JavaScript setup to the end of `module.exports` in `webpack.config.js`.
 - Depending on your configuration, the order of navigation tabs in the UI may change.
 - Made minor tweaks to how channels urls are set up.
+- Image logos used by the AI images app were moved to `/static/images/ai_images/`.
 - The declaration for these apps has moved to a new "plugins" section of `pegasus-config.yml`.
 
 ### Other Changes
