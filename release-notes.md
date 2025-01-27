@@ -3,7 +3,7 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
-## Version 2024.1
+## Version 2025.1
 
 This release includes mostly backend infrastructure changes to some Pegasus features to pave the way for a (future) plugin ecosystem.
 This should make it easier to maintain Pegasus apps as well as possible (in the future) for other people to develop
