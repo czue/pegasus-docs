@@ -3,6 +3,27 @@ Version History and Release Notes
 
 Releases of [SaaS Pegasus: The Django SaaS Boilerplate](https://www.saaspegasus.com/) are documented here.
 
+
+## Version 2025.1.1
+
+This is a hotfix release that fixes an issue with installing Node 22 in the development Docker container.
+Thanks Oscar and Emiliano for reporting!
+
+If you'd rather manually apply the patch, you can just apply the following patch to your `Dockerfile.dev` file:
+
+```diff
+ RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
+     --mount=target=/var/cache/apt,type=cache,sharing=locked \
+     rm -f /etc/apt/apt.conf.d/docker-clean && \
+-    echo "deb https://deb.nodesource.com/node_22.x bookworm main" > /etc/apt/sources.list.d/nodesource.list && \
+-    wget -qO- https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
++    curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
+     apt-get update && \
+     apt-get install -yqq nodejs \
+```
+
+*Jan 28, 2025*
+
 ## Version 2025.1
 
 This release includes mostly backend infrastructure changes to some Pegasus features to pave the way for a (future) plugin ecosystem.
